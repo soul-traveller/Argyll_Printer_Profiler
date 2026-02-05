@@ -1,0 +1,56 @@
+theme: jekyll-theme-cayman
+markdown: kramdown
+
+title: "read_image_patch_colors – Read image grid patches and store colors in ArgyllCMS compatible files."
+description: "Generate ArgyllCMS compatible .ti1 and .ti2 files from a grid of color patches in an image."
+author: "Knut Larsson"
+lang: en
+keywords:
+  - Argyll_Printer_Profiler
+  - ArgyllCMS
+  - Argyll CMS
+  - automated ArgyllCMS workflow
+  - printer profiling automation
+  - printer ICC profiling
+  - ICC profile creation
+  - ICC profile generation
+  - ICC color profiles
+  - printer calibration
+  - printer characterization
+  - printer color management
+  - macOS printer profiling
+  - macOS color management
+  - Homebrew ArgyllCMS
+  - bash script
+  - shell script
+  - macOS bash automation
+  - terminal-based profiling
+  - ColorSync Utility
+  - Apple ColorSync
+  - print as color target
+  - targen
+  - printtarg
+  - chartread
+  - colprof
+  - profcheck
+  - dispcal
+  - TI1 file
+  - TI2 file
+  - TI3 file
+  - spectrophotometer support
+  - X-Rite ColorMunki Photo
+  - X-Rite i1Pro
+  - printer ink limit
+  - patch consistency tolerance
+  - RGB printer profiling
+  - CMYK printer profiling
+  - inkjet printer profiling
+  - fine art printer profiling
+  - ICC workflow automation
+  - photographic printing accuracy
+
+plugins:
+  - jekyll-sitemap
+
+url: "https://soul-traveller.github.io"
+baseurl: "/Argyll_Printer_Profiler"
