@@ -1,8 +1,8 @@
 theme: jekyll-theme-cayman
 markdown: kramdown
 
-title: "Script for calibrating printers using ArgyllCMS on MacOS"
-description: "An interactive Bash script that automates a complete ArgyllCMS printer profiling workflow on macOS, from target generation to ICC profile creation."
+title: "Script for calibrating printers using ArgyllCMS on MacOS or Linux"
+description: "An interactive Bash script that automates a complete ArgyllCMS printer profiling workflow on macOS/Linux, from target generation to ICC profile creation."
 author: "Knut Larsson"
 lang: en
 keywords:
@@ -20,6 +20,8 @@ keywords:
   - printer color management
   - macOS printer profiling
   - macOS color management
+  - Linux printer profiling
+  - Linux color management
   - Homebrew ArgyllCMS
   - bash script
   - shell script

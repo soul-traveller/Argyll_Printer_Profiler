@@ -1,10 +1,10 @@
 # Argyll_Printer_Profiler.command — User Guide
 **Version:** 1.0<br>
-**Platform:** macOS<br>
+**Platform:** macOS and Linux<br>
 **Based on:** Simple script by Jintak Han (https://github.com/jintakhan/AutomatedArgyllPrinter)<br>
 **Author:** Knut Larsson<br>
 
-Argyll_Printer_Profiler.command is an interactive Bash script that automates a complete **ArgyllCMS printer profiling workflow** on macOS, from target generation to ICC installation.<br>
+Argyll_Printer_Profiler.command is an interactive Bash script that automates a complete **ArgyllCMS printer profiling workflow** on macOS and Linux, from target generation to ICC installation.<br>
 
 ---
 
@@ -12,11 +12,14 @@ Argyll_Printer_Profiler.command is an interactive Bash script that automates a c
 
 - [Overview](#overview)
 - [Requirements](#requirements)
-- [Installation](#installation-on-macos)
-  - [ArgyllCMS Installation](#argyllcms-installation)
+- [Installation](#installation)
+  - [Required Dependabilities for MacOS](#required-dependabilities-for-macos)
+  - [Required Dependabilities for Linux](#required-dependabilities-for-linux)
   - [Script Placement](#script-placement)
-  - [Execution Permissions (Important)](#execution-permissions-important)
-- [Setup File: Argyll_Printer_Profiler_setup.ini](#setup-file-Argyll_Printer_Profiler_setup.ini)
+  - [Execution Permissions for MacOS (Important)](#execution-permissions-for-macos-important)
+  - [Execution Permissions for Linux (Important)](#execution-permissions-for-linux-important)
+  - [Getting Started](#getting-started)
+- [Setup File: Argyll_Printer_Profiler_setup.ini](#setup-file-argyll-printer-profiler-setupini)
 - [General Workflow](#general-workflow)
 - [Main Menu Actions Explained](#main-menu-actions-explained)
 - [Files and Folder Structure](#files-and-folder-structure)
@@ -44,23 +47,25 @@ The script:
 - Reads measurements
 - Builds ICC profiles
 - Performs sanity checks
-- Installs profiles into macOS local profiles folder
+- Installs profiles into defined local profiles folder
 
 ---
 
 ## Requirements
 
-- macOS 10.13 or later (Intel or Apple Silicon)
+- macOS 10.13 or later (Intel or Apple Silicon), or a modern Linux distribution
 - ArgyllCMS installed and available in Terminal (checked by script)
+- On Linux, `zenity` installed (for graphical file pickers)
 - Supported measurement device (ColorMunki, i1Pro, etc.)
 - Terminal access
-- ColorSync Utility (included with macOS)
+- ColorSync Utility (included with macOS) for printing targets without color management
+- On Linux, other software to print targets without color management
 
 ---
 
 ## Installation
 
-### Required Dependabilities for  macOS
+### Required Dependabilities for MacOS
 
 The recommended way is Homebrew:
 
@@ -103,7 +108,7 @@ All generated files are stored **relative to the script’s location**.
 
 ---
 
-### Execution Permissions for Mac (Important)
+### Execution Permissions for MacOS (Important)
 
 On modern macOS versions, a script must have the **execute bit** set.
 
@@ -161,7 +166,7 @@ Expected output:
 
 Finnaly, the file manager preferences must be modified to run .sh files.
 
-For GNOME / Nautilus (Ubuntu, Fedora)
+For Files / Nautilus (Ubuntu, Fedora)
 
 1. Open Files
 2. Menu → Preferences
@@ -172,8 +177,26 @@ For GNOME / Nautilus (Ubuntu, Fedora)
 
 Now double-click will prompt or run.
 You can now run the script by:
-- Double-clicking it in Finder
-- Or running `./Argyll_Printer_Profiler.command` from Terminal
+- Double-clicking it in your file manager (e.g. Files/Nautilus).
+- Or running `./Argyll_Printer_Profiler.sh` from Terminal
+
+### Getting Started
+
+Run script, then start by modifying the setup via menu, as well as opening the .ini file.
+The following should be assesed/modified:
+
+1. Easily modified via menu:
+    - ICC profile to use (PRECONDITIONING_PROFILE_PATH and PRINTER_ICC_PATH)
+    - Ink limit
+    - Paper size
+
+2. Modified in .ini file:
+    - PRINTER_PROFILES_PATH (different on Linux)
+    - Common arguments to use by default (COMMON_ARGUMENTS_*)
+    - Is STRIP_PATCH_CONSISTENSY_TOLERANCE satisfactory?
+    - EXAMPLE_FILE_NAMING (file naming convention)
+    - Is DEFAULT_TARGEN_COMMAND_NON_COLORMUNKI satisfactory?
+    - Is DEFAULT_PRINTTARG_COMMAND_NON_COLORMUNKI satisfactory?
 
 ---
 
@@ -347,7 +370,7 @@ Used to generate color values:
 After successful creation:
 
 - `.icc` file is copied to `PRINTER_PROFILES_PATH`
-- Typically:
+- Typically (for macOS):
   ```
   ~/Library/ColorSync/Profiles
   ```
