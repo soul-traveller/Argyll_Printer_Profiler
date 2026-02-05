@@ -2,7 +2,7 @@ theme: jekyll-theme-cayman
 markdown: kramdown
 
 title: "Script for calibrating printers using ArgyllCMS on MacOS"
-description: "Argyll_Printer_Profiler.command is an interactive Bash script that automates a complete ArgyllCMS printer profiling workflow on macOS, from target generation to ICC installation."
+description: "An interactive Bash script that automates a complete ArgyllCMS printer profiling workflow on macOS, from target generation to ICC profile creation."
 author: "Knut Larsson"
 lang: en
 keywords:
