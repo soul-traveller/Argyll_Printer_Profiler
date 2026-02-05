@@ -12,11 +12,11 @@ Argyll_Printer_Profiler.command is an interactive Bash script that automates a c
 
 - [Overview](#overview)
 - [Requirements](#requirements)
-- [Installation on macOS](#installation-on-macos)
+- [Installation](#installation-on-macos)
   - [ArgyllCMS Installation](#argyllcms-installation)
   - [Script Placement](#script-placement)
   - [Execution Permissions (Important)](#execution-permissions-important)
-- [Setup File: Argyll_Printer_Profiler_setup.ini](#setup-file-Argyll_Printer_Profiler_setupini)
+- [Setup File: Argyll_Printer_Profiler_setup.ini](#setup-file-Argyll_Printer_Profiler_setup.ini)
 - [General Workflow](#general-workflow)
 - [Main Menu Actions Explained](#main-menu-actions-explained)
 - [Files and Folder Structure](#files-and-folder-structure)
@@ -58,14 +58,28 @@ The script:
 
 ---
 
-## Installation on macOS
+## Installation
 
-### ArgyllCMS Installation
+### Required Dependabilities for  macOS
 
 The recommended way is Homebrew:
 
 ```bash
 brew install argyll-cms
+```
+
+Verify installation:
+
+```bash
+targen -?
+```
+
+### Required Dependabilities for Linux
+
+The recommended way is apt:
+
+```bash
+sudo apt install argyll zenity
 ```
 
 Verify installation:
@@ -89,7 +103,7 @@ All generated files are stored **relative to the script’s location**.
 
 ---
 
-### Execution Permissions (Important)
+### Execution Permissions for Mac (Important)
 
 On modern macOS versions, a script must have the **execute bit** set.
 
@@ -113,6 +127,50 @@ Expected output:
 -rwxr-xr-x@ Argyll_Printer_Profiler.command
 ```
 
+You can now run the script by:
+- Double-clicking it in Finder
+- Or running `./Argyll_Printer_Profiler.command` from Terminal
+
+---
+
+### Execution Permissions for Linux (Important)
+
+As for macOS, Linux scripts must have the **execute bit** set.
+However, the .command file extension is mac only.
+Rename file to .sh, then:
+
+1. Open Terminal
+2. Navigate to the script folder
+3. Run:
+
+```bash
+chmod +x Argyll_Printer_Profiler.sh
+```
+
+Verify:
+
+```bash
+ls -l Argyll_Printer_Profiler.sh
+```
+
+Expected output:
+
+```
+-rwxr-xr-x@ Argyll_Printer_Profiler.sh
+```
+
+Finnaly, the file manager preferences must be modified to run .sh files.
+
+For GNOME / Nautilus (Ubuntu, Fedora)
+
+1. Open Files
+2. Menu → Preferences
+3. Executable Text Files
+4. Select:
+ - ✅ Ask what to do
+ - or Run them
+
+Now double-click will prompt or run.
 You can now run the script by:
 - Double-clicking it in Finder
 - Or running `./Argyll_Printer_Profiler.command` from Terminal

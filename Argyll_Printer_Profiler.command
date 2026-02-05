@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+
 # Version 1.0
 
 # Argyll_Printer_Profiler
@@ -15,6 +16,22 @@
 # Redesigned by Knut Larsson, https://github.com/soul-traveller/Argyll_Printer_Profiler
 # Based on instructions at https://rawtherapee.com/mirror/dcamprof/argyll-print.html
 
+# --- OS detection -------------------------------------------------
+OS_TYPE="$(uname -s)"
+
+case "$OS_TYPE" in
+  Darwin)
+    PLATFORM="macos"
+    ;;
+  Linux)
+    PLATFORM="linux"
+    ;;
+  *)
+    echo "❌ Unsupported operating system: $OS_TYPE"
+    exit 1
+    ;;
+esac
+
 shopt -s nullglob
 
 echo "=============================================================="
@@ -29,7 +46,7 @@ echo "          Color Target Generation & ICC Profiling             "
 echo "=============================================================="
 echo
 echo
-echo "Automated ArgyllCMS script for calibrating printers on MacOS."
+echo "Automated ArgyllCMS script for calibrating printers on MacOS and Linux."
 echo "Targets are adapted for use with X-Rite Colormunki Photo / i1Studio."
 echo
 echo "Author: Knut Larsson"
@@ -68,19 +85,51 @@ for var in STRIP_PATCH_CONSISTENSY_TOLERANCE PRINTER_ICC_PATH COLOR_SYNC_UTILITY
   fi
 done
 
-# --- ArgyllCMS detection ---------------------------------------------
-REQUIRED_CMDS=(targen chartread colprof printtarg profcheck dispcal)
+# --- Required command detection --------------------------------------
+REQUIRED_CMDS=(
+    targen
+    chartread
+    colprof
+    printtarg
+    profcheck
+    dispcal
+)
 
+if [[ "$PLATFORM" == "linux" ]]; then
+    REQUIRED_CMDS+=(
+        zenity
+    )
+fi
 for cmd in "${REQUIRED_CMDS[@]}"; do
   if ! command -v "$cmd" >/dev/null 2>&1; then
     echo "❌ ArgyllCMS not found (missing command: $cmd)"
     echo
-    echo "Install it using Homebrew:"
-    echo "  brew install argyll-cms"
+    if [[ "$PLATFORM" == "macos" ]]; then
+        echo "Install it using Homebrew:"
+        echo "  brew install argyll-cms"
+    else
+        echo "Install required dependabilities from your distribution's package manager or from argyllcms.com"
+        echo "Example:"
+        echo "   sudo apt install argyll zenity"
+    fi
     echo
     exit 1
   fi
 done
+
+# Portable sed -i helper (required for Linux)
+sed_inplace() {
+    local pattern="$1"
+    local file="$2"
+
+    if [[ "$PLATFORM" == "macos" ]]; then
+        # macOS: BSD sed needs -i '' for in-place editing without backup
+        sed -i '' "$pattern" "$file"
+    else
+        # Linux: GNU sed
+        sed -i "$pattern" "$file"
+    fi
+}
 
 # --- Extract Argyll version --------------------------------------------------
 ARGYLL_VERSION_LINE=$(dispcal 2>&1 | head -n 1)
@@ -95,7 +144,7 @@ move_log() {
     if mv "$TEMP_LOG" "$PROFILE_FOLDER/" 2>/dev/null; then
         TEMP_LOG="${PROFILE_FOLDER}/$(basename "$TEMP_LOG")"
     else
-        echo "⚠ Could not move log to profile folder"
+        echo "⚠️ Could not move log to profile folder"
         return 1
     fi
     exec > >(tee -a "$TEMP_LOG") 2>&1
@@ -218,21 +267,44 @@ rename_files() {
 }
 
 specify_profile_name() {
-    echo
-    echo 'When specifying a profile description/filename the following is highly recommended to include:'
-    echo '  - Printer ID'
-    echo '  - Paper ID'
-    echo '  - Target used for profile'
-    echo '  - Instrument/calibration type used'
-    echo '  - Date'
-    echo "Example filename: ${EXAMPLE_FILE_NAMING}"
-    echo 'For simplicity, profile description and filename are made identical.'
-    echo 'The profile description is what you will see in Photoshop and ColorSync Utility.'
-    echo
-    echo 'Enter a desired filename for this profile.'
-    echo 'If your filename is foobar, your profile will be named foobar.icc.'
-    echo
-    read -e -p 'Enter filename: ' name
+    while true; do
+        echo
+        echo 'When specifying a profile description/filename the following is highly recommended to include:'
+        echo '  - Printer ID'
+        echo '  - Paper ID'
+        echo '  - Color Space'
+        echo '  - Target used for profile'
+        echo '  - Instrument/calibration type used'
+        echo '  - Date created'
+        echo "Example file naming convention (select and copy):"
+        echo "${EXAMPLE_FILE_NAMING}"
+        echo
+        echo 'For simplicity, profile description and filename are made identical.'
+        echo 'The profile description is what you will see in Photoshop and ColorSync Utility.'
+        echo
+        echo 'Enter a desired filename for this profile.'
+        echo 'If your filename is foobar, your profile will be named foobar.icc.'
+        echo
+        echo 'Valid values: Letters A–Z a–z, digits 0–9, dash -, underscore _, parentheses ( ), dot .'
+        echo 'Press Enter without typing anything to cancel and return to previous menu.'
+        echo
+
+        read -e -p 'Enter filename: ' name
+
+        # If user pressed Enter without typing anything → cancel
+        if [[ -z "$name" ]]; then
+            echo "⏎ Input cancelled. Returning to previous menu..."
+            return 1
+        fi
+
+        if [[ ! "$name" =~ ^[A-Za-z0-9._()\-]+$ ]]; then
+            echo "❌ Invalid file name characters. Please try again."
+            continue
+        fi
+
+        # Valid input → exit loop
+        break
+    done
 
     prepare_profile_folder || {
         echo "Profile preparation failed..."
@@ -248,7 +320,8 @@ select_icc_profile() {
     # If cancelled, nothing is changed and it returns to main_menu
 
     echo
-    echo "Select a new ICC profile to use"
+    echo "Select a new ICC/ICM profile to use"
+    echo
 
     # Extract folder and current file from PRINTER_ICC_PATH
     local current_file
@@ -257,8 +330,9 @@ select_icc_profile() {
     folder="$(dirname "$PRINTER_ICC_PATH")"
 
     # Open AppleScript file chooser dialog
-    local new_icc_path
-    new_icc_path=$(osascript <<EOF
+
+    if [[ "$PLATFORM" == "macos" ]]; then
+        new_icc_path=$(osascript <<EOF
 try
     tell application "Finder"
         activate
@@ -270,6 +344,13 @@ on error
 end try
 EOF
 )
+    else    # linux
+        # Open Zenity file chooser dialog (Linux)
+        new_icc_path=$(zenity --file-selection \
+            --title="Select a new ICC/ICM profile (.icc or .icm)" \
+            --filename="${folder}/" \
+            --file-filter="ICC/ICM profiles | *.icc *.icm")
+    fi
 
     # Check if user cancelled
     if [ -z "$new_icc_path" ]; then
@@ -285,11 +366,13 @@ EOF
         return 1
     fi
 
-    echo "Selected ICC profile: $new_icc_path"
+    echo "Selected profile: $new_icc_path"
+}
 
+set_icc_profile_parameter() {
     # Update the setup file
     if [ ! -f "$SETUP_FILE" ]; then
-        echo "❌ Setup file not found. Cannot save new ICC profile."
+        echo "❌ Setup file not found. Cannot save new ICC/ICM profile."
         return 1
     fi
 
@@ -298,9 +381,29 @@ EOF
     escaped_path=$(printf '%s\n' "$new_icc_path" | sed 's/[\/&]/\\&/g')
 
     # Replace the line starting with PRINTER_ICC_PATH=
-    sed -i.bak "s|^PRINTER_ICC_PATH=.*|PRINTER_ICC_PATH=\"${escaped_path}\"|" "$SETUP_FILE"
+    sed_inplace "s|^PRINTER_ICC_PATH=.*|PRINTER_ICC_PATH=\"${escaped_path}\"|" "$SETUP_FILE"
 
     echo "✅ Updated PRINTER_ICC_PATH in setup file:"
+    echo "   $SETUP_FILE"
+    echo "   New path: $new_icc_path"
+    echo
+}
+
+set_precond_profile_parameter() {
+    # Update the setup file
+    if [ ! -f "$SETUP_FILE" ]; then
+        echo "❌ Setup file not found. Cannot save new ICC/ICM profile."
+        return 1
+    fi
+
+    # Escape slashes for sed
+    local escaped_path
+    escaped_path=$(printf '%s\n' "$new_icc_path" | sed 's/[\/&]/\\&/g')
+
+    # Replace the line starting with PRECONDITIONING_PROFILE_PATH=
+    sed_inplace "s|^PRECONDITIONING_PROFILE_PATH=.*|PRECONDITIONING_PROFILE_PATH=\"${escaped_path}\"|" "$SETUP_FILE"
+
+    echo "✅ Updated PRECONDITIONING_PROFILE_PATH in setup file:"
     echo "   $SETUP_FILE"
     echo "   New path: $new_icc_path"
     echo
@@ -309,6 +412,7 @@ EOF
 select_instrument() {
     echo
     echo 'Creating a test chart...'
+    echo
     echo 'Please choose a spectrophotometer model. This effects how target is generated.'
     echo '1: i1Pro'
     echo '2: i1Pro3+'
@@ -318,6 +422,9 @@ select_instrument() {
     echo '6: DTP41'
     echo '7: DTP51'
     echo '8: SpectroScan'
+    echo
+    echo "When choosing '3: Colormunki' a menu of target options will be presented at next step."
+    echo 'For all other choices command arguments may be edited for targen and printtarg.'
     echo
     read -r -n 1 -p 'Enter your choice [1–8]: ' answer
     case $answer in
@@ -365,174 +472,330 @@ select_instrument() {
 }
 
 specify_and_generate_target() {
-    default_target() {
-      if [ "$PAPER_SIZE" = "Letter" ]; then
-        patch_count='392'
-      else
-        patch_count='420'
-      fi
-      label='Medium (default)'
-      white_patches='5'
-      black_patches='5'
-      gray_steps='64'
-      multi_cube_steps='5'
-      multi_cube_surface_steps='4'
-      layout_seed='-R2'
-    }
+    precon_icc_filename="${PRECONDITIONING_PROFILE_PATH##*/}"
 
-    while true; do
-        # Display menu depending on paper size
-        if [ "$PAPER_SIZE" = "A4" ]; then
-            echo 'Select the target size:'
-            echo '1: Small  – 210 patches  - 1 x A4 page  (quick, lower accuracy)'
-            echo '2: Medium – 420 patches  - 2 x A4 pages (recommended default)'
-            echo '3: Large  – 630 patches  - 3 x A4 pages (better accuracy)'
-            echo '4: XL     – 840 patches  - 4 x A4 pages'
-            echo '5: XXL    – 1050 patches - 5 x A4 pages'
-            echo '6: XXXL   – 1260 patches - 6 x A4 pages (maximum quality)'
-
-        elif [ "$PAPER_SIZE" = "Letter" ]; then
-            echo 'Select the target size:'
-            echo '1: Small  – 196 patches  - 1 x Letter page  (quick, lower accuracy)'
-            echo '2: Medium – 392 patches  - 2 x Letter pages (recommended default)'
-            echo '3: Large  – 588 patches  - 3 x Letter pages (better accuracy)'
-            echo '4: XL     – 784 patches  - 4 x Letter pages'
-            echo '5: XXL    – 980 patches  - 5 x Letter pages'
-            echo '6: XXXL   – 1176 patches - 6 x Letter pages (maximum quality)'
-        else
-            # PAPER_SIZE A4 or any other value than Letter
-            echo "⚠ Unknown PAPER_SIZE \"$PAPER_SIZE\", reverting to A4."
-            PAPER_SIZE="A4"
-            echo 'Select the target size:'
-            echo '1: Small  – 210 patches  - 1 x A4 page  (quick, lower accuracy)'
-            echo '2: Medium – 420 patches  - 2 x A4 pages (recommended default)'
-            echo '3: Large  – 630 patches  - 3 x A4 pages (better accuracy)'
-            echo '4: XL     – 840 patches  - 4 x A4 pages'
-            echo '5: XXL    – 1050 patches - 5 x A4 pages'
-            echo '6: XXXL   – 1260 patches - 6 x A4 pages (maximum quality)'
-        fi
-
-        echo
-        # Prompt user after menu
-        read -r -n 1 -p 'Enter your choice [1–6]: ' patch_choice
-        case "$patch_choice" in
-        1)
+    if [ "$inst_name" = "ColorMunki" ]; then
+        default_target() {
+          label='Medium (default)'
+          # If any of these parameters are set to empty ("") the argument in targen/printarg is omitted.
           if [ "$PAPER_SIZE" = "Letter" ]; then
-            patch_count='196'
+            patch_count='392'
           else
-            patch_count='210'
+            patch_count='420'
           fi
-          label='Small'
-          white_patches='4'
-          black_patches='4'
-          gray_steps='32'
-          multi_cube_steps='3'
-          multi_cube_surface_steps='3'
-          layout_seed='-R1'
-          ;;
-        2)
-          default_target
-          ;;
-        3)
-          if [ "$PAPER_SIZE" = "Letter" ]; then
-            patch_count='588'
-          else
-            patch_count='630'
-          fi
-          label='Large'
-          white_patches='6'
-          black_patches='6'
+          white_patches='5'
+          black_patches='5'
           gray_steps='64'
-          multi_cube_steps='6'
-          multi_cube_surface_steps='6'
-          layout_seed='-R3'
-          ;;
-        4)
-          if [ "$PAPER_SIZE" = "Letter" ]; then
-            patch_count='784'
-          else
-            patch_count='840'
-          fi
-          label='XL'
-          white_patches='7'
-          black_patches='7'
-          gray_steps='128'
-          multi_cube_steps='7'
-          multi_cube_surface_steps='7'
-          layout_seed='-R4'
-          ;;
-        5)
-          if [ "$PAPER_SIZE" = "Letter" ]; then
-            patch_count='980'
-          else
-            patch_count='1050'
-          fi
-          label='XXL'
-          white_patches='8'
-          black_patches='8'
-          gray_steps='128'
-          multi_cube_steps='8'
-          multi_cube_surface_steps='8'
-          layout_seed='-R5'
-          ;;
-        6)
-          if [ "$PAPER_SIZE" = "Letter" ]; then
-            patch_count='1176'
-          else
-            patch_count='1260'
-          fi
-          label='XXXL'
-          white_patches='8'
-          black_patches='8'
-          gray_steps='128'
-          multi_cube_steps='8'
-          multi_cube_surface_steps='8'
-          layout_seed='-R6'
-          ;;
-        *)
-          default_target
-          echo 'Invalid selection. Using default.'
-          ;;
-        esac
+          multi_cube_steps='5'
+          multi_cube_surface_steps='4'
+          layout_seed='2'
+        }
 
-        echo
-        echo "Selected target: ${label} – ${patch_count} patches"
+        while true; do
+            # Display menu depending on paper size
+            if [ "$PAPER_SIZE" = "A4" ]; then
+                echo
+                echo 'Select the target size:'
+                echo '1: Small  – 210 patches  - 1 x A4 page  (quick, lower accuracy)'
+                echo '2: Medium – 420 patches  - 2 x A4 pages (recommended default)'
+                echo '3: Large  – 630 patches  - 3 x A4 pages (better accuracy)'
+                echo '4: XL     – 840 patches  - 4 x A4 pages'
+                echo '5: XXL    – 1050 patches - 5 x A4 pages'
+                echo '6: XXXL   – 1260 patches - 6 x A4 pages (maximum quality)'
 
-        read -r -n 1 -p 'Do you want to continue with select target? [y/n]: ' again
-        case "$again" in
-        [yY]|[yY][eE][sS])
-          echo 'Continuing with selected target...'
-          break
-          ;;
-        *)
-          echo 'Repeating target selection...'
-          ;;
-        esac
-    done
+            elif [ "$PAPER_SIZE" = "Letter" ]; then
+                echo
+                echo 'Select the target size:'
+                echo '1: Small  – 196 patches  - 1 x Letter page  (quick, lower accuracy)'
+                echo '2: Medium – 392 patches  - 2 x Letter pages (recommended default)'
+                echo '3: Large  – 588 patches  - 3 x Letter pages (better accuracy)'
+                echo '4: XL     – 784 patches  - 4 x Letter pages'
+                echo '5: XXL    – 980 patches  - 5 x Letter pages'
+                echo '6: XXXL   – 1176 patches - 6 x Letter pages (maximum quality)'
+            else
+                # PAPER_SIZE A4 or any other value than Letter
+                echo
+                echo "⚠️ Unknown PAPER_SIZE \"$PAPER_SIZE\", reverting to A4."
+                PAPER_SIZE="A4"
+                echo
+                echo 'Select the target size:'
+                echo '1: Small  – 210 patches  - 1 x A4 page  (quick, lower accuracy)'
+                echo '2: Medium – 420 patches  - 2 x A4 pages (recommended default)'
+                echo '3: Large  – 630 patches  - 3 x A4 pages (better accuracy)'
+                echo '4: XL     – 840 patches  - 4 x A4 pages'
+                echo '5: XXL    – 1050 patches - 5 x A4 pages'
+                echo '6: XXXL   – 1260 patches - 6 x A4 pages (maximum quality)'
+            fi
 
-    ## Removed defined layout seed for printtarg if not used
-    if [ "$USE_LAYOUT_SEED_FOR_TARGET" = "false" ]; then
+            echo
+            # Prompt user after menu
+            read -r -n 1 -p 'Enter your choice [1–6]: ' patch_choice
+            echo
+            case "$patch_choice" in
+            1)
+              label='Small'
+              # If any of these parameters are set to empty ("") the argument in targen/printarg is omitted.
+              if [ "$PAPER_SIZE" = "Letter" ]; then
+                patch_count='196'
+              else
+                patch_count='210'
+              fi
+              white_patches='4'
+              black_patches='4'
+              gray_steps='32'
+              multi_cube_steps='3'
+              multi_cube_surface_steps='3'
+              layout_seed='1'
+              ;;
+            2)
+              default_target
+              ;;
+            3)
+              label='Large'
+              # If any of these parameters are set to empty ("") the argument in targen/printarg is omitted.
+              if [ "$PAPER_SIZE" = "Letter" ]; then
+                patch_count='588'
+              else
+                patch_count='630'
+              fi
+              white_patches='6'
+              black_patches='6'
+              gray_steps='64'
+              multi_cube_steps='6'
+              multi_cube_surface_steps='6'
+              layout_seed='3'
+              ;;
+            4)
+              label='XL'
+              # If any of these parameters are set to empty ("") the argument in targen/printarg is omitted.
+              if [ "$PAPER_SIZE" = "Letter" ]; then
+                patch_count='784'
+              else
+                patch_count='840'
+              fi
+              white_patches='7'
+              black_patches='7'
+              gray_steps='128'
+              multi_cube_steps='7'
+              multi_cube_surface_steps='7'
+              layout_seed='4'
+              ;;
+            5)
+              label='XXL'
+              # If any of these parameters are set to empty ("") the argument in targen/printarg is omitted.
+              if [ "$PAPER_SIZE" = "Letter" ]; then
+                patch_count='980'
+              else
+                patch_count='1050'
+              fi
+              white_patches='8'
+              black_patches='8'
+              gray_steps='128'
+              multi_cube_steps='8'
+              multi_cube_surface_steps='8'
+              layout_seed='5'
+              ;;
+            6)
+              label='XXXL'
+              # If any of the targen/printarg relevant arument-parameters are set to empty ("") the argument is omitted at execution.
+              if [ "$PAPER_SIZE" = "Letter" ]; then
+                patch_count='1176'
+              else
+                patch_count='1260'
+              fi
+              white_patches='8'
+              black_patches='8'
+              gray_steps='128'
+              multi_cube_steps='8'
+              multi_cube_surface_steps='8'
+              layout_seed='6'
+              ;;
+            *)
+              default_target
+              echo 'Invalid selection. Using default.'
+              ;;
+            esac
+
+            echo
+            echo "Selected target: ${label} – ${patch_count} patches"
+
+            read -r -n 1 -p 'Do you want to continue with select target? [y/n]: ' again
+            case "$again" in
+            [yY]|[yY][eE][sS])
+              echo 'Continuing with selected target...'
+              break
+              ;;
+            *)
+              echo 'Repeating target selection...'
+              ;;
+            esac
+        done
+
+    else    # Other instruments than Colormunki
+        # Clear parameters
+        patch_count=''
+        white_patches=''
+        black_patches=''
+        gray_steps=''
+        multi_cube_steps=''
+        multi_cube_surface_steps=''
         layout_seed=''
+
+        while true; do
+            echo
+            echo
+            echo 'Specify targen command arguments for instrument chosen:'
+            echo "Default value specified:"
+            echo "'${DEFAULT_TARGEN_COMMAND_NON_COLORMUNKI}'"
+            echo
+            echo 'Valid values: Letters A–Z a–z, digits 0–9, dash -, underscore _, '
+            echo '              parentheses ( ), forward slash /, space, dot .'
+            echo 'Notes: -l and -c arguments are programatically selected and should not be in parameter.'
+            echo '       Current pre-conditioning profile specified:'
+            echo "       -c ${PRECONDITIONING_PROFILE_PATH}"
+            echo "       Current ink limit specified: -l${INK_LIMIT}"
+            echo
+            read -e -p "Enter/modify arguments or enter to use default: " TARGEN_COMMAND_NON_COLORMUNKI
+
+            # Use default if user pressed Enter
+            if [[ -z "$TARGEN_COMMAND_NON_COLORMUNKI" ]]; then
+                TARGEN_COMMAND_NON_COLORMUNKI="${DEFAULT_TARGEN_COMMAND_NON_COLORMUNKI}"
+                break
+            fi
+
+            if [[ ! "$TARGEN_COMMAND_NON_COLORMUNKI" =~ ^[A-Za-z0-9._()\/\-[:space:]]+$ ]]; then
+                echo "❌ Invalid characters. Please try again."
+                continue
+            fi
+
+            # Valid input → exit loop
+            break
+        done
+        while true; do
+            echo
+            echo
+            echo 'Specify printtarg command arguments for instrument chosen:'
+            echo "Default value specified:"
+            echo "'${DEFAULT_PRINTTARG_COMMAND_NON_COLORMUNKI}'"
+            echo
+            echo 'Valid values: Letters A–Z a–z, digits 0–9, dash -, underscore _, '
+            echo '              parentheses ( ), forward slash /, space, dot .'
+            echo 'Notes: -i and -T arguments are programatically selected and should not be in parameter.'
+            echo "       Current instrument specified: ${inst_arg}"
+            echo "       Current target resolution specified: -T${TARGET_RESOLUTION}"
+            echo
+            read -e -p "Enter/modify arguments or enter to use default: " PRINTTARG_COMMAND_NON_COLORMUNKI
+
+            # Use default if user pressed Enter
+            if [[ -z "$PRINTTARG_COMMAND_NON_COLORMUNKI" ]]; then
+                PRINTTARG_COMMAND_NON_COLORMUNKI="${DEFAULT_PRINTTARG_COMMAND_NON_COLORMUNKI}"
+                break
+            fi
+
+            if [[ ! "$PRINTTARG_COMMAND_NON_COLORMUNKI" =~ ^[A-Za-z0-9._()\/\-[:space:]]+$ ]]; then
+                echo "❌ Invalid characters. Please try again."
+                continue
+            fi
+
+            # Valid input → exit loop
+            break
+        done
     fi
 
-    echo
-    echo 'Generating target color values (.ti1 file)...'
-    echo "Command Used: targen ${COMMON_ARGUMENTS_TARGEN} -l${INK_LIMIT} -e${white_patches} -B${black_patches} -g${gray_steps} -m${multi_cube_steps} -M${multi_cube_surface_steps} -f${patch_count} "${name}""
-    # --- Generate target ONLY ONCE, after confirmation ---
-    targen ${COMMON_ARGUMENTS_TARGEN} -e${white_patches} -B${black_patches} -g${gray_steps} -m${multi_cube_steps} -f${patch_count} "${name}" || {
-        echo "❌ targen failed. See log for details."
-        return 1
-    }
+    # --- Build targen arguments conditionally ---------------------------
 
-    echo
-    echo 'Generating target(s) (.tif image(es) and .ti2 file)...'
-    echo "Command Used: printtarg ${COMMON_ARGUMENTS_PRINTTARG} ${inst_arg} -b ${layout_seed} -r${PROFILE_SMOOTING} -T${TARGET_RESOLUTION} -p${PAPER_SIZE} "${name}""
-    # Common printtarg command
-    printtarg ${COMMON_ARGUMENTS_PRINTTARG} ${inst_arg} -b ${layout_seed} -r${PROFILE_SMOOTING} -T${TARGET_RESOLUTION} -p${PAPER_SIZE} "${name}" || {
-        echo "❌ printtarg failed. See log for details."
-        return 1
-    }
-    echo
+    # For targen, if any variable for each argument is empty, then remove argument in command (empty parameter)
+   targen_l=''        # ink limit
+   if [ -n "$INK_LIMIT" ]; then
+       targen_l="-l${INK_LIMIT}"
+   fi
+    targen_e=''        # white patches
+    if [ -n "$white_patches" ]; then
+        targen_e="-e${white_patches}"
+    fi
+    targen_B=''        # black patches
+    if [ -n "$black_patches" ]; then
+        targen_B="-B${black_patches}"
+    fi
+    targen_g=''        # gray steps
+    if [ -n "$gray_steps" ]; then
+        targen_g="-g${gray_steps}"
+    fi
+    targen_m=''        # multi cube steps
+    if [ -n "$multi_cube_steps" ]; then
+        targen_m="-m${multi_cube_steps}"
+    fi
+    targen_M=''        # multi cube surface steps
+    if [ -n "$multi_cube_surface_steps" ]; then
+        targen_M="-M${multi_cube_surface_steps}"
+    fi
+    targen_f=''        # patch count
+    if [ -n "$patch_count" ]; then
+        targen_f="-f${patch_count}"
+    fi
+    targen_c=()        # pre-conditioning profile path with filename
+    if [ -n "$PRECONDITIONING_PROFILE_PATH" ]; then
+       targen_c+=("-c" "$PRECONDITIONING_PROFILE_PATH")
+    fi
+
+    # --- Build printtarg arguments conditionally -------------------------
+
+    # For printtarg, if any variable for each argument is empty, then remove argument in command (empty parameter)
+    printtarg_T=''     # target resolution
+    if [ -n "$TARGET_RESOLUTION" ]; then
+        printtarg_T="-T${TARGET_RESOLUTION}"
+    fi
+    printtarg_p=''     # paper size
+    if [ -n "$PAPER_SIZE" ]; then
+        printtarg_p="-p${PAPER_SIZE}"
+    fi
+    ## Removed defined layout seed for printtarg if not used
+    printtarg_R=''        # layour seed
+    if [ "$USE_LAYOUT_SEED_FOR_TARGET" = "true" ]; then
+        if [ -n "$layout_seed" ]; then
+            printtarg_R="-R${layout_seed}"
+        fi
+    fi
+
+    if [ "$inst_name" = "ColorMunki" ]; then
+        echo
+        echo 'Generating target color values (.ti1 file)...'
+        echo "Command Used: targen ${COMMON_ARGUMENTS_TARGEN} ${targen_l} ${targen_e} ${targen_B} ${targen_g} ${targen_m} ${targen_M} ${targen_f} "${targen_c[@]}" "${name}""
+        # --- Generate target ONLY ONCE, after confirmation ---
+        targen ${COMMON_ARGUMENTS_TARGEN} ${targen_l} ${targen_e} ${targen_B} ${targen_g} ${targen_m} ${targen_M} ${targen_f} "${targen_c[@]}" "${name}" || {
+            echo "❌ targen failed. See log for details."
+            return 1
+        }
+
+        echo
+        echo 'Generating target(s) (.tif image(es) and .ti2 file)...'
+        echo "Command Used: printtarg ${COMMON_ARGUMENTS_PRINTTARG} ${inst_arg} ${printtarg_R} ${printtarg_T} ${printtarg_p} "${name}""
+        # Common printtarg command
+        printtarg ${COMMON_ARGUMENTS_PRINTTARG} ${inst_arg} ${printtarg_R} ${printtarg_T} ${printtarg_p} "${name}" || {
+            echo "❌ printtarg failed. See log for details."
+            return 1
+        }
+        echo
+    else    # Other than Colormunki
+        echo
+        echo 'Generating target color values (.ti1 file)...'
+        # --- Generate target ONLY ONCE, after confirmation ---
+        echo "Command Used: targen ${targen_l} "${targen_c[@]}" ${TARGEN_COMMAND_NON_COLORMUNKI} "${name}""
+        targen ${targen_l} "${targen_c[@]}" ${TARGEN_COMMAND_NON_COLORMUNKI} "${name}" || {
+            echo "❌ targen failed. See log for details."
+            return 1
+        }
+
+        echo
+        echo 'Generating target(s) (.tif image(es) and .ti2 file)...'
+        echo "Command Used: printtarg ${inst_arg} ${printtarg_T} ${PRINTTARG_COMMAND_NON_COLORMUNKI} "${name}""
+        # Common printtarg command
+        printtarg ${inst_arg} ${printtarg_T} ${PRINTTARG_COMMAND_NON_COLORMUNKI} "${name}" || {
+            echo "❌ printtarg failed. See log for details."
+            return 1
+        }
+        echo
+    fi
 
     # Detect generated TIFF files (single-page or multi-page)
     tif_files=()
@@ -554,16 +817,18 @@ specify_and_generate_target() {
         echo "  $f"
     done
 
-    echo 'Please print the test chart(s) using ColorSync Utility (opens automatically).'
-    echo 'In the Printer dialog set option "Colour" to "Print as Color Target".'
-    echo 'This will print without color management.'
-    echo 'Tip: It might be beneficial to print targets with 88-90% scaling to prevent the rubber'
-    echo '     taps underneath the Colormunki to interfere with reading of the first patches.'
-
-    # Open all created TIFFs in ColorSync Utility
-    for f in "${tif_files[@]}"; do
-        open -a "${COLOR_SYNC_UTILITY_PATH}" "$f"
-    done
+    if [[ "$PLATFORM" == "macos" ]]; then
+        echo 'Please print the test chart(s) using ColorSync Utility (opens automatically).'
+        echo 'In the Printer dialog set option "Colour" to "Print as Color Target".'
+        echo 'This will print without color management.'
+        echo 'Tip: It might be beneficial to print targets with 88-90% scaling to prevent the rubber'
+        echo '     taps underneath the Colormunki to interfere with reading of the first patches.'
+        open -a "$COLOR_SYNC_UTILITY_PATH" "$f"
+    else
+        echo 'Please print the test chart(s) created and make sure to disable color management.'
+        echo 'Tip: It might be beneficial to print targets with 88-90% scaling to prevent the rubber'
+        echo '     taps underneath the Colormunki to interfere with reading of the first patches.'
+    fi
 
     echo
     read -p 'After target(s) have been printed, press enter to continue...'
@@ -619,7 +884,8 @@ select_ti2_file() {
     echo
 
     local ti2_path
-    ti2_path=$(osascript <<EOF
+    if [[ "$PLATFORM" == "macos" ]]; then
+        ti2_path=$(osascript <<EOF
 try
     tell application "Finder"
         activate
@@ -631,6 +897,13 @@ on error
 end try
 EOF
 )
+    else    # linux
+        # Open Zenity file chooser dialog (Linux)
+        ti2_path=$(zenity --file-selection \
+            --title="Select a .ti2 file" \
+            --filename="${SCRIPT_DIR}/${CREATED_PROFILES_FOLDER}/" \
+            --file-filter="Target Information 2 data | *.ti2")
+    fi
 
     # User cancelled → return to main menu
     if [ -z "$ti2_path" ]; then
@@ -752,7 +1025,8 @@ select_ti3_file() {
     echo
 
     local ti3_path
-    ti3_path=$(osascript <<EOF
+    if [[ "$PLATFORM" == "macos" ]]; then
+        ti3_path=$(osascript <<EOF
 try
     tell application "Finder"
         activate
@@ -764,6 +1038,13 @@ on error
 end try
 EOF
 )
+    else    # linux
+        # Open Zenity file chooser dialog (Linux)
+        ti3_path=$(zenity --file-selection \
+            --title="Select a .ti3 file" \
+            --filename="${SCRIPT_DIR}/${CREATED_PROFILES_FOLDER}/" \
+            --file-filter="Target Information 3 data | *.ti3")
+    fi
 
     # User cancelled → return to main menu
     if [ -z "$ti3_path" ]; then
@@ -894,7 +1175,8 @@ select_ti3_file_only() {
     echo
 
     local ti3_path
-    ti3_path=$(osascript <<EOF
+    if [[ "$PLATFORM" == "macos" ]]; then
+        ti3_path=$(osascript <<EOF
 try
     tell application "Finder"
         activate
@@ -906,6 +1188,13 @@ on error
 end try
 EOF
 )
+    else    # linux
+        # Open Zenity file chooser dialog (Linux)
+        ti3_path=$(zenity --file-selection \
+            --title="Select a .ti3 file" \
+            --filename="${SCRIPT_DIR}/${CREATED_PROFILES_FOLDER}/" \
+            --file-filter="Target Information 3 data | *.ti3")
+    fi
 
     # User cancelled → return to main menu
     if [ -z "$ti3_path" ]; then
@@ -984,20 +1273,36 @@ sanity_check() {
     echo
 }
 
+# Helper for stat command differences (Linux vs macOS)
+file_mtime() {
+  if stat -f "%m" "$1" >/dev/null 2>&1; then
+    stat -f "%m" "$1"
+  else
+    stat -c "%Y" "$1"
+  fi
+}
+
 perform_measurement_and_profile_creation() {
     echo
     echo "Starting chart reading (read .ti2 file and generate .ti3 file)..."
     echo
 
+    # --- Build chartread arguments conditionally ---------------------------
+    # For chartread, if any variable for each argument is empty, then remove argument in command (empty parameter)
+    chartread_T=''        # patch strip consistency
+    if [ -n "$STRIP_PATCH_CONSISTENSY_TOLERANCE" ]; then
+        chartread_T="-T${STRIP_PATCH_CONSISTENSY_TOLERANCE}"
+    fi
+
+    local ti3_file="${name}.ti3"
     if [ "$action" = "2" ]; then    # re-read or resume partly read chart
         # Capture modification time state before chartread
-        local ti3_file="${name}.ti3"
         local ti3_mtime_before=""
         if [ -f "$ti3_file" ]; then
-            ti3_mtime_before=$(stat -f "%m" "$ti3_file")
+            ti3_mtime_before=$(file_mtime "$ti3_file")
         fi
 
-        echo "Command Used: chartread ${COMMON_ARGUMENTS_CHARTREAD} -r -T"${STRIP_PATCH_CONSISTENSY_TOLERANCE}" "${name}""
+        echo "Command Used: chartread ${COMMON_ARGUMENTS_CHARTREAD} -r ${chartread_T} "${name}""
         echo
         echo "Tips:"
         echo "     - Reading speed to more than 7 sec per strip reduces"
@@ -1007,7 +1312,7 @@ perform_measurement_and_profile_creation() {
         echo "     - Save progress once in a while with 'd' and then"
         echo "       resume measuring with option 2 of main manu."
         echo
-        chartread ${COMMON_ARGUMENTS_CHARTREAD} -r -T"${STRIP_PATCH_CONSISTENSY_TOLERANCE}" "${name}" || {
+        chartread ${COMMON_ARGUMENTS_CHARTREAD} -r ${chartread_T} "${name}" || {
             echo
             echo "❌ chartread failed. See log for details."
             echo
@@ -1017,17 +1322,17 @@ perform_measurement_and_profile_creation() {
         # Detect abort after chartread
         # Resume mode: Check if file modified, if not user abored
         local ti3_mtime_after
-        ti3_mtime_after=$(stat -f "%m" "$ti3_file")
+        ti3_mtime_after=$(file_mtime "$ti3_file")
 
         if [[ "$ti3_mtime_after" == "$ti3_mtime_before" ]]; then
             echo
-            echo "⚠️ Chartread aborted by user (no new measurements written)."
+            echo "⚠️️ Chartread aborted by user (no new measurements written)."
             echo
             return 1
         fi
 
     else # Normal chartread
-        echo "Command Used: chartread ${COMMON_ARGUMENTS_CHARTREAD} -T"${STRIP_PATCH_CONSISTENSY_TOLERANCE}" "${name}""
+        echo "Command Used: chartread ${COMMON_ARGUMENTS_CHARTREAD} ${chartread_T} "${name}""
         echo
         echo "Tips:"
         echo "     - Reading speed to more than 7 sec per strip reduces"
@@ -1037,7 +1342,7 @@ perform_measurement_and_profile_creation() {
         echo "     - Save progress once in a while with 'd' and then"
         echo "       resume measuring with option 2 of main manu."
         echo
-        chartread ${COMMON_ARGUMENTS_CHARTREAD} -T"${STRIP_PATCH_CONSISTENSY_TOLERANCE}" "${name}" || {
+        chartread ${COMMON_ARGUMENTS_CHARTREAD} ${chartread_T} "${name}" || {
             echo
             echo "❌ chartread failed. See log for details."
             echo
@@ -1048,10 +1353,25 @@ perform_measurement_and_profile_creation() {
         # Fresh read: file must exist
         if [ ! -f "$ti3_file" ]; then
             echo
-            echo "⚠️ Chartread aborted by user."
+            echo "⚠️️ Chartread aborted by user."
             echo
             return 1
         fi
+    fi
+
+    # --- Build colprof arguments conditionally ---------------------------
+    # For colprof, if any variable for each argument is empty, then remove argument in command (empty parameter)
+    colprof_S=()        # printer icc profile
+    if [ -n "$PRINTER_ICC_PATH" ]; then
+       colprof_S+=("-S" "$PRINTER_ICC_PATH")
+    fi
+    colprof_l=''        # ink limit
+    if [ -n "$INK_LIMIT" ]; then
+        colprof_l="-l${INK_LIMIT}"
+    fi
+    colprof_r=''        # Average deviation / smooting
+    if [ -n "$PROFILE_SMOOTING" ]; then
+        colprof_r="-r${PROFILE_SMOOTING}"
     fi
 
     echo
@@ -1061,8 +1381,8 @@ perform_measurement_and_profile_creation() {
         echo
         echo
         echo "Starting profile creation (read .ti3 file and generate .icc file)..."
-        echo "Command Used: colprof ${COMMON_ARGUMENTS_COLPROF} -S \"${PRINTER_ICC_PATH}\" -D"${desc}" "${name}""
-        colprof ${COMMON_ARGUMENTS_COLPROF} -l${INK_LIMIT} -S "${PRINTER_ICC_PATH}" -D"${desc}" "${name}" || {
+        echo "Command Used: colprof ${COMMON_ARGUMENTS_COLPROF} ${colprof_l} ${colprof_r} "${colprof_S[@]}" -D"${desc}" "${name}""
+        colprof ${COMMON_ARGUMENTS_COLPROF} ${colprof_l} ${colprof_r} "${colprof_S[@]}" -D"${desc}" "${name}" || {
             echo
             echo "❌ colprof failed. See log for details."
             echo
@@ -1085,11 +1405,26 @@ perform_measurement_and_profile_creation() {
 }
 
 create_profile_from_existing() {
+    # --- Build colprof arguments conditionally ---------------------------
+    # For colprof, if any variable for each argument is empty, then remove argument in command (empty parameter)
+    colprof_S=()        # printer icc profile
+    if [ -n "$PRINTER_ICC_PATH" ]; then
+       colprof_S+=("-S" "$PRINTER_ICC_PATH")
+    fi
+    colprof_l=''        # ink limit
+    if [ -n "$INK_LIMIT" ]; then
+        colprof_l="-l${INK_LIMIT}"
+    fi
+    colprof_r=''        # Average deviation / smooting
+    if [ -n "$PROFILE_SMOOTING" ]; then
+        colprof_r="-r${PROFILE_SMOOTING}"
+    fi
+
     echo
     echo
     echo "Starting profile creation (read .ti3 file and generate .icc file)..."
-    echo "Command Used: colprof ${COMMON_ARGUMENTS_COLPROF} -S \"${PRINTER_ICC_PATH}\" -D"${desc}" "${name}""
-    colprof ${COMMON_ARGUMENTS_COLPROF} -l${INK_LIMIT} -S "${PRINTER_ICC_PATH}" -D"${desc}" "${name}" || {
+    echo "Command Used: colprof ${COMMON_ARGUMENTS_COLPROF} ${colprof_l} ${colprof_r} "${colprof_S[@]}" -D"${desc}" "${name}""
+    colprof ${COMMON_ARGUMENTS_COLPROF} ${colprof_l} ${colprof_r} "${colprof_S[@]}" -D"${desc}" "${name}" || {
         echo
         echo "❌ colprof failed. See log for details."
         echo
@@ -1117,6 +1452,7 @@ install_profile_and_save_data() {
 edit_setup_parameters() {
     while true; do
         icc_filename="${PRINTER_ICC_PATH##*/}"
+        precon_icc_filename="${PRECONDITIONING_PROFILE_PATH##*/}"
 
         echo
         echo
@@ -1126,21 +1462,29 @@ edit_setup_parameters() {
         echo "What parameter do you want to modify?"
         echo
         echo "1: Select Color Space profile to use when creating printer profile."
+        echo "   (gamut mapping to output profile)"
         echo "   Current file specified: '${icc_filename}'"
         echo
-        echo "2: Modify patch consistency tolerance (chartread arg. -T)"
+        echo "2: Select pre-conditioning profile to use when creating target."
+        echo "   Current file specified: '${precon_icc_filename}'"
+        echo
+        echo "3: Modify patch consistency tolerance (chartread arg. -T)"
         echo "   Current value specified: '${STRIP_PATCH_CONSISTENSY_TOLERANCE}'"
         echo
-        echo "3: Modify paper size for target generation. Valid values: A4, Letter."
+        echo "4: Modify paper size for target generation (printtarg -p). Valid values: A4, Letter."
         echo "   Current value specified: '${PAPER_SIZE}'"
         echo
-        echo "4: Modify ink limit. Valid values: 0 – 400 (%)."
+        echo "5: Modify ink limit (targen and colprof -l). Valid values: 0 – 400 (%)."
         echo "   Current value specified: '${INK_LIMIT}'"
         echo
-        echo "5: Go back to main menu."
+        echo "6: Modify file naming convention example (shown in main menu option 1). Valid value: text."
+        echo "   Current value specified:"
+        echo "   '${EXAMPLE_FILE_NAMING}'"
+        echo
+        echo "7: Go back to main menu."
         echo
 
-        read -r -n 1 -p "Enter your choice [1–5]: " answer
+        read -r -n 1 -p "Enter your choice [1–7]: " answer
         echo
 
         case $answer in
@@ -1148,11 +1492,26 @@ edit_setup_parameters() {
                 select_icc_profile || {
                     echo "Returning to setup menu..."
                 }
+                set_icc_profile_parameter || {
+                    echo "Returning to setup menu..."
+                }
                 source "$SETUP_FILE"
                 continue
                 ;;
 
             2)
+                select_icc_profile || {
+                    echo "Returning to setup menu..."
+                }
+                set_precond_profile_parameter || {
+                    echo "Returning to setup menu..."
+                }
+                source "$SETUP_FILE"
+                continue
+                echo
+                ;;
+
+            3)
                 echo
                 read -r -p "Enter new value [0.6 recommended]: " value
 
@@ -1161,20 +1520,21 @@ edit_setup_parameters() {
                     continue
                 fi
 
-                sed -i.bak "s|^STRIP_PATCH_CONSISTENSY_TOLERANCE=.*|STRIP_PATCH_CONSISTENSY_TOLERANCE=${value}|" "$SETUP_FILE"
+                sed_inplace "s|^STRIP_PATCH_CONSISTENSY_TOLERANCE=.*|STRIP_PATCH_CONSISTENSY_TOLERANCE='${value}'|" "$SETUP_FILE"
 
                 echo "✅ Updated STRIP_PATCH_CONSISTENSY_TOLERANCE to $value"
                 source "$SETUP_FILE"
+                echo
                 continue
                 ;;
 
-            3)
+            4)
                 echo
                 read -r -p "Enter paper size [A4 or Letter]: " value
 
                 case "$value" in
                     A4|Letter)
-                        sed -i.bak "s|^PAPER_SIZE=.*|PAPER_SIZE=${value}|" "$SETUP_FILE"
+                        sed_inplace "s|^PAPER_SIZE=.*|PAPER_SIZE='${value}'|" "$SETUP_FILE"
                         echo "✅ Updated PAPER_SIZE to $value"
                         source "$SETUP_FILE"
                         ;;
@@ -1182,10 +1542,11 @@ edit_setup_parameters() {
                         echo "❌ Invalid paper size."
                         ;;
                 esac
+                echo
                 continue
                 ;;
 
-            4)
+            5)
                 echo
                 read -r -p "Enter ink limit (0–400): " value
 
@@ -1194,14 +1555,51 @@ edit_setup_parameters() {
                     continue
                 fi
 
-                sed -i.bak "s|^INK_LIMIT=.*|INK_LIMIT=${value}|" "$SETUP_FILE"
+                sed_inplace "s|^INK_LIMIT=.*|INK_LIMIT='${value}'|" "$SETUP_FILE"
 
                 echo "✅ Updated INK_LIMIT to $value"
+                source "$SETUP_FILE"
+                echo
+                continue
+                ;;
+
+            6)
+                while true; do
+                    echo
+                    echo 'When specifying a profile description/filename the following is highly recommended to include:'
+                    echo '  - Printer ID'
+                    echo '  - Paper ID'
+                    echo '  - Color Space'
+                    echo '  - Target used for profile'
+                    echo '  - Instrument/calibration type used'
+                    echo '  - Date created'
+                    echo
+                    echo "Current value specified:"
+                    echo "'${EXAMPLE_FILE_NAMING}'"
+                    echo
+                    echo 'Valid values: Letters A–Z a–z, digits 0–9, dash -, underscore _, parentheses ( ), dot .'
+                    echo
+                    read -e -p "Enter example file naming convention: " value
+
+                    if [[ ! "$value" =~ ^[A-Za-z0-9._()\-]+$ ]]; then
+                        echo "❌ Invalid file name characters. Please try again."
+                        continue
+                    fi
+
+                    # Valid input → exit loop
+                    break
+                done
+
+                sed_inplace "s|^EXAMPLE_FILE_NAMING=.*|EXAMPLE_FILE_NAMING='${value}'|" "$SETUP_FILE"
+
+                echo "✅ Updated file naming convention example to:"
+                echo "$value"
+                echo
                 source "$SETUP_FILE"
                 continue
                 ;;
 
-            5)
+            7)
                 echo "Returning to main menu..."
                 return 0
                 ;;
@@ -1370,7 +1768,11 @@ main_menu() {
             action='7'
             echo
             echo "Closing Terminal..."
-            osascript -e 'tell application "Terminal" to close front window' & exit 0
+            if [[ "$PLATFORM" == "macos" ]]; then
+                osascript -e 'tell application "Terminal" to close front window' & exit 0
+            else
+                exit 0
+            fi
             ;;
           *)
             action='1'
