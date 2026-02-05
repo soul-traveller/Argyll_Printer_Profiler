@@ -1,8 +1,8 @@
 theme: jekyll-theme-cayman
 markdown: kramdown
 
-title: "read_image_patch_colors – Read image grid patches and store colors in ArgyllCMS compatible files."
-description: "Generate ArgyllCMS compatible .ti1 and .ti2 files from a grid of color patches in an image."
+title: "Script for calibrating printers using ArgyllCMS on MacOS"
+description: "Argyll_Printer_Profiler.command is an interactive Bash script that automates a complete ArgyllCMS printer profiling workflow on macOS, from target generation to ICC installation."
 author: "Knut Larsson"
 lang: en
 keywords:
