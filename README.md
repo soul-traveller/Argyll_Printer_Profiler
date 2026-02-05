@@ -1,11 +1,11 @@
 # Argyll_Printer_Profiler.command — User Guide
-**Version:** 1.0
-**Platform:** macOS
-**Based on:** Simple script by Jintak Han (https://github.com/jintakhan/AutomatedArgyllPrinter)
-**Author:** Knut Larsson
+**Version:** 1.0\n
+**Platform:** macOS\n
+**Based on:** Simple script by Jintak Han (https://github.com/jintakhan/AutomatedArgyllPrinter)\n
+**Author:** Knut Larsson\n\n
 
-Argyll_Printer_Profiler.command is an interactive Bash script that automates a complete **ArgyllCMS printer profiling workflow** on macOS, from target generation to ICC installation.
+Argyll_Printer_Profiler.command is an interactive Bash script that automates a complete **ArgyllCMS printer profiling workflow** on macOS, from target generation to ICC installation.\n\n
 
-See full Reference and Usage Guide:
+See full Reference and Usage Guide:\n
 https://soul-traveller.github.io/Argyll_Printer_Profiler/
 ---
