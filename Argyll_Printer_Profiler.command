@@ -58,7 +58,7 @@ cd "$(dirname "$0")"
 SCRIPT_DIR="$(cd -- "$(dirname -- "$0")" && pwd)"
 SCRIPT_NAME="$(basename -- "$0")"
 TEMP_LOG="${SCRIPT_DIR}/Argyll_Printer_Profiler_$(date +%Y%m%d_%H%M%S).log"
- 
+
 # Try to create/truncate the log file explicitly
 if ! : >"$TEMP_LOG" 2>/dev/null; then
   echo "❌ Cannot create log file at '$TEMP_LOG'."
@@ -67,7 +67,7 @@ else
   # Only if creation succeeded, hook up tee-based logging
   exec > >(tee -a "$TEMP_LOG") 2>&1
 fi
- 
+
 echo
 echo "File path: ${SCRIPT_DIR}"
 echo "Script executed: ${SCRIPT_NAME}"
@@ -155,12 +155,12 @@ move_log() {
         echo "❌ Log file '$TEMP_LOG' does not exist; cannot move."
         return 1
     fi
- 
+
     if [ ! -d "$PROFILE_FOLDER" ]; then
         echo "❌ Profile folder '$PROFILE_FOLDER' does not exist; cannot move log."
         return 1
     fi
- 
+
     if mv "$TEMP_LOG" "$PROFILE_FOLDER/"; then
         TEMP_LOG="${PROFILE_FOLDER}/$(basename "$TEMP_LOG")"
     else
@@ -442,11 +442,13 @@ select_instrument() {
     echo '6: DTP41'
     echo '7: DTP51'
     echo '8: SpectroScan'
+    echo "9: Abort printing target."
     echo
     echo "When choosing '3: Colormunki' a menu of target options will be presented at next step."
     echo 'For all other choices command arguments may be edited for targen and printtarg.'
     echo
-    read -r -n 1 -p 'Enter your choice [1–8]: ' answer
+    read -r -n 1 -p 'Enter your choice [1–9]: ' answer
+    echo
     case $answer in
       1)
         inst_arg='-ii1'
@@ -480,9 +482,15 @@ select_instrument() {
         inst_arg='-iSS'
         inst_name='SpectroScan'
         ;;
+      9)
+        echo
+        echo 'Aborting printing target.'
+        return 1
+        ;;
       *)
         inst_arg="-iCM -h"
         inst_name='ColorMunki'
+        echo
         echo 'No valid selection made. Using default instrument...'
         ;;
     esac
@@ -494,164 +502,37 @@ select_instrument() {
 specify_and_generate_target() {
     precon_icc_filename="${PRECONDITIONING_PROFILE_PATH##*/}"
 
-    if [ "$inst_name" = "ColorMunki" ]; then
-        default_target() {
-          label='Medium (default)'
-          # If any of these parameters are set to empty ("") the argument in targen/printarg is omitted.
-          if [ "$PAPER_SIZE" = "Letter" ]; then
-            patch_count='392'
-          else
-            patch_count='420'
-          fi
-          white_patches='5'
-          black_patches='5'
-          gray_steps='64'
-          multi_cube_steps='5'
-          multi_cube_surface_steps='4'
-          layout_seed='2'
-        }
+    menu_info_common_settings() {
+        echo "Common settings for targen defined in setup file: "
+        echo "      - Arguments set: $COMMON_ARGUMENTS_TARGEN"
+        echo "      - Ink limit -l: $INK_LIMIT"
+        echo '      - Pre-conditioning profile specified -c:'
+        echo "        '${PRECONDITIONING_PROFILE_PATH}'"
+        echo "Common settings for printtarg defined in setup file: "
+        echo "      - Arguments set: $COMMON_ARGUMENTS_PRINTTARG"
+        echo "      - Paper size -p: $PAPER_SIZE, Target resolution -T: $TARGET_RESOLUTION dpi"
+        echo "Common settings for chartread defined in setup file: "
+        echo "      - Arguments set: $COMMON_ARGUMENTS_CHARTREAD"
+        echo "      - Patch consistency tolerance per strip -T: $STRIP_PATCH_CONSISTENSY_TOLERANCE"
+        echo "Common settings for coprof defined in setup file: "
+        echo "      - Arguments set: $COMMON_ARGUMENTS_COLPROF"
+        echo "      - Average deviation/smooting -r: $PROFILE_SMOOTING"
+        echo '      - Color space profile specified, gamut mapping -S:'
+        echo "        '${PRINTER_ICC_PATH}'"
+    }
+    menu_info_other_instruments() {
+        echo "1: $INST_OTHER_MENU_OPTION1_PATCH_COUNT_f patches $INST_OTHER_MENU_OPTION1_DESCRIPTION"
+        echo "2: $INST_OTHER_MENU_OPTION2_PATCH_COUNT_f patches $INST_OTHER_MENU_OPTION2_DESCRIPTION"
+        echo "3: $INST_OTHER_MENU_OPTION3_PATCH_COUNT_f patches $INST_OTHER_MENU_OPTION3_DESCRIPTION"
+        echo "4: $INST_OTHER_MENU_OPTION4_PATCH_COUNT_f patches $INST_OTHER_MENU_OPTION4_DESCRIPTION"
+        echo "5: $INST_OTHER_MENU_OPTION5_PATCH_COUNT_f patches $INST_OTHER_MENU_OPTION5_DESCRIPTION"
+        echo "6: $INST_OTHER_MENU_OPTION6_PATCH_COUNT_f patches $INST_OTHER_MENU_OPTION6_DESCRIPTION"
+        echo "7: Custom – Specify arugments independend of setup parameters"
+        echo "8: Abort printing target."
+    }
 
-        while true; do
-            # Display menu depending on paper size
-            if [ "$PAPER_SIZE" = "A4" ]; then
-                echo
-                echo 'Select the target size:'
-                echo '1: Small  – 210 patches  - 1 x A4 page  (quick, lower accuracy)'
-                echo '2: Medium – 420 patches  - 2 x A4 pages (recommended default)'
-                echo '3: Large  – 630 patches  - 3 x A4 pages (better accuracy)'
-                echo '4: XL     – 840 patches  - 4 x A4 pages'
-                echo '5: XXL    – 1050 patches - 5 x A4 pages'
-                echo '6: XXXL   – 1260 patches - 6 x A4 pages (maximum quality)'
-
-            elif [ "$PAPER_SIZE" = "Letter" ]; then
-                echo
-                echo 'Select the target size:'
-                echo '1: Small  – 196 patches  - 1 x Letter page  (quick, lower accuracy)'
-                echo '2: Medium – 392 patches  - 2 x Letter pages (recommended default)'
-                echo '3: Large  – 588 patches  - 3 x Letter pages (better accuracy)'
-                echo '4: XL     – 784 patches  - 4 x Letter pages'
-                echo '5: XXL    – 980 patches  - 5 x Letter pages'
-                echo '6: XXXL   – 1176 patches - 6 x Letter pages (maximum quality)'
-            else
-                # PAPER_SIZE A4 or any other value than Letter
-                echo
-                echo "⚠️ Unknown PAPER_SIZE \"$PAPER_SIZE\", reverting to A4."
-                PAPER_SIZE="A4"
-                echo
-                echo 'Select the target size:'
-                echo '1: Small  – 210 patches  - 1 x A4 page  (quick, lower accuracy)'
-                echo '2: Medium – 420 patches  - 2 x A4 pages (recommended default)'
-                echo '3: Large  – 630 patches  - 3 x A4 pages (better accuracy)'
-                echo '4: XL     – 840 patches  - 4 x A4 pages'
-                echo '5: XXL    – 1050 patches - 5 x A4 pages'
-                echo '6: XXXL   – 1260 patches - 6 x A4 pages (maximum quality)'
-            fi
-
-            echo
-            # Prompt user after menu
-            read -r -n 1 -p 'Enter your choice [1–6]: ' patch_choice
-            echo
-            case "$patch_choice" in
-            1)
-              label='Small'
-              # If any of these parameters are set to empty ("") the argument in targen/printarg is omitted.
-              if [ "$PAPER_SIZE" = "Letter" ]; then
-                patch_count='196'
-              else
-                patch_count='210'
-              fi
-              white_patches='4'
-              black_patches='4'
-              gray_steps='32'
-              multi_cube_steps='3'
-              multi_cube_surface_steps='3'
-              layout_seed='1'
-              ;;
-            2)
-              default_target
-              ;;
-            3)
-              label='Large'
-              # If any of these parameters are set to empty ("") the argument in targen/printarg is omitted.
-              if [ "$PAPER_SIZE" = "Letter" ]; then
-                patch_count='588'
-              else
-                patch_count='630'
-              fi
-              white_patches='6'
-              black_patches='6'
-              gray_steps='64'
-              multi_cube_steps='6'
-              multi_cube_surface_steps='6'
-              layout_seed='3'
-              ;;
-            4)
-              label='XL'
-              # If any of these parameters are set to empty ("") the argument in targen/printarg is omitted.
-              if [ "$PAPER_SIZE" = "Letter" ]; then
-                patch_count='784'
-              else
-                patch_count='840'
-              fi
-              white_patches='7'
-              black_patches='7'
-              gray_steps='128'
-              multi_cube_steps='7'
-              multi_cube_surface_steps='7'
-              layout_seed='4'
-              ;;
-            5)
-              label='XXL'
-              # If any of these parameters are set to empty ("") the argument in targen/printarg is omitted.
-              if [ "$PAPER_SIZE" = "Letter" ]; then
-                patch_count='980'
-              else
-                patch_count='1050'
-              fi
-              white_patches='8'
-              black_patches='8'
-              gray_steps='128'
-              multi_cube_steps='8'
-              multi_cube_surface_steps='8'
-              layout_seed='5'
-              ;;
-            6)
-              label='XXXL'
-              # If any of the targen/printarg relevant arument-parameters are set to empty ("") the argument is omitted at execution.
-              if [ "$PAPER_SIZE" = "Letter" ]; then
-                patch_count='1176'
-              else
-                patch_count='1260'
-              fi
-              white_patches='8'
-              black_patches='8'
-              gray_steps='128'
-              multi_cube_steps='8'
-              multi_cube_surface_steps='8'
-              layout_seed='6'
-              ;;
-            *)
-              default_target
-              echo 'Invalid selection. Using default.'
-              ;;
-            esac
-
-            echo
-            echo "Selected target: ${label} – ${patch_count} patches"
-
-            read -r -n 1 -p 'Do you want to continue with select target? [y/n]: ' again
-            case "$again" in
-            [yY]|[yY][eE][sS])
-              echo 'Continuing with selected target...'
-              break
-              ;;
-            *)
-              echo 'Repeating target selection...'
-              ;;
-            esac
-        done
-
-    else    # Other instruments than Colormunki
+    menu_option_custom_target() {
+        label='Custom'
         # Clear parameters
         patch_count=''
         white_patches=''
@@ -659,31 +540,40 @@ specify_and_generate_target() {
         gray_steps=''
         multi_cube_steps=''
         multi_cube_surface_steps=''
+        scale_patch_and_spacer=''
+        scale_spacer=''
         layout_seed=''
+        inst_arg=''
 
         while true; do
             echo
             echo
-            echo 'Specify targen command arguments for instrument chosen:'
+            echo 'Specify targen command arguments:'
             echo "Default value specified:"
-            echo "'${DEFAULT_TARGEN_COMMAND_NON_COLORMUNKI}'"
+            echo "'${DEFAULT_TARGEN_COMMAND_CUSTOM}'"
+            echo
+            echo 'Notes: - Arguments -l and -c are programatically selected'
+            echo '         (unless empty '' in setup) and should not be specified below.'
+            if [ -n "$PRECONDITIONING_PROFILE_PATH" ]; then
+                echo '       - Current pre-conditioning profile specified -c:'
+                echo "         '${PRECONDITIONING_PROFILE_PATH}'"
+                precon_icc="${PRECONDITIONING_PROFILE_PATH}"
+            else
+                echo '       - Pre-conditioning profile is currently not specified in setup.'
+            fi
+            echo "       - Current ink limit specified -l: '${INK_LIMIT}'"
             echo
             echo 'Valid values: Letters A–Z a–z, digits 0–9, dash -, underscore _, '
             echo '              parentheses ( ), forward slash /, space, dot .'
-            echo 'Notes: -l and -c arguments are programatically selected and should not be in parameter.'
-            echo '       Current pre-conditioning profile specified:'
-            echo "       -c ${PRECONDITIONING_PROFILE_PATH}"
-            echo "       Current ink limit specified: -l${INK_LIMIT}"
-            echo
-            read -e -p "Enter/modify arguments or enter to use default: " TARGEN_COMMAND_NON_COLORMUNKI
+            read -e -p "Enter/modify arguments or enter to use default: " targen_command_custom
 
             # Use default if user pressed Enter
-            if [[ -z "$TARGEN_COMMAND_NON_COLORMUNKI" ]]; then
-                TARGEN_COMMAND_NON_COLORMUNKI="${DEFAULT_TARGEN_COMMAND_NON_COLORMUNKI}"
+            if [[ -z "$targen_command_custom" ]]; then
+                targen_command_custom="${DEFAULT_TARGEN_COMMAND_CUSTOM}"
                 break
             fi
 
-            if [[ ! "$TARGEN_COMMAND_NON_COLORMUNKI" =~ ^[A-Za-z0-9._()\/\-[:space:]]+$ ]]; then
+            if [[ ! "$targen_command_custom" =~ ^[A-Za-z0-9._()\/\-[:space:]]+$ ]]; then
                 echo "❌ Invalid characters. Please try again."
                 continue
             fi
@@ -694,25 +584,24 @@ specify_and_generate_target() {
         while true; do
             echo
             echo
-            echo 'Specify printtarg command arguments for instrument chosen:'
+            echo 'Specify printtarg command arguments:'
             echo "Default value specified:"
-            echo "'${DEFAULT_PRINTTARG_COMMAND_NON_COLORMUNKI}'"
+            echo "'${DEFAULT_PRINTTARG_COMMAND_CUSTOM}'"
+            echo
+            echo "Note: - Previsouly selected instrument (-i), resolution (-T) "
+            echo "        and page size (-p) must be specified again if desired."
             echo
             echo 'Valid values: Letters A–Z a–z, digits 0–9, dash -, underscore _, '
             echo '              parentheses ( ), forward slash /, space, dot .'
-            echo 'Notes: -i and -T arguments are programatically selected and should not be in parameter.'
-            echo "       Current instrument specified: ${inst_arg}"
-            echo "       Current target resolution specified: -T${TARGET_RESOLUTION}"
-            echo
-            read -e -p "Enter/modify arguments or enter to use default: " PRINTTARG_COMMAND_NON_COLORMUNKI
+            read -e -p "Enter/modify arguments or enter to use default: " printtarg_command_custom
 
             # Use default if user pressed Enter
-            if [[ -z "$PRINTTARG_COMMAND_NON_COLORMUNKI" ]]; then
-                PRINTTARG_COMMAND_NON_COLORMUNKI="${DEFAULT_PRINTTARG_COMMAND_NON_COLORMUNKI}"
+            if [[ -z "$printtarg_command_custom" ]]; then
+                printtarg_command_custom="${DEFAULT_PRINTTARG_COMMAND_CUSTOM}"
                 break
             fi
 
-            if [[ ! "$PRINTTARG_COMMAND_NON_COLORMUNKI" =~ ^[A-Za-z0-9._()\/\-[:space:]]+$ ]]; then
+            if [[ ! "$printtarg_command_custom" =~ ^[A-Za-z0-9._()\/\-[:space:]]+$ ]]; then
                 echo "❌ Invalid characters. Please try again."
                 continue
             fi
@@ -720,7 +609,369 @@ specify_and_generate_target() {
             # Valid input → exit loop
             break
         done
-    fi
+    }
+
+    default_target() {
+        label='Medium (default)'
+        # If any of these parameters are set to empty ("") the argument in targen/printarg is omitted.
+        if [ "$inst_name" = "ColorMunki" ]; then
+            if [ "$PAPER_SIZE" = "A4" ]; then
+                patch_count="$INST_CM_MENU_OPTION2_PATCH_COUNT_A4_f"
+            elif [ "$PAPER_SIZE" = "Letter" ]; then
+                patch_count="$INST_CM_MENU_OPTION2_PATCH_COUNT_LETTER_f"
+            else
+                patch_count="$INST_OTHER_MENU_OPTION2_PATCH_COUNT_f"
+            fi
+
+            if [[ "$PAPER_SIZE" = "A4" || "$PAPER_SIZE" = "Letter" ]]; then
+                white_patches="$INST_CM_MENU_OPTION2_WHITE_PATCHES_e"
+                black_patches="$INST_CM_MENU_OPTION2_BLACK_PATCHES_B"
+                gray_steps="$INST_CM_MENU_OPTION2_GRAY_STEPS_g"
+                multi_cube_steps="$INST_CM_MENU_OPTION2_MULTI_CUBE_STEPS_m"
+                multi_cube_surface_steps="$INST_CM_MENU_OPTION2_MULTI_CUBE_SURFACE_STEPS_M"
+                scale_patch_and_spacer="$INST_CM_MENU_OPTION2_SCALE_PATCH_AND_SPACER_a"
+                scale_spacer="$INST_CM_MENU_OPTION2_SCALE_SPACER_A"
+            else
+                white_patches="$INST_OTHER_MENU_OPTION2_WHITE_PATCHES_e"
+                black_patches="$INST_OTHER_MENU_OPTION2_BLACK_PATCHES_B"
+                gray_steps="$INST_OTHER_MENU_OPTION2_GRAY_STEPS_g"
+                multi_cube_steps="$INST_OTHER_MENU_OPTION2_MULTI_CUBE_STEPS_m"
+                multi_cube_surface_steps="$INST_OTHER_MENU_OPTION2_MULTI_CUBE_SURFACE_STEPS_M"
+                scale_patch_and_spacer="$INST_OTHER_MENU_OPTION2_SCALE_PATCH_AND_SPACER_a"
+                scale_spacer="$INST_OTHER_MENU_OPTION2_SCALE_SPACER_A"
+            fi
+        else
+            patch_count="$INST_OTHER_MENU_OPTION2_PATCH_COUNT_f"
+            white_patches="$INST_OTHER_MENU_OPTION2_WHITE_PATCHES_e"
+            black_patches="$INST_OTHER_MENU_OPTION2_BLACK_PATCHES_B"
+            gray_steps="$INST_OTHER_MENU_OPTION2_GRAY_STEPS_g"
+            multi_cube_steps="$INST_OTHER_MENU_OPTION2_MULTI_CUBE_STEPS_m"
+            multi_cube_surface_steps="$INST_OTHER_MENU_OPTION2_MULTI_CUBE_SURFACE_STEPS_M"
+            scale_patch_and_spacer="$INST_OTHER_MENU_OPTION2_SCALE_PATCH_AND_SPACER_a"
+            scale_spacer="$INST_OTHER_MENU_OPTION2_SCALE_SPACER_A"
+        fi
+        layout_seed="$INST_CM_MENU_OPTION2_LAYOUT_SEED_R"
+    }
+
+    while true; do
+        if [ "$inst_name" = "ColorMunki" ]; then
+            # Display menu depending on paper size
+            if [ "$PAPER_SIZE" = "A4" ]; then
+                echo
+                echo "Below menu choices have been optimized for page size $PAPER_SIZE and $inst_name instrument."
+                menu_info_common_settings
+                echo
+                echo 'Select the target size:'
+                echo
+                echo "1: $INST_CM_MENU_OPTION1_PATCH_COUNT_A4_f patches $INST_CM_MENU_OPTION1_A4_DESCRIPTION"
+                echo "2: $INST_CM_MENU_OPTION2_PATCH_COUNT_A4_f patches $INST_CM_MENU_OPTION2_A4_DESCRIPTION"
+                echo "3: $INST_CM_MENU_OPTION3_PATCH_COUNT_A4_f patches $INST_CM_MENU_OPTION3_A4_DESCRIPTION"
+                echo "4: $INST_CM_MENU_OPTION4_PATCH_COUNT_A4_f patches $INST_CM_MENU_OPTION4_A4_DESCRIPTION"
+                echo "5: $INST_CM_MENU_OPTION5_PATCH_COUNT_A4_f patches $INST_CM_MENU_OPTION5_A4_DESCRIPTION"
+                echo "6: $INST_CM_MENU_OPTION6_PATCH_COUNT_A4_f patches $INST_CM_MENU_OPTION6_A4_DESCRIPTION"
+                echo "7: Custom – Specify arugments independend of setup parameters"
+                echo "8: Abort printing target."
+            elif [ "$PAPER_SIZE" = "Letter" ]; then
+                echo
+                echo "Below menu choices have been optimized for page size $PAPER_SIZE and $inst_name instrument."
+                menu_info_common_settings
+                echo
+                echo 'Select the target size:'
+                echo
+                echo "1: $INST_CM_MENU_OPTION1_PATCH_COUNT_LETTER_f patches $INST_CM_MENU_OPTION1_LETTER_DESCRIPTION"
+                echo "2: $INST_CM_MENU_OPTION2_PATCH_COUNT_LETTER_f patches $INST_CM_MENU_OPTION2_LETTER_DESCRIPTION"
+                echo "3: $INST_CM_MENU_OPTION3_PATCH_COUNT_LETTER_f patches $INST_CM_MENU_OPTION3_LETTER_DESCRIPTION"
+                echo "4: $INST_CM_MENU_OPTION4_PATCH_COUNT_LETTER_f patches $INST_CM_MENU_OPTION4_LETTER_DESCRIPTION"
+                echo "5: $INST_CM_MENU_OPTION5_PATCH_COUNT_LETTER_f patches $INST_CM_MENU_OPTION5_LETTER_DESCRIPTION"
+                echo "6: $INST_CM_MENU_OPTION6_PATCH_COUNT_LETTER_f patches $INST_CM_MENU_OPTION6_LETTER_DESCRIPTION"
+                echo "7: Custom – Specify arugments independend of setup parameters"
+                echo "8: Abort printing target."
+            else
+                # PAPER_SIZE A4 or any other value than Letter
+                echo
+                echo "⚠️ Non-standard printer paper size: PAPER_SIZE \"$PAPER_SIZE\"."
+                echo 'USING INSTRUMENT/PAGE INDEPENDENT MENU-PARAMETERS (STARTING WITH INST_OTHER_*).'
+                echo
+                echo 'Number of created pages increase with patch count, depending on settings.'
+                menu_info_common_settings
+                echo
+                echo 'Select the target size:'
+                echo
+                menu_info_other_instruments
+            fi
+        else
+            # Display menu for other instruments
+            echo
+            echo 'Number of created pages increase with patch count, depending on settings.'
+            menu_info_common_settings
+            echo
+            echo 'Select the target size:'
+            echo
+            menu_info_other_instruments
+        fi
+
+        echo
+        # Prompt user after menu
+        read -r -n 1 -p 'Enter your choice [1–8]: ' patch_choice
+        echo
+        case "$patch_choice" in
+        1)
+            label='Small'
+            # If any of these parameters are set to empty ("") the argument in targen/printarg is omitted.
+            if [ "$inst_name" = "ColorMunki" ]; then
+                if [ "$PAPER_SIZE" = "A4" ]; then
+                    patch_count="$INST_CM_MENU_OPTION1_PATCH_COUNT_A4_f"
+                elif [ "$PAPER_SIZE" = "Letter" ]; then
+                    patch_count="$INST_CM_MENU_OPTION1_PATCH_COUNT_LETTER_f"
+                else
+                    patch_count="$INST_OTHER_MENU_OPTION1_PATCH_COUNT_f"
+                fi
+
+                if [[ "$PAPER_SIZE" = "A4" || "$PAPER_SIZE" = "Letter" ]]; then
+                    white_patches="$INST_CM_MENU_OPTION1_WHITE_PATCHES_e"
+                    black_patches="$INST_CM_MENU_OPTION1_BLACK_PATCHES_B"
+                    gray_steps="$INST_CM_MENU_OPTION1_GRAY_STEPS_g"
+                    multi_cube_steps="$INST_CM_MENU_OPTION1_MULTI_CUBE_STEPS_m"
+                    multi_cube_surface_steps="$INST_CM_MENU_OPTION1_MULTI_CUBE_SURFACE_STEPS_M"
+                    scale_patch_and_spacer="$INST_CM_MENU_OPTION1_SCALE_PATCH_AND_SPACER_a"
+                    scale_spacer="$INST_CM_MENU_OPTION1_SCALE_SPACER_A"
+                else
+                    white_patches="$INST_OTHER_MENU_OPTION1_WHITE_PATCHES_e"
+                    black_patches="$INST_OTHER_MENU_OPTION1_BLACK_PATCHES_B"
+                    gray_steps="$INST_OTHER_MENU_OPTION1_GRAY_STEPS_g"
+                    multi_cube_steps="$INST_OTHER_MENU_OPTION1_MULTI_CUBE_STEPS_m"
+                    multi_cube_surface_steps="$INST_OTHER_MENU_OPTION1_MULTI_CUBE_SURFACE_STEPS_M"
+                    scale_patch_and_spacer="$INST_OTHER_MENU_OPTION1_SCALE_PATCH_AND_SPACER_a"
+                    scale_spacer="$INST_OTHER_MENU_OPTION1_SCALE_SPACER_A"
+                fi
+            else
+                patch_count="$INST_OTHER_MENU_OPTION1_PATCH_COUNT_f"
+                white_patches="$INST_OTHER_MENU_OPTION1_WHITE_PATCHES_e"
+                black_patches="$INST_OTHER_MENU_OPTION1_BLACK_PATCHES_B"
+                gray_steps="$INST_OTHER_MENU_OPTION1_GRAY_STEPS_g"
+                multi_cube_steps="$INST_OTHER_MENU_OPTION1_MULTI_CUBE_STEPS_m"
+                multi_cube_surface_steps="$INST_OTHER_MENU_OPTION1_MULTI_CUBE_SURFACE_STEPS_M"
+                scale_patch_and_spacer="$INST_OTHER_MENU_OPTION1_SCALE_PATCH_AND_SPACER_a"
+                scale_spacer="$INST_OTHER_MENU_OPTION1_SCALE_SPACER_A"
+            fi
+            layout_seed="$INST_CM_MENU_OPTION1_LAYOUT_SEED_R"
+            ;;
+        2)
+            default_target
+            ;;
+        3)
+            label='Large'
+            # If any of these parameters are set to empty ("") the argument in targen/printarg is omitted.
+            if [ "$inst_name" = "ColorMunki" ]; then
+                if [ "$PAPER_SIZE" = "A4" ]; then
+                    patch_count="$INST_CM_MENU_OPTION3_PATCH_COUNT_A4_f"
+                elif [ "$PAPER_SIZE" = "Letter" ]; then
+                    patch_count="$INST_CM_MENU_OPTION3_PATCH_COUNT_LETTER_f"
+                else
+                    patch_count="$INST_OTHER_MENU_OPTION3_PATCH_COUNT_f"
+                fi
+
+                if [[ "$PAPER_SIZE" = "A4" || "$PAPER_SIZE" = "Letter" ]]; then
+                    white_patches="$INST_CM_MENU_OPTION3_WHITE_PATCHES_e"
+                    black_patches="$INST_CM_MENU_OPTION3_BLACK_PATCHES_B"
+                    gray_steps="$INST_CM_MENU_OPTION3_GRAY_STEPS_g"
+                    multi_cube_steps="$INST_CM_MENU_OPTION3_MULTI_CUBE_STEPS_m"
+                    multi_cube_surface_steps="$INST_CM_MENU_OPTION3_MULTI_CUBE_SURFACE_STEPS_M"
+                    scale_patch_and_spacer="$INST_CM_MENU_OPTION3_SCALE_PATCH_AND_SPACER_a"
+                    scale_spacer="$INST_CM_MENU_OPTION3_SCALE_SPACER_A"
+                else
+                    white_patches="$INST_OTHER_MENU_OPTION3_WHITE_PATCHES_e"
+                    black_patches="$INST_OTHER_MENU_OPTION3_BLACK_PATCHES_B"
+                    gray_steps="$INST_OTHER_MENU_OPTION3_GRAY_STEPS_g"
+                    multi_cube_steps="$INST_OTHER_MENU_OPTION3_MULTI_CUBE_STEPS_m"
+                    multi_cube_surface_steps="$INST_OTHER_MENU_OPTION3_MULTI_CUBE_SURFACE_STEPS_M"
+                    scale_patch_and_spacer="$INST_OTHER_MENU_OPTION3_SCALE_PATCH_AND_SPACER_a"
+                    scale_spacer="$INST_OTHER_MENU_OPTION3_SCALE_SPACER_A"
+                fi
+            else
+                patch_count="$INST_OTHER_MENU_OPTION3_PATCH_COUNT_f"
+                white_patches="$INST_OTHER_MENU_OPTION3_WHITE_PATCHES_e"
+                black_patches="$INST_OTHER_MENU_OPTION3_BLACK_PATCHES_B"
+                gray_steps="$INST_OTHER_MENU_OPTION3_GRAY_STEPS_g"
+                multi_cube_steps="$INST_OTHER_MENU_OPTION3_MULTI_CUBE_STEPS_m"
+                multi_cube_surface_steps="$INST_OTHER_MENU_OPTION3_MULTI_CUBE_SURFACE_STEPS_M"
+                scale_patch_and_spacer="$INST_OTHER_MENU_OPTION3_SCALE_PATCH_AND_SPACER_a"
+                scale_spacer="$INST_OTHER_MENU_OPTION3_SCALE_SPACER_A"
+            fi
+            layout_seed="$INST_CM_MENU_OPTION3_LAYOUT_SEED_R"
+            ;;
+        4)
+            label='XL'
+            # If any of these parameters are set to empty ("") the argument in targen/printarg is omitted.
+            if [ "$inst_name" = "ColorMunki" ]; then
+                if [ "$PAPER_SIZE" = "A4" ]; then
+                    patch_count="$INST_CM_MENU_OPTION4_PATCH_COUNT_A4_f"
+                elif [ "$PAPER_SIZE" = "Letter" ]; then
+                    patch_count="$INST_CM_MENU_OPTION4_PATCH_COUNT_LETTER_f"
+                else
+                    patch_count="$INST_OTHER_MENU_OPTION4_PATCH_COUNT_f"
+                fi
+
+                if [[ "$PAPER_SIZE" = "A4" || "$PAPER_SIZE" = "Letter" ]]; then
+                    white_patches="$INST_CM_MENU_OPTION4_WHITE_PATCHES_e"
+                    black_patches="$INST_CM_MENU_OPTION4_BLACK_PATCHES_B"
+                    gray_steps="$INST_CM_MENU_OPTION4_GRAY_STEPS_g"
+                    multi_cube_steps="$INST_CM_MENU_OPTION4_MULTI_CUBE_STEPS_m"
+                    multi_cube_surface_steps="$INST_CM_MENU_OPTION4_MULTI_CUBE_SURFACE_STEPS_M"
+                    scale_patch_and_spacer="$INST_CM_MENU_OPTION4_SCALE_PATCH_AND_SPACER_a"
+                    scale_spacer="$INST_CM_MENU_OPTION4_SCALE_SPACER_A"
+                else
+                    white_patches="$INST_OTHER_MENU_OPTION4_WHITE_PATCHES_e"
+                    black_patches="$INST_OTHER_MENU_OPTION4_BLACK_PATCHES_B"
+                    gray_steps="$INST_OTHER_MENU_OPTION4_GRAY_STEPS_g"
+                    multi_cube_steps="$INST_OTHER_MENU_OPTION4_MULTI_CUBE_STEPS_m"
+                    multi_cube_surface_steps="$INST_OTHER_MENU_OPTION4_MULTI_CUBE_SURFACE_STEPS_M"
+                    scale_patch_and_spacer="$INST_OTHER_MENU_OPTION4_SCALE_PATCH_AND_SPACER_a"
+                    scale_spacer="$INST_OTHER_MENU_OPTION4_SCALE_SPACER_A"
+                fi
+            else
+                patch_count="$INST_OTHER_MENU_OPTION4_PATCH_COUNT_f"
+                white_patches="$INST_OTHER_MENU_OPTION4_WHITE_PATCHES_e"
+                black_patches="$INST_OTHER_MENU_OPTION4_BLACK_PATCHES_B"
+                gray_steps="$INST_OTHER_MENU_OPTION4_GRAY_STEPS_g"
+                multi_cube_steps="$INST_OTHER_MENU_OPTION4_MULTI_CUBE_STEPS_m"
+                multi_cube_surface_steps="$INST_OTHER_MENU_OPTION4_MULTI_CUBE_SURFACE_STEPS_M"
+                scale_patch_and_spacer="$INST_OTHER_MENU_OPTION4_SCALE_PATCH_AND_SPACER_a"
+                scale_spacer="$INST_OTHER_MENU_OPTION4_SCALE_SPACER_A"
+            fi
+            layout_seed="$INST_CM_MENU_OPTION4_LAYOUT_SEED_R"
+            ;;
+        5)
+            label='XXL'
+            # If any of these parameters are set to empty ("") the argument in targen/printarg is omitted.
+            if [ "$inst_name" = "ColorMunki" ]; then
+                if [ "$PAPER_SIZE" = "A4" ]; then
+                    patch_count="$INST_CM_MENU_OPTION5_PATCH_COUNT_A4_f"
+                elif [ "$PAPER_SIZE" = "Letter" ]; then
+                    patch_count="$INST_CM_MENU_OPTION5_PATCH_COUNT_LETTER_f"
+                else
+                    patch_count="$INST_OTHER_MENU_OPTION5_PATCH_COUNT_f"
+                fi
+
+                if [[ "$PAPER_SIZE" = "A4" || "$PAPER_SIZE" = "Letter" ]]; then
+                    white_patches="$INST_CM_MENU_OPTION5_WHITE_PATCHES_e"
+                    black_patches="$INST_CM_MENU_OPTION5_BLACK_PATCHES_B"
+                    gray_steps="$INST_CM_MENU_OPTION5_GRAY_STEPS_g"
+                    multi_cube_steps="$INST_CM_MENU_OPTION5_MULTI_CUBE_STEPS_m"
+                    multi_cube_surface_steps="$INST_CM_MENU_OPTION5_MULTI_CUBE_SURFACE_STEPS_M"
+                    scale_patch_and_spacer="$INST_CM_MENU_OPTION5_SCALE_PATCH_AND_SPACER_a"
+                    scale_spacer="$INST_CM_MENU_OPTION5_SCALE_SPACER_A"
+
+                else
+                    white_patches="$INST_OTHER_MENU_OPTION5_WHITE_PATCHES_e"
+                    black_patches="$INST_OTHER_MENU_OPTION5_BLACK_PATCHES_B"
+                    gray_steps="$INST_OTHER_MENU_OPTION5_GRAY_STEPS_g"
+                    multi_cube_steps="$INST_OTHER_MENU_OPTION5_MULTI_CUBE_STEPS_m"
+                    multi_cube_surface_steps="$INST_OTHER_MENU_OPTION5_MULTI_CUBE_SURFACE_STEPS_M"
+                    scale_patch_and_spacer="$INST_OTHER_MENU_OPTION5_SCALE_PATCH_AND_SPACER_a"
+                    scale_spacer="$INST_OTHER_MENU_OPTION5_SCALE_SPACER_A"
+                fi
+            else
+                patch_count="$INST_OTHER_MENU_OPTION5_PATCH_COUNT_f"
+                white_patches="$INST_OTHER_MENU_OPTION5_WHITE_PATCHES_e"
+                black_patches="$INST_OTHER_MENU_OPTION5_BLACK_PATCHES_B"
+                gray_steps="$INST_OTHER_MENU_OPTION5_GRAY_STEPS_g"
+                multi_cube_steps="$INST_OTHER_MENU_OPTION5_MULTI_CUBE_STEPS_m"
+                multi_cube_surface_steps="$INST_OTHER_MENU_OPTION5_MULTI_CUBE_SURFACE_STEPS_M"
+                scale_patch_and_spacer="$INST_OTHER_MENU_OPTION5_SCALE_PATCH_AND_SPACER_a"
+                scale_spacer="$INST_OTHER_MENU_OPTION5_SCALE_SPACER_A"
+            fi
+            layout_seed="$INST_CM_MENU_OPTION5_LAYOUT_SEED_R"
+            ;;
+        6)
+            label='XXXL'
+            # If any of the targen/printarg relevant argument-parameters are set to empty ("") the argument is omitted at execution.
+            if [ "$inst_name" = "ColorMunki" ]; then
+                if [ "$PAPER_SIZE" = "A4" ]; then
+                    patch_count="$INST_CM_MENU_OPTION6_PATCH_COUNT_A4_f"
+                elif [ "$PAPER_SIZE" = "Letter" ]; then
+                    patch_count="$INST_CM_MENU_OPTION6_PATCH_COUNT_LETTER_f"
+                else
+                    patch_count="$INST_OTHER_MENU_OPTION6_PATCH_COUNT_f"
+                fi
+
+                if [[ "$PAPER_SIZE" = "A4" || "$PAPER_SIZE" = "Letter" ]]; then
+                    white_patches="$INST_CM_MENU_OPTION6_WHITE_PATCHES_e"
+                    black_patches="$INST_CM_MENU_OPTION6_BLACK_PATCHES_B"
+                    gray_steps="$INST_CM_MENU_OPTION6_GRAY_STEPS_g"
+                    multi_cube_steps="$INST_CM_MENU_OPTION6_MULTI_CUBE_STEPS_m"
+                    multi_cube_surface_steps="$INST_CM_MENU_OPTION6_MULTI_CUBE_SURFACE_STEPS_M"
+                    scale_patch_and_spacer="$INST_CM_MENU_OPTION6_SCALE_PATCH_AND_SPACER_a"
+                    scale_spacer="$INST_CM_MENU_OPTION6_SCALE_SPACER_A"
+                else
+                    white_patches="$INST_OTHER_MENU_OPTION6_WHITE_PATCHES_e"
+                    black_patches="$INST_OTHER_MENU_OPTION6_BLACK_PATCHES_B"
+                    gray_steps="$INST_OTHER_MENU_OPTION6_GRAY_STEPS_g"
+                    multi_cube_steps="$INST_OTHER_MENU_OPTION6_MULTI_CUBE_STEPS_m"
+                    multi_cube_surface_steps="$INST_OTHER_MENU_OPTION6_MULTI_CUBE_SURFACE_STEPS_M"
+                    scale_patch_and_spacer="$INST_OTHER_MENU_OPTION6_SCALE_PATCH_AND_SPACER_a"
+                    scale_spacer="$INST_OTHER_MENU_OPTION6_SCALE_SPACER_A"
+                fi
+            else
+                patch_count="$INST_OTHER_MENU_OPTION6_PATCH_COUNT_f"
+                white_patches="$INST_OTHER_MENU_OPTION6_WHITE_PATCHES_e"
+                black_patches="$INST_OTHER_MENU_OPTION6_BLACK_PATCHES_B"
+                gray_steps="$INST_OTHER_MENU_OPTION6_GRAY_STEPS_g"
+                multi_cube_steps="$INST_OTHER_MENU_OPTION6_MULTI_CUBE_STEPS_m"
+                multi_cube_surface_steps="$INST_OTHER_MENU_OPTION6_MULTI_CUBE_SURFACE_STEPS_M"
+                scale_patch_and_spacer="$INST_OTHER_MENU_OPTION6_SCALE_PATCH_AND_SPACER_a"
+                scale_spacer="$INST_OTHER_MENU_OPTION6_SCALE_SPACER_A"
+            fi
+            layout_seed="$INST_CM_MENU_OPTION6_LAYOUT_SEED_R"
+            ;;
+        7)
+            menu_option_custom_target
+            ;;
+        8)
+            echo 'Aborting printing target.'
+            return 1
+            ;;
+        *)
+            default_target
+            echo 'Invalid selection. Using default.'
+            ;;
+        esac
+
+        echo
+        if [ ! "$label" = "Custom" ]; then      # When menu choice other than Custom
+            echo "Selected target: ${label} – ${patch_count} patches"
+        else
+            targen_c=''        # pre-conditioning profile path with filename
+            if [ -n "$PRECONDITIONING_PROFILE_PATH" ]; then
+                targen_c=(" -c \"$PRECONDITIONING_PROFILE_PATH\"")
+            fi
+            targen_l=''        # ink limit
+            if [ -n "$INK_LIMIT" ]; then
+                targen_l=" -l${INK_LIMIT}"
+            fi
+            echo "Selected target: - ${label}"
+            echo "                 - targen arguments: ${targen_command_custom}${targen_l}${targen_c}"
+            echo "                 - printtarg arguments: ${printtarg_command_custom}"
+        fi
+
+        while true; do
+            read -r -n 1 -p 'Do you want to continue with select target? [y/n]: ' again
+            echo
+            case "$again" in
+            [yY]|[yY][eE][sS])
+                echo 'Continuing with selected target...'
+                break 2  # Exit both loops (confirmation and target selection)
+                ;;
+            [nN]|[nN][oO])
+                echo 'Repeating target selection...'
+                break  # Exit confirmation loop, stay in target selection loop
+                ;;
+            *)
+                echo 'Invalid input. Please enter y/yes or n/no.'
+                ;;
+            esac
+        done
+    done
 
     # --- Build targen arguments conditionally ---------------------------
 
@@ -748,6 +999,14 @@ specify_and_generate_target() {
     targen_M=''        # multi cube surface steps
     if [ -n "$multi_cube_surface_steps" ]; then
         targen_M="-M${multi_cube_surface_steps}"
+    fi
+    targen_a=''        # multi cube surface steps
+    if [ -n "$scale_patch_and_spacer" ]; then
+        targen_a="-a${scale_patch_and_spacer}"
+    fi
+    targen_A=''        # multi cube surface steps
+    if [ -n "$scale_spacer" ]; then
+        targen_A="-A${scale_spacer}"
     fi
     targen_f=''        # patch count
     if [ -n "$patch_count" ]; then
@@ -777,7 +1036,7 @@ specify_and_generate_target() {
         fi
     fi
 
-    if [ "$inst_name" = "ColorMunki" ]; then
+    if [ ! "$label" = "Custom" ]; then      # When menu choice other than Custom
         echo
         echo 'Generating target color values (.ti1 file)...'
         echo "Command Used: targen ${COMMON_ARGUMENTS_TARGEN} ${targen_l} ${targen_e} ${targen_B} ${targen_g} ${targen_m} ${targen_M} ${targen_f} "${targen_c[@]}" "${name}""
@@ -789,28 +1048,28 @@ specify_and_generate_target() {
 
         echo
         echo 'Generating target(s) (.tif image(es) and .ti2 file)...'
-        echo "Command Used: printtarg ${COMMON_ARGUMENTS_PRINTTARG} ${inst_arg} ${printtarg_R} ${printtarg_T} ${printtarg_p} "${name}""
+        echo "Command Used: printtarg ${COMMON_ARGUMENTS_PRINTTARG} ${inst_arg} ${printtarg_R} ${printtarg_T} ${printtarg_p} ${targen_a} ${targen_A} "${name}""
         # Common printtarg command
-        printtarg ${COMMON_ARGUMENTS_PRINTTARG} ${inst_arg} ${printtarg_R} ${printtarg_T} ${printtarg_p} "${name}" || {
+        printtarg ${COMMON_ARGUMENTS_PRINTTARG} ${inst_arg} ${printtarg_R} ${printtarg_T} ${printtarg_p} ${targen_a} ${targen_A} "${name}" || {
             echo "❌ printtarg failed. See log for details."
             return 1
         }
         echo
-    else    # Other than Colormunki
+    else      # When menu choice is Custom
         echo
         echo 'Generating target color values (.ti1 file)...'
         # --- Generate target ONLY ONCE, after confirmation ---
-        echo "Command Used: targen ${targen_l} "${targen_c[@]}" ${TARGEN_COMMAND_NON_COLORMUNKI} "${name}""
-        targen ${targen_l} "${targen_c[@]}" ${TARGEN_COMMAND_NON_COLORMUNKI} "${name}" || {
+        echo "Command Used: targen ${targen_command_custom} ${targen_l} "${targen_c[@]}" "${name}""
+        targen ${targen_command_custom} ${targen_l} "${targen_c[@]}" "${name}" || {
             echo "❌ targen failed. See log for details."
             return 1
         }
 
         echo
         echo 'Generating target(s) (.tif image(es) and .ti2 file)...'
-        echo "Command Used: printtarg ${inst_arg} ${printtarg_T} ${PRINTTARG_COMMAND_NON_COLORMUNKI} "${name}""
+        echo "Command Used: printtarg ${printtarg_command_custom} "${name}""
         # Common printtarg command
-        printtarg ${inst_arg} ${printtarg_T} ${PRINTTARG_COMMAND_NON_COLORMUNKI} "${name}" || {
+        printtarg ${printtarg_command_custom} "${name}" || {
             echo "❌ printtarg failed. See log for details."
             return 1
         }
@@ -1264,18 +1523,8 @@ sanity_check() {
     echo
     echo 'Performing sanity check (creating .txt file)...'
     echo
-    echo "Command Used: profcheck -k "${name}.ti3" "${name}.icc" | tee -a "${name}_sanity_check.txt""
-    echo
-    echo "and,"
-    echo
     echo "Command Used: profcheck -v2 -k -s "${name}.ti3" "${name}.icc" 2>&1 >> "${name}_sanity_check.txt""
     echo
-    profcheck -k "${name}.ti3" "${name}.icc" | tee -a "${name}_sanity_check.txt" || {
-        echo
-        echo "❌ profcheck failed. See log for details."
-        echo
-        return 1
-    }
     profcheck -v2 -k -s "${name}.ti3" "${name}.icc" 2>&1 >> "${name}_sanity_check.txt" || {
         echo
         echo "❌ profcheck failed. See log for details."
@@ -1396,6 +1645,7 @@ perform_measurement_and_profile_creation() {
 
     echo
     read -r -n 1 -p 'Do you want to continue creating profile with resulting ti3 file? [y/n]: ' continue
+    echo
     case "$continue" in
     [yY]|[yY][eE][sS])
         echo
@@ -1551,6 +1801,7 @@ edit_setup_parameters() {
             4)
                 echo
                 read -r -p "Enter paper size [A4 or Letter]: " value
+                echo
 
                 case "$value" in
                     A4|Letter)
@@ -1670,6 +1921,7 @@ main_menu() {
         echo '7: Exit script'
         echo
         read -r -n 1 -p 'Enter your choice [1–7]: ' answer
+        echo
         case $answer in
           1)
             action='1'
