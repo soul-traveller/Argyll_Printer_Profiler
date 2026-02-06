@@ -42,11 +42,13 @@ It is designed for:
 
 The script:
 
-- Generates optimized color targets
+- Allows configuring 6 diferent target setups, accessable by menu, for two instruments
+  (Colormunki and one other, such as i1 Pro, i1Pro3+, DP20, SpectroScan etc.)
+- Generates optimized color targets according to defined setup (targen+printtarg)
 - Assists with printing targets correctly
-- Reads measurements
-- Builds ICC profiles
-- Performs sanity checks
+- Reads measurements (chartread)
+- Builds ICC profiles (colrprof)
+- Performs sanity checks (profcheck)
 - Installs profiles into defined local profiles folder
 
 ---
