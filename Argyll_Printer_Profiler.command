@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-
-# Version 1.0.1
+version="1.1.0"
+# Version 1.1.0
 
 # Argyll_Printer_Profiler
 # Uses ArgyllCMS version that is installed and checks if commands are availeble in terminal.
@@ -49,8 +49,8 @@ echo
 echo "Automated ArgyllCMS script for calibrating printers on MacOS and Linux."
 echo "Targets are adapted for use with X-Rite Colormunki Photo / i1Studio."
 echo
-echo "Author: Knut Larsson"
-echo
+echo "Author:  Knut Larsson"
+echo "Version: $version"
 echo
 echo
 # --- Set location and script name -------------------------------------------------

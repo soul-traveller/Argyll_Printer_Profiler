@@ -1,0 +1,42 @@
+
+File path: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler
+Script executed: Argyll_Printer_Profiler.command
+Log file: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler/Argyll_Printer_Profiler_20260206_205247.log
+
+✅ ArgyllCMS detected
+   Version: 3.4.1
+
+
+
+What action do you want to perform?
+
+1: Create printer profile from scratch (default).
+   Specify name → Generate targets → Measure target patches
+    → Create profile → Sanity check → Copy to profile folder
+
+2: Re-read or resume partly read chart, then create printer profile.
+   Specify .ti3 file → Continue measuring target patches
+    → Create profile → Sanity check → Copy to profile folder
+
+   Note: Existing .ti3, .ti2 and target image filenames must be same.
+         If more than one target image, filenames end with _01, _02, etc.
+
+3: Select an existing target with .ti2 file to create profile:
+   Specify .ti2 file → Measure target patches
+    → Create profile → Sanity check → Copy to profile folder
+
+   Note: Existing .ti2 and target image filenames must be same.
+         If more than one target image, filenames end with _01, _02, etc.
+
+4: Create printer profile from an existing .ti3.
+   Specify .ti3 file → Create profile → Sanity check → Copy to profile folder
+
+5: Perform sanity check on existing .ti3 and .icc file pair.
+
+   Note: Existing .ti3 and .icc filenames must be same.
+
+6: Change setup parameters.
+
+7: Exit script
+
+Enter your choice [1–7]: 
