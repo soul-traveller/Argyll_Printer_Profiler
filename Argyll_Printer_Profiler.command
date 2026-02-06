@@ -58,10 +58,20 @@ cd "$(dirname "$0")"
 SCRIPT_DIR="$(cd -- "$(dirname -- "$0")" && pwd)"
 SCRIPT_NAME="$(basename -- "$0")"
 TEMP_LOG="${SCRIPT_DIR}/Argyll_Printer_Profiler_$(date +%Y%m%d_%H%M%S).log"
-exec > >(tee -a "$TEMP_LOG") 2>&1
+ 
+# Try to create/truncate the log file explicitly
+if ! : >"$TEMP_LOG" 2>/dev/null; then
+  echo "❌ Cannot create log file at '$TEMP_LOG'."
+  echo "   Check folder permissions or disk access."
+else
+  # Only if creation succeeded, hook up tee-based logging
+  exec > >(tee -a "$TEMP_LOG") 2>&1
+fi
+ 
 echo
 echo "File path: ${SCRIPT_DIR}"
 echo "Script executed: ${SCRIPT_NAME}"
+echo "Log file: ${TEMP_LOG}"
 echo
 
 # --- Load setup file -------------------------------------------------
@@ -141,10 +151,20 @@ echo
 # --- Functions --------------------------------------------------
 move_log() {
     # Move log to profile folder
-    if mv "$TEMP_LOG" "$PROFILE_FOLDER/" 2>/dev/null; then
+    if [ ! -f "$TEMP_LOG" ]; then
+        echo "❌ Log file '$TEMP_LOG' does not exist; cannot move."
+        return 1
+    fi
+ 
+    if [ ! -d "$PROFILE_FOLDER" ]; then
+        echo "❌ Profile folder '$PROFILE_FOLDER' does not exist; cannot move log."
+        return 1
+    fi
+ 
+    if mv "$TEMP_LOG" "$PROFILE_FOLDER/"; then
         TEMP_LOG="${PROFILE_FOLDER}/$(basename "$TEMP_LOG")"
     else
-        echo "⚠️ Could not move log to profile folder"
+        echo "❌ Could not move log '$TEMP_LOG' to '$PROFILE_FOLDER/'"
         return 1
     fi
     exec > >(tee -a "$TEMP_LOG") 2>&1
@@ -823,7 +843,7 @@ specify_and_generate_target() {
         echo 'This will print without color management.'
         echo 'Tip: It might be beneficial to print targets with 88-90% scaling to prevent the rubber'
         echo '     taps underneath the Colormunki to interfere with reading of the first patches.'
-        open -a "$COLOR_SYNC_UTILITY_PATH" "$f"
+        open -a "$COLOR_SYNC_UTILITY_PATH" "${tif_files[@]}"
     else
         echo 'Please print the test chart(s) created and make sure to disable color management.'
         echo 'Tip: It might be beneficial to print targets with 88-90% scaling to prevent the rubber'
