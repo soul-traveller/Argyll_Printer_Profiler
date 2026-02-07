@@ -42,7 +42,7 @@ It is designed for:
 
 The script:
 
-- Allows configuring 6 diferent target setups, accessable by menu, for two instruments
+- Allows configuring 6 different target setups, accessable by menu, for two instruments
   (Colormunki and one other, such as i1 Pro, i1Pro3+, DP20, SpectroScan etc.)
 - Generates optimized color targets according to defined setup (targen+printtarg)
 - Assists with printing targets correctly
