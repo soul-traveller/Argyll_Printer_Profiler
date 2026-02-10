@@ -1,5 +1,5 @@
 # Argyll_Printer_Profiler.command — User Guide
-**Version:** 1.0<br>
+**Version:** 1.2<br>
 **Platform:** macOS and Linux<br>
 **Based on:** Simple script by Jintak Han (https://github.com/jintakhan/AutomatedArgyllPrinter)<br>
 **Author:** Knut Larsson<br>
@@ -22,6 +22,8 @@ Argyll_Printer_Profiler.command is an interactive Bash script that automates a c
 - [Setup File: Argyll_Printer_Profiler_setup.ini](#setup-file-argyll-printer-profiler-setupini)
 - [General Workflow](#general-workflow)
 - [Main Menu Actions Explained](#main-menu-actions-explained)
+- [Target Generation Menu Options](#target-generation-menu-options)
+- [Custom Target Generation](#custom-target-generation)
 - [Files and Folder Structure](#files-and-folder-structure)
 - [ArgyllCMS Commands and Defaults](#argyllcms-commands-and-defaults)
 - [ICC Profile Installation](#icc-profile-installation)
@@ -42,13 +44,11 @@ It is designed for:
 
 The script:
 
-- Allows configuring 6 different target setups, accessable by menu, for two instruments
-  (Colormunki and one other, such as i1 Pro, i1Pro3+, DP20, SpectroScan etc.)
-- Generates optimized color targets according to defined setup (targen+printtarg)
+- Generates optimized color targets
 - Assists with printing targets correctly
-- Reads measurements (chartread)
-- Builds ICC profiles (colrprof)
-- Performs sanity checks (profcheck)
+- Reads measurements
+- Builds ICC profiles
+- Performs sanity checks
 - Installs profiles into defined local profiles folder
 
 ---
@@ -213,33 +213,49 @@ Argyll_Printer_Profiler_setup.ini
 
 ### Key Parameters
 
-- `PRINTER_ICC_PATH`
+See `Argyll_Printer_Profiler_setup.ini` for a descriptions and list of all parameters.
+
+- **`PRINTER_ICC_PATH`**
   Path to the RGB/CMYK colorspace profile used as reference (e.g. sRGB, AdobeRGB).
 
-- `PRINTER_PROFILES_PATH`
+- **`PRINTER_PROFILES_PATH`**
   Destination folder for installed ICC profiles
   Example (recommended):
   ```$HOME/Library/ColorSync/Profiles```
 
-- `STRIP_PATCH_CONSISTENSY_TOLERANCE`
+- **`STRIP_PATCH_CONSISTENSY_TOLERANCE`**
   Used by `chartread -T`
   Default recommendation: **0.6**
 
-- `INK_LIMIT`
+- **`INK_LIMIT`**
   Total ink limit used by `targen` and `colprof`
 
   Typical values:
   - Inkjet: 220–300
   - Laser: 180–260
 
-- `PAPER_SIZE`
+- **`PAPER_SIZE`**
   `A4` or `Letter`
 
-- `PROFILE_SMOOTING`
+- **`PROFILE_SMOOTING`**
   Argument -r in `colprof` average deviation, affecting accuracy and smooting of profile. Argyll-default 0.5. 1.0 makes smoother profile without much reduction in accuracy.
 
-- `TARGET_RESOLUTION`
+- **`TARGET_RESOLUTION`**
   DPI for generated TIFF targets
+
+- **`DEFAULT_TARGEN_COMMAND_CUSTOM`**: Custom targen arguments template
+- **`DEFAULT_PRINTTARG_COMMAND_CUSTOM`**: Custom printtarg arguments template
+
+#### Instrument-Specific Parameters
+- **`INST_CM_*`**: ColorMunki-optimized parameters (A4/Letter paper sizes)
+- **`INST_OTHER_*`**: Other instrument parameters (paper size independent)
+ 
+#### Target Generation Parameters
+- **`*_PATCH_COUNT_*`**: Number of patches per option
+- **`*_WHITE_PATCHES_e`**: White patch count (`targen -e`)
+- **`*_BLACK_PATCHES_B`**: Black patch count (`targen -B`)
+- **`*_GRAY_STEPS_g`**: Gray ramp steps (`targen -g`)
+- **`*_DESCRIPTION`**: Menu display descriptions
 
 The script validates that all required parameters exist before running.
 
@@ -260,16 +276,16 @@ The script validates that all required parameters exist before running.
 
 ## Main Menu Actions Explained
 
-### 1. Create printer profile from scratch
+### 1. Create target chart and printer profile from scratch
 
 - Define profile name
-- Generate new targets (menu-selected)
+- Generate new targets (menu-selected from 6 optimized presets or custom)
 - Measure patches
 - Create ICC profile
 - Sanity check
 - Install profile into local profile folder
 
-### 2. Re-read or resume partly read chart
+### 2. Resume or re-read an existing target chart measurement and create profile
 
 - Continue from an existing `.ti3`. Useful if measurement was interrupted
 - Measure patches
@@ -277,7 +293,7 @@ The script validates that all required parameters exist before running.
 - Sanity check
 - Install profile into local profile folder
 
-### 3. Create profile from existing `.ti2`
+### 3. Read an existing target chart from scratch and create profile
 
 - Reuse printed targets
 - Measure again
@@ -285,12 +301,10 @@ The script validates that all required parameters exist before running.
 - Sanity check
 - Install profile into local profile folder
 
-### 4. Create profile from existing `.ti3`
+### 4. Create printer profile from an existing measurement file
 
 - Skip measurement
-- Direct ICC generation in selected folder
-    - Make sure `.ti3` file selected has unique name.
-    - Overwrites existing `.icc` with same name, if exists
+- Direct ICC generation in selected folder or create new profile folder
 - Sanity check
 - Install profile into local profile folder
 
@@ -304,7 +318,73 @@ The script validates that all required parameters exist before running.
 
 - Edit selected values in the `.ini` file interactively
 
+### 7. Show ΔE2000 Color Accuracy — Quick Reference
+
+- Displays ΔE2000 color difference values and their perceptual meaning
+- Quick reference for evaluating profile quality
+
+### 8. Exit script
+
 ---
+
+## Target Generation Menu Options
+
+The target generation menu options is available under main menu action **1**.
+
+The script provides **6 optimized preset targets** plus a **custom option**, where patch counts and menu text are configurable in the `.ini` file.
+
+### ColorMunki Instrument (A4/Letter Paper)
+Default menu for ColorMunki instrument:
+
+**A4 Paper Size:**.  
+- **Option 1**: Small – 210 patches – 1 × A4 page, quick profiling.  
+- **Option 2**: Medium – 420 patches – 2 × A4 pages, recommended default.  
+- **Option 3**: Large – 630 patches – 3 × A4 pages, better accuracy.  
+- **Option 4**: XL – 840 patches – 4 × A4 pages, high quality.  
+- **Option 5**: XXL – 1050 patches – 5 × A4 pages, very high quality.  
+- **Option 6**: XXXL – 1260 patches – 6 × A4 pages, maximum quality.  
+
+**Letter Paper Size:**.  
+- **Option 1**: Small – 196 patches – 1 × Letter page, quick profiling.  
+- **Option 2**: Medium – 392 patches – 2 × Letter pages, recommended default.  
+- **Option 3**: Large – 588 patches – 3 × Letter pages, better accuracy.  
+- **Option 4**: XL – 784 patches – 4 × Letter pages, high quality.  
+- **Option 5**: XXL – 980 patches – 5 × Letter pages, very high quality.  
+- **Option 6**: XXXL – 1176 patches – 6 × Letter pages, maximum quality.  
+
+### Other Instruments (Same for All Paper Sizes)
+Default menu for other instruments is only partially specified. User may add as desired:
+
+- **Option 1**: Small – 480 patches – quick profiling
+- **Option 2**: Medium – 960 patches – recommended default
+- **Options 3-6**: Not specified
+
+### Option 7: Custom Target Generation
+Allows advanced users to specify custom `targen` and `printtarg` arguments independent of setup parameters.
+
+## Custom Target Generation
+
+**Menu Option 7**, under main menu action **1**, provides advanced users with direct control over ArgyllCMS parameters.
+
+### Features:
+- **Independent Parameters**: Bypasses all preset configurations
+- **Direct Argument Control**: Specify exact `targen` and `printtarg` arguments
+- **Default Templates**: Pre-populated with sensible defaults that can be edited
+- **Expert Control**: Full access to all ArgyllCMS capabilities
+
+### Usage:
+1. Select option 7 from any target generation menu
+2. Review and edit `targen` arguments (patch count, ink limits, etc.)
+3. Review and edit `printtarg` arguments (resolution, paper size, scaling)
+4. Confirm to generate custom target
+
+### Default Templates:
+- **targen**: `-v -d2 -G -e8 -B8 -g128 -f954`
+- **printtarg**: `-v -ii1 -a0.75 -A0.5 -M2 -T300 -P -p210x297`
+
+These defaults can be modified in the `.ini` file via:
+- `DEFAULT_TARGEN_COMMAND_CUSTOM`
+- `DEFAULT_PRINTTARG_COMMAND_CUSTOM`
 
 ## Files and Folder Structure
 
@@ -323,9 +403,17 @@ Script_Location
         ├── ProfileName.icc
         ├── ProfileName_sanity_check.txt
         └── Argyll_Printer_Profiler_YYYYMMDD_HHMMSS.log
+└── Pre-made_Targets/
+    ├── Patch Width 8-11mm - Expert (Use rig-guide-ruler)/
+    ├── Patch Width 12-15mm - Intermediate (Easy with ruler)
+    └── Patch Width 16-30mm - Easy (Freehand possible)
 ```
 
-All work is performed inside this folder once created.
+The script will create a new folder for each profile, named after the profile name.
+A selection of targets is provided in the `Pre-made_Targets` folder, grouped by patch width and ease of use.
+
+- **`Created_Profiles`**: Auto-generated profiles and associated files
+- **`Pre-made_Targets`**: Target files for reuse.
 
 ---
 

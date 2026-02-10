@@ -1,0 +1,3 @@
+# Commands used
+targen -v -d2 -G -t -e8 -B8 -g216 -f1156 Colormunki-Expert-Letter-1156p-4pages
+printtarg -v -b -P -iCM -h -T300 -pLetter -a0.84 Colormunki-Expert-Letter-1156p-4pages

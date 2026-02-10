@@ -1,0 +1,2 @@
+# Commands used
+printtarg -v -b -P -iCM -h -T300 -pLetter -a0.9 -m6 Colormunki-Intermediate-Letter-1168p-5pages-tc918-grays-randomized

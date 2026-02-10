@@ -1,0 +1,3 @@
+# Commands used
+targen -v -d2 -G -t -e6 -B6 -g144 -f910 Colormunki-Intermediate-A4-910p-5pages
+printtarg -v -b -P -iCM -h -T300 -pA4 -a1.06 Colormunki-Intermediate-A4-910p-5pages
