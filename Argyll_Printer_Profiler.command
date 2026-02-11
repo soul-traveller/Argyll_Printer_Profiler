@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-version="1.2.0"
-# Version 1.2.0
+version="1.2.1"
+# Version 1.2.1
 
 # Argyll_Printer_Profiler
 # Uses ArgyllCMS version that is installed and checks if commands are availeble in terminal.
@@ -1826,17 +1826,146 @@ sanity_check() {
     echo
     echo 'Performing sanity check (creating .txt file)...'
     echo
-    echo "Command Used: profcheck -v2 -k -s "${name}.ti3" "${name}.icc" 2>&1 >> "${name}_sanity_check.txt""
-    echo
+    echo "Command Used: profcheck -v -k -s" 2>&1 > "${name}_sanity_check.txt"
     profcheck -v2 -k -s "${name}.ti3" "${name}.icc" 2>&1 >> "${name}_sanity_check.txt" || {
         echo
         echo "❌ profcheck failed. See log for details."
         echo
         return 1
     }
+    # Append to sanity check file
+    {
+        echo
+        echo
+    } >> "${name}_sanity_check.txt"
+
+    # Extract delta E values from lines starting with "["
+    declare -a delta_e_values=()
+    
+    while IFS= read -r line; do
+        # match lines that start with [decimal] followed by space and @
+        if [[ "$line" =~ ^\[([0-9]+\.[0-9]+)\].*@ ]]; then
+            delta_e_values+=("${BASH_REMATCH[1]}")
+        fi
+    done < "${name}_sanity_check.txt"
+    
+    if [ ${#delta_e_values[@]} -eq 0 ]; then
+        echo "⚠️ No delta E values found in sanity check file"
+        return 1
+    fi
+    
+    # DEBUG!!: show first few values
+    #echo "Found ${#delta_e_values[@]} delta E values"
+    #echo "First few values: ${delta_e_values[@]:0:5}"
+
+    # Since profcheck -s already sorts from highest to lowest:
+    # First element is largest, last element is smallest
+    largest="${delta_e_values[0]}"
+    
+    # Get last element safely
+    last_index=$((${#delta_e_values[@]} - 1))
+    smallest="${delta_e_values[$last_index]}"
+    
+    # Calculate range using awk (more reliable than bc)
+    range=$(awk "BEGIN {printf \"%.6f\", $largest - $smallest}")
+
+    # Calculate percentiles based on position in sorted array
+    total_patches=${#delta_e_values[@]}
+
+    # Calculate positions (round up to nearest integer)
+    pos_99=$(awk "BEGIN {printf \"%.0f\", $total_patches * 0.99}")
+    pos_98=$(awk "BEGIN {printf \"%.0f\", $total_patches * 0.98}")
+    pos_95=$(awk "BEGIN {printf \"%.0f\", $total_patches * 0.95}")
+    pos_90=$(awk "BEGIN {printf \"%.0f\", $total_patches * 0.90}")
+    
+    # Get values at these positions from the end of array (since sorted highest to lowest)
+    # 99th percentile should be near smallest values, so access from end
+    percentile_99=${delta_e_values[$((total_patches - pos_99))]}
+    percentile_98=${delta_e_values[$((total_patches - pos_98))]}
+    percentile_95=${delta_e_values[$((total_patches - pos_95))]}
+    percentile_90=${delta_e_values[$((total_patches - pos_90))]}
+    
+    # Count values below thresholds
+    count_lt_1=0
+    count_lt_2=0
+    count_lt_3=0
+    
+    for value in "${delta_e_values[@]}"; do
+        # Compare using awk for floating point comparison
+        if (( $(awk "BEGIN {print ($value < 1.0)}") )); then
+            ((count_lt_1++))
+        fi
+        if (( $(awk "BEGIN {print ($value < 2.0)}") )); then
+            ((count_lt_2++))
+        fi
+        if (( $(awk "BEGIN {print ($value < 3.0)}") )); then
+            ((count_lt_3++))
+        fi
+    done
+    
+    # Calculate percentages
+    percent_lt_1=$(awk "BEGIN {printf \"%.1f\", ($count_lt_1 / $total_patches) * 100}")
+    percent_lt_2=$(awk "BEGIN {printf \"%.1f\", ($count_lt_2 / $total_patches) * 100}")
+    percent_lt_3=$(awk "BEGIN {printf \"%.1f\", ($count_lt_3 / $total_patches) * 100}")
+    
+    # Display results
+    echo
+    echo "Delta E Range Analysis:"
+    echo "  Largest ΔE:  $largest"
+    echo "  Smallest ΔE: $smallest"
+    echo
+    echo "Percentile Values:"
+    echo "  99th percentile: $percentile_99"
+    echo "  98th percentile: $percentile_98"
+    echo "  95th percentile: $percentile_95"
+    echo "  90th percentile: $percentile_90"
+    echo
+    echo "Patch Count Analysis:"
+    echo "  Percent of patches with ΔE<1.0: ${percent_lt_1}%"
+    echo "  Percent of patches with ΔE<2.0: ${percent_lt_2}%"
+    echo "  Percent of patches with ΔE<3.0: ${percent_lt_3}%"
+    echo
+    
+    # Append results to sanity check file
+    {
+        echo
+        echo "=== Delta E Range Analysis ==="
+        echo "Largest ΔE: $largest"
+        echo "Smallest ΔE: $smallest"
+        echo
+        echo "Percentile Values:"
+        echo "99th percentile: $percentile_99"
+        echo "98th percentile: $percentile_98"
+        echo "95th percentile: $percentile_95"
+        echo "90th percentile: $percentile_90"
+        echo
+        echo "Patch Count Analysis:"
+        echo "Percent of patches with ΔE<1.0: ${percent_lt_1}%"
+        echo "Percent of patches with ΔE<2.0: ${percent_lt_2}%"
+        echo "Percent of patches with ΔE<3.0: ${percent_lt_3}%"
+        echo "================================"
+        echo
+    } >> "${name}_sanity_check.txt"
+    
+    profcheck -v -k "${name}.ti3" "${name}.icc" || {
+        echo
+        echo "❌ profcheck failed. See log for details."
+        echo
+        return 1
+    }
+    profcheck -v -k "${name}.ti3" "${name}.icc" 2>&1 >> "${name}_sanity_check.txt" || {
+        echo
+        echo "❌ profcheck failed. See log for details."
+        echo
+        return 1
+    }
+
     echo
     echo "Detailed sanity check stored in '${name}_sanity_check.txt'."
     echo 'Sanity check complete.'
+    echo
+    read -p 'Press enter to return to the main menu...'
+    echo
     echo
     show_de_reference
 }

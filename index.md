@@ -249,7 +249,7 @@ See `Argyll_Printer_Profiler_setup.ini` for a descriptions and list of all param
 #### Instrument-Specific Parameters
 - **`INST_CM_*`**: ColorMunki-optimized parameters (A4/Letter paper sizes)
 - **`INST_OTHER_*`**: Other instrument parameters (paper size independent)
- 
+
 #### Target Generation Parameters
 - **`*_PATCH_COUNT_*`**: Number of patches per option
 - **`*_WHITE_PATCHES_e`**: White patch count (`targen -e`)
@@ -312,7 +312,7 @@ The script validates that all required parameters exist before running.
 
 - Runs `profcheck` on existing `.ti3` + `.icc`
 - File created is named: `profile name + _sanity_check.txt`
-- If run several times, results are appended into same file.
+- If run several times, results are overwritten.
 
 ### 6. Change setup parameters
 
@@ -336,21 +336,21 @@ The script provides **6 optimized preset targets** plus a **custom option**, whe
 ### ColorMunki Instrument (A4/Letter Paper)
 Default menu for ColorMunki instrument:
 
-**A4 Paper Size:**.  
-- **Option 1**: Small – 210 patches – 1 × A4 page, quick profiling.  
-- **Option 2**: Medium – 420 patches – 2 × A4 pages, recommended default.  
-- **Option 3**: Large – 630 patches – 3 × A4 pages, better accuracy.  
-- **Option 4**: XL – 840 patches – 4 × A4 pages, high quality.  
-- **Option 5**: XXL – 1050 patches – 5 × A4 pages, very high quality.  
-- **Option 6**: XXXL – 1260 patches – 6 × A4 pages, maximum quality.  
+**A4 Paper Size:**.
+- **Option 1**: Small – 210 patches – 1 × A4 page, quick profiling.
+- **Option 2**: Medium – 420 patches – 2 × A4 pages, recommended default.
+- **Option 3**: Large – 630 patches – 3 × A4 pages, better accuracy.
+- **Option 4**: XL – 840 patches – 4 × A4 pages, high quality.
+- **Option 5**: XXL – 1050 patches – 5 × A4 pages, very high quality.
+- **Option 6**: XXXL – 1260 patches – 6 × A4 pages, maximum quality.
 
-**Letter Paper Size:**.  
-- **Option 1**: Small – 196 patches – 1 × Letter page, quick profiling.  
-- **Option 2**: Medium – 392 patches – 2 × Letter pages, recommended default.  
-- **Option 3**: Large – 588 patches – 3 × Letter pages, better accuracy.  
-- **Option 4**: XL – 784 patches – 4 × Letter pages, high quality.  
-- **Option 5**: XXL – 980 patches – 5 × Letter pages, very high quality.  
-- **Option 6**: XXXL – 1176 patches – 6 × Letter pages, maximum quality.  
+**Letter Paper Size:**.
+- **Option 1**: Small – 196 patches – 1 × Letter page, quick profiling.
+- **Option 2**: Medium – 392 patches – 2 × Letter pages, recommended default.
+- **Option 3**: Large – 588 patches – 3 × Letter pages, better accuracy.
+- **Option 4**: XL – 784 patches – 4 × Letter pages, high quality.
+- **Option 5**: XXL – 980 patches – 5 × Letter pages, very high quality.
+- **Option 6**: XXXL – 1176 patches – 6 × Letter pages, maximum quality.
 
 ### Other Instruments (Same for All Paper Sizes)
 Default menu for other instruments is only partially specified. User may add as desired:
