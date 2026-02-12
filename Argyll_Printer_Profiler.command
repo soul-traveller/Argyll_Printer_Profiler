@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-version="1.2.1"
-# Version 1.2.1
+version="1.2.2"
+# Version 1.2.2
 
 # Argyll_Printer_Profiler
 # Uses ArgyllCMS version that is installed and checks if commands are availeble in terminal.
@@ -55,37 +55,68 @@ echo
 echo
 # --- Set location and script name -------------------------------------------------
 cd "$(dirname "$0")"
-SCRIPT_DIR="$(cd -- "$(dirname -- "$0")" && pwd)"
-SCRIPT_NAME="$(basename -- "$0")"
-TEMP_LOG="${SCRIPT_DIR}/Argyll_Printer_Profiler_$(date +%Y%m%d_%H%M%S).log"
+script_dir="$(cd -- "$(dirname -- "$0")" && pwd)"
+script_name="$(basename -- "$0")"
+temp_log="${script_dir}/Argyll_Printer_Profiler_$(date +%Y%m%d).log"
 
-# Try to create/truncate the log file explicitly
-if ! : >"$TEMP_LOG" 2>/dev/null; then
-  echo "❌ Cannot create log file at '$TEMP_LOG'."
-  echo "   Check folder permissions or disk access."
+session_separator() {
+    # Add session separator to log file only
+    {
+        echo
+        echo
+        echo
+        echo "================================================================================"
+        echo "🆕 NEW SCRIPT SESSION STARTED"
+        echo "📅 Date & Time: $(date '+%Y-%m-%d %H:%M:%S %Z (%z)')"
+        echo "🖥️  Platform: $PLATFORM"
+        echo "👤 User: $(whoami)"
+        echo "📂 Working Directory: $(pwd)"
+        echo "📜 Script: $script_name"
+        echo "📊 Log File: $temp_log"
+        echo "⚡ Process ID: $$"
+        echo "================================================================================"
+        echo
+        echo
+        echo
+    } >> "$temp_log"
+}
+
+# Check if log file for today already exists
+if [ -f "$temp_log" ]; then
+    echo "⚠️ Log file already exists for today."
+    echo "🔄 Appending to existing daily log."
+    # Hook up tee-based logging for existing file
+    exec > >(tee -a "$temp_log") 2>&1
+    # Add session separator to log file only
+    session_separator
 else
-  # Only if creation succeeded, hook up tee-based logging
-  exec > >(tee -a "$TEMP_LOG") 2>&1
+    # Try to create/truncate the log file explicitly
+    if ! : >"$temp_log" 2>/dev/null; then
+        echo "❌ Cannot create log file at '$temp_log'."
+        echo "   Check folder permissions or disk access."
+        exit 1  # Exit if we can't create log file
+    else
+        # Only if creation succeeded, hook up tee-based logging
+        exec > >(tee -a "$temp_log") 2>&1
+        # Add session separator to log file only
+        session_separator
+    fi
 fi
 
 echo
-echo "File path: ${SCRIPT_DIR}"
-echo "Script executed: ${SCRIPT_NAME}"
-echo "Log file: ${TEMP_LOG}"
-echo
 
 # --- Load setup file -------------------------------------------------
-SETUP_FILE="${SCRIPT_DIR}/Argyll_Printer_Profiler_setup.ini"
+setup_file="${script_dir}/Argyll_Printer_Profiler_setup.ini"
 
-if [ ! -f "$SETUP_FILE" ]; then
+if [ ! -f "$setup_file" ]; then
   echo "❌ Setup file not found:"
-  echo "   The setup ini file must be located in folder together with script ${SCRIPT_NAME}."
+  echo "   The setup ini file must be located in folder together with script ${script_name}."
   exit 1
 fi
 
 # Load variables
 # shellcheck source=/dev/null
-source "$SETUP_FILE"
+source "$setup_file"
 
 # Check if setup parameters exist
 for var in STRIP_PATCH_CONSISTENSY_TOLERANCE PRINTER_ICC_PATH COLOR_SYNC_UTILITY_PATH PRINTER_PROFILES_PATH PROFILE_SMOOTING TARGET_RESOLUTION; do
@@ -105,27 +136,74 @@ REQUIRED_CMDS=(
     dispcal
 )
 
+# Platform-specific requirements
 if [[ "$PLATFORM" == "linux" ]]; then
     REQUIRED_CMDS+=(
         zenity
     )
 fi
+
+# Check core ArgyllCMS commands
+missing_argyll=()
+missing_linux_tools=()
+
 for cmd in "${REQUIRED_CMDS[@]}"; do
   if ! command -v "$cmd" >/dev/null 2>&1; then
-    echo "❌ ArgyllCMS not found (missing command: $cmd)"
+    # Check if it's an ArgyllCMS command or Linux tool
+    case "$cmd" in
+        targen|chartread|colprof|printtarg|profcheck|dispcal)
+            missing_argyll+=("$cmd")
+            ;;
+        zenity)
+            missing_linux_tools+=("$cmd")
+            ;;
+    esac
+  fi
+done
+
+# Check Linux window management tools (optional but recommended)
+if [[ "$PLATFORM" == "linux" ]]; then
+    if ! command -v wmctrl >/dev/null 2>&1 && ! command -v xdotool >/dev/null 2>&1; then
+        missing_linux_tools+=("wmctrl or xdotool")
+    fi
+fi
+
+# Report missing dependencies
+if [ ${#missing_argyll[@]} -gt 0 ]; then
+    echo "❌ ArgyllCMS not found (missing commands: ${missing_argyll[*]})"
     echo
     if [[ "$PLATFORM" == "macos" ]]; then
-        echo "Install it using Homebrew:"
+        echo "Install ArgyllCMS using desired package manager (e.g. Homebrew):"
         echo "  brew install argyll-cms"
     else
-        echo "Install required dependabilities from your distribution's package manager or from argyllcms.com"
+        echo "Install ArgyllCMS from your distribution's package manager or from argyllcms.com"
         echo "Example:"
-        echo "   sudo apt install argyll zenity"
+        echo "   sudo apt install argyll-cms"
     fi
     echo
     exit 1
-  fi
-done
+fi
+ 
+if [ ${#missing_linux_tools[@]} -gt 0 ]; then
+    echo "❌ Missing required Linux tools: ${missing_linux_tools[*]}"
+    echo
+    echo "Install with your package manager:"
+    echo "   sudo apt install ${missing_linux_tools[*]}"
+    echo
+    echo "These tools are required for the script to function properly:"
+    if [[ " ${missing_linux_tools[*]} " =~ " zenity " ]]; then
+        echo "  • zenity: Required for file selection dialogs"
+    fi
+    if [[ " ${missing_linux_tools[*]} " =~ " wmctrl or xdotool " ]]; then
+        echo "  • wmctrl or xdotool: Required for terminal focus management"
+    fi
+    echo
+    echo "Please install the missing dependencies and try again."
+    exit 1
+fi
+ 
+echo "✅ All required dependencies found"
+echo
 
 # Portable sed -i helper (required for Linux)
 sed_inplace() {
@@ -147,35 +225,28 @@ ARGYLL_VERSION=$(echo "$ARGYLL_VERSION_LINE" | sed -n 's/.*Version \([0-9.]*\).*
 echo "✅ ArgyllCMS detected"
 echo "   Version: $ARGYLL_VERSION"
 echo
+echo "🖥️  Recommeded Terminal Window Size: 100 columns x 50 rows"
+echo
 
 # --- Functions --------------------------------------------------
-move_log() {
-    # Move log to profile folder
-    if [ ! -f "$TEMP_LOG" ]; then
-        echo "❌ Log file '$TEMP_LOG' does not exist; cannot move."
-        return 1
-    fi
-
-    if [ ! -d "$PROFILE_FOLDER" ]; then
-        echo "❌ Profile folder '$PROFILE_FOLDER' does not exist; cannot move log."
-        return 1
-    fi
-
-    if mv "$TEMP_LOG" "$PROFILE_FOLDER/"; then
-        TEMP_LOG="${PROFILE_FOLDER}/$(basename "$TEMP_LOG")"
-    else
-        echo "❌ Could not move log '$TEMP_LOG' to '$PROFILE_FOLDER/'"
-        return 1
-    fi
-    exec > >(tee -a "$TEMP_LOG") 2>&1
-}
-
 prepare_profile_folder() {
+    # Validate required variables
+    # ${name:-} If $name is unset or empty, use "" (empty string)
+    if [ -z "${name:-}" ]; then
+        echo "❌ name variable not set"
+        return 1
+    fi
+    
+    # ${action:-} If $action is unset or empty, use "" (empty string)
+    if [ -z "${action:-}" ]; then
+        echo "❌ action variable not set"
+        return 1
+    fi
 
     # Default fallback
     new_name="$name"
 
-    # Do only if action 2 or 3 (ti2 or ti3 selection)
+    # Do only if action 2 or 3 or 4 (ti2 or ti3 selection)
     if [[ "$action" == "2" || "$action" == "3"  || "$action" == "4" ]]; then
         echo
         echo 'Enter/modify filename for this new profile.'
@@ -202,28 +273,74 @@ prepare_profile_folder() {
         fi
     fi
 
-    PROFILE_FOLDER="${SCRIPT_DIR}/${CREATED_PROFILES_FOLDER}/${new_name}"
+    while true; do  # ← Outer loop for retry logic
+        profile_folder="${script_dir}/${CREATED_PROFILES_FOLDER}/${new_name}"
 
+        # Check if profile folder already exists
+        if [ -d "$profile_folder" ]; then
+            echo
+            echo "⚠️ Profile folder already exists: '$profile_folder'"
+            echo
+            echo "Contents:"
+            ls -l -1 "$profile_folder" 2>/dev/null || echo "  (Unable to list contents)"
+            echo
+            echo "Choose an option:"
+            echo "  1) Use existing folder (may overwrite files)"
+            echo "  2) Enter a different name"
+            echo "  3) Cancel operation"
+            echo
+            while true; do
+                read -r -n 1 -p "Enter choice [1-3]: " choice
+                echo
+                case "$choice" in
+                    1)
+                        echo
+                        echo "Using existing folder: '$profile_folder'"
+                        break 2     # Exit both loops
+                        ;;
+                    2)
+                        echo
+                        read -e -p "Enter new filename: " new_name
+                        # Sanitize input
+                        new_name="$(printf '%s' "$new_name" | sed 's/[[:space:]]*$//')"
+                        profile_folder="${script_dir}/${CREATED_PROFILES_FOLDER}/${new_name}"
+                        # Restart check with new name
+                        break 1     # Exit inner loop only
+                        ;;
+                    3)
+                        echo
+                        echo "Creating profile folder cancelled."
+                        return 1
+                        ;;
+                    *)
+                        echo "❌ Invalid choice. Please enter 1, 2, or 3."
+                        ;;
+                esac
+            done
+        else
+            # Folder doesn't exist, break outer loop
+            break
+        fi
+    done  # ← Close outer loop
+    
     # DEBUG!!!
     #echo
     #echo "In function prepare_profile_folder:"
-    #echo "Defined Folder before mkdir: $PROFILE_FOLDER"
+    #echo "Defined Folder before mkdir: $profile_folder"
     #echo "new_name: ${new_name}"
     #echo
 
-    mkdir -p "$PROFILE_FOLDER" || {
-        echo "❌ Failed to create profile folder: $PROFILE_FOLDER"
+    # Create profile folder
+    mkdir -p "$profile_folder" || {
+        echo "❌ Failed to create profile folder: '$profile_folder'"
         return 1
     }
 
-    # Move log to profile folder
-    move_log
-
     echo "✅ Working folder for profile:"
-    echo "$PROFILE_FOLDER"
+    echo "'$profile_folder'"
 
-    cd "$PROFILE_FOLDER" || {
-        echo "❌ Failed to change directory to $PROFILE_FOLDER"
+    cd "$profile_folder" || {
+        echo "❌ Failed to change directory to '$profile_folder'"
         return 1
     }
 
@@ -233,31 +350,37 @@ prepare_profile_folder() {
 copy_files_ti1_ti2_ti3_tif() {
     # Copy existing files into new folder
     # Verify file exists
-    if [ ! -f "${SOURCE_FOLDER}/${name}.ti1" ]; then
+    if [ ! -n "$name" ] || [ ! -f "${source_folder}/${name}.ti1" ]; then
         echo "⚠️ .ti1 file not found for '${name}'. Ignoring."
     else
-        cp "${SOURCE_FOLDER}/${name}.ti1" "$PROFILE_FOLDER/" || {
-            echo "❌ Failed to copy ${name}.ti1 to directory to $PROFILE_FOLDER"
+        cp "${source_folder}/${name}.ti1" "$profile_folder/" || {
+            echo "❌ Failed to copy ${name}.ti1 to directory to '$profile_folder'"
+            echo "Profile folder is left as is:"
+            echo "'${profile_folder}'"
             return 1
         }
     fi
 
     if [[ "$action" == "4" ]]; then
-        if [ ! -f "${SOURCE_FOLDER}/${name}.ti2" ]; then
+        if [ ! -n "$name" ] || [ ! -f "${source_folder}/${name}.ti2" ]; then
             echo "⚠️ .ti2 file not found for '${name}'. Ignoring."
         else
-            cp "${SOURCE_FOLDER}/${name}.ti2" "$PROFILE_FOLDER/" || {
-                echo "❌ Failed to copy ${name}.ti2 to directory to $PROFILE_FOLDER"
+            cp "${source_folder}/${name}.ti2" "$profile_folder/" || {
+                echo "❌ Failed to copy ${name}.ti2 to directory to '$profile_folder'"
+                echo "Profile folder is left as is:"
+                echo "'${profile_folder}'"
                 return 1
             }
         fi
     else    # must exist for action 2 + 3
-        if [ ! -f "${SOURCE_FOLDER}/${name}.ti2" ]; then
+        if [ ! -n "$name" ] || [ ! -f "${source_folder}/${name}.ti2" ]; then
             echo "❌ .ti2 file not found for '${name}'."
             return 1
         else
-            cp "${SOURCE_FOLDER}/${name}.ti2" "$PROFILE_FOLDER/" || {
-                echo "❌ Failed to copy ${name}.ti2 to directory to $PROFILE_FOLDER"
+            cp "${source_folder}/${name}.ti2" "$profile_folder/" || {
+                echo "❌ Failed to copy ${name}.ti2 to directory to '$profile_folder'"
+                echo "Profile folder is left as is:"
+                echo "'${profile_folder}'"
                 return 1
             }
         fi
@@ -265,12 +388,14 @@ copy_files_ti1_ti2_ti3_tif() {
 
     # Do only if action 2 or 4 (ti3 selection)
     if [[ "$action" == "2" || "$action" == "4" ]]; then
-        if [ ! -f "${SOURCE_FOLDER}/${name}.ti3" ]; then
+        if [ ! -n "$name" ] || [ ! -f "${source_folder}/${name}.ti3" ]; then
             echo "❌ .ti3 file not found for '${name}'."
             return 1
         else
-            cp "${SOURCE_FOLDER}/${name}.ti3" "$PROFILE_FOLDER/" || {
-                echo "❌ Failed to copy ${name}.ti3 to directory to $PROFILE_FOLDER"
+            cp "${source_folder}/${name}.ti3" "$profile_folder/" || {
+                echo "❌ Failed to copy ${name}.ti3 to directory to '$profile_folder'"
+                echo "Profile folder is left as is:"
+                echo "'${profile_folder}'"
                 return 1
             }
         fi
@@ -279,8 +404,10 @@ copy_files_ti1_ti2_ti3_tif() {
     if (( ${#tif_files[@]} > 0 )); then
         # Copy all TIFFs from tif_files array
         for f in "${tif_files[@]}"; do
-            cp "$f" "$PROFILE_FOLDER/" || {
-                echo "❌ Failed to copy $(basename "$f") to $PROFILE_FOLDER"
+            cp "$f" "$profile_folder/" || {
+                echo "❌ Failed to copy $(basename "$f") to '$profile_folder'"
+                echo "Profile folder is left as is:"
+                echo "'${profile_folder}'"
                 return 1
             }
         done
@@ -288,29 +415,57 @@ copy_files_ti1_ti2_ti3_tif() {
 }
 
 rename_files_ti1_ti2_ti3_tif() {
+    # Before calling this function, make sure:
+    #  - $name and $new_name are set.
+    #  - $profile_folder is set.
+    #  - $tif_files is set.
+    #  - $action is set.
+    #  - directory $profile_folder exists.
+    #  - directory has been cd'ed into.
+
+    # Verify we're in the correct directory
+    if [ "$(pwd)" != "$profile_folder" ]; then
+        echo "⚠️ Not in profile folder. Current: $(pwd)"
+        echo "🔄 Attempting to change to profile folder: '$profile_folder'"
+            
+        if cd "$profile_folder" 2>/dev/null; then
+            echo "✅ Successfully changed to profile folder"
+        else
+            echo "❌ Failed to change to profile folder."
+            echo "Existing files are left in profile folder:"
+            echo "'${profile_folder}'"
+            return 1
+        fi
+    fi
     echo "Renaming files to match new profile name…"
     local f base suffix ext newfile i
 
     # Rename files
-    if [ -f "${PROFILE_FOLDER}/${name}.ti1" ]; then
+    if [ -f "${profile_folder}/${name}.ti1" ]; then
         mv "${name}.ti1" "${new_name}.ti1" || {
             echo "❌ Failed to rename ${name}.ti1 → ${new_name}.ti1"
+            echo "Existing files are left in profile folder:"
+            echo "'${profile_folder}'"
             return 1
         }
     fi
 
-    if [ -f "${PROFILE_FOLDER}/${name}.ti2" ]; then
+    if [ -f "${profile_folder}/${name}.ti2" ]; then
         mv "${name}.ti2" "${new_name}.ti2" || {
             echo "❌ Failed to rename ${name}.ti2 → ${new_name}.ti2"
+            echo "Existing files are left in profile folder:"
+            echo "'${profile_folder}'"
             return 1
         }
     fi
 
     # Do only if action 2 (ti3 selection)
     if [[ "$action" == "2" || "$action" == "4" ]]; then
-        if [ -f "${PROFILE_FOLDER}/${name}.ti3" ]; then
+        if [ -f "${profile_folder}/${name}.ti3" ]; then
             mv "${name}.ti3" "${new_name}.ti3" || {
                 echo "❌ Failed to rename ${name}.ti3 → ${new_name}.ti3"
+                echo "Existing files are left in profile folder:"
+                echo "'${profile_folder}'"
                 return 1
             }
         fi
@@ -340,12 +495,13 @@ rename_files_ti1_ti2_ti3_tif() {
         fi
 
         # Build new filename. Profile folder must have had 'cd' performed.
-        #newfile="${PROFILE_FOLDER}/${new_name}${suffix}${ext}"
         newfile="${new_name}${suffix}${ext}"
 
         # Rename file
         mv "$(basename "$f")" "$newfile" || {
             echo "❌ Failed to rename $(basename "$f") → $(basename "$newfile")"
+            echo "Existing files are left in profile folder:"
+            echo "'${profile_folder}'"
             return 1
         }
 
@@ -373,8 +529,9 @@ specify_profile_name() {
     while true; do
         echo
         echo
+        echo
         echo "─────────────────────────────────────────────────────────────────────"
-        echo " Specify Profile Description / File Name"
+        echo "Specify Profile Description / File Name"
         echo "─────────────────────────────────────────────────────────────────────"
         echo
         echo 'The following is highly recommended to include:'
@@ -470,6 +627,8 @@ EOF
             wmctrl -a "$(xdotool getactivewindow)" 2>/dev/null || true
         elif command -v xdotool >/dev/null 2>&1; then
             xdotool windowactivate "$(xdotool getactivewindow getwindowpid)" 2>/dev/null || true
+        else
+            echo "⚠️ Warning: Could not return focus to terminal (install wmctrl or xdotool)"
         fi
     fi
 
@@ -492,7 +651,7 @@ EOF
 
 set_icc_profile_parameter() {
     # Update the setup file
-    if [ ! -f "$SETUP_FILE" ]; then
+    if [ ! -f "$setup_file" ]; then
         echo "❌ Setup file not found. Cannot save new ICC/ICM profile."
         return 1
     fi
@@ -502,17 +661,17 @@ set_icc_profile_parameter() {
     escaped_path=$(printf '%s\n' "$new_icc_path" | sed 's/[\/&]/\\&/g')
 
     # Replace the line starting with PRINTER_ICC_PATH=
-    sed_inplace "s|^PRINTER_ICC_PATH=.*|PRINTER_ICC_PATH=\"${escaped_path}\"|" "$SETUP_FILE"
+    sed_inplace "s|^PRINTER_ICC_PATH=.*|PRINTER_ICC_PATH=\"${escaped_path}\"|" "$setup_file"
 
     echo "✅ Updated PRINTER_ICC_PATH in setup file:"
-    echo "   $SETUP_FILE"
+    echo "   $setup_file"
     echo "   New path: $new_icc_path"
     echo
 }
 
 set_precond_profile_parameter() {
     # Update the setup file
-    if [ ! -f "$SETUP_FILE" ]; then
+    if [ ! -f "$setup_file" ]; then
         echo "❌ Setup file not found. Cannot save new ICC/ICM profile."
         return 1
     fi
@@ -522,81 +681,102 @@ set_precond_profile_parameter() {
     escaped_path=$(printf '%s\n' "$new_icc_path" | sed 's/[\/&]/\\&/g')
 
     # Replace the line starting with PRECONDITIONING_PROFILE_PATH=
-    sed_inplace "s|^PRECONDITIONING_PROFILE_PATH=.*|PRECONDITIONING_PROFILE_PATH=\"${escaped_path}\"|" "$SETUP_FILE"
+    sed_inplace "s|^PRECONDITIONING_PROFILE_PATH=.*|PRECONDITIONING_PROFILE_PATH=\"${escaped_path}\"|" "$setup_file"
 
     echo "✅ Updated PRECONDITIONING_PROFILE_PATH in setup file:"
-    echo "   $SETUP_FILE"
+    echo "   $setup_file"
     echo "   New path: $new_icc_path"
     echo
 }
 
 select_instrument() {
-    echo
-    echo 'Creating a test chart...'
-    echo
-    echo 'Please choose a spectrophotometer model. '
-    echo 'This effects how the target chart is generated.'
-    echo
-    echo '1: i1Pro'
-    echo '2: i1Pro3+'
-    echo '3: ColorMunki (Default)'
-    echo '4: DTP20'
-    echo '5: DTP22'
-    echo '6: DTP41'
-    echo '7: DTP51'
-    echo '8: SpectroScan'
-    echo "9: Abort printing target."
-    echo
-    echo "When choosing '3: Colormunki' a menu of target options will be presented at next step."
-    echo 'For all other choices command arguments may be edited for targen and printtarg.'
-    echo
-    read -r -n 1 -p 'Enter your choice [1–9]: ' answer
-    echo
-    case $answer in
-      1)
-        inst_arg='-ii1'
-        inst_name='i1Pro'
-        ;;
-      2)
-        inst_arg='-i3p'
-        inst_name='i1Pro3+'
-        ;;
-      3)
-        inst_arg="-iCM -h"
-        inst_name='ColorMunki'
-        ;;
-      4)
-        inst_arg='-i20'
-        inst_name='DTP20'
-        ;;
-      5)
-        inst_arg='-i22'
-        inst_name='DTP22'
-        ;;
-      6)
-        inst_arg='-i41'
-        inst_name='DTP41'
-        ;;
-      7)
-        inst_arg='-i51'
-        inst_name='DTP51'
-        ;;
-      8)
-        inst_arg='-iSS'
-        inst_name='SpectroScan'
-        ;;
-      9)
+    while true; do
         echo
-        echo 'Aborting printing target.'
-        return 1
-        ;;
-      *)
-        inst_arg="-iCM -h"
-        inst_name='ColorMunki'
         echo
-        echo 'No valid selection made. Using default instrument...'
-        ;;
-    esac
+        echo "─────────────────────────────────────────────────────────────────────"
+        echo 'Specify Spectrophotometer Model'
+        echo "─────────────────────────────────────────────────────────────────────"
+        echo
+        echo 'This affects how the target chart is generated.'
+        echo
+        echo '1: i1Pro'
+        echo '2: i1Pro3+'
+        echo '3: ColorMunki'
+        echo '4: DTP20'
+        echo '5: DTP22'
+        echo '6: DTP41'
+        echo '7: DTP51'
+        echo '8: SpectroScan'
+        echo "9: Abort creating target."
+        echo
+        echo 'Notes:'
+        echo "  - A menu of target chart options will be presented next step."
+        echo "  - Option '3: ColorMunki' has a separate configurable menu from the rest."
+        echo "  - The menu option and command arguments for targen and printtarg may be"
+        echo "    edited in .ini file."
+        echo
+        echo "─────────────────────────────────────────────────────────────────────"
+        echo
+        read -r -n 1 -p 'Enter your choice [1-9]: ' answer
+        echo
+        
+        # Validate input
+        if [[ ! "$answer" =~ ^[1-9]$ ]]; then
+            echo
+            echo "❌ Invalid choice. Please enter a number from 1 to 9."
+            echo
+            continue
+        fi
+        
+        case $answer in
+            1)
+                inst_arg=' -ii1'
+                inst_name='i1Pro'
+                break
+                ;;
+            2)
+                inst_arg=' -i3p'
+                inst_name='i1Pro3+'
+                break
+                ;;
+            3)
+                inst_arg=' -iCM -h'
+                inst_name='ColorMunki'
+                break
+                ;;
+            4)
+                inst_arg=' -i20'
+                inst_name='DTP20'
+                break
+                ;;
+            5)
+                inst_arg=' -i22'
+                inst_name='DTP22'
+                break
+                ;;
+            6)
+                inst_arg=' -i41'
+                inst_name='DTP41'
+                break
+                ;;
+            7)
+                inst_arg=' -i51'
+                inst_name='DTP51'
+                break
+                ;;
+            8)
+                inst_arg=' -iSS'
+                inst_name='SpectroScan'
+                break
+                ;;
+            9)
+                echo
+                echo 'Aborting creating target.'
+                return 1
+                ;;
+        esac
+    done
+    
     echo
     echo "Selected instrument: ${inst_name}"
     echo
@@ -622,6 +802,18 @@ specify_and_generate_target() {
         echo "      - Average deviation/smooting -r: $PROFILE_SMOOTING"
         echo '      - Color space profile specified, gamut mapping -S:'
         echo "        '${PRINTER_ICC_PATH}'"
+        echo
+        echo "Notes on generating target charts:"
+        echo
+        echo '  When making targets with argyllcms targen, often two very light coloured patches'
+        echo '  come next to each other (especially if there are multiple white patches), and targen'
+        echo '  leaves the spacer between them also white (not black as it should be), which then'
+        echo '  results in error “Not enough few patches” during reading of chart.'
+        echo '  To prevent this, review the targets before printing to see if any light colored patches'
+        echo '  are next to each other, and if the spacer is close in color. If there are, re-generate'
+        echo '  the targets until it is acceptable. If this situation persists, this may be reason to'
+        echo '  choose a pre-made target (option 3. in main menu).'
+        echo
     }
     menu_info_other_instruments() {
         echo "1: $INST_OTHER_MENU_OPTION1_PATCH_COUNT_f patches $INST_OTHER_MENU_OPTION1_DESCRIPTION"
@@ -665,6 +857,7 @@ specify_and_generate_target() {
                 echo '       - Pre-conditioning profile is currently not specified in setup.'
             fi
             echo "       - Current ink limit specified -l: '${INK_LIMIT}'"
+            echo "       - For more information on targen arguments, see argyllcms manual."
             echo
             echo 'Valid values: Letters A–Z a–z, digits 0–9, dash -, underscore _, '
             echo '              parentheses ( ), forward slash /, space, dot .'
@@ -691,8 +884,9 @@ specify_and_generate_target() {
             echo "Default value specified:"
             echo "'${DEFAULT_PRINTTARG_COMMAND_CUSTOM}'"
             echo
-            echo "Note: - Previsouly selected instrument (-i), resolution (-T) "
+            echo "Note: - Previously selected instrument (-i), resolution (-T) "
             echo "        and page size (-p) must be specified again if desired."
+            echo "      - For more information on printtarg arguments, see argyllcms manual."
             echo
             echo 'Valid values: Letters A–Z a–z, digits 0–9, dash -, underscore _, '
             echo '              parentheses ( ), forward slash /, space, dot .'
@@ -1085,31 +1279,31 @@ specify_and_generate_target() {
     # For targen, if any variable for each argument is empty, then remove argument in command (empty parameter)
    targen_l=''        # ink limit
    if [ -n "$INK_LIMIT" ]; then
-       targen_l="-l${INK_LIMIT}"
+       targen_l=" -l${INK_LIMIT}"
    fi
     targen_e=''        # white patches
     if [ -n "$white_patches" ]; then
-        targen_e="-e${white_patches}"
+        targen_e=" -e${white_patches}"
     fi
     targen_B=''        # black patches
     if [ -n "$black_patches" ]; then
-        targen_B="-B${black_patches}"
+        targen_B=" -B${black_patches}"
     fi
     targen_g=''        # gray steps
     if [ -n "$gray_steps" ]; then
-        targen_g="-g${gray_steps}"
+        targen_g=" -g${gray_steps}"
     fi
     targen_m=''        # multi cube steps
     if [ -n "$multi_cube_steps" ]; then
-        targen_m="-m${multi_cube_steps}"
+        targen_m=" -m${multi_cube_steps}"
     fi
     targen_M=''        # multi cube surface steps
     if [ -n "$multi_cube_surface_steps" ]; then
-        targen_M="-M${multi_cube_surface_steps}"
+        targen_M=" -M${multi_cube_surface_steps}"
     fi
     targen_f=''        # patch count
     if [ -n "$patch_count" ]; then
-        targen_f="-f${patch_count}"
+        targen_f=" -f${patch_count}"
     fi
     targen_c=()        # pre-conditioning profile path with filename
     if [ -n "$PRECONDITIONING_PROFILE_PATH" ]; then
@@ -1121,43 +1315,43 @@ specify_and_generate_target() {
     # For printtarg, if any variable for each argument is empty, then remove argument in command (empty parameter)
     printtarg_T=''     # target resolution
     if [ -n "$TARGET_RESOLUTION" ]; then
-        printtarg_T="-T${TARGET_RESOLUTION}"
+        printtarg_T=" -T${TARGET_RESOLUTION}"
     fi
     printtarg_p=''     # paper size
     if [ -n "$PAPER_SIZE" ]; then
-        printtarg_p="-p${PAPER_SIZE}"
+        printtarg_p=" -p${PAPER_SIZE}"
     fi
     printtarg_a=''        # multi cube surface steps
     if [ -n "$scale_patch_and_spacer" ]; then
-        printtarg_a="-a${scale_patch_and_spacer}"
+        printtarg_a=" -a${scale_patch_and_spacer}"
     fi
     printtarg_A=''        # multi cube surface steps
     if [ -n "$scale_spacer" ]; then
-        printtarg_A="-A${scale_spacer}"
+        printtarg_A=" -A${scale_spacer}"
     fi
     ## Removed defined layout seed for printtarg if not used
     printtarg_R=''        # layour seed
     if [ "$USE_LAYOUT_SEED_FOR_TARGET" = "true" ]; then
         if [ -n "$layout_seed" ]; then
-            printtarg_R="-R${layout_seed}"
+            printtarg_R=" -R${layout_seed}"
         fi
     fi
 
     if [ ! "$label" = "Custom" ]; then      # When menu choice other than Custom
         echo
         echo 'Generating target color values (.ti1 file)...'
-        echo "Command Used: targen ${COMMON_ARGUMENTS_TARGEN} ${targen_l} ${targen_e} ${targen_B} ${targen_g} ${targen_m} ${targen_M} ${targen_f} "${targen_c[@]}" "${name}""
+        echo "Command Used: targen ${COMMON_ARGUMENTS_TARGEN}${targen_l}${targen_e}${targen_B}${targen_g}${targen_m}${targen_M}${targen_f} "${targen_c[@]}" "${name}""
         # --- Generate target ONLY ONCE, after confirmation ---
-        targen ${COMMON_ARGUMENTS_TARGEN} ${targen_l} ${targen_e} ${targen_B} ${targen_g} ${targen_m} ${targen_M} ${targen_f} "${targen_c[@]}" "${name}" || {
+        targen ${COMMON_ARGUMENTS_TARGEN}${targen_l}${targen_e}${targen_B}${targen_g}${targen_m}${targen_M}${targen_f} "${targen_c[@]}" "${name}" || {
             echo "❌ targen failed. See log for details."
             return 1
         }
 
         echo
         echo 'Generating target(s) (.tif image(es) and .ti2 file)...'
-        echo "Command Used: printtarg ${COMMON_ARGUMENTS_PRINTTARG} ${inst_arg} ${printtarg_R} ${printtarg_T} ${printtarg_p} ${printtarg_a} ${printtarg_A} "${name}""
+        echo "Command Used: printtarg ${COMMON_ARGUMENTS_PRINTTARG}${inst_arg}${printtarg_R}${printtarg_T}${printtarg_p}${printtarg_a}${printtarg_A} "${name}""
         # Common printtarg command
-        printtarg ${COMMON_ARGUMENTS_PRINTTARG} ${inst_arg} ${printtarg_R} ${printtarg_T} ${printtarg_p} ${printtarg_a} ${printtarg_A} "${name}" || {
+        printtarg ${COMMON_ARGUMENTS_PRINTTARG}${inst_arg}${printtarg_R}${printtarg_T}${printtarg_p}${printtarg_a}${printtarg_A} "${name}" || {
             echo "❌ printtarg failed. See log for details."
             return 1
         }
@@ -1166,8 +1360,8 @@ specify_and_generate_target() {
         echo
         echo 'Generating target color values (.ti1 file)...'
         # --- Generate target ONLY ONCE, after confirmation ---
-        echo "Command Used: targen ${targen_command_custom} ${targen_l} "${targen_c[@]}" "${name}""
-        targen ${targen_command_custom} ${targen_l} "${targen_c[@]}" "${name}" || {
+        echo "Command Used: targen ${targen_command_custom}${targen_l} "${targen_c[@]}" "${name}""
+        targen ${targen_command_custom}${targen_l} "${targen_c[@]}" "${name}" || {
             echo "❌ targen failed. See log for details."
             return 1
         }
@@ -1213,7 +1407,12 @@ specify_and_generate_target() {
             open -a "$COLOR_SYNC_UTILITY_PATH" "${tif_files[@]}"
         else
             echo 'Please print the test chart(s) and make sure to disable color management.'
-            echo 'Use applications like ColorSync Utility or Adobe Color Print Utility.'
+            echo 'Use applications like ColorSync Utility, Adobe Color Print Utility or'
+            echo 'Photoshop etc.'
+            echo
+            echo 'If you want ColorSync Utility to automatically open all created test'
+            echo 'charts, open .ini file and set parameter'
+            echo "ENABLE_AUTO_OPEN_IMAGES_WITH_COLOR_SYNC_MAC to 'true'."
         fi
     else
         echo 'Please print the test chart(s) and make sure to disable color management.'
@@ -1250,16 +1449,16 @@ check_files_in_new_location_after_copy() {
     local missing_files=0
     # Check .ti2, applicable for action 2+3
     if [[ ! "$action" == "4" ]]; then
-        if [ ! -f "${PROFILE_FOLDER}/${name}.ti2" ]; then
-            echo "❌ Missing ${name}.ti2 in $PROFILE_FOLDER"
+        if [ ! -f "${profile_folder}/${name}.ti2" ]; then
+            echo "❌ Missing ${name}.ti2 in $profile_folder"
             missing_files=1
         fi
     fi
 
     # Check .ti3 if exists (only for ti3 selection)
     if [[ "$action" == "2" || "$action" == "4" ]]; then
-        if [ ! -f "${PROFILE_FOLDER}/${name}.ti3" ]; then
-            echo "❌ Missing ${name}.ti3 in $PROFILE_FOLDER"
+        if [ ! -f "${profile_folder}/${name}.ti3" ]; then
+            echo "❌ Missing ${name}.ti3 in $profile_folder"
             missing_files=1
         fi
     fi
@@ -1268,15 +1467,15 @@ check_files_in_new_location_after_copy() {
     if [[ ! "$action" == "4" ]]; then
         # Check TIFFs
         tif_files=()
-        if [ -f "${PROFILE_FOLDER}/${name}.tif" ]; then
-            tif_files+=("${PROFILE_FOLDER}/${name}.tif")
+        if [ -f "${profile_folder}/${name}.tif" ]; then
+            tif_files+=("${profile_folder}/${name}.tif")
         fi
-        for f in "${PROFILE_FOLDER}/${name}"_??.tif; do
+        for f in "${profile_folder}/${name}"_??.tif; do
             [ -f "$f" ] && tif_files+=("$f")
         done
 
         if [ ${#tif_files[@]} -eq 0 ]; then
-            echo "❌ No TIFF files found in $PROFILE_FOLDER"
+            echo "❌ No TIFF files found in $profile_folder"
             missing_files=1
         fi
     fi
@@ -1290,7 +1489,7 @@ check_files_in_new_location_after_copy() {
 
 
 select_ti2_file() {
-    # Open dialog to select .ti2 file, starting from folder where script is located (SCRIPT_DIR).
+    # Open dialog to select .ti2 file, starting from folder where script is located (script_dir).
     # Verify that selected file has .tif images with same name. If more than one image, filenames must end with _01, _02, ..., _03, etc.
     # Set found filenames to parameter tif_files[@]
     # Set filename selected to parameter ${name} and ${desc}
@@ -1302,7 +1501,7 @@ select_ti2_file() {
 try
     tell application "Finder"
         activate
-        set f to choose file with prompt "Select a .ti2 file" of type {"ti2"} default location POSIX file "${SCRIPT_DIR}/${PRE_MADE_TARGETS_FOLDER}"
+        set f to choose file with prompt "$dialog_title" of type {"ti2"} default location POSIX file "${script_dir}/${PRE_MADE_TARGETS_FOLDER}"
         set resultPath to POSIX path of f
     end tell
     tell application "Terminal"
@@ -1319,7 +1518,7 @@ EOF
         # Open Zenity file chooser dialog (Linux)
         ti2_path=$(zenity --file-selection \
             --title="Select a .ti2 file" \
-            --filename="${SCRIPT_DIR}/${PRE_MADE_TARGETS_FOLDER}/" \
+            --filename="${script_dir}/${PRE_MADE_TARGETS_FOLDER}/" \
             --file-filter="Target Information 2 data | *.ti2")
 
         # Return focus to terminal after file selection
@@ -1327,6 +1526,8 @@ EOF
             wmctrl -a "$(xdotool getactivewindow)" 2>/dev/null || true
         elif command -v xdotool >/dev/null 2>&1; then
             xdotool windowactivate "$(xdotool getactivewindow getwindowpid)" 2>/dev/null || true
+        else
+            echo "⚠️ Warning: Could not return focus to terminal (install wmctrl or xdotool)"
         fi
     fi
 
@@ -1345,7 +1546,7 @@ EOF
     name="$(basename "$ti2_path" .ti2)"
     desc="$name"
     # Folder where the selected file resides
-    SOURCE_FOLDER="$(dirname "$ti2_path")"
+    source_folder="$(dirname "$ti2_path")"
 
     echo "Selected .ti2 file: $ti2_path"
 
@@ -1353,11 +1554,11 @@ EOF
     tif_files=()
 
     # Single-page
-    if [ -f "${SOURCE_FOLDER}/${name}.tif" ]; then
-        tif_files+=("${SOURCE_FOLDER}/${name}.tif")
+    if [ -f "${source_folder}/${name}.tif" ]; then
+        tif_files+=("${source_folder}/${name}.tif")
     else
         # Multi-page
-        for f in "${SOURCE_FOLDER}/${name}"_??.tif; do
+        for f in "${source_folder}/${name}"_??.tif; do
             [ -f "$f" ] && tif_files+=("$f")
         done
     fi
@@ -1413,17 +1614,14 @@ EOF
             ;;
           2)
             # Overwrite existing
-            # Update PROFILE_FOLDER to folder of selected .ti2 file
-            PROFILE_FOLDER="$SOURCE_FOLDER"
-
-            # Move log to profile folder
-            move_log
+            # Update profile_folder to folder of selected .ti2 file
+            profile_folder="$source_folder"
 
             echo "✅ Working folder for profile:"
-            echo "$PROFILE_FOLDER"
+            echo "$profile_folder"
             # Change working directory
-            cd "$PROFILE_FOLDER" || {
-                echo "❌ Failed to change directory to $PROFILE_FOLDER"
+            cd "$profile_folder" || {
+                echo "❌ Failed to change directory to $profile_folder"
                 return 1
             }
             break  # exit submenu loop
@@ -1440,7 +1638,7 @@ EOF
 }
 
 select_ti3_file() {
-    # Open dialog to select .ti3 file, starting from folder where script is located (SCRIPT_DIR).
+    # Open dialog to select .ti3 file, starting from folder where script is located (script_dir).
     # Verify that selected file has .ti2 file and .tif images with same name. If more than one image, filenames must end with _01, _02, ..., _03, etc.
     # Set found filenames to parameter tif_files[@]
     # Set filename selected to parameter ${name} and ${desc}
@@ -1452,7 +1650,7 @@ select_ti3_file() {
 try
     tell application "Finder"
         activate
-        set f to choose file with prompt "Select a .ti3 file" of type {"ti3"} default location POSIX file "${SCRIPT_DIR}/${CREATED_PROFILES_FOLDER}"
+        set f to choose file with prompt "$dialog_title" of type {"ti3"} default location POSIX file "${script_dir}/${CREATED_PROFILES_FOLDER}"
         set resultPath to POSIX path of f
     end tell
     tell application "Terminal"
@@ -1469,7 +1667,7 @@ EOF
         # Open Zenity file chooser dialog (Linux)
         ti3_path=$(zenity --file-selection \
             --title="Select a .ti3 file" \
-            --filename="${SCRIPT_DIR}/${CREATED_PROFILES_FOLDER}/" \
+            --filename="${script_dir}/${CREATED_PROFILES_FOLDER}/" \
             --file-filter="Target Information 3 data | *.ti3")
 
         # Return focus to terminal after file selection
@@ -1477,6 +1675,8 @@ EOF
             wmctrl -a "$(xdotool getactivewindow)" 2>/dev/null || true
         elif command -v xdotool >/dev/null 2>&1; then
             xdotool windowactivate "$(xdotool getactivewindow getwindowpid)" 2>/dev/null || true
+        else
+            echo "⚠️ Warning: Could not return focus to terminal (install wmctrl or xdotool)"
         fi
     fi
 
@@ -1495,12 +1695,12 @@ EOF
     name="$(basename "$ti3_path" .ti3)"
     desc="$name"
     # Folder where the selected file resides
-    SOURCE_FOLDER="$(dirname "$ti3_path")"
+    source_folder="$(dirname "$ti3_path")"
 
     echo "Selected .ti3 file: $ti3_path"
 
     # Verify .ti2 exists
-    if [ ! -f "${SOURCE_FOLDER}/${name}.ti2" ]; then
+    if [ ! -n "$name" ] || [ ! -f "${source_folder}/${name}.ti2" ]; then
         echo "❌ Matching .ti2 file not found for '${name}'."
         return 1
     fi
@@ -1509,11 +1709,11 @@ EOF
     tif_files=()
 
     # Single-page
-    if [ -f "${SOURCE_FOLDER}/${name}.tif" ]; then
-        tif_files+=("${SOURCE_FOLDER}/${name}.tif")
+    if [ -f "${source_folder}/${name}.tif" ]; then
+        tif_files+=("${source_folder}/${name}.tif")
     else
         # Multi-page
-        for f in "${SOURCE_FOLDER}/${name}"_??.tif; do
+        for f in "${source_folder}/${name}"_??.tif; do
             [ -f "$f" ] && tif_files+=("$f")
         done
     fi
@@ -1569,17 +1769,14 @@ EOF
             ;;
           2)
             # Overwrite existing
-            # Update PROFILE_FOLDER to folder of selected .ti3 file
-            PROFILE_FOLDER="$SOURCE_FOLDER"
-
-            # Move log to profile folder
-            move_log
+            # Update profile_folder to folder of selected .ti3 file
+            profile_folder="$source_folder"
 
             echo "✅ Working folder for profile:"
-            echo "$PROFILE_FOLDER"
+            echo "$profile_folder"
             # Change working directory
-            cd "$PROFILE_FOLDER" || {
-                echo "❌ Failed to change directory to $PROFILE_FOLDER"
+            cd "$profile_folder" || {
+                echo "❌ Failed to change directory to $profile_folder"
                 return 1
             }
             break  # exit submenu loop
@@ -1596,7 +1793,7 @@ EOF
 }
 
 select_ti3_file_only() {
-    # Open dialog to select .ti3 file, starting from folder where script is located (SCRIPT_DIR).
+    # Open dialog to select .ti3 file, starting from folder where script is located (script_dir).
     # Verify that selected file has .ti3 file
     # Set found filenames to parameter tif_files[@]
     # Set filename selected to parameter ${name} and ${desc}
@@ -1608,7 +1805,7 @@ select_ti3_file_only() {
 try
     tell application "Finder"
         activate
-        set f to choose file with prompt "Select a .ti3 file" of type {"ti3"} default location POSIX file "${SCRIPT_DIR}/${CREATED_PROFILES_FOLDER}"
+        set f to choose file with prompt "$dialog_title" of type {"ti3"} default location POSIX file "${script_dir}/${CREATED_PROFILES_FOLDER}"
         set resultPath to POSIX path of f
     end tell
     tell application "Terminal"
@@ -1625,7 +1822,7 @@ EOF
         # Open Zenity file chooser dialog (Linux)
         ti3_path=$(zenity --file-selection \
             --title="Select a .ti3 file" \
-            --filename="${SCRIPT_DIR}/${CREATED_PROFILES_FOLDER}/" \
+            --filename="${script_dir}/${CREATED_PROFILES_FOLDER}/" \
             --file-filter="Target Information 3 data | *.ti3")
 
         # Return focus to terminal after file selection
@@ -1633,6 +1830,8 @@ EOF
             wmctrl -a "$(xdotool getactivewindow)" 2>/dev/null || true
         elif command -v xdotool >/dev/null 2>&1; then
             xdotool windowactivate "$(xdotool getactivewindow getwindowpid)" 2>/dev/null || true
+        else
+            echo "⚠️ Warning: Could not return focus to terminal (install wmctrl or xdotool)"
         fi
     fi
 
@@ -1651,12 +1850,12 @@ EOF
     name="$(basename "$ti3_path" .ti3)"
     desc="$name"
     # Folder where the selected file resides
-    SOURCE_FOLDER="$(dirname "$ti3_path")"
+    source_folder="$(dirname "$ti3_path")"
 
     # only for action 5 (perform sanity check)
     if [ "$action" = "5" ]; then
         # Verify .icc exists
-        if [ ! -f "${SOURCE_FOLDER}/${name}.icc" ]; then
+        if [ ! -n "$name" ] || [ ! -f "${source_folder}/${name}.icc" ]; then
             echo "❌ Matching .icc file not found for '${name}'."
             return 1
         fi
@@ -1665,17 +1864,14 @@ EOF
     echo "Selected .ti3 file: $ti3_path"
 
     # Overwrite existing
-    # Update PROFILE_FOLDER to folder of selected .ti3 file
-    PROFILE_FOLDER="$SOURCE_FOLDER"
-
-    # Move log to profile folder
-    move_log
+    # Update profile_folder to folder of selected .ti3 file
+    profile_folder="$source_folder"
 
     echo "✅ Working folder for profile:"
-    echo "$PROFILE_FOLDER"
+    echo "$profile_folder"
     # Change working directory
-    cd "$PROFILE_FOLDER" || {
-        echo "❌ Failed to change directory to $PROFILE_FOLDER"
+    cd "$profile_folder" || {
+        echo "❌ Failed to change directory to $profile_folder"
         return 1
     }
 
@@ -1721,17 +1917,14 @@ EOF
                 ;;
             2)
                 # Overwrite existing
-                # Update PROFILE_FOLDER to folder of selected .ti3 file
-                PROFILE_FOLDER="$SOURCE_FOLDER"
-
-                # Move log to profile folder
-                move_log
+                # Update profile_folder to folder of selected .ti3 file
+                profile_folder="$source_folder"
 
                 echo "✅ Working folder for profile:"
-                echo "$PROFILE_FOLDER"
+                echo "$profile_folder"
                 # Change working directory
-                cd "$PROFILE_FOLDER" || {
-                    echo "❌ Failed to change directory to $PROFILE_FOLDER"
+                cd "$profile_folder" || {
+                    echo "❌ Failed to change directory to $profile_folder"
                     return 1
                 }
                 break  # exit submenu loop
@@ -1753,75 +1946,105 @@ show_de_reference() {
     echo
     echo
     echo "Below is an overview of expected accuracy of profiles."
-    echo "If dE values are too large it is  recommended to remeasure"
-    echo "patches or whole target."
     echo
-    echo "────────────────────────────────────────────────────────────"
-    echo " ΔE2000 Color Accuracy — Quick Reference (Profiled Printers)"
-    echo "────────────────────────────────────────────────────────────"
+    echo "──────────────────────────────────────────────────────────────────────────────"
+    echo "Delta E 2000 (Real-World Accuracy After Profiling)"
+    echo "──────────────────────────────────────────────────────────────────────────────"
+    echo "                             Typical       Typical          Typical"
+    echo "Printer Class                ΔE2000        Substrates       Use Cases"
+    echo "──────────────────────────────────────────────────────────────────────────────"
+    echo "Professional Photo Inkjet    Avg 0.5-1.5   Gloss,           Gallery,"
+    echo "  Example Models:            95% 1.5-2.5   baryta,          contract proofing"
+    echo "  Epson P700/P900/P9570,     Max 3-5       fine art"
+    echo "  Canon PRO-1000, HP Z9+"
     echo
-    printf "%-32s %8s %8s %8s\n" " Printer type"  "Avg"   "95%"   "Max"
-    echo "────────────────────────────────────────────────────────────"
-    printf "%-34s %10s %10s %8s\n" \
-        " Professional photo inkjet" \
-        "0.5–1.2" \
-        "1.5–2.5" \
-        "3–5"
-    echo "   Examples:"
-    echo "     • Epson SureColor P700 / P900 / P9570"
-    echo "     • Canon PRO-1000 / PRO-2100 / PRO-4100"
-    echo "     • HP DesignJet Z9+ / Z6 PostScript"
+    echo "Prosumer / High-End Inkjet   Avg 0.8-2.0   Premium gloss,   Serious hobby,"
+    echo "  Example Models:            95% 2.0-3.5   semi-gloss,      small studio"
+    echo "  Epson P600/P800,           Max 4-7"
+    echo "  Canon PRO-200/300"
     echo
-    printf "%-34s %10s %10s %8s\n" \
-        " Prosumer / high-end inkjet" \
-        "0.8–1.8" \
-        "2.0–3.5" \
-        "4–7"
-    echo "   Examples:"
-    echo "     • Epson SureColor P600 / P800"
-    echo "     • Canon PIXMA PRO-200 / PRO-300"
+    echo "Consumer Home Inkjet         Avg 1.5-3.0   Glossy, matte,   Casual photo,"
+    echo "  Example Models:            95% 3.0-5.0   plain            mixed docs"
+    echo "  Canon PIXMA TS/MG,         Max 6-10"
+    echo "  Epson EcoTank/Expression"
     echo
-    printf "%-34s %10s %10s %8s\n" \
-        " Consumer home inkjet" \
-        "1.5–3.0" \
-        "3.0–5.0" \
-        "6–10"
-    echo "   Examples:"
-    echo "     • Canon PIXMA TS / MG series"
-    echo "     • Epson Expression / EcoTank series"
+    echo "Professional Laser /         Avg 1.5-2.5   Coated stock,    Corporate,"
+    echo "Production                   95% 3.0-4.0   proof paper      marketing,"
+    echo "  Example Models:            Max 5-7                        light proof"
+    echo "  Xerox PrimeLink,"
+    echo "  Canon imagePRESS"
+    echo "  Ricoh Pro C"
     echo
-    printf "%-34s %10s %10s %8s\n" \
-        " Professional laser printer" \
-        "1.5–2.5" \
-        "3.0–4.0" \
-        "5–7"
-    echo "   Examples:"
-    echo "     • Xerox Versant / PrimeLink"
-    echo "     • Canon imagePRESS C series"
-    echo "     • Ricoh Pro C series"
+    echo "Office / Consumer Laser      Avg 2.5-5.0   Office bond,     Business docs,"
+    echo "  Example Models:            95% 4.0-7.0   coated office    presentations"
+    echo "  HP Color LaserJet Pro,     Max 7-12+"
+    echo "  Brother HL/MFC"
+    echo "  Canon i-SENSYS"
     echo
-    printf "%-34s %10s %10s %8s\n" \
-        " Office / consumer laser" \
-        "2.5–5.0" \
-        "4.0–7.0" \
-        "7–12+"
-    echo "   Examples:"
-    echo "     • HP Color LaserJet Pro"
-    echo "     • Brother HL / MFC color series"
-    echo "     • Canon i-SENSYS / MF color series"
+    echo "──────────────────────────────────────────────────────────────────────────────"
     echo
-    echo "────────────────────────────────────────────────────────────"
-    echo
-    echo " Notes:"
+    echo "Notes:"
     echo "   • Values assume proper ICC profiling and correct media settings"
     echo "   • Avg = overall accuracy, 95% = typical worst case, Max = outliers"
     echo "   • Lower ΔE = higher color accuracy"
     echo "   • ΔE < 1.0 is generally considered visually indistinguishable"
     echo "   • Source of these numbers: https://ChatGPT.com"
     echo
-    echo
 }
 
+improving_accuracy() {
+    echo
+    echo
+    echo
+    echo "────────────────────────────────────────────────────────────────"
+    echo "Tips on how to improve accuracy of a profile"
+    echo "────────────────────────────────────────────────────────────────"
+    echo
+    echo "  1. The top-most lines in the file '*_sanity_check.txt, created'"
+    echo "     after a profile is made, are the patches with higest ΔE values."
+    echo
+    echo "  2. If ΔE values are too large it is recommended to remeasure."
+    echo "      - ΔE > 2 is regarded as clearly visible difference and"
+    echo "         should be remeasured (depending on printer type, see"
+    echo "         Quick Reference table below or menu option 8)."
+    echo "      - ΔE < 1 is considered visually indistinguishable."
+    echo
+    echo "  3. The 'Largest ΔE' or 'max.' value is an indicator that some"
+    echo "     patches should be remeasured."
+    echo
+    echo "  4. When wanting to remeasure patches to improve overall profile"
+    echo "     quality, do the following: "
+    echo "      a. Open file '*_sanity_check.txt' of a created printer"
+    echo "         profile and identify which sheets have largest error."
+    echo "         Look at patch ID and find column label on target chart."
+    echo "      b. In main menu, chose option 3, then select the target used"
+    echo "         for your profile by selecting"
+    echo "         the .ti2 file (files and targets should be in the folder"
+    echo "         where your .icc is stored)"
+    echo "      c. Select option '1. Create new profile (copy files into"
+    echo "         new folder)'. Do not overwrite."
+    echo "      d. Start reading only those strips where high error has been"
+    echo "         identified. "
+    echo "         Press 'f' to move forward, or 'b' to move back one strip"
+    echo "         at a time while reading."
+    echo "      e. When you have read the appropriate target strips, select"
+    echo "         ‘d’ to save and exit."
+    echo "      f. Open the created .ti3 file, and also the original .ti3"
+    echo "         for your profile to be improved."
+    echo "         The new .ti3 file has data for read patches below the tag"
+    echo "         'BEGIN_DATA', and contain only the lines you re-read."
+    echo "      g. In the original .ti3 file, search for the patch IDs to"
+    echo "         identify the lines to replace."
+    echo "         Copy one data line at a time from the new .ti3 file, and"
+    echo "         replace the line with same ID in the original .ti3 file."
+    echo "         Then save file."
+    echo "      h. Now choose option 4 in main menu. Select the updated .ti3"
+    echo "         file. Now a new .icc profile and and sanity report is"
+    echo "         created. Study results and see if the profile is improved."
+    echo
+    echo "────────────────────────────────────────────────────────────────"
+    echo
+}
 sanity_check() {
     echo
     echo 'Performing sanity check (creating .txt file)...'
@@ -1840,20 +2063,25 @@ sanity_check() {
     } >> "${name}_sanity_check.txt"
 
     # Extract delta E values from lines starting with "["
-    declare -a delta_e_values=()
-    
+    local -a delta_e_values=()
+    local largest smallest range total_patches index array_length
+    local pos_99 pos_98 pos_95 pos_90
+    local percentile_99 percentile_98 percentile_95 percentile_90
+    local count_lt_1 count_lt_2 count_lt_3
+    local percent_lt_1 percent_lt_2 percent_lt_3
+
     while IFS= read -r line; do
         # match lines that start with [decimal] followed by space and @
         if [[ "$line" =~ ^\[([0-9]+\.[0-9]+)\].*@ ]]; then
             delta_e_values+=("${BASH_REMATCH[1]}")
         fi
     done < "${name}_sanity_check.txt"
-    
+
     if [ ${#delta_e_values[@]} -eq 0 ]; then
         echo "⚠️ No delta E values found in sanity check file"
         return 1
     fi
-    
+
     # DEBUG!!: show first few values
     #echo "Found ${#delta_e_values[@]} delta E values"
     #echo "First few values: ${delta_e_values[@]:0:5}"
@@ -1861,11 +2089,11 @@ sanity_check() {
     # Since profcheck -s already sorts from highest to lowest:
     # First element is largest, last element is smallest
     largest="${delta_e_values[0]}"
-    
+
     # Get last element safely
     last_index=$((${#delta_e_values[@]} - 1))
     smallest="${delta_e_values[$last_index]}"
-    
+
     # Calculate range using awk (more reliable than bc)
     range=$(awk "BEGIN {printf \"%.6f\", $largest - $smallest}")
 
@@ -1877,19 +2105,41 @@ sanity_check() {
     pos_98=$(awk "BEGIN {printf \"%.0f\", $total_patches * 0.98}")
     pos_95=$(awk "BEGIN {printf \"%.0f\", $total_patches * 0.95}")
     pos_90=$(awk "BEGIN {printf \"%.0f\", $total_patches * 0.90}")
-    
+
     # Get values at these positions from the end of array (since sorted highest to lowest)
     # 99th percentile should be near smallest values, so access from end
-    percentile_99=${delta_e_values[$((total_patches - pos_99))]}
-    percentile_98=${delta_e_values[$((total_patches - pos_98))]}
-    percentile_95=${delta_e_values[$((total_patches - pos_95))]}
-    percentile_90=${delta_e_values[$((total_patches - pos_90))]}
-    
+    array_length=${#delta_e_values[@]}
+
+    index=$(( total_patches - pos_99 ))
+    if (( index >= 0 && index < array_length )); then
+        percentile_99="${delta_e_values[index]}"
+    else
+        percentile_99="N/A"
+    fi
+    index=$(( total_patches - pos_98 ))
+    if (( index >= 0 && index < array_length )); then
+        percentile_98="${delta_e_values[index]}"
+    else
+        percentile_98="N/A"
+    fi
+    index=$(( total_patches - pos_95 ))
+    if (( index >= 0 && index < array_length )); then
+        percentile_95="${delta_e_values[index]}"
+    else
+        percentile_95="N/A"
+    fi
+    index=$(( total_patches - pos_90 ))
+    if (( index >= 0 && index < array_length )); then
+        percentile_90="${delta_e_values[index]}"
+    else
+        percentile_90="N/A"
+    fi
+
     # Count values below thresholds
     count_lt_1=0
     count_lt_2=0
     count_lt_3=0
-    
+
     for value in "${delta_e_values[@]}"; do
         # Compare using awk for floating point comparison
         if (( $(awk "BEGIN {print ($value < 1.0)}") )); then
@@ -1902,12 +2152,12 @@ sanity_check() {
             ((count_lt_3++))
         fi
     done
-    
+
     # Calculate percentages
     percent_lt_1=$(awk "BEGIN {printf \"%.1f\", ($count_lt_1 / $total_patches) * 100}")
     percent_lt_2=$(awk "BEGIN {printf \"%.1f\", ($count_lt_2 / $total_patches) * 100}")
     percent_lt_3=$(awk "BEGIN {printf \"%.1f\", ($count_lt_3 / $total_patches) * 100}")
-    
+
     # Display results
     echo
     echo "Delta E Range Analysis:"
@@ -1925,7 +2175,7 @@ sanity_check() {
     echo "  Percent of patches with ΔE<2.0: ${percent_lt_2}%"
     echo "  Percent of patches with ΔE<3.0: ${percent_lt_3}%"
     echo
-    
+
     # Append results to sanity check file
     {
         echo
@@ -1946,7 +2196,7 @@ sanity_check() {
         echo "================================"
         echo
     } >> "${name}_sanity_check.txt"
-    
+
     profcheck -v -k "${name}.ti3" "${name}.icc" || {
         echo
         echo "❌ profcheck failed. See log for details."
@@ -1961,13 +2211,50 @@ sanity_check() {
     }
 
     echo
-    echo "Detailed sanity check stored in '${name}_sanity_check.txt'."
-    echo 'Sanity check complete.'
+    echo "Sanity Check Complete"
+    echo "Detailed sanity check stored in:"
+    echo "'${name}_sanity_check.txt'."
     echo
-    read -p 'Press enter to return to the main menu...'
-    echo
-    echo
-    show_de_reference
+    while true; do
+        echo
+        echo
+        echo "─────────────────────────────────────────────────────────────────────────"
+        echo "What would you like to do?"
+        echo "─────────────────────────────────────────────────────────────────────────"
+        echo
+        echo "1) Show tips on how to improve accuracy of a profile"
+        echo "2) Show ΔE2000 Color Accuracy — Quick Reference"
+        echo "3) Return to main menu"
+        echo
+        echo "─────────────────────────────────────────────────────────────────────────"
+        echo
+        read -r -n 1 -p 'Enter your choice [1-3]: ' choice
+        echo
+        
+        case "$choice" in
+            1)
+                echo
+                improving_accuracy
+                echo
+                read -p 'Press enter to continue...'
+                ;;
+            2)
+                echo
+                show_de_reference
+                echo
+                read -p 'Press enter to continue...'
+                ;;
+            3)
+                echo
+                echo "Returning to main menu..."
+                break
+                ;;
+            *)
+                echo
+                echo "❌ Invalid choice. Please enter 1, 2, or 3."
+                ;;
+        esac
+    done
 }
 
 # Helper for stat command differences (Linux vs macOS)
@@ -1984,7 +2271,7 @@ perform_measurement_and_profile_creation() {
     # For chartread, if any variable for each argument is empty, then remove argument in command (empty parameter)
     chartread_T=''        # patch strip consistency
     if [ -n "$STRIP_PATCH_CONSISTENSY_TOLERANCE" ]; then
-        chartread_T="-T${STRIP_PATCH_CONSISTENSY_TOLERANCE}"
+        chartread_T=" -T${STRIP_PATCH_CONSISTENSY_TOLERANCE}"
     fi
 
     echo
@@ -2017,12 +2304,20 @@ perform_measurement_and_profile_creation() {
 
     common_text_tips() {
         echo "Tips:"
+        echo "     - Default for reading targets using ArgyllCMS is to start from"
+        echo "       column A, from the side where the column letters are, and then"
+        echo "       read to the end of the other side of the page."
+        echo "       If not done this way, “unexpected high deviation” message may"
+        echo "       appear frequently."
+        echo "     - Enabling bi-directional strip reading (removing -B flag and"
+        echo "       adding -b) may cause false indentification of strips when read,"
+        echo "       thus it is recommended to not enable this feature for beginners."
         echo "     - Scanning speed of more than 7 sec per strip reduces frequent"
-        echo "       re-reading due to inconsistent results and increases quality."
-        echo "     - If frequent inconsistent results try altering"
-        echo "       patch consistency tolerance."
+        echo "       re-reading due to inconsistent results, and increases quality."
+        echo "     - If frequent inconsistent results try altering patch consistency"
+        echo "       tolerance parameter in setup (or .ini file)."
         echo "     - Save progress once in a while with 'd' and then"
-        echo "       resume measuring with option 2 of main manu."
+        echo "       resume measuring with option 2 of main menu."
     }
 
     local ti3_file="${name}.ti3"
@@ -2033,11 +2328,11 @@ perform_measurement_and_profile_creation() {
             ti3_mtime_before=$(file_mtime "$ti3_file")
         fi
 
-        echo "Command Used: chartread ${COMMON_ARGUMENTS_CHARTREAD} ${chartread_T} "${name}""
         echo
         common_text_tips
         echo
-        chartread ${COMMON_ARGUMENTS_CHARTREAD} -r ${chartread_T} "${name}" || {
+        echo "Command Used: chartread ${COMMON_ARGUMENTS_CHARTREAD} -r${chartread_T} "${name}""
+        chartread ${COMMON_ARGUMENTS_CHARTREAD} -r${chartread_T} "${name}" || {
             echo
             echo "❌ chartread failed. See log for details."
             echo
@@ -2057,11 +2352,11 @@ perform_measurement_and_profile_creation() {
         fi
 
     else # Normal chartread
-        echo "Command Used: chartread ${COMMON_ARGUMENTS_CHARTREAD} ${chartread_T} "${name}""
         echo
         common_text_tips
         echo
-        chartread ${COMMON_ARGUMENTS_CHARTREAD} ${chartread_T} "${name}" || {
+        echo "Command Used: chartread ${COMMON_ARGUMENTS_CHARTREAD}${chartread_T} "${name}""
+        chartread ${COMMON_ARGUMENTS_CHARTREAD}${chartread_T} "${name}" || {
             echo
             echo "❌ chartread failed. See log for details."
             echo
@@ -2086,11 +2381,11 @@ perform_measurement_and_profile_creation() {
     fi
     colprof_l=''        # ink limit
     if [ -n "$INK_LIMIT" ]; then
-        colprof_l="-l${INK_LIMIT}"
+        colprof_l=" -l${INK_LIMIT}"
     fi
     colprof_r=''        # Average deviation / smooting
     if [ -n "$PROFILE_SMOOTING" ]; then
-        colprof_r="-r${PROFILE_SMOOTING}"
+        colprof_r=" -r${PROFILE_SMOOTING}"
     fi
 
     echo
@@ -2101,8 +2396,8 @@ perform_measurement_and_profile_creation() {
         echo
         echo
         echo "Starting profile creation (read .ti3 file and generate .icc file)..."
-        echo "Command Used: colprof ${COMMON_ARGUMENTS_COLPROF} ${colprof_l} ${colprof_r} "${colprof_S[@]}" -D"${desc}" "${name}""
-        colprof ${COMMON_ARGUMENTS_COLPROF} ${colprof_l} ${colprof_r} "${colprof_S[@]}" -D"${desc}" "${name}" || {
+        echo "Command Used: colprof ${COMMON_ARGUMENTS_COLPROF}${colprof_l}${colprof_r} "${colprof_S[@]}" -D "${desc}" "${name}""
+        colprof ${COMMON_ARGUMENTS_COLPROF}${colprof_l}${colprof_r} "${colprof_S[@]}" -D "${desc}" "${name}" || {
             echo
             echo "❌ colprof failed. See log for details."
             echo
@@ -2133,18 +2428,18 @@ create_profile_from_existing() {
     fi
     colprof_l=''        # ink limit
     if [ -n "$INK_LIMIT" ]; then
-        colprof_l="-l${INK_LIMIT}"
+        colprof_l=" -l${INK_LIMIT}"
     fi
     colprof_r=''        # Average deviation / smooting
     if [ -n "$PROFILE_SMOOTING" ]; then
-        colprof_r="-r${PROFILE_SMOOTING}"
+        colprof_r=" -r${PROFILE_SMOOTING}"
     fi
 
     echo
     echo
     echo "Starting profile creation (read .ti3 file and generate .icc file)..."
-    echo "Command Used: colprof ${COMMON_ARGUMENTS_COLPROF} ${colprof_l} ${colprof_r} "${colprof_S[@]}" -D"${desc}" "${name}""
-    colprof ${COMMON_ARGUMENTS_COLPROF} ${colprof_l} ${colprof_r} "${colprof_S[@]}" -D"${desc}" "${name}" || {
+    echo "Command Used: colprof ${COMMON_ARGUMENTS_COLPROF}${colprof_l}${colprof_r} "${colprof_S[@]}" -D "${desc}" "${name}""
+    colprof ${COMMON_ARGUMENTS_COLPROF}${colprof_l}${colprof_r} "${colprof_S[@]}" -D "${desc}" "${name}" || {
         echo
         echo "❌ colprof failed. See log for details."
         echo
@@ -2176,11 +2471,12 @@ edit_setup_parameters() {
 
         echo
         echo
+        echo
         echo "─────────────────────────────────────────────────────────────────────"
-        echo " Change Setup Parameters - Sub-Menu "
+        echo "Change Setup Parameters - Sub-Menu "
         echo "─────────────────────────────────────────────────────────────────────"
         echo
-        echo "In this menu some variables stored in the $SETUP_FILE file "
+        echo "In this menu some variables stored in the $setup_file file "
         echo "can be modified. For other parameters modify the file in a text editor."
         echo
         echo "What parameter do you want to modify?"
@@ -2221,7 +2517,7 @@ edit_setup_parameters() {
                 set_icc_profile_parameter || {
                     echo "Returning to setup menu..."
                 }
-                source "$SETUP_FILE"
+                source "$setup_file"
                 continue
                 ;;
 
@@ -2232,7 +2528,7 @@ edit_setup_parameters() {
                 set_precond_profile_parameter || {
                     echo "Returning to setup menu..."
                 }
-                source "$SETUP_FILE"
+                source "$setup_file"
                 continue
                 echo
                 ;;
@@ -2246,10 +2542,10 @@ edit_setup_parameters() {
                     continue
                 fi
 
-                sed_inplace "s|^STRIP_PATCH_CONSISTENSY_TOLERANCE=.*|STRIP_PATCH_CONSISTENSY_TOLERANCE='${value}'|" "$SETUP_FILE"
+                sed_inplace "s|^STRIP_PATCH_CONSISTENSY_TOLERANCE=.*|STRIP_PATCH_CONSISTENSY_TOLERANCE='${value}'|" "$setup_file"
 
                 echo "✅ Updated STRIP_PATCH_CONSISTENSY_TOLERANCE to $value"
-                source "$SETUP_FILE"
+                source "$setup_file"
                 echo
                 continue
                 ;;
@@ -2261,9 +2557,9 @@ edit_setup_parameters() {
 
                 case "$value" in
                     A4|Letter)
-                        sed_inplace "s|^PAPER_SIZE=.*|PAPER_SIZE='${value}'|" "$SETUP_FILE"
+                        sed_inplace "s|^PAPER_SIZE=.*|PAPER_SIZE='${value}'|" "$setup_file"
                         echo "✅ Updated PAPER_SIZE to $value"
-                        source "$SETUP_FILE"
+                        source "$setup_file"
                         ;;
                     *)
                         echo "❌ Invalid paper size."
@@ -2282,10 +2578,10 @@ edit_setup_parameters() {
                     continue
                 fi
 
-                sed_inplace "s|^INK_LIMIT=.*|INK_LIMIT='${value}'|" "$SETUP_FILE"
+                sed_inplace "s|^INK_LIMIT=.*|INK_LIMIT='${value}'|" "$setup_file"
 
                 echo "✅ Updated INK_LIMIT to $value"
-                source "$SETUP_FILE"
+                source "$setup_file"
                 echo
                 continue
                 ;;
@@ -2294,8 +2590,9 @@ edit_setup_parameters() {
                 while true; do
                     echo
                     echo
+                    echo
                     echo "─────────────────────────────────────────────────────────────────────"
-                    echo " Specify Profile Description / File Name"
+                    echo "Specify Profile Description / File Name"
                     echo "─────────────────────────────────────────────────────────────────────"
                     echo
                     echo 'The following is highly recommended to include:'
@@ -2326,13 +2623,13 @@ edit_setup_parameters() {
                     break
                 done
 
-                sed_inplace "s|^EXAMPLE_FILE_NAMING=.*|EXAMPLE_FILE_NAMING='${value}'|" "$SETUP_FILE"
+                sed_inplace "s|^EXAMPLE_FILE_NAMING=.*|EXAMPLE_FILE_NAMING='${value}'|" "$setup_file"
 
                 echo
                 echo "✅ Updated file naming convention example to:"
                 echo "$value"
                 echo
-                source "$SETUP_FILE"
+                source "$setup_file"
                 continue
                 ;;
 
@@ -2357,19 +2654,29 @@ edit_setup_parameters() {
 main_menu() {
     while true; do
         # --- Load setup file -------------------------------------------------
-        SETUP_FILE="${SCRIPT_DIR}/Argyll_Printer_Profiler_setup.ini"
+        setup_file="${script_dir}/Argyll_Printer_Profiler_setup.ini"
         # Load variables
-        source "$SETUP_FILE"
+        source "$setup_file"
+        # Clear global variables
+        source_folder=""
+        dialog_title=""
+        name=""
+        desc=""
+        action=""
+        profile_folder=""
+        new_name=""
+        ti3_mtime_before=""
+        ti3_mtime_after=""
 
         echo
         echo
-        echo "─────────────────────────────────────────────────────────────────────"
-        echo " Printer Profiling — Main Menu"
-        echo "─────────────────────────────────────────────────────────────────────"
-        echo ' General Notes: '
-        echo '   1. Existing ti1/ti2/ti3/icc and target image (.tif) filenames'
-        echo '      must be match.'
-        echo '   2. If more than one target image, filenames end with _01, _02, etc.'
+        echo
+        echo "─────────────────────────────────────────────────────────────────────────"
+        echo "Printer Profiling — Main Menu"
+        echo "─────────────────────────────────────────────────────────────────────────"
+        echo 'General Notes: '
+        echo '   1. Existing ti1/ti2/ti3/icc and target image (.tif) filenames must match.'
+        echo '   2. If more than one target image, filenames must end with _01, _02, etc.'
         echo
         echo
         echo 'What action do you want to perform?'
@@ -2397,12 +2704,14 @@ main_menu() {
         echo
         echo '6: Change setup parameters'
         echo
-        echo '7: Show ΔE2000 Color Accuracy — Quick Reference'
+        echo '7: Show tips on how to improve accuracy of a profile'
         echo
-        echo '8: Exit script'
-        echo "─────────────────────────────────────────────────────────────────────"
+        echo '8: Show ΔE2000 Color Accuracy — Quick Reference'
         echo
-        read -r -n 1 -p 'Enter your choice [1–8]: ' answer
+        echo '9: Exit script'
+        echo "─────────────────────────────────────────────────────────────────────────"
+        echo
+        read -r -n 1 -p 'Enter your choice [1–9]: ' answer
         echo
 
         case $answer in
@@ -2436,9 +2745,10 @@ main_menu() {
           2)
             action='2'
             # Call functions
+            dialog_title="Select an existing .ti3 file to re-read/resume measuring target patches."
             echo
             echo
-            echo "Select an existing .ti3 file to re-read/resume measuring target patches."
+            echo "$dialog_title"
             echo
             select_ti3_file || {
                 echo "Operation aborted. Returning to main menu..."
@@ -2457,9 +2767,10 @@ main_menu() {
           3)
             action='3'
             # Call functions
+            dialog_title="Select an existing .ti2 file to measure target patches."
             echo
             echo
-            echo "Select an existing .ti2 file to measure target patches."
+            echo "$dialog_title"
             echo
             select_ti2_file || {
                 echo "Operation aborted. Returning to main menu..."
@@ -2478,9 +2789,10 @@ main_menu() {
           4)
             action='4'
             # Call functions
+            dialog_title="Select an existing completed .ti3 file to create .icc profile with."
             echo
             echo
-            echo "Select an existing .ti3 file to create .icc profile with. The .ti3 file must be complete."
+            echo "$dialog_title"
             echo
             select_ti3_file_only || {
                 echo "Operation aborted. Returning to main menu..."
@@ -2499,9 +2811,11 @@ main_menu() {
           5)
             action='5'
             # Call functions
+
+            dialog_title="Select an existing .ti3 file that has a matching .icc profile."
             echo
             echo
-            echo "Select an existing .ti3 file that has a matching .icc with same name."
+            echo "$dialog_title"
             echo
             select_ti3_file_only || {
                 echo "Operation aborted. Returning to main menu..."
@@ -2520,19 +2834,28 @@ main_menu() {
             ;;
           7)
             action='7'
-            show_de_reference
+            improving_accuracy
             read -p 'Press enter to return to the main menu...'
             continue   # <-- go back to menu
             ;;
           8)
             action='8'
+            show_de_reference
+            read -p 'Press enter to return to the main menu...'
+            continue   # <-- go back to menu
+            ;;
+          9)
+            action='9'
             echo
-            echo "Closing Terminal..."
-            if [[ "$PLATFORM" == "macos" ]]; then
-                osascript -e 'tell application "Terminal" to close front window' & exit 0
-            else
-                exit 0
+            echo "Exiting script..."
+            
+            # Restore stdout/stderr before exit (with error handling)
+            if ! exec >/dev/tty 2>&1 2>/dev/null; then
+                echo "⚠️ Could not restore terminal output"
             fi
+            
+            # Exit cleanly
+            exit 0
             ;;
           *)
             action='0'

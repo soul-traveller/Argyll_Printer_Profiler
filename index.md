@@ -1,5 +1,5 @@
 # Argyll_Printer_Profiler.command — User Guide
-**Version:** 1.2<br>
+**Version:** 1.2.2<br>
 **Platform:** macOS and Linux<br>
 **Based on:** Simple script by Jintak Han (https://github.com/jintakhan/AutomatedArgyllPrinter)<br>
 **Author:** Knut Larsson<br>
@@ -11,6 +11,7 @@ Argyll_Printer_Profiler.command is an interactive Bash script that automates a c
 ## 📑 Table of Contents
 
 - [Overview](#overview)
+- [Features](#features)
 - [Requirements](#requirements)
 - [Installation](#installation)
   - [Required Dependabilities for MacOS](#required-dependabilities-for-macos)
@@ -42,7 +43,7 @@ It is designed for:
 - X-Rite ColorMunki / i1Studio and compatible instruments
 - Users who want reproducible, well-documented profiles without memorizing ArgyllCMS commands
 
-The script:
+## Features
 
 - Generates optimized color targets
 - Assists with printing targets correctly
@@ -51,13 +52,30 @@ The script:
 - Performs sanity checks
 - Installs profiles into defined local profiles folder
 
+### Advanced Delta E Analysis
+- Percentile calculations (99th, 98th, 95th, 90th)
+- Patch count analysis below specific thresholds
+- Range statistics and outlier identification
+ 
+### Robust Error Handling
+- Variable validation in all functions
+- Dependency checking with clear error messages
+- Directory verification and automatic recovery
+ 
+### Enhanced User Interface
+- Consistent menu formatting with visual separators
+- Input validation for all numeric choices
+- Clear error messages and recovery options
+
 ---
 
 ## Requirements
 
 - macOS 10.13 or later (Intel or Apple Silicon), or a modern Linux distribution
 - ArgyllCMS installed and available in Terminal (checked by script)
-- On Linux, `zenity` installed (for graphical file pickers)
+- On Linux,   
+    - `zenity` installed (for graphical file pickers)
+    - `wmctrl` or `xdotool` installed (for window management)
 - Supported measurement device (ColorMunki, i1Pro, etc.)
 - Terminal access
 - ColorSync Utility (included with macOS) for printing targets without color management
@@ -86,7 +104,7 @@ targen -?
 The recommended way is apt:
 
 ```bash
-sudo apt install argyll zenity
+sudo apt install argyll zenity wmctrl xdotool
 ```
 
 Verify installation:
@@ -279,7 +297,8 @@ The script validates that all required parameters exist before running.
 ### 1. Create target chart and printer profile from scratch
 
 - Define profile name
-- Generate new targets (menu-selected from 6 optimized presets or custom)
+- Generate new targets (menu-selected from 12 optimized presets or custom)
+  - 6 for ColorMunki, 6 for other instruments
 - Measure patches
 - Create ICC profile
 - Sanity check
@@ -308,22 +327,31 @@ The script validates that all required parameters exist before running.
 - Sanity check
 - Install profile into local profile folder
 
-### 5. Perform sanity check only
+### 5. Perform sanity check on existing profile
 
 - Runs `profcheck` on existing `.ti3` + `.icc`
 - File created is named: `profile name + _sanity_check.txt`
+- Extended analysis calculations:
+    - Patch count analysis (ΔE < 1.0, 2.0, 3.0)
+    - Average, max, min, percentile statistics.
 - If run several times, results are overwritten.
+- Results are displayed in the terminal and in the created file.
+- Get help on how to improve profile accuracy using the sanity check results.
 
 ### 6. Change setup parameters
 
 - Edit selected values in the `.ini` file interactively
 
-### 7. Show ΔE2000 Color Accuracy — Quick Reference
+### 7. Show tips on how to improve accuracy of a profile
+
+- Display important information and procedure on how to improve accuracy of created profile, using sanity check as basis.
+
+### 8. Show ΔE2000 Color Accuracy — Quick Reference
 
 - Displays ΔE2000 color difference values and their perceptual meaning
 - Quick reference for evaluating profile quality
 
-### 8. Exit script
+### 9. Exit script
 
 ---
 
@@ -353,11 +381,11 @@ Default menu for ColorMunki instrument:
 - **Option 6**: XXXL – 1176 patches – 6 × Letter pages, maximum quality.
 
 ### Other Instruments (Same for All Paper Sizes)
-Default menu for other instruments is only partially specified. User may add as desired:
+Default menu for other instruments is only partially specified. User may modify/add as desired:
 
 - **Option 1**: Small – 480 patches – quick profiling
 - **Option 2**: Medium – 960 patches – recommended default
-- **Options 3-6**: Not specified
+- **Options 3-6**: Options Not defined (specify in the `.ini` file)
 
 ### Option 7: Custom Target Generation
 Allows advanced users to specify custom `targen` and `printtarg` arguments independent of setup parameters.
@@ -402,7 +430,7 @@ Script_Location
         ├── ProfileName.tif / _01.tif / _02.tif
         ├── ProfileName.icc
         ├── ProfileName_sanity_check.txt
-        └── Argyll_Printer_Profiler_YYYYMMDD_HHMMSS.log
+        └── Argyll_Printer_Profiler_YYYYMMDD.log
 └── Pre-made_Targets/
     ├── Patch Width 8-11mm - Expert (Use rig-guide-ruler)/
     ├── Patch Width 12-15mm - Intermediate (Easy with ruler)
@@ -471,8 +499,9 @@ macOS applications must be **restarted** to see the new profile.
 
 ## Logs and Debugging
 
-- A timestamped log file is created at script start
-- Log is automatically moved into the profile folder
+- A daily log file is created: `Argyll_Printer_Profiler_YYYYMMDD.log`
+- Multiple script executions on same day append to same log
+- Log remains in script directory throughout session
 - All stdout/stderr is captured
 
 Log files are essential for:
