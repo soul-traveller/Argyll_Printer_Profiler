@@ -1,0 +1,2 @@
+Commands used:
+printtarg -v -b -P -iCM -T200 -M6 -p297x210 -a0.464 -A1.5 Atkinson4410
