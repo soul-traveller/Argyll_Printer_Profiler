@@ -1,0 +1,10 @@
+# Exclude specific files
+*.log export-ignore
+_includes/ export-ignore
+*.html export-ignore
+*.yml export-ignore
+robots.txt export-ignore
+
+# Exclude by pattern
+docs/internal/ export-ignore
+.gitignore export-ignore
