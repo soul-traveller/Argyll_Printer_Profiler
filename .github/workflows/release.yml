@@ -1,0 +1,50 @@
+name: Create Release Assets
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create clean archive (excluding export-ignore files)
+        run: |
+          # Create a temporary directory for clean files
+          mkdir -p release-temp
+          # Copy all files except those marked with export-ignore
+          git archive HEAD --format=tar | tar -x -C release-temp/
+          # Remove files/directories marked as export-ignore in .gitattributes
+          rm -f release-temp/*.log
+          rm -rf release-temp/_includes
+          rm -f release-temp/*.html
+          rm -f release-temp/*.yml
+          rm -f release-temp/robots.txt
+          rm -rf release-temp/docs/internal
+          rm -f release-temp/.gitignore
+          # Create the clean archives
+          cd release-temp
+          tar -czf ../argyll-printer-profiler-${{ github.event.release.tag_name }}.tar.gz .
+          zip -r ../argyll-printer-profiler-${{ github.event.release.tag_name }}.zip . -q
+          cd ..
+
+      - name: Upload tar.gz to release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: argyll-printer-profiler-${{ github.event.release.tag_name }}.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload zip to release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: argyll-printer-profiler-${{ github.event.release.tag_name }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
