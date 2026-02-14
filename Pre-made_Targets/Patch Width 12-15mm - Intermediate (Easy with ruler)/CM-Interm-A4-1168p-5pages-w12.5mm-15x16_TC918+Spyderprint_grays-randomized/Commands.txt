@@ -1,2 +1,0 @@
-# Commands used
-printtarg -v -b -P -iCM -h -T300 -pA4 -a0.93 -m6 Colormunki-Intermediate-A4-1168p-5pages-tc918-grays-randomized

@@ -1,0 +1,2 @@
+# Commands used
+printtarg -v -b -P -iCM -h -T200 -pA4 -a0.93 -M6 CM-Interm-A4-1168p-5pages-tc918-grays-randomized
