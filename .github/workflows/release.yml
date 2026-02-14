@@ -15,6 +15,13 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Delete auto-generated release assets
+        run: |
+          gh release delete-asset "${{ github.event.release.tag_name }}" "Source code (tar.gz)" || true
+          gh release delete-asset "${{ github.event.release.tag_name }}" "Source code (zip)" || true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Create clean archive (excluding export-ignore files)
         run: |
           # Create a temporary directory for clean files
