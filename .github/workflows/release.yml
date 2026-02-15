@@ -36,10 +36,15 @@ jobs:
           rm -f release-temp/robots.txt
           rm -rf release-temp/docs/internal
           rm -f release-temp/.gitignore
-          # Create the clean archives
-          cd release-temp
-          tar -czf ../argyll-printer-profiler-${{ github.event.release.tag_name }}.tar.gz .
-          zip -r ../argyll-printer-profiler-${{ github.event.release.tag_name }}.zip . -q
+          
+          # Create a folder with the tag name and move files into it
+          mkdir -p "release-temp-tagged/argyll-printer-profiler-${{ github.event.release.tag_name }}"
+          mv release-temp/* "release-temp-tagged/argyll-printer-profiler-${{ github.event.release.tag_name }}/"
+          
+          # Create the clean archives with the tagged folder
+          cd release-temp-tagged
+          tar -czf ../argyll-printer-profiler-${{ github.event.release.tag_name }}.tar.gz argyll-printer-profiler-${{ github.event.release.tag_name }}/
+          zip -r ../argyll-printer-profiler-${{ github.event.release.tag_name }}.zip argyll-printer-profiler-${{ github.event.release.tag_name }}/ -q
           cd ..
 
       - name: Upload tar.gz to release
