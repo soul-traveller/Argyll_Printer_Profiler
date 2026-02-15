@@ -1,2 +1,0 @@
-# Commands used
-printtarg -v -b -P -iCM -T200 -m6 -p279.4x215.9 -a0.468 -A1.5 Mod_Atkinson2060

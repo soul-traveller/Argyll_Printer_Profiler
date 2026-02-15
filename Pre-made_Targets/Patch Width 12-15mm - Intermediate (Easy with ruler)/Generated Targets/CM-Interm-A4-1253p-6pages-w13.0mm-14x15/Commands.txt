@@ -1,0 +1,3 @@
+Commands used:
+targen -v -d2 -G -t -e8 -B8 -g256 -f1253 CM-Interm-A4-1253p-6pages-w13.0mm-14x15
+printtarg -v -b -P -iCM -h -T200 -pA4 -M6 CM-Interm-A4-1253p-6pages-w13.0mm-14x15

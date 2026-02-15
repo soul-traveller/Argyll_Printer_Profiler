@@ -1,0 +1,2 @@
+Commands used:
+printtarg -v -b -P -iCM -h -T200 -pLetter -M6 -a0.96 CM-Interm-Letter-Mod_Atkinson2072

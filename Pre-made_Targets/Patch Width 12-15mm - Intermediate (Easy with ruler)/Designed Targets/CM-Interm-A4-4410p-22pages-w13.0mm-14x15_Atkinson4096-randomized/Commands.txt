@@ -1,0 +1,2 @@
+Commands used:
+printtarg -v -b -P -iCM -h -T200 -pA4 -M6 CM-Interm-A4-Atkinson4410
