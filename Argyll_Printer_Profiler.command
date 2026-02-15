@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-version="1.2.2"
-# Version 1.2.2
+version="1.2.5"
+# Version 1.2.5
 
 # Argyll_Printer_Profiler
 # Uses ArgyllCMS version that is installed and checks if commands are availeble in terminal.
