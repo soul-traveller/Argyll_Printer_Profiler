@@ -28,6 +28,8 @@ case "$OS_TYPE" in
     ;;
   *)
     echo "❌ Unsupported operating system: $OS_TYPE"
+    echo
+    read -p 'Press enter to quit...'
     exit 1
     ;;
 esac
@@ -94,6 +96,8 @@ else
     if ! : >"$temp_log" 2>/dev/null; then
         echo "❌ Cannot create log file at '$temp_log'."
         echo "   Check folder permissions or disk access."
+        echo
+        read -p 'Press enter to quit...'
         exit 1  # Exit if we can't create log file
     else
         # Only if creation succeeded, hook up tee-based logging
@@ -111,6 +115,8 @@ setup_file="${script_dir}/Argyll_Printer_Profiler_setup.ini"
 if [ ! -f "$setup_file" ]; then
   echo "❌ Setup file not found:"
   echo "   The setup ini file must be located in folder together with script ${script_name}."
+  echo
+  read -p 'Press enter to quit...'
   exit 1
 fi
 
@@ -122,6 +128,8 @@ source "$setup_file"
 for var in STRIP_PATCH_CONSISTENSY_TOLERANCE PRINTER_ICC_PATH COLOR_SYNC_UTILITY_PATH PRINTER_PROFILES_PATH PROFILE_SMOOTING TARGET_RESOLUTION; do
   if [ -z "${!var:-}" ]; then
     echo "❌ Variable $var not set. Check setup file."
+    echo
+    read -p 'Press enter to quit...'
     exit 1
   fi
 done
@@ -181,6 +189,7 @@ if [ ${#missing_argyll[@]} -gt 0 ]; then
         echo "   sudo apt install argyll-cms"
     fi
     echo
+    read -p 'Press enter to quit...'
     exit 1
 fi
  
@@ -199,6 +208,8 @@ if [ ${#missing_linux_tools[@]} -gt 0 ]; then
     fi
     echo
     echo "Please install the missing dependencies and try again."
+    echo
+    read -p 'Press enter to quit...'
     exit 1
 fi
  
@@ -602,31 +613,38 @@ select_icc_profile() {
 try
     tell application "Finder"
         activate
-        set f to choose file with prompt "Select a new ICC profile (.icc or .icm)" of type {"icc", "icm"} default location POSIX file "${folder}"
+        set f to choose file with prompt "Select a new profile (.icc or .icm)" of type {"icc", "icm"} default location POSIX file "${folder}"
         set resultPath to POSIX path of f
     end tell
-    tell application "Terminal"
-        activate
-    end tell
+    tell application "Terminal" to activate
+    tell application "System Events" to set frontmost of process "Terminal" to true
     return resultPath
 on error
+    tell application "Terminal" to activate
+    tell application "System Events" to set frontmost of process "Terminal" to true
     return ""
 end try
 EOF
 )
 
     else    # linux
+        local term_win_id=""
+        if command -v xdotool >/dev/null 2>&1; then
+            term_win_id="$(xdotool getactivewindow 2>/dev/null)"
+        elif command -v xprop >/dev/null 2>&1; then
+            term_win_id="$(xprop -root _NET_ACTIVE_WINDOW 2>/dev/null | awk '{print $NF}')"
+        fi
         # Open Zenity file chooser dialog (Linux)
         new_icc_path=$(zenity --file-selection \
-            --title="Select a new ICC/ICM profile (.icc or .icm)" \
+            --title="Select a new profile (.icc or .icm)" \
             --filename="${folder}/" \
             --file-filter="ICC/ICM profiles | *.icc *.icm")
 
         # Return focus to terminal after file selection
-        if command -v wmctrl >/dev/null 2>&1; then
-            wmctrl -a "$(xdotool getactivewindow)" 2>/dev/null || true
-        elif command -v xdotool >/dev/null 2>&1; then
-            xdotool windowactivate "$(xdotool getactivewindow getwindowpid)" 2>/dev/null || true
+        if [ -n "$term_win_id" ] && command -v xdotool >/dev/null 2>&1; then
+            xdotool windowactivate "$term_win_id" 2>/dev/null || true
+        elif [ -n "$term_win_id" ] && command -v wmctrl >/dev/null 2>&1; then
+            wmctrl -ia "$term_win_id" 2>/dev/null || true
         else
             echo "⚠️ Warning: Could not return focus to terminal (install wmctrl or xdotool)"
         fi
@@ -656,6 +674,11 @@ set_icc_profile_parameter() {
         return 1
     fi
 
+    if [ -z "${new_icc_path:-}" ]; then
+        echo "⚠️ No new ICC/ICM profile selected. Keeping existing PRINTER_ICC_PATH."
+        return 1
+    fi
+
     # Escape slashes for sed
     local escaped_path
     escaped_path=$(printf '%s\n' "$new_icc_path" | sed 's/[\/&]/\\&/g')
@@ -673,6 +696,11 @@ set_precond_profile_parameter() {
     # Update the setup file
     if [ ! -f "$setup_file" ]; then
         echo "❌ Setup file not found. Cannot save new ICC/ICM profile."
+        return 1
+    fi
+
+    if [ -z "${new_icc_path:-}" ]; then
+        echo "⚠️ No new ICC/ICM profile selected. Keeping existing PRECONDITIONING_PROFILE_PATH."
         return 1
     fi
 
@@ -1504,28 +1532,35 @@ try
         set f to choose file with prompt "$dialog_title" of type {"ti2"} default location POSIX file "${script_dir}/${PRE_MADE_TARGETS_FOLDER}"
         set resultPath to POSIX path of f
     end tell
-    tell application "Terminal"
-        activate
-    end tell
+    tell application "Terminal" to activate
+    tell application "System Events" to set frontmost of process "Terminal" to true
     return resultPath
 on error
+    tell application "Terminal" to activate
+    tell application "System Events" to set frontmost of process "Terminal" to true
     return ""
 end try
 EOF
 )
 
     else    # linux
+        local term_win_id=""
+        if command -v xdotool >/dev/null 2>&1; then
+            term_win_id="$(xdotool getactivewindow 2>/dev/null)"
+        elif command -v xprop >/dev/null 2>&1; then
+            term_win_id="$(xprop -root _NET_ACTIVE_WINDOW 2>/dev/null | awk '{print $NF}')"
+        fi
         # Open Zenity file chooser dialog (Linux)
         ti2_path=$(zenity --file-selection \
-            --title="Select a .ti2 file" \
+            --title="$dialog_title" \
             --filename="${script_dir}/${PRE_MADE_TARGETS_FOLDER}/" \
             --file-filter="Target Information 2 data | *.ti2")
 
         # Return focus to terminal after file selection
-        if command -v wmctrl >/dev/null 2>&1; then
-            wmctrl -a "$(xdotool getactivewindow)" 2>/dev/null || true
-        elif command -v xdotool >/dev/null 2>&1; then
-            xdotool windowactivate "$(xdotool getactivewindow getwindowpid)" 2>/dev/null || true
+        if [ -n "$term_win_id" ] && command -v xdotool >/dev/null 2>&1; then
+            xdotool windowactivate "$term_win_id" 2>/dev/null || true
+        elif [ -n "$term_win_id" ] && command -v wmctrl >/dev/null 2>&1; then
+            wmctrl -ia "$term_win_id" 2>/dev/null || true
         else
             echo "⚠️ Warning: Could not return focus to terminal (install wmctrl or xdotool)"
         fi
@@ -1653,28 +1688,35 @@ try
         set f to choose file with prompt "$dialog_title" of type {"ti3"} default location POSIX file "${script_dir}/${CREATED_PROFILES_FOLDER}"
         set resultPath to POSIX path of f
     end tell
-    tell application "Terminal"
-        activate
-    end tell
+    tell application "Terminal" to activate
+    tell application "System Events" to set frontmost of process "Terminal" to true
     return resultPath
 on error
+    tell application "Terminal" to activate
+    tell application "System Events" to set frontmost of process "Terminal" to true
     return ""
 end try
 EOF
 )
 
     else    # linux
+        local term_win_id=""
+        if command -v xdotool >/dev/null 2>&1; then
+            term_win_id="$(xdotool getactivewindow 2>/dev/null)"
+        elif command -v xprop >/dev/null 2>&1; then
+            term_win_id="$(xprop -root _NET_ACTIVE_WINDOW 2>/dev/null | awk '{print $NF}')"
+        fi
         # Open Zenity file chooser dialog (Linux)
         ti3_path=$(zenity --file-selection \
-            --title="Select a .ti3 file" \
+            --title="$dialog_title" \
             --filename="${script_dir}/${CREATED_PROFILES_FOLDER}/" \
             --file-filter="Target Information 3 data | *.ti3")
 
         # Return focus to terminal after file selection
-        if command -v wmctrl >/dev/null 2>&1; then
-            wmctrl -a "$(xdotool getactivewindow)" 2>/dev/null || true
-        elif command -v xdotool >/dev/null 2>&1; then
-            xdotool windowactivate "$(xdotool getactivewindow getwindowpid)" 2>/dev/null || true
+        if [ -n "$term_win_id" ] && command -v xdotool >/dev/null 2>&1; then
+            xdotool windowactivate "$term_win_id" 2>/dev/null || true
+        elif [ -n "$term_win_id" ] && command -v wmctrl >/dev/null 2>&1; then
+            wmctrl -ia "$term_win_id" 2>/dev/null || true
         else
             echo "⚠️ Warning: Could not return focus to terminal (install wmctrl or xdotool)"
         fi
@@ -1808,28 +1850,35 @@ try
         set f to choose file with prompt "$dialog_title" of type {"ti3"} default location POSIX file "${script_dir}/${CREATED_PROFILES_FOLDER}"
         set resultPath to POSIX path of f
     end tell
-    tell application "Terminal"
-        activate
-    end tell
+    tell application "Terminal" to activate
+    tell application "System Events" to set frontmost of process "Terminal" to true
     return resultPath
 on error
+    tell application "Terminal" to activate
+    tell application "System Events" to set frontmost of process "Terminal" to true
     return ""
 end try
 EOF
 )
 
     else    # linux
+        local term_win_id=""
+        if command -v xdotool >/dev/null 2>&1; then
+            term_win_id="$(xdotool getactivewindow 2>/dev/null)"
+        elif command -v xprop >/dev/null 2>&1; then
+            term_win_id="$(xprop -root _NET_ACTIVE_WINDOW 2>/dev/null | awk '{print $NF}')"
+        fi
         # Open Zenity file chooser dialog (Linux)
         ti3_path=$(zenity --file-selection \
-            --title="Select a .ti3 file" \
+            --title="$dialog_title" \
             --filename="${script_dir}/${CREATED_PROFILES_FOLDER}/" \
             --file-filter="Target Information 3 data | *.ti3")
 
         # Return focus to terminal after file selection
-        if command -v wmctrl >/dev/null 2>&1; then
-            wmctrl -a "$(xdotool getactivewindow)" 2>/dev/null || true
-        elif command -v xdotool >/dev/null 2>&1; then
-            xdotool windowactivate "$(xdotool getactivewindow getwindowpid)" 2>/dev/null || true
+        if [ -n "$term_win_id" ] && command -v xdotool >/dev/null 2>&1; then
+            xdotool windowactivate "$term_win_id" 2>/dev/null || true
+        elif [ -n "$term_win_id" ] && command -v wmctrl >/dev/null 2>&1; then
+            wmctrl -ia "$term_win_id" 2>/dev/null || true
         else
             echo "⚠️ Warning: Could not return focus to terminal (install wmctrl or xdotool)"
         fi
@@ -1875,7 +1924,7 @@ EOF
         return 1
     }
 
-    # only for action 4 (perform sanity check)
+    # only for action 4 (Create printer profile from an existing measurement file)
     if [ "$action" = "4" ]; then
         while true; do
             echo
@@ -2455,10 +2504,67 @@ create_profile_from_existing() {
 
 install_profile_and_save_data() {
     echo 'Installing measured ICC profile...'
+
+    # Verify source ICC exists
+    if [ ! -f "${name}.icc" ]; then
+        echo
+        echo "❌ ICC profile not found: '${name}.icc'"
+        echo "   Expected it in the current working directory:"
+        echo "   $(pwd)"
+        echo
+        return 1
+    fi
+
+    # Verify destination exists
+    if [ -z "${PRINTER_PROFILES_PATH:-}" ]; then
+        echo
+        echo "❌ PRINTER_PROFILES_PATH is empty. Check setup file."
+        echo
+        return 1
+    fi
+
+    if [ ! -d "${PRINTER_PROFILES_PATH}" ]; then
+        echo
+        echo "❌ Destination directory does not exist: '${PRINTER_PROFILES_PATH}'"
+        echo "   Check PRINTER_PROFILES_PATH in the setup file."
+        echo
+        return 1
+    fi
+
+    # Verify destination is writable
+    if [ ! -w "${PRINTER_PROFILES_PATH}" ]; then
+        echo
+        echo "❌ Destination directory is not writable: '${PRINTER_PROFILES_PATH}'"
+        echo "   Check folder permissions or choose a user-writable profile folder."
+        echo
+        if [[ "$PLATFORM" == "linux" ]]; then
+            if [[ "${PRINTER_PROFILES_PATH}" == /usr/share/* || "${PRINTER_PROFILES_PATH}" == /usr/local/share/* ]]; then
+                echo "   This is a system folder and typically requires administrator rights."
+                echo "   Options:"
+                echo "     1) Change PRINTER_PROFILES_PATH to a user folder (recommended)"
+                echo "        e.g. '$HOME/.local/share/color/icc' (create if missing)"
+                echo "     2) Or install to the system folder using sudo (advanced)"
+                echo "        e.g. sudo cp '${name}.icc' '${PRINTER_PROFILES_PATH}/'"
+            fi
+            echo
+            echo "   Current permissions:"
+            ls -ld "${PRINTER_PROFILES_PATH}" 2>/dev/null || true
+        else
+            echo "   Suggested macOS user profile folder:"
+            echo "     '$HOME/Library/ColorSync/Profiles'"
+        fi
+        echo
+        return 1
+    fi
+
     cp "${name}.icc" "${PRINTER_PROFILES_PATH}" || {
-        echo "❌ Failed to copy ICC profile to ${PRINTER_PROFILES_PATH}. See log for details."
+        echo
+        echo "❌ Failed to copy ICC profile to '${PRINTER_PROFILES_PATH}'."
+        echo "   Check folder permissions or disk access. See log for details."
+        echo
         return 1
     }
+
     echo "Finished. '${name}.icc' was installed to the directory '${PRINTER_PROFILES_PATH}'"
     echo "Please restart any color-managed applications before using this profile."
     echo "To print with this profile in a color-managed workflow, select "'${desc}'" in the profile selection menu."
@@ -2511,24 +2617,26 @@ edit_setup_parameters() {
 
         case $answer in
             1)
-                select_icc_profile || {
+                if select_icc_profile; then
+                    set_icc_profile_parameter || {
+                        echo "Returning to setup menu..."
+                    }
+                    source "$setup_file"
+                else
                     echo "Returning to setup menu..."
-                }
-                set_icc_profile_parameter || {
-                    echo "Returning to setup menu..."
-                }
-                source "$setup_file"
+                fi
                 continue
                 ;;
 
             2)
-                select_icc_profile || {
+                if select_icc_profile; then
+                    set_precond_profile_parameter || {
+                        echo "Returning to setup menu..."
+                    }
+                    source "$setup_file"
+                else
                     echo "Returning to setup menu..."
-                }
-                set_precond_profile_parameter || {
-                    echo "Returning to setup menu..."
-                }
-                source "$setup_file"
+                fi
                 continue
                 echo
                 ;;
