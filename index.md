@@ -1,22 +1,27 @@
-# Argyll_Printer_Profiler.command — User Guide
-**Version:** 1.2.5<br>
-**Platform:** macOS and Linux<br>
+# Argyll_Printer_Profiler Scripts — User Guide
+**Version:** 1.3.0<br>
+**Platform:** macOS, Linux (Bash script); macOS, Linux, Windows (Python script)<br>
 **Based on:** Simple script by Jintak Han (https://github.com/jintakhan/AutomatedArgyllPrinter)<br>
 **Author:** Knut Larsson<br>
 
-Argyll_Printer_Profiler.command is an interactive Bash script that automates a complete **ArgyllCMS printer profiling workflow** on macOS and Linux, from target generation to ICC installation.<br>
+Argyll_Printer_Profiler is available in two versions: a Bash script (Argyll_Printer_Profiler.command) and a Python script (Argyll_Printer_Profiler.py). Both automate a complete **ArgyllCMS printer profiling workflow** on supported platforms, from target generation to ICC installation.<br>
 
 ---
 
 ## 📑 Table of Contents
 
 - [Overview](#overview)
+- [Scripts and Platforms](#scripts-and-platforms)
 - [Features](#features)
-- [Requirements](#requirements)
 - [Installation](#installation)
-  - [Required Dependabilities for MacOS](#required-dependabilities-for-macos)
-  - [Required Dependabilities for Linux](#required-dependabilities-for-linux)
-  - [Script Placement](#script-placement)
+  - [Bash Script Dependencies](#bash-script-dependencies)
+    - [macOS](#macos)
+    - [Linux](#linux)
+  - [Python Script Dependencies](#python-script-dependencies)
+    - [macOS](#macos-1)
+    - [Linux](#linux-1)
+    - [Windows](#windows)
+- [Script Placement](#script-placement)
   - [Execution Permissions for MacOS (Important)](#execution-permissions-for-macos-important)
   - [Execution Permissions for Linux (Important)](#execution-permissions-for-linux-important)
   - [Getting Started](#getting-started)
@@ -42,6 +47,41 @@ It is designed for:
 - Inkjet and laser printers
 - X-Rite ColorMunki / i1Studio and compatible instruments
 - Users who want reproducible, well-documented profiles without memorizing ArgyllCMS commands
+
+---
+
+## Scripts and Platforms
+
+The Argyll_Printer_Profiler project provides two script versions to accommodate different user preferences and platform requirements.
+
+### Bash Script (Argyll_Printer_Profiler.command)
+
+- **Platforms:** macOS, Linux
+- **Requirements:**
+  - macOS 10.13 or later (Intel or Apple Silicon), or a modern Linux distribution
+  - ArgyllCMS installed and available in Terminal
+  - On Linux: `zenity` for graphical file pickers, `wmctrl` or `xdotool` for window management
+  - Supported measurement device (ColorMunki, i1Pro, etc.)
+  - Terminal access
+- **How to use:**
+  - On macOS: Double-click the script in Finder after setting execute permissions
+  - On Linux: Run `./Argyll_Printer_Profiler.command` in terminal after setting permissions
+
+### Python Script (Argyll_Printer_Profiler.py)
+
+- **Platforms:** macOS, Linux, Windows
+- **Requirements:**
+  - Python 3.x with tkinter (usually included)
+  - ArgyllCMS tools available from terminal
+  - Spectrophotometer connected for measurement workflows
+  - Supported platforms: Windows 10+, macOS 10.6+, Linux (Ubuntu/Debian and similar)
+  - On Linux: `wmctrl` or `xdotool` for window management and focus return
+- **How to use:**
+  - Run `python3 Argyll_Printer_Profiler.py` in terminal or command prompt
+
+Both scripts use the same setup file (`Argyll_Printer_Profiler_setup.ini`) and provide identical functionality and user experience.
+
+---
 
 ## Features
 
@@ -69,23 +109,11 @@ It is designed for:
 
 ---
 
-## Requirements
-
-- macOS 10.13 or later (Intel or Apple Silicon), or a modern Linux distribution
-- ArgyllCMS installed and available in Terminal (checked by script)
-- On Linux,   
-    - `zenity` installed (for graphical file pickers)
-    - `wmctrl` or `xdotool` installed (for window management)
-- Supported measurement device (ColorMunki, i1Pro, etc.)
-- Terminal access
-- ColorSync Utility (included with macOS) for printing targets without color management
-- On Linux, other software to print targets without color management
-
----
-
 ## Installation
 
-### Required Dependabilities for MacOS
+### Bash Script Dependencies
+
+#### macOS
 
 The recommended way is Homebrew:
 
@@ -93,23 +121,87 @@ The recommended way is Homebrew:
 brew install argyll-cms
 ```
 
-Verify installation:
+Verify ArgyllCMS installation:
 
 ```bash
 targen -?
 ```
 
-### Required Dependabilities for Linux
+#### Linux
 
 The recommended way is apt:
 
 ```bash
-sudo apt install argyll zenity wmctrl xdotool
+sudo apt install argyll zenity xdotool
+or
+sudo apt install argyll zenity wmctrl
 ```
 
-Verify installation:
+Verify ArgyllCMS installation:
 
 ```bash
+targen -?
+```
+
+### Python Script Dependencies
+
+#### macOS
+
+Install Python 3 with tkinter support:
+
+```bash
+brew install python3 python-tk
+```
+
+Install ArgyllCMS:
+
+```bash
+brew install argyll-cms
+```
+
+Verify installations:
+
+```bash
+python3 --version
+python3 -c "import tkinter; print('tkinter available')"
+targen -?
+```
+
+#### Linux
+
+Install Python 3 with tkinter support (if not already installed):
+
+```bash
+sudo apt install python3 python3-tk
+```
+
+Install ArgyllCMS and window management tools:
+
+```bash
+sudo apt install argyll xdotool
+or
+sudo apt install argyll wmctrl
+```
+
+Verify installations:
+
+```bash
+python3 --version
+python3 -c "import tkinter; print('tkinter available')"
+targen -?
+```
+
+#### Windows
+
+Download and install Python 3.x from https://www.python.org/downloads/ (ensure tkinter is selected during installation).
+
+Download and install ArgyllCMS from https://www.argyllcms.com/.
+
+Verify installations:
+
+```bash
+python --version
+python -c "import tkinter; print('tkinter available')"
 targen -?
 ```
 
@@ -117,7 +209,7 @@ targen -?
 
 ### Script Placement
 
-You may place `Argyll_Printer_Profiler.command` **in any folder**:
+You may place any of the scripts **in any folder**:
 
 - Desktop
 - Documents
@@ -198,7 +290,7 @@ For Files / Nautilus (Ubuntu, Fedora)
 Now double-click will prompt or run.
 You can now run the script by:
 - Double-clicking it in your file manager (e.g. Files/Nautilus).
-- Or running `./Argyll_Printer_Profiler.sh` from Terminal
+- Or running `./Argyll_Printer_Profiler.cmmand` from Terminal
 
 ### Getting Started
 
@@ -218,6 +310,18 @@ The following should be assesed/modified:
     - Is DEFAULT_TARGEN_COMMAND_NON_COLORMUNKI satisfactory?
     - Is DEFAULT_PRINTTARG_COMMAND_NON_COLORMUNKI satisfactory?
 
+3. Run the script
+
+   For the Bash script (Argyll_Printer_Profiler.command), see the Execution Permissions for MacOS or Linux sections above for setting permissions and running.
+
+   For the Python script (Argyll_Printer_Profiler.py), open a terminal or command prompt, navigate to the script folder, and run:
+
+   ```bash
+   python3 Argyll_Printer_Profiler.py
+   ```
+
+   On Windows, use `python` instead of `python3`.
+
 ---
 
 ## Setup File: Argyll_Printer_Profiler_setup.ini
@@ -226,6 +330,9 @@ The setup file **must be located in the same folder as the script**:
 
 ```
 Argyll_Printer_Profiler.command
+or
+Argyll_Printer_Profiler.py
+
 Argyll_Printer_Profiler_setup.ini
 ```
 
