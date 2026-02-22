@@ -4,7 +4,7 @@
 **Based on:** Simple script by Jintak Han (https://github.com/jintakhan/AutomatedArgyllPrinter)<br>
 **Author:** Knut Larsson<br>
 
-Argyll_Printer_Profiler is available in two versions: a Bash script (Argyll_Printer_Profiler.command) and a Python script (Argyll_Printer_Profiler.py). Both automate a complete **ArgyllCMS printer profiling workflow** on supported platforms, from target generation to ICC installation.<br>
+Argyll_Printer_Profiler is available in two versions: a Bash script (`Argyll_Printer_Profiler.command`) and a Python script (`Argyll_Printer_Profiler.py`). Both automate a complete **ArgyllCMS printer profiling workflow** on supported platforms, from target generation to ICC installation.<br>
 
 ---
 
@@ -54,7 +54,7 @@ It is designed for:
 
 The Argyll_Printer_Profiler project provides two script versions to accommodate different user preferences and platform requirements.
 
-### Bash Script (Argyll_Printer_Profiler.command)
+### Bash Script (`Argyll_Printer_Profiler.command`)
 
 - **Platforms:** macOS, Linux
 - **Requirements:**
@@ -84,13 +84,25 @@ Both scripts use the same setup file (`Argyll_Printer_Profiler_setup.ini`) and p
 ---
 
 ## Features
+**General**
 
 - Generates optimized color targets
-- Assists with printing targets correctly
 - Reads measurements
 - Builds ICC profiles
 - Performs sanity checks
 - Installs profiles into defined local profiles folder
+
+**Details**
+
+- Assists user through the whole printer profile creation process in one go: from target generation (targen+printtarg), reading (charread), making profile (colprof) and outputing proifle sanity check.
+- Configure a set of predefined targets, and select them from a menu (6 for Colormunki and 6 for other instruments) (editable from ini file)
+- Configure defaults as desired for later reuse (targen, printtarg, chartread, and colprof)
+- Re-measure / resume measurements on a previously incomplete / saved / interupted measurement set
+- Select pre-existing target chart to measure and create profile.
+- Perform "sanity check" with extended statistics on any profile with existing ti3 file
+- When creting a profile, a new folder is created with the name chosen for the profile, and needed files are copied and renamed automatically.
+- Selection of ti2/3 files and icc files are done through a file dialog, so that one does not have to write long path strings.
+
 
 ### Advanced Delta E Analysis
 - Percentile calculations (99th, 98th, 95th, 90th)
@@ -102,10 +114,8 @@ Both scripts use the same setup file (`Argyll_Printer_Profiler_setup.ini`) and p
 - Dependency checking with clear error messages
 - Directory verification and automatic recovery
  
-### Enhanced User Interface
-- Consistent menu formatting with visual separators
-- Input validation for all numeric choices
-- Clear error messages and recovery options
+### User Interface
+- Simple interactive terminal prompt
 
 ---
 
@@ -290,7 +300,7 @@ For Files / Nautilus (Ubuntu, Fedora)
 Now double-click will prompt or run.
 You can now run the script by:
 - Double-clicking it in your file manager (e.g. Files/Nautilus).
-- Or running `./Argyll_Printer_Profiler.cmmand` from Terminal
+- Or running `./Argyll_Printer_Profiler.sh` from Terminal
 
 ### Getting Started
 
@@ -298,23 +308,23 @@ Run script, then start by modifying the setup via menu, as well as opening the .
 The following should be assesed/modified:
 
 1. Easily modified via menu:
-    - ICC profile to use (PRECONDITIONING_PROFILE_PATH and PRINTER_ICC_PATH)
+    - ICC profile to use (`PRECONDITIONING_PROFILE_PATH` and `PRINTER_ICC_PATH`)
     - Ink limit
     - Paper size
 
 2. Modified in .ini file:
-    - PRINTER_PROFILES_PATH (different on Linux)
-    - Common arguments to use by default (COMMON_ARGUMENTS_*)
-    - Is STRIP_PATCH_CONSISTENSY_TOLERANCE satisfactory?
-    - EXAMPLE_FILE_NAMING (file naming convention)
-    - Is DEFAULT_TARGEN_COMMAND_NON_COLORMUNKI satisfactory?
-    - Is DEFAULT_PRINTTARG_COMMAND_NON_COLORMUNKI satisfactory?
+    - `PRINTER_PROFILES_PATH` (different on Linux)
+    - Common arguments to use by default (`COMMON_ARGUMENTS_*`)
+    - Is `STRIP_PATCH_CONSISTENSY_TOLERANCE` satisfactory?
+    - `EXAMPLE_FILE_NAMING` (file naming convention)
+    - Is `DEFAULT_TARGEN_COMMAND_NON_COLORMUNKI` satisfactory?
+    - Is `DEFAULT_PRINTTARG_COMMAND_NON_COLORMUNKI` satisfactory?
 
 3. Run the script
 
-   For the Bash script (Argyll_Printer_Profiler.command), see the Execution Permissions for MacOS or Linux sections above for setting permissions and running.
+   For the Bash script (`Argyll_Printer_Profiler.command`), see the Execution Permissions for MacOS or Linux sections above for setting permissions and running.
 
-   For the Python script (Argyll_Printer_Profiler.py), open a terminal or command prompt, navigate to the script folder, and run:
+   For the Python script (`Argyll_Printer_Profiler.py`), open a terminal or command prompt, navigate to the script folder, and run:
 
    ```bash
    python3 Argyll_Printer_Profiler.py
@@ -324,7 +334,7 @@ The following should be assesed/modified:
 
 ---
 
-## Setup File: Argyll_Printer_Profiler_setup.ini
+## Setup File: `Argyll_Printer_Profiler_setup.ini`
 
 The setup file **must be located in the same folder as the script**:
 
@@ -337,6 +347,9 @@ Argyll_Printer_Profiler_setup.ini
 ```
 
 ### Key Parameters
+**For details on ArgyllCMS and the commands used by this script (targen, printtarg, chartread, colprof, profcheck), see:**   
+[https://www.argyllcms.com/doc/ArgyllDoc.html](https://www.argyllcms.com/doc/ArgyllDoc.html)
+
 
 See `Argyll_Printer_Profiler_setup.ini` for a descriptions and list of all parameters.
 
@@ -404,35 +417,40 @@ The script validates that all required parameters exist before running.
 ### 1. Create target chart and printer profile from scratch
 
 - Define profile name
-- Generate new targets (menu-selected from 12 optimized presets or custom)
-  - 6 for ColorMunki, 6 for other instruments
+- Create profile folder
+- Generate new targets (menu-selected from 12 optimized presets or custom, 6 for ColorMunki, 6 for other instruments)
 - Measure patches
 - Create ICC profile
 - Sanity check
-- Install profile into local profile folder
+- Install profile into specified profile folder
 
 ### 2. Resume or re-read an existing target chart measurement and create profile
 
-- Continue from an existing `.ti3`. Useful if measurement was interrupted
+- Continue from an existing `.ti3`. Useful if measurement was interrupted.
+- Define profile name
+- Create new or overwrite existing profile `ti3`/`icc`
+- Create profile folder, copy needed files and rename them
 - Measure patches
 - Create new or overwrite existing profile `ti3`/`icc`
 - Sanity check
-- Install profile into local profile folder
+- Install profile into specified profile folder
 
 ### 3. Read an existing target chart from scratch and create profile
 
 - Reuse printed targets
-- Measure again
+- Define profile name
 - Create new or overwrite existing profile `ti3`/`icc`
+- Create profile folder, copy needed files and rename them
+- Measure patches
 - Sanity check
-- Install profile into local profile folder
+- Install profile into specified profile folder
 
 ### 4. Create printer profile from an existing measurement file
 
 - Skip measurement
 - Direct ICC generation in selected folder or create new profile folder
 - Sanity check
-- Install profile into local profile folder
+- Install profile into specified profile folder
 
 ### 5. Perform sanity check on existing profile
 
@@ -441,7 +459,7 @@ The script validates that all required parameters exist before running.
 - Extended analysis calculations:
     - Patch count analysis (ΔE < 1.0, 2.0, 3.0)
     - Average, max, min, percentile statistics.
-- If run several times, results are overwritten.
+- If run several times, results existing file are overwritten.
 - Results are displayed in the terminal and in the created file.
 - Get help on how to improve profile accuracy using the sanity check results.
 
@@ -471,28 +489,28 @@ The script provides **6 optimized preset targets** plus a **custom option**, whe
 ### ColorMunki Instrument (A4/Letter Paper)
 Default menu for ColorMunki instrument:
 
-**A4 Paper Size:**.
-- **Option 1**: Small – 210 patches – 1 × A4 page, quick profiling.
-- **Option 2**: Medium – 420 patches – 2 × A4 pages, recommended default.
-- **Option 3**: Large – 630 patches – 3 × A4 pages, better accuracy.
-- **Option 4**: XL – 840 patches – 4 × A4 pages, high quality.
-- **Option 5**: XXL – 1050 patches – 5 × A4 pages, very high quality.
-- **Option 6**: XXXL – 1260 patches – 6 × A4 pages, maximum quality.
+**A4 Paper Size:**  
+- **Option 1**: Small – 210 patches – 1 × A4 page, quick profiling.  
+- **Option 2**: Medium – 420 patches – 2 × A4 pages, recommended default.  
+- **Option 3**: Large – 630 patches – 3 × A4 pages, better accuracy.  
+- **Option 4**: XL – 840 patches – 4 × A4 pages, high quality.  
+- **Option 5**: XXL – 1050 patches – 5 × A4 pages, very high quality.  
+- **Option 6**: XXXL – 1260 patches – 6 × A4 pages, maximum quality.  
 
-**Letter Paper Size:**.
-- **Option 1**: Small – 196 patches – 1 × Letter page, quick profiling.
-- **Option 2**: Medium – 392 patches – 2 × Letter pages, recommended default.
-- **Option 3**: Large – 588 patches – 3 × Letter pages, better accuracy.
-- **Option 4**: XL – 784 patches – 4 × Letter pages, high quality.
-- **Option 5**: XXL – 980 patches – 5 × Letter pages, very high quality.
-- **Option 6**: XXXL – 1176 patches – 6 × Letter pages, maximum quality.
+**Letter Paper Size:**  
+- **Option 1**: Small – 196 patches – 1 × Letter page, quick profiling.  
+- **Option 2**: Medium – 392 patches – 2 × Letter pages, recommended default.  
+- **Option 3**: Large – 588 patches – 3 × Letter pages, better accuracy.  
+- **Option 4**: XL – 784 patches – 4 × Letter pages, high quality.  
+- **Option 5**: XXL – 980 patches – 5 × Letter pages, very high quality.  
+- **Option 6**: XXXL – 1176 patches – 6 × Letter pages, maximum quality.  
 
 ### Other Instruments (Same for All Paper Sizes)
 Default menu for other instruments is only partially specified. User may modify/add as desired:
 
-- **Option 1**: Small – 480 patches – quick profiling
-- **Option 2**: Medium – 960 patches – recommended default
-- **Options 3-6**: Options Not defined (specify in the `.ini` file)
+- **Option 1**: Small – 480 patches – quick profiling.  
+- **Option 2**: Medium – 960 patches – recommended default.  
+- **Options 3-6**: Options Not defined (specify in the `.ini` file).  
 
 ### Option 7: Custom Target Generation
 Allows advanced users to specify custom `targen` and `printtarg` arguments independent of setup parameters.
@@ -568,7 +586,6 @@ Used to generate color values:
 - Instrument-specific layout
 - User-selected paper size
 - Resolution from setup file
-- Optimized for ColorMunki/i1Studio
 
 ### chartread
 
@@ -595,10 +612,17 @@ Used to generate color values:
 After successful creation:
 
 - `.icc` file is copied to `PRINTER_PROFILES_PATH`
-- Typically (for macOS):
-  ```
-  ~/Library/ColorSync/Profiles
-  ```
+- Typical paths:   
+   - macOS: 
+      - `$HOME/Library/ColorSync/Profiles/` (user) or 
+      - `/Library/ColorSync/Profiles/` (system)
+   - Windows: 
+      - `C:\Windows\System32\spool\drivers\color\` or 
+      - `%USERPROFILE%\AppData\Local\Microsoft\Windows\spool\drivers\color\`
+   - Linux: 
+      - `/usr/share/color/icc/` or 
+      - `/var/lib/colord/icc/` or 
+      - `$HOME/.color/icc/`
 
 macOS applications must be **restarted** to see the new profile.
 
