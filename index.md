@@ -14,18 +14,18 @@ Argyll_Printer_Profiler is available in two versions: a Bash script (`Argyll_Pri
 - [Scripts and Platforms](#scripts-and-platforms)
 - [Features](#features)
 - [Installation](#installation)
+  - [Getting Started](#getting-started)
   - [Bash Script Dependencies](#bash-script-dependencies)
-    - [macOS](#macos)
-    - [Linux](#linux)
+      - [macOS](#macos)
+      - [Linux](#linux)
   - [Python Script Dependencies](#python-script-dependencies)
-    - [macOS](#macos-1)
-    - [Linux](#linux-1)
-    - [Windows](#windows)
-- [Script Placement](#script-placement)
+      - [macOS](#macos-1)
+      - [Linux](#linux-1)
+      - [Windows](#windows)
+  - [Script Placement](#script-placement)
   - [Execution Permissions for MacOS (Important)](#execution-permissions-for-macos-important)
   - [Execution Permissions for Linux (Important)](#execution-permissions-for-linux-important)
-  - [Getting Started](#getting-started)
-- [Setup File: Argyll_Printer_Profiler_setup.ini](#setup-file-argyll-printer-profiler-setupini)
+  - [Key Parameters](#key-parameters)
 - [General Workflow](#general-workflow)
 - [Main Menu Actions Explained](#main-menu-actions-explained)
 - [Target Generation Menu Options](#target-generation-menu-options)
@@ -120,6 +120,41 @@ Both scripts use the same setup file (`Argyll_Printer_Profiler_setup.ini`) and p
 ---
 
 ## Installation
+### Getting Started
+
+1. Prepare for the script to run:   
+    - Place script folder in a desired location. See section [Script Placement](#script-placement).
+    - Check that dependencies are installed. See section [Bash Script Dependencies](#bash-script-dependencies).
+
+2. Modify the setup to fit your operating system. See section [Key Parameters](#key-parameters) for understanding the most important configurable parameters. The following should be assesed/modified:
+
+	a. Easily modified via main menu (option 6):   
+	
+       - ICC profile to use (`PRECONDITIONING_PROFILE_PATH` and `PRINTER_ICC_PATH`).  
+       - Ink limit.  
+       - Paper size.  
+
+	b. Modified in .ini file:   
+	
+       - `PRINTER_PROFILES_PATH` (different for MacOS/Linux/Windows).  
+       - Common arguments to use by default (`COMMON_ARGUMENTS_*`).  
+       - Is `STRIP_PATCH_CONSISTENSY_TOLERANCE` satisfactory?   
+       - `EXAMPLE_FILE_NAMING` (file naming convention).  
+       - Is `DEFAULT_TARGEN_COMMAND_NON_COLORMUNKI` satisfactory?   
+       - Is `DEFAULT_PRINTTARG_COMMAND_NON_COLORMUNKI` satisfactory?   
+
+3. Run the script
+
+   For the Bash script (`Argyll_Printer_Profiler.command`), see the Execution Permissions for MacOS or Linux sections below for setting permissions and running.
+
+   For the Python script (`Argyll_Printer_Profiler.py`), open a terminal or command prompt, navigate to the script folder, and run:
+
+   ```bash
+   python3 Argyll_Printer_Profiler.py
+   ```
+
+   On Windows, use `python` instead of `python3`.
+
 
 ### Bash Script Dependencies
 
@@ -215,8 +250,6 @@ python -c "import tkinter; print('tkinter available')"
 targen -?
 ```
 
----
-
 ### Script Placement
 
 You may place any of the scripts **in any folder**:
@@ -228,7 +261,16 @@ You may place any of the scripts **in any folder**:
 
 All generated files are stored **relative to the script’s location**.
 
----
+**Setup File: Argyll\_Printer\_Profiler\_setup.ini**.  
+The setup file **must be located in the same folder as the script**:
+
+```
+Argyll_Printer_Profiler.command
+or
+Argyll_Printer_Profiler.py
+
+Argyll_Printer_Profiler_setup.ini
+```
 
 ### Execution Permissions for MacOS (Important)
 
@@ -257,8 +299,6 @@ Expected output:
 You can now run the script by:
 - Double-clicking it in Finder
 - Or running `./Argyll_Printer_Profiler.command` from Terminal
-
----
 
 ### Execution Permissions for Linux (Important)
 
@@ -302,50 +342,6 @@ You can now run the script by:
 - Double-clicking it in your file manager (e.g. Files/Nautilus).
 - Or running `./Argyll_Printer_Profiler.sh` from Terminal
 
-### Getting Started
-
-Run script, then start by modifying the setup via menu, as well as opening the .ini file.
-The following should be assesed/modified:
-
-1. Easily modified via menu:
-    - ICC profile to use (`PRECONDITIONING_PROFILE_PATH` and `PRINTER_ICC_PATH`)
-    - Ink limit
-    - Paper size
-
-2. Modified in .ini file:
-    - `PRINTER_PROFILES_PATH` (different on Linux)
-    - Common arguments to use by default (`COMMON_ARGUMENTS_*`)
-    - Is `STRIP_PATCH_CONSISTENSY_TOLERANCE` satisfactory?
-    - `EXAMPLE_FILE_NAMING` (file naming convention)
-    - Is `DEFAULT_TARGEN_COMMAND_NON_COLORMUNKI` satisfactory?
-    - Is `DEFAULT_PRINTTARG_COMMAND_NON_COLORMUNKI` satisfactory?
-
-3. Run the script
-
-   For the Bash script (`Argyll_Printer_Profiler.command`), see the Execution Permissions for MacOS or Linux sections above for setting permissions and running.
-
-   For the Python script (`Argyll_Printer_Profiler.py`), open a terminal or command prompt, navigate to the script folder, and run:
-
-   ```bash
-   python3 Argyll_Printer_Profiler.py
-   ```
-
-   On Windows, use `python` instead of `python3`.
-
----
-
-## Setup File: `Argyll_Printer_Profiler_setup.ini`
-
-The setup file **must be located in the same folder as the script**:
-
-```
-Argyll_Printer_Profiler.command
-or
-Argyll_Printer_Profiler.py
-
-Argyll_Printer_Profiler_setup.ini
-```
-
 ### Key Parameters
 **For details on ArgyllCMS and the commands used by this script (targen, printtarg, chartread, colprof, profcheck), see:**   
 [https://www.argyllcms.com/doc/ArgyllDoc.html](https://www.argyllcms.com/doc/ArgyllDoc.html)
@@ -373,7 +369,7 @@ See `Argyll_Printer_Profiler_setup.ini` for a descriptions and list of all param
   - Laser: 180–260
 
 - **`PAPER_SIZE`**
-  `A4` or `Letter`
+  `A4` or `Letter`. Any other sizes requires the use of Option 7: Custom Target Generation, after selecting main menu option 1.
 
 - **`PROFILE_SMOOTING`**
   Argument -r in `colprof` average deviation, affecting accuracy and smooting of profile. Argyll-default 0.5. 1.0 makes smoother profile without much reduction in accuracy.
@@ -505,6 +501,8 @@ Default menu for ColorMunki instrument:
 - **Option 5**: XXL – 980 patches – 5 × Letter pages, very high quality.  
 - **Option 6**: XXXL – 1176 patches – 6 × Letter pages, maximum quality.  
 
+The Colormunki menu above has separate options for A4 and Letter, shown according to the current setting of paper size, which can be chosen in main menu option 6.
+
 ### Other Instruments (Same for All Paper Sizes)
 Default menu for other instruments is only partially specified. User may modify/add as desired:
 
@@ -512,12 +510,14 @@ Default menu for other instruments is only partially specified. User may modify/
 - **Option 2**: Medium – 960 patches – recommended default.  
 - **Options 3-6**: Options Not defined (specify in the `.ini` file).  
 
+The menu for Other Instruments is the same regardless of paper size. This means that, if options differntiate between A4 and Letter size, then the page size must first be set in main menu option 6.
+
 ### Option 7: Custom Target Generation
 Allows advanced users to specify custom `targen` and `printtarg` arguments independent of setup parameters.
 
 ## Custom Target Generation
 
-**Menu Option 7**, under main menu action **1**, provides advanced users with direct control over ArgyllCMS parameters.
+**Menu Option 7**, under main menu action **1**, provides advanced users with direct control over ArgyllCMS parameters. Refer to [https://www.argyllcms.com/doc/ArgyllDoc.html](https://www.argyllcms.com/doc/ArgyllDoc.html) for command attributes.
 
 ### Features:
 - **Independent Parameters**: Bypasses all preset configurations
@@ -555,11 +555,14 @@ Script_Location
         ├── ProfileName.tif / _01.tif / _02.tif
         ├── ProfileName.icc
         ├── ProfileName_sanity_check.txt
-        └── Argyll_Printer_Profiler_YYYYMMDD.log
 └── Pre-made_Targets/
     ├── Patch Width 8-11mm - Expert (Use rig-guide-ruler)/
     ├── Patch Width 12-15mm - Intermediate (Easy with ruler)
     └── Patch Width 16-30mm - Easy (Freehand possible)
+└── Argyll_Printer_Profiler_YYYYMMDD.log
+└── Argyll_Printer_Profiler.py
+└── Argyll_Printer_Profiler.command
+└── Argyll_Printer_Profiler.ini
 ```
 
 The script will create a new folder for each profile, named after the profile name.
