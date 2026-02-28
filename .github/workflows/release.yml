@@ -51,7 +51,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: argyll-printer-profiler-${{ github.event.release.tag_name }}.tar.gz
-          overwrite: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -59,6 +58,5 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: argyll-printer-profiler-${{ github.event.release.tag_name }}.zip
-          overwrite: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
