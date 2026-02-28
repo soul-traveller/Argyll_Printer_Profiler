@@ -79,7 +79,7 @@ def getch() -> str:
         return ch
 
 
-VERSION = "1.3.0"
+VERSION = "1.3.2"
 
 
 @dataclass

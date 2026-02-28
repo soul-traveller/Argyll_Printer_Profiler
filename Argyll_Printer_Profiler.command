@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-version="1.3.0"
-# Version 1.3.0
+version="1.3.2"
+# Version 1.3.2
 
 # Argyll_Printer_Profiler
 # Uses ArgyllCMS version that is installed and checks if commands are availeble in terminal.
@@ -182,7 +182,7 @@ if [ ${#missing_argyll[@]} -gt 0 ]; then
     read -p 'Press enter to quit...'
     exit 1
 fi
- 
+
 if [ ${#missing_linux_tools[@]} -gt 0 ]; then
     echo "❌ Missing required Linux tools: ${missing_linux_tools[*]}"
     echo
@@ -202,7 +202,7 @@ if [ ${#missing_linux_tools[@]} -gt 0 ]; then
     read -p 'Press enter to quit...'
     exit 1
 fi
- 
+
 echo "✅ All required dependencies found"
 echo
 
@@ -237,7 +237,7 @@ prepare_profile_folder() {
         echo "❌ name variable not set"
         return 1
     fi
-    
+
     # ${action:-} If $action is unset or empty, use "" (empty string)
     if [ -z "${action:-}" ]; then
         echo "❌ action variable not set"
@@ -328,7 +328,7 @@ prepare_profile_folder() {
             break
         fi
     done  # ← Close outer loop
-    
+
     # DEBUG!!!
     #echo
     #echo "In function prepare_profile_folder:"
@@ -443,7 +443,7 @@ rename_files_ti1_ti2_ti3_tif() {
     if [ "$(pwd)" != "$profile_folder" ]; then
         echo "⚠️ Not in profile folder. Current: $(pwd)"
         echo "🔄 Attempting to change to profile folder: '$profile_folder'"
-            
+
         if cd "$profile_folder" 2>/dev/null; then
             echo "✅ Successfully changed to profile folder"
         else
@@ -694,7 +694,7 @@ select_instrument() {
         echo
         read -r -n 1 -p 'Enter your choice [1-9]: ' answer
         echo
-        
+
         # Validate input
         if [[ ! "$answer" =~ ^[1-9]$ ]]; then
             echo
@@ -702,7 +702,7 @@ select_instrument() {
             echo
             continue
         fi
-        
+
         case $answer in
             1)
                 inst_arg=' -ii1'
@@ -751,7 +751,7 @@ select_instrument() {
                 ;;
         esac
     done
-    
+
     echo
     echo "Selected instrument: ${inst_name}"
     echo
@@ -1530,13 +1530,13 @@ select_file() {
     local ext="$1"
     local title="$2"
     local type="$3"
-    
+
     echo
 
     local file_path
     local default_location
     local filter
-    
+
     case "$type" in
         ti2)
             default_location="${script_dir}/${PRE_MADE_TARGETS_FOLDER}"
@@ -1563,7 +1563,7 @@ select_file() {
         else
             of_type="{\"${ext}\"}"
         fi
-        
+
         file_path=$(osascript <<EOF
 try
     tell application "Finder"
@@ -1627,17 +1627,17 @@ EOF
             echo "❌ Selected file is not a .$ext file."
             return 1
         fi
-        
+
         name="$(basename "$file_path" .$ext)"
         desc="$name"
         source_folder="$(dirname "$file_path")"
-        
+
         echo "Selected .$ext file: $file_path"
-        
+
         if [[ "$type" == "ti2" ]]; then
             # Check TIFF targets
             tif_files=()
-            
+
             # Single-page
             if [ -f "${source_folder}/${name}.tif" ]; then
                 tif_files+=("${source_folder}/${name}.tif")
@@ -1647,18 +1647,18 @@ EOF
                     [ -f "$f" ] && tif_files+=("$f")
                 done
             fi
-            
+
             if [ ${#tif_files[@]} -eq 0 ]; then
                 echo "❌ No matching .tif target images found for '${name}'."
                 return 1
             fi
-            
+
             echo "Found target image(s):"
             echo
             for f in "${tif_files[@]}"; do
                 echo "  $(basename "$f")"
             done
-            
+
             copy_or_overwrite_submenu "use files in their current location, " "existing .ti3 and .icc/icm files will be overwritten"
         elif [[ "$type" == "ti3" ]]; then
             # Verify .ti2 exists
@@ -1666,10 +1666,10 @@ EOF
                 echo "❌ Matching .ti2 file not found for '${name}'."
                 return 1
             fi
-            
+
             # Check TIFF targets
             tif_files=()
-            
+
             # Single-page
             if [ -f "${source_folder}/${name}.tif" ]; then
                 tif_files+=("${source_folder}/${name}.tif")
@@ -1679,18 +1679,18 @@ EOF
                     [ -f "$f" ] && tif_files+=("$f")
                 done
             fi
-            
+
             if [ ${#tif_files[@]} -eq 0 ]; then
                 echo "❌ No matching .tif target images found for '${name}'."
                 return 1
             fi
-            
+
             echo "Found target image(s):"
             echo
             for f in "${tif_files[@]}"; do
                 echo "  $(basename "$f")"
             done
-            
+
             copy_or_overwrite_submenu "measurement will" "resume using existing .ti3 and .icc/icm file will be overwritten"
         elif [[ "$type" == "ti3_only" ]]; then
             # only for action 5 (perform sanity check)
@@ -2011,7 +2011,7 @@ sanity_check() {
         echo
         read -r -n 1 -p 'Enter your choice [1-3]: ' choice
         echo
-        
+
         case "$choice" in
             1)
                 echo
@@ -2768,12 +2768,12 @@ main_menu() {
             action='9'
             echo
             echo 'Exiting script...'
-            
+
             # Restore stdout/stderr before exit (with error handling)
             if ! exec >/dev/tty 2>&1 2>/dev/null; then
                 echo '⚠️ Could not restore terminal output'
             fi
-            
+
             # Exit cleanly
             exit 0
             ;;
