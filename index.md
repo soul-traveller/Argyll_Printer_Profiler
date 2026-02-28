@@ -48,6 +48,8 @@ It is designed for:
 - X-Rite ColorMunki / i1Studio and compatible instruments
 - Users who want reproducible, well-documented profiles without memorizing ArgyllCMS commands
 
+Make sure to read chapter on [Installation](#installation) below and follow steps in section [Getting Started](#getting-started).
+
 ---
 
 ## Scripts and Platforms
