@@ -1,0 +1,7 @@
+# Commands used
+# Landscape
+printtarg -v -b -P -iCM -h -T200 -p420x297 -a0.85 -M6 CM-Expert-A3-1168p-2pages-landscape-tc918-grays-randomized
+
+# Non-randomized
+# Landscape
+printtarg -v -b -P -iCM -h -T200 -p420x297 -a0.85 -M6 -r CM-Expert-A3-1168p-2pages-landscape-tc918-grays

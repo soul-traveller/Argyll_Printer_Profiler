@@ -1,0 +1,5 @@
+# Commands used
+printtarg -v -b -P -iCM -h -T200 -p279x432 -a1.076 -M6 CM-Interm-Tabloid-1168p-3pages-tc918-grays-randomized
+
+# Non-randomized
+printtarg -v -b -P -iCM -h -T200 -p279x432 -a1.06 -M6 -r CM-Interm-Tabloid-1168p-3pages-tc918-grays
