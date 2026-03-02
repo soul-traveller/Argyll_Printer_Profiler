@@ -276,11 +276,15 @@ Argyll_Printer_Profiler_setup.ini
 
 ### Execution Permissions for MacOS (Important)
 
+**Note!**
+Ctrl + Right Click on the script, then Open, may work in many cases instead of running chmod command in terminal.
+
 On modern macOS versions, a script must have the **execute bit** set.
 
 1. Open Terminal
-2. Navigate to the script folder
-3. Run:
+2. Navigate to the script folder  
+   (use: "cd [folder_name]" and "ls" to navigate, "cd .." to navigate one level up)
+3. Run command:
 
 ```bash
 chmod +x Argyll_Printer_Profiler.command
@@ -309,8 +313,9 @@ However, the .command file extension is mac only.
 Rename file to .sh, then:
 
 1. Open Terminal
-2. Navigate to the script folder
-3. Run:
+2. Navigate to the script folder  
+   (use: "cd [folder_name]" and "ls" to navigate, "cd .." to navigate one level up)
+3. Run command:
 
 ```bash
 chmod +x Argyll_Printer_Profiler.sh
