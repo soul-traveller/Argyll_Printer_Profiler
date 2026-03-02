@@ -184,6 +184,21 @@ or
 sudo apt install argyll zenity wmctrl
 ```
 
+**Note!**   
+Many Linux distibutions have preinstalled Linux xdotool or wmctrl.  
+To verify if any of them is installed, open a terminal and run:  
+
+```bash
+command -v xdotool >/dev/null 2>&1 && echo true || echo false
+```  
+Outputs true if xdotool is installed, otherwise false.
+
+```bash
+command -v wmctrl >/dev/null 2>&1 && echo true || echo false
+```   
+Outputs true if wmctrl is installed, otherwise false.
+
+
 Verify ArgyllCMS installation:
 
 ```bash
