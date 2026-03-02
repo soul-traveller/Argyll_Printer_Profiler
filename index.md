@@ -290,7 +290,7 @@ On modern macOS versions, a script must have the **execute bit** set.
 chmod +x Argyll_Printer_Profiler.command
 ```
 
-Verify:
+Verify (not strictly necessary):
 
 ```bash
 ls -l Argyll_Printer_Profiler.command
@@ -321,7 +321,7 @@ Rename file to .sh, then:
 chmod +x Argyll_Printer_Profiler.sh
 ```
 
-Verify:
+Verify (not strictly necessary):
 
 ```bash
 ls -l Argyll_Printer_Profiler.sh
