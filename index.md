@@ -1,5 +1,5 @@
 # Argyll_Printer_Profiler Scripts — User Guide
-**Version:** 1.3.2<br>
+**Version:** 1.3.4<br>
 **Platform:** macOS, Linux (Bash script); macOS, Linux, Windows (Python script)<br>
 **Based on:** Simple script by Jintak Han (https://github.com/jintakhan/AutomatedArgyllPrinter)<br>
 **Author:** Knut Larsson<br>
@@ -126,22 +126,37 @@ Both scripts use the same setup file (`Argyll_Printer_Profiler_setup.ini`) and p
 
 1. Prepare for the script to run:   
     - Place script folder in a desired location. See section [Script Placement](#script-placement).
-    - Check that dependencies are installed. See section [Bash Script Dependencies](#bash-script-dependencies).
+    - Check that dependencies are installed. 
+       - For MacOS/Linux:
+          - See section [Bash Script Dependencies](#bash-script-dependencies).
+       - For Windows:
+          - See section[Python Script Dependencies](#python-script-dependencies)
+    - Make sure environmental PATH variable for installed ArgyllCMS is present.  
+      This is especially important for windows. Use the script `add_argyll_path_windows`
+      which is supplied with the release of Argyll\_Printer\_Profiler.   
+      This script comes in two versions, use ase desired (guidance in header of file): 
+      1. Windows PowerShell: `add_argyll_path_windows.ps1` and   
+      2. Python: `add_argyll_path_windows.py`  
 
 2. Modify the setup to fit your operating system. See section [Key Parameters](#key-parameters) for understanding the most important configurable parameters. The following should be assesed/modified:
 
 	a. Easily modified via main menu (option 6):   
-	
-       - ICC profile to use (`PRECONDITIONING_PROFILE_PATH` and `PRINTER_ICC_PATH`).  
+       - Paths, which are different for MacOS/Linux/Windows and **must be changed**   
+         if not valid (visible above main menu when running script):
+          - ICC profile to use `PRINTER_ICC_PATH`    
+            for creation of printer profile (used by colprof)
+          - ICC profile to use `PRECONDITIONING_PROFILE_PATH`  
+            if target charts are generated to fit a perticular profile (used by targen).  
+          - Location path `PRINTER_PROFILES_PATH` to dirictory where printer profiles   
+            are placed for operating system to use .  
        - Ink limit.  
        - Paper size.  
-
-	b. Modified in .ini file:   
-	
-       - `PRINTER_PROFILES_PATH` (different for MacOS/Linux/Windows).  
-       - Common arguments to use by default (`COMMON_ARGUMENTS_*`).  
        - Is `STRIP_PATCH_CONSISTENSY_TOLERANCE` satisfactory?   
        - `EXAMPLE_FILE_NAMING` (file naming convention).  
+
+	b. Modified in .ini file (defaults can be used as is):   
+	
+       - Common arguments to use by default (`COMMON_ARGUMENTS_*`).  
        - Is `DEFAULT_TARGEN_COMMAND_NON_COLORMUNKI` satisfactory?   
        - Is `DEFAULT_PRINTTARG_COMMAND_NON_COLORMUNKI` satisfactory?   
 
@@ -665,6 +680,16 @@ Log files are essential for:
 - Reproducing command lines
 - Support requests
 
+**If you require more detailed debugging information:
+**In the .ini file, locate the common parameters for the command you want to debug: 
+- **`COMMON_ARGUMENTS_TARGEN`**.  
+- **`COMMON_ARGUMENTS_PRINTTARG`**.  
+- **`COMMON_ARGUMENTS_CHARTREAD`**.  
+- **`COMMON_ARGUMENTS_COLPROF`**   
+
+Change the **`-v`** argument on any of the parameters to **`-v2`**.
+Now terminal output and log file will show detailed debug output from ArgyllCMS commands.
+
 ---
 
 ## Important Notes and Best Practices
@@ -681,8 +706,28 @@ Log files are essential for:
 
 ### Script won’t run
 
-- Ensure execute bit is set (`chmod +x`)
-- macOS Gatekeeper may require right-click → Open
+For .command script on Linux or MacOS:    
+
+   - Ensure execute bit is set (`chmod +x`). See sections: 
+      - [Execution Permissions for MacOS (Important)](#execution-permissions-for-macos-important)
+      - [Execution Permissions for Linux (Important)](#execution-permissions-for-linux-important)
+   - macOS Gatekeeper may require Cntr+right-click → Open.  
+   - The .command script cannot run on Windows.
+
+### Script does not find ArgyllCMS installation
+
+Make sure ArgyllCMS is properly installed. Under chapter [Installation](#installation) see sections:   
+
+   - [Getting Started](#getting-started).  
+   - [Bash Script Dependencies](#bash-script-dependencies).  
+   - [Python Script Dependencies](#python-script-dependencies).  
+
+### Path warnings above main menu
+
+- Ensure all path variables are set correctly according to your operating system (platform).   
+- Defalt when downloading `Argyll_Printer_Profiler` paths are for MacOS.
+- User main menu option 6 to set all the path variables.
+- `PRECONDITIONING_PROFILE_PATH` is allowed to be empty.
 
 ### ICC not copied
 

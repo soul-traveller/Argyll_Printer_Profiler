@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Argyll Printer Profiler — Python Port
+"""Argyll Printer Profiler
 
 This is a fully functional Python port of the original Bash script
 `Argyll_Printer_Profiler.command`, providing cross-platform support for automated
@@ -32,6 +32,9 @@ Usage:
 2. Install ArgyllCMS: Download from https://www.argyllcms.com/ or use package managers.
 3. Run: python Argyll_Printer_Profiler.py
 4. Follow the interactive menus to create profiles or perform checks.
+
+User Guide:
+- https://soul-traveller.github.io/Argyll_Printer_Profiler/
 
 Dependencies:
 - Python 3.x with tkinter
@@ -79,7 +82,23 @@ def getch() -> str:
         return ch
 
 
-VERSION = "1.3.2"
+def getch_logged(prompt: str, log: "TeeLogger") -> str:
+    """Read a single keypress like Bash `read -n 1` and ensure it is logged.
+
+    This keeps the interactive UX of `getch()` (no need to press Enter), while also
+    mirroring the Bash script behavior where the chosen key is visible in the log.
+    """
+
+    # Terminal echo (what the user sees)
+    print(prompt, end="", flush=True)
+    ch = getch()
+    print(ch, flush=True)
+
+    # Log echo (avoid double-printing to terminal by writing to log file only)
+    log.log_only(f"{prompt}{ch}")
+    return ch
+
+VERSION = "1.3.4"
 
 
 @dataclass
@@ -104,11 +123,11 @@ class AppState:
     ti3_mtime_after: str = ""  # Modification time after measurement
     tif_files: list[Path] = field(default_factory=list)  # List of TIFF target images
     new_icc_path: str = ""  # Path to newly selected ICC profile
+    profile_installation_path: str = ""  # Path to where ICC profiles are installed/used by Operating System
 
     # Additional globals used by the ported workflow
     inst_arg: str = ""  # Instrument argument for Argyll commands
     inst_name: str = ""  # Human-readable instrument name
-
 
 
 class TeeLogger:
@@ -140,6 +159,17 @@ class TeeLogger:
         # Write to log file only, not to stdout
         with self.log_path.open("a", encoding="utf-8", errors="replace") as f:
             f.write(text + "\n")
+
+
+def log_event_enter(log: TeeLogger, name: str) -> None:
+    """Write a log-only timestamped ENTER marker for higher-level flow steps.
+
+    This is intentionally log-only (no terminal output) to keep UX unchanged,
+    while making it easier to correlate durations and navigation in the log.
+    """
+
+    now = dt.datetime.now().astimezone()
+    log.log_only(f"===== {now.strftime('%Y-%m-%d %H:%M:%S %z')} | ENTER | {name} =====")
 
 
 def detect_platform() -> str:
@@ -255,7 +285,7 @@ def check_required_commands(required_cmds: list[str], log: TeeLogger, PLATFORM: 
                 if PLATFORM == "linux":
                     log.writeln("On Linux, install ArgyllCMS with: sudo apt update && sudo apt install argyll")
                 elif PLATFORM == "macos":
-                    log.writeln("On macOS, install ArgyllCMS with: brew install argyllcms")
+                    log.writeln("On macOS, install ArgyllCMS with: brew install argyll-cms")
                 elif PLATFORM == "windows":
                     log.writeln("On Windows, download and install ArgyllCMS from https://www.argyllcms.com/")
                 break  # Only show once for Argyll tools
@@ -265,27 +295,73 @@ def check_required_commands(required_cmds: list[str], log: TeeLogger, PLATFORM: 
 def run_cmd(args: list[str], log: TeeLogger, cwd: Optional[Path] = None) -> int:
     """Run external command and stream combined stdout/stderr to logger."""
 
+    log_event_enter(log, f"cmd:{Path(args[0]).name}")
     log.writeln("")
     log.writeln(f"Command Used: {' '.join(args)}")
 
-    # Stream output line-by-line so it goes to both terminal and log.
+    # Stream output to both terminal and log.
+    # Some ArgyllCMS tools (e.g., colprof) may print progress using carriage returns ("\r")
+    # without newlines. If we iterate line-by-line, those updates can be split into many
+    # separate lines in the log. We therefore read character-by-character and treat "\r"
+    # as an in-place update: show it in the terminal, but avoid emitting a new log line
+    # for every update.
     try:
         proc = subprocess.Popen(
             args,
             cwd=str(cwd) if cwd else None,
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
-            text=True,
-            encoding="utf-8",
-            errors="replace",
+            text=False,
         )
     except FileNotFoundError:
         log.writeln(f"❌ Command not found: {args[0]}")
         return 127
 
     assert proc.stdout is not None
-    for line in proc.stdout:
-        log.write(line)
+    buf = ""
+    pending_cr_fragment: str | None = None
+    while True:
+        chunk = proc.stdout.read(1)
+        if not chunk:
+            break
+
+        try:
+            ch = chunk.decode("utf-8", errors="replace")
+        except Exception:
+            ch = "?"
+
+        buf += ch
+
+        while True:
+            nl_idx = buf.find("\n")
+            cr_idx = buf.find("\r")
+            idxs = [i for i in (nl_idx, cr_idx) if i != -1]
+            if not idxs:
+                break
+
+            cut = min(idxs)
+            token = buf[cut]
+            segment = buf[:cut]
+            buf = buf[cut + 1 :]
+
+            if token == "\n":
+                if pending_cr_fragment is not None:
+                    log.write(pending_cr_fragment)
+                    pending_cr_fragment = None
+                log.write(segment + "\n")
+            else:
+                pending_cr_fragment = segment
+                sys.stdout.write(segment + "\r")
+                sys.stdout.flush()
+
+    if buf:
+        if pending_cr_fragment is not None:
+            pending_cr_fragment = pending_cr_fragment + buf
+        else:
+            pending_cr_fragment = buf
+
+    if pending_cr_fragment is not None:
+        log.write(pending_cr_fragment)
 
     proc.wait()
     return int(proc.returncode)
@@ -304,8 +380,8 @@ def _split_cfg_args(cfg_value: str) -> list[str]:
     return shlex.split(s)
 
 
-def pick_file_gui(title: str, filetypes: list[tuple[str, str]], initialdir: Optional[Path] = None) -> Optional[str]:
-    """GUI file picker using tkinter. Returns path or None if cancelled.
+def pick_file_gui(title: str, filetypes: list[tuple[str, str]], initialdir: Optional[Path] = None, is_folder: bool = False, platform: str = "") -> Optional[str]:
+    """GUI file/folder picker using tkinter. Returns path or None if cancelled.
 
     tkinter is a required dependency for this port (no console fallback).
     """
@@ -317,6 +393,26 @@ def pick_file_gui(title: str, filetypes: list[tuple[str, str]], initialdir: Opti
         raise RuntimeError(
             "tkinter is required for file selection dialogs but is not available in this Python installation."
         ) from e
+
+    # Capture terminal window ID for focus return on Linux
+    term_win_id = None
+    if platform == "linux":
+        # Try xdotool first for getting active window
+        if shutil.which("xdotool"):
+            try:
+                result = subprocess.run(["xdotool", "getactivewindow"], capture_output=True, text=True, timeout=2)
+                if result.returncode == 0:
+                    term_win_id = result.stdout.strip()
+            except subprocess.TimeoutExpired:
+                pass
+        # Fallback to xprop if xdotool not available
+        elif shutil.which("xprop"):
+            try:
+                result = subprocess.run(["xprop", "-root", "_NET_ACTIVE_WINDOW"], capture_output=True, text=True, timeout=2)
+                if result.returncode == 0:
+                    term_win_id = result.stdout.split()[-1].strip()
+            except subprocess.TimeoutExpired:
+                pass
 
     root = tk.Tk()
     root.geometry("1x1+0+0")  # Place off-screen to avoid visible window
@@ -335,17 +431,39 @@ def pick_file_gui(title: str, filetypes: list[tuple[str, str]], initialdir: Opti
 
     kwargs: dict[str, object] = {
         "title": title,
-        "filetypes": filetypes,
         "parent": root,  # Set root as parent to ensure dialog inherits focus
     }
     if initialdir is not None:
-        kwargs["initialdir"] = str(initialdir)
+        try:
+            init = initialdir.expanduser()
+            if init.is_dir():
+                kwargs["initialdir"] = str(init)
+        except Exception:
+            pass
 
-    path = filedialog.askopenfilename(**kwargs)
+    if is_folder:
+        path = filedialog.askdirectory(**kwargs)
+    else:
+        kwargs["filetypes"] = filetypes
+        path = filedialog.askopenfilename(**kwargs)
+
     try:
         root.destroy()
     except Exception:
         pass
+
+    # Bring focus back to terminal after dialog closes (for cancel/exit and successful selection)
+    if platform == "macos":
+        subprocess.run(["osascript", "-e", 'tell application "Terminal" to activate', "-e", 'tell application "System Events" to set frontmost of process "Terminal" to true'], check=False)
+    elif platform == "windows":
+        import ctypes
+        ctypes.windll.user32.SetForegroundWindow(ctypes.windll.kernel32.GetConsoleWindow())
+    elif platform == "linux":
+        if term_win_id:
+            if shutil.which("xdotool"):
+                subprocess.run(["xdotool", "windowactivate", term_win_id], check=False)
+            elif shutil.which("wmctrl"):
+                subprocess.run(["wmctrl", "-ia", term_win_id], check=False)
 
     return path or None
 
@@ -391,15 +509,29 @@ def _copy_or_overwrite_submenu(
         log.writeln("3: Abort operation")
         log.writeln("")
 
-        print("Enter your choice [1-3]: ", end='', flush=True)
-        copy_choice = getch()
-        print(copy_choice, flush=True)
+        copy_choice = getch_logged("Enter your choice [1-3]: ", log)
         log.writeln("")
 
         if copy_choice == "1":
             if not prepare_profile_folder(state, cfg, log):
                 log.writeln("Profile preparation failed...")
                 return False
+
+            # If source and destination are the same folder, skip copy, rename and check
+            # because nothing should be copied and files should not be renamed/checked.
+            source = Path(state.source_folder)
+            dest = Path(state.profile_folder)
+            def _same_dir(a: Path, b: Path) -> bool:
+                try:
+                    return a.resolve() == b.resolve()
+                except OSError:
+                    return a.absolute() == b.absolute()
+
+            if _same_dir(source, dest):
+                state.name = state.new_name
+                state.desc = state.new_name
+                # Same folder: skip rename and check
+                return True
 
             if not copy_files_ti1_ti2_ti3_tif(state, cfg, log):
                 log.writeln("File copy failed...")
@@ -429,7 +561,7 @@ def _copy_or_overwrite_submenu(
             log.writeln("User chose to abort.")
             return False
 
-        log.writeln("Invalid selection. Please choose 1 or 2.")
+        log.writeln("Invalid selection. Please choose 1, 2 or 3.")
 
 
 def select_file(state: AppState, cfg: dict[str, str], log: TeeLogger) -> bool:
@@ -444,24 +576,55 @@ def select_file(state: AppState, cfg: dict[str, str], log: TeeLogger) -> bool:
     The goal is to preserve messages, validation rules, and submenu timing.
     """
 
-    if state.action == "6":
+    if state.action == "7":
+        log_event_enter(log, "menu:select_printer_profiles_path")
+        log.writeln("")
+        log.writeln("Select a folder where printer profiles are installed for use by operating system")
+        log.writeln("")
+
+        raw = (cfg.get("PRINTER_PROFILES_PATH", "") or "").strip()
+        expanded = os.path.expandvars(raw)
+        current_path = Path(expanded).expanduser() if expanded else Path("")
+        if current_path.is_dir():
+            initialdir = current_path
+        elif current_path.parent.is_dir():
+            initialdir = current_path.parent
+        else:
+            initialdir = state.script_dir
+        title = "Select a folder where printer profiles are installed for use by operating system"
+        filetypes = [("Folder", ""), ("All files", "*")]
+        allowed_suffixes = {"", ""}
+        invalid_suffix_message = "❌ Selected path is not folder."
+    elif state.action == "6":
+        log_event_enter(log, "menu:select_icc_profile")
         log.writeln("")
         log.writeln("Select a new ICC/ICM profile to use")
         log.writeln("")
 
-        current_path = Path(cfg.get("PRINTER_ICC_PATH", "") or "")
-        initialdir = current_path.parent if str(current_path) else Path.cwd()
+        raw = (cfg.get("PRINTER_ICC_PATH", "") or "").strip()
+        expanded = os.path.expandvars(raw)
+        current_path = Path(expanded).expanduser() if expanded else Path("")
+        if current_path.is_file() and current_path.parent.is_dir():
+            initialdir = current_path.parent
+        elif current_path.is_dir():
+            initialdir = current_path
+        elif current_path.parent.is_dir():
+            initialdir = current_path.parent
+        else:
+            initialdir = state.script_dir
         title = "Select a new profile (.icc or .icm)"
         filetypes = [("ICC/ICM profiles", "*.icc *.icm"), ("All files", "*")]
         allowed_suffixes = {".icc", ".icm"}
         invalid_suffix_message = "❌ Selected file is not a .icc or .icm file."
     elif state.action == "3":
+        log_event_enter(log, "menu:select_ti2_file")
         initialdir = state.script_dir / cfg.get("PRE_MADE_TARGETS_FOLDER", "Pre-made_Targets")
         title = state.dialog_title
         filetypes = [("Target Information 2 data", "*.ti2"), ("All files", "*")]
         allowed_suffixes = {".ti2"}
         invalid_suffix_message = "❌ Selected file is not a .ti2 file."
     elif state.action in {"2", "4", "5"}:
+        log_event_enter(log, f"menu:select_ti3_file(action={state.action})")
         initialdir = state.script_dir / cfg.get("CREATED_PROFILES_FOLDER", "Created_Profiles")
         title = state.dialog_title
         filetypes = [("Target Information 3 data", "*.ti3"), ("All files", "*")]
@@ -496,30 +659,15 @@ def select_file(state: AppState, cfg: dict[str, str], log: TeeLogger) -> bool:
             title=title,
             filetypes=filetypes,
             initialdir=initialdir,
+            is_folder=state.action == "7",
+            platform=state.PLATFORM
         )
     except RuntimeError as e:
         log.writeln(f"❌ {e}")
         return False
 
-    # Bring focus back to terminal after dialog closes (for cancel/exit and successful selection)
-    if state.PLATFORM == "macos":
-        # Use osascript to activate Terminal and set frontmost
-        subprocess.run(["osascript", "-e", 'tell application "Terminal" to activate', "-e", 'tell application "System Events" to set frontmost of process "Terminal" to true'], check=False)
-    elif state.PLATFORM == "windows":
-        # Use Windows API to set console window as foreground
-        import ctypes
-        ctypes.windll.user32.SetForegroundWindow(ctypes.windll.kernel32.GetConsoleWindow())
-    elif state.PLATFORM == "linux":
-        # Use xdotool or wmctrl to activate the captured window
-        if term_win_id:
-            if shutil.which("xdotool"):
-                subprocess.run(["xdotool", "windowactivate", term_win_id], check=False)
-            elif shutil.which("wmctrl"):
-                subprocess.run(["wmctrl", "-ia", term_win_id], check=False)
-
     if not selected:
-        log.writeln("Selection cancelled.")
-        log.writeln("")
+        # Selection cancelled.
         return False
 
     p = Path(selected).expanduser().resolve()
@@ -527,9 +675,19 @@ def select_file(state: AppState, cfg: dict[str, str], log: TeeLogger) -> bool:
         log.writeln(invalid_suffix_message)
         return False
 
+    if state.action == "7":
+        if not p.is_dir():
+            log.writeln(invalid_suffix_message)
+            return False
+
     if state.action == "6":
         state.new_icc_path = str(p)
         log.writeln(f"Selected profile: {state.new_icc_path}")
+        return True
+
+    if state.action == "7":
+        state.profile_installation_path = str(p)
+        log.writeln(f"Selected path: {state.profile_installation_path}")
         return True
 
     state.name = p.stem
@@ -659,6 +817,7 @@ def print_profile_name_menu(log: TeeLogger, cfg: dict[str, str], last_line: str,
 def prepare_profile_folder(state: AppState, cfg: dict[str, str], log: TeeLogger) -> bool:
     """Create/select profile folder (port of Bash prepare_profile_folder)."""
 
+    log_event_enter(log, "menu:prepare_profile_folder")
     if not state.name:
         log.writeln("❌ name variable not set")
         return False
@@ -693,7 +852,6 @@ def prepare_profile_folder(state: AppState, cfg: dict[str, str], log: TeeLogger)
                     state.new_name = state.name
                     break
                 else:
-                    log.writeln("⏎ Input cancelled. Returning to previous menu...")
                     return False
 
             if not re.fullmatch(r"[A-Za-z0-9._()\-]+", name):
@@ -705,7 +863,7 @@ def prepare_profile_folder(state: AppState, cfg: dict[str, str], log: TeeLogger)
 
     while True:
         profile_folder = state.script_dir / created_profiles_folder / state.new_name
-
+        
         if profile_folder.is_dir():
             log.writeln("")
             log.writeln(f"⚠️ Profile folder already exists: '{str(profile_folder)}'")
@@ -715,7 +873,7 @@ def prepare_profile_folder(state: AppState, cfg: dict[str, str], log: TeeLogger)
                 for p in sorted(profile_folder.iterdir()):
                     log.writeln(f"  {p.name}")
             except OSError:
-                log.writeln("  (Unable to list contents of '{str(profile_folder)}')")
+                log.writeln(f"  (Unable to list contents of '{str(profile_folder)}')")
             log.writeln("")
             log.writeln("Choose an option:")
             log.writeln("  1) Use existing folder (delete existing files)")
@@ -723,22 +881,21 @@ def prepare_profile_folder(state: AppState, cfg: dict[str, str], log: TeeLogger)
             log.writeln("  3) Cancel operation")
             log.writeln("")
             while True:
-                print("Enter choice [1-3]: ", end='', flush=True)
-                choice = getch()
-                print(choice, flush=True)
+                choice = getch_logged("Enter choice [1-3]: ", log)
                 log.writeln("")
                 if choice == "1":
                     log.writeln("")
                     log.writeln(f"Using existing folder: '{str(profile_folder)}'")
-                    # Delete existing contents to avoid leftover files from previous runs
-                    for item in profile_folder.iterdir():
-                        try:
-                            if item.is_file() or item.is_symlink():
-                                item.unlink()
-                            elif item.is_dir():
-                                shutil.rmtree(item)
-                        except OSError as e:
-                            log.writeln(f"⚠️ Warning: Failed to delete {item.name}: {e}")
+                    if state.new_name != state.name:
+                        # Delete existing contents to avoid leftover files from previous runs
+                        for item in profile_folder.iterdir():
+                            try:
+                                if item.is_file() or item.is_symlink():
+                                    item.unlink()
+                                elif item.is_dir():
+                                    shutil.rmtree(item)
+                            except OSError as e:
+                                log.writeln(f"⚠️ Warning: Failed to delete {item.name}: {e}")
                     break
                 if choice == "2":
                     # Show the menu again for re-entering name
@@ -751,7 +908,7 @@ def prepare_profile_folder(state: AppState, cfg: dict[str, str], log: TeeLogger)
                         name = input(prompt).strip()
 
                         if not name:
-                            log.writeln("⏎ Input cancelled. Returning to previous menu...")
+                            log.writeln("")
                             return False
 
                         if not re.fullmatch(r"[A-Za-z0-9._()\-]+", name):
@@ -794,6 +951,8 @@ def prepare_profile_folder(state: AppState, cfg: dict[str, str], log: TeeLogger)
 def copy_files_ti1_ti2_ti3_tif(state: AppState, cfg: dict[str, str], log: TeeLogger) -> bool:
     """Copy relevant .ti1/.ti2/.ti3/.tif files into working folder."""
 
+    log_event_enter(log, "func:copy_files_ti1_ti2_ti3_tif")
+
     _ = (cfg,)
     if not state.source_folder or not state.profile_folder:
         return False
@@ -809,8 +968,6 @@ def copy_files_ti1_ti2_ti3_tif(state: AppState, cfg: dict[str, str], log: TeeLog
             if missing_message:
                 log.writeln(missing_message)
             return True
-        if path.parent == dest:
-            return True
         try:
             shutil.copy2(path, dest / path.name)
         except OSError:
@@ -820,11 +977,13 @@ def copy_files_ti1_ti2_ti3_tif(state: AppState, cfg: dict[str, str], log: TeeLog
             return False
         return True
 
+    log.writeln(f"Copying files from '{str(source)}' to '{str(dest)}'...")
+
     # .ti1 is optional
     if not _copy_if_exists(
         source / f"{state.name}.ti1",
         required=False,
-        missing_message=f"⚠️ .ti1 file not found for '{state.name}'. Ignoring.",
+        missing_message=f"ℹ️ No .ti1 file found in selected folder '{state.name}'. Not required, thus ignoring.",
     ):
         return False
 
@@ -854,8 +1013,6 @@ def copy_files_ti1_ti2_ti3_tif(state: AppState, cfg: dict[str, str], log: TeeLog
             return False
 
     for f in state.tif_files:
-        if f.parent == dest:
-            continue
         try:
             shutil.copy2(f, dest / f.name)
         except OSError:
@@ -869,6 +1026,8 @@ def copy_files_ti1_ti2_ti3_tif(state: AppState, cfg: dict[str, str], log: TeeLog
 
 def rename_files_ti1_ti2_ti3_tif(state: AppState, cfg: dict[str, str], log: TeeLogger) -> bool:
     """Rename files to new basename (port of Bash rename_files_ti1_ti2_ti3_tif)."""
+
+    log_event_enter(log, "func:rename_files_ti1_ti2_ti3_tif")
 
     _ = (cfg,)
     if not state.profile_folder:
@@ -954,13 +1113,13 @@ def rename_files_ti1_ti2_ti3_tif(state: AppState, cfg: dict[str, str], log: TeeL
 def specify_profile_name(state: AppState, cfg: dict[str, str], log: TeeLogger) -> bool:
     """Prompt for profile name (port of Bash specify_profile_name)."""
 
+    log_event_enter(log, "menu:specify_profile_name")
     while True:
-        print_profile_name_menu(log, cfg, "Leave empty to cancel and return to previous menu.")
+        print_profile_name_menu(log, cfg, "Leave empty to cancel.")
 
         name = input("Enter filename: ").strip()
 
         if not name:
-            log.writeln("⏎ Input cancelled. Returning to previous menu...")
             return False
 
         if not re.fullmatch(r"[A-Za-z0-9._()\-]+", name):
@@ -984,6 +1143,7 @@ def specify_profile_name(state: AppState, cfg: dict[str, str], log: TeeLogger) -
 def select_instrument(state: AppState, cfg: dict[str, str], log: TeeLogger) -> bool:
     """Select instrument menu (port of Bash select_instrument)."""
 
+    log_event_enter(log, "menu:select_instrument")
     _ = (cfg,)
     while True:
         log.writeln("")
@@ -1013,9 +1173,7 @@ def select_instrument(state: AppState, cfg: dict[str, str], log: TeeLogger) -> b
         log.writeln("─────────────────────────────────────────────────────────────────────")
         log.writeln("")
 
-        print('Enter your choice [1-9]: ', end='', flush=True)
-        answer = getch()
-        print(answer, flush=True)
+        answer = getch_logged("Enter your choice [1-9]: ", log)
 
         if not re.fullmatch(r"[1-9]", answer or ""):
             log.writeln("")
@@ -1069,6 +1227,7 @@ def select_instrument(state: AppState, cfg: dict[str, str], log: TeeLogger) -> b
 def specify_and_generate_target(state: AppState, cfg: dict[str, str], log: TeeLogger) -> bool:
     """Target generation menu and targen/printtarg execution."""
 
+    log_event_enter(log, "menu:specify_and_generate_target")
     def menu_info_common_settings() -> None:
         log.writeln("Common settings for targen defined in setup file: ")
         log.writeln(f"      - Arguments set: {cfg.get('COMMON_ARGUMENTS_TARGEN', '')}")
@@ -1087,7 +1246,7 @@ def specify_and_generate_target(state: AppState, cfg: dict[str, str], log: TeeLo
         )
         log.writeln("Common settings for coprof defined in setup file: ")
         log.writeln(f"      - Arguments set: {cfg.get('COMMON_ARGUMENTS_COLPROF', '')}")
-        log.writeln(f"      - Average deviation/smooting -r: {cfg.get('PROFILE_SMOOTING', '')}")
+        log.writeln(f"      - Average deviation/smooting -r: {cfg.get('PROFILE_SMOOTHING', '')}")
         log.writeln("      - Color space profile specified, gamut mapping -S:")
         log.writeln(f"        '{cfg.get('PRINTER_ICC_PATH', '')}'")
         log.writeln("")
@@ -1306,9 +1465,7 @@ def specify_and_generate_target(state: AppState, cfg: dict[str, str], log: TeeLo
             menu_info_other_instruments()
 
         log.writeln("")
-        print("Enter your choice [1–8]: ", end='', flush=True)
-        patch_choice = getch()
-        print(patch_choice, flush=True)
+        patch_choice = getch_logged("Enter your choice [1–8]: ", log)
 
         if patch_choice == "8":
             log.writeln("Aborting printing target.")
@@ -1442,20 +1599,19 @@ def specify_and_generate_target(state: AppState, cfg: dict[str, str], log: TeeLo
 
         while True:
             log.writeln("")
-            print("Do you want to continue with selected target? [y/n]: ", end='', flush=True)
-            again = getch()
-            print(again, flush=True)
-            if again.lower() == "y":
+            cont = getch_logged("Do you want to continue with selected target? [y/n]: ", log)
+            log.writeln("")
+            if cont.lower() == "y":
                 log.writeln("")
                 log.writeln("Continuing with selected target...")
                 break
-            if again.lower() == "n":
+            if cont.lower() == "n":
                 log.writeln("")
                 log.writeln("Repeating target selection...")
                 break
             log.writeln("")
-            log.writeln("Invalid input. Please enter y or n.")
-        if again.lower() == "y":
+            log.writeln("Invalid input. Please enter y(=yes) or n(=no).")
+        if cont.lower() == "y":
             break
 
     # --- Execute targen/printtarg -------------------------------------------------
@@ -1509,25 +1665,26 @@ def specify_and_generate_target(state: AppState, cfg: dict[str, str], log: TeeLo
     log.writeln("After target(s) have been printed...")
     log.writeln("")
     while True:
-        print("Do you want to continue with measuring of target? [y/n]: ", end='', flush=True)
-        again = getch()
-        print(again, flush=True)
-        if again.lower() == "y":
+        cont = getch_logged("Do you want to continue with measuring of target? [y/n]: ", log)
+        log.writeln("")
+        if cont.lower() == "y":
             log.writeln("")
             log.writeln("Continuing with measuring of target...")
             break
-        if again.lower() == "n":
+        if cont.lower() == "n":
             log.writeln("")
             log.writeln("Aborting measuring of target...")
             return False
         log.writeln("")
-        log.writeln("Invalid input. Please enter y or n.")
+        log.writeln("Invalid input. Please enter y(=yes) or n(=no).")
 
     return True
 
 
 def check_files_in_new_location_after_copy(state: AppState, cfg: dict[str, str], log: TeeLogger) -> bool:
     """Verify copied files (port of Bash check_files_in_new_location_after_copy)."""
+
+    log_event_enter(log, "func:check_files_in_new_location_after_copy")
 
     _ = (cfg,)
     if not state.profile_folder or not state.name:
@@ -1669,9 +1826,11 @@ def improving_accuracy(state: AppState, cfg: dict[str, str], log: TeeLogger) -> 
 def sanity_check(state: AppState, cfg: dict[str, str], log: TeeLogger) -> bool:
     """Run profcheck and generate sanity report (port of Bash sanity_check)."""
 
+    log_event_enter(log, "workflow:sanity_check")
     _ = (cfg,)
     sanity_file = Path(f"{state.name}_sanity_check.txt")
 
+    log.writeln("")
     log.writeln("")
     log.writeln("Performing sanity check (creating .txt file)...")
     log.writeln("")
@@ -1800,43 +1959,6 @@ def sanity_check(state: AppState, cfg: dict[str, str], log: TeeLogger) -> bool:
     log.writeln(f"Detailed sanity check stored in:")
     log.writeln(f"'{sanity_file}'.")
     log.writeln("")
-
-    # Submenu
-    while True:
-        log.writeln("")
-        log.writeln("")
-        log.writeln("─────────────────────────────────────────────────────────────────────────")
-        log.writeln("What would you like to do?")
-        log.writeln("─────────────────────────────────────────────────────────────────────────")
-        log.writeln("")
-        log.writeln("1) Show tips on how to improve accuracy of a profile")
-        log.writeln("2) Show ΔE2000 Color Accuracy — Quick Reference")
-        log.writeln("3) Return to main menu")
-        log.writeln("")
-        log.writeln("─────────────────────────────────────────────────────────────────────────")
-        log.writeln("")
-
-        print("Enter your choice [1-3]: ", end='', flush=True)
-        choice = getch()
-        print(choice, flush=True)
-
-        if choice == "1":
-            log.writeln("")
-            improving_accuracy(state, cfg, log)
-            log.writeln("")
-            input("Press enter to continue...")
-        elif choice == "2":
-            log.writeln("")
-            show_de_reference(state, cfg, log)
-            log.writeln("")
-            input("Press enter to continue...")
-        elif choice == "3":
-            log.writeln("")
-            log.writeln("Returning to main menu...")
-            break
-        else:
-            log.writeln("")
-            log.writeln("❌ Invalid choice. Please enter 1, 2, or 3.")
     return True
 
 
@@ -1849,6 +1971,7 @@ def file_mtime(path: Path) -> int:
 def perform_measurement_and_profile_creation(state: AppState, cfg: dict[str, str], log: TeeLogger) -> bool:
     """Run chartread + colprof (port of Bash perform_measurement_and_profile_creation)."""
 
+    log_event_enter(log, "workflow:perform_measurement_and_profile_creation")
     # --- Build chartread arguments conditionally ---------------------------
     chartread_T = ""
     strip_tol = cfg.get("STRIP_PATCH_CONSISTENSY_TOLERANCE", "")
@@ -1860,19 +1983,18 @@ def perform_measurement_and_profile_creation(state: AppState, cfg: dict[str, str
     log.writeln("Please connect the spectrophotometer.")
     log.writeln("")
     while True:
-        print("Continue? [y/n]: ", end='', flush=True)
-        again = getch()
-        print(again, flush=True)
-        if again.lower() == "y":
+        cont = getch_logged("Continue? [y/n]: ", log)
+        log.writeln("")
+        if cont.lower() == "y":
             log.writeln("")
             log.writeln("Starting chart reading (read .ti2 file and generate .ti3 file)...")
             break
-        if again.lower() == "n":
+        if cont.lower() == "n":
             log.writeln("")
             log.writeln("Aborting measuring of target...")
             return False
         log.writeln("")
-        log.writeln("Invalid input. Please enter y or n.")
+        log.writeln("Invalid input. Please enter y(=yes) or n(=no).")
 
     log.writeln("")
     log.writeln("")
@@ -1952,22 +2074,25 @@ def perform_measurement_and_profile_creation(state: AppState, cfg: dict[str, str
     ink_limit = cfg.get("INK_LIMIT", "")
     if ink_limit:
         colprof_args.append(f"-l{ink_limit}")
-    smoothing = cfg.get("PROFILE_SMOOTING", "")
+    smoothing = cfg.get("PROFILE_SMOOTHING", "")
     if smoothing:
         colprof_args.append(f"-r{smoothing}")
+    # PRINTER_ICC_PATH is required
     printer_icc = cfg.get("PRINTER_ICC_PATH", "")
     if printer_icc:
         p = Path(printer_icc).expanduser()
         if not p.is_file():
             log.writeln(f"⚠️ Warning: Printer ICC profile not found: '{printer_icc}'")
-            log.writeln("   Skipping printer ICC profile in colprof.")
+            log.writeln("   Make sure parameter PRINTER_ICC_PATH is specified and valid. Use main menu option 6, or manually edit .ini file.")
+            log.writeln("   This defines path and file name for the color space to use when creating profile with colprof.")
+            log.writeln("   Cancelling running colprof...")
+            return False
         else:
             colprof_args.extend(["-S", str(p.resolve())])
 
     log.writeln("")
-    print("Do you want to continue creating profile with resulting ti3 file? [y/n]: ", end='', flush=True)
-    cont = getch()
-    print(cont, flush=True)
+    cont = getch_logged("Do you want to continue creating profile with resulting ti3 file? [y/n]: ", log)
+    log.writeln("")
     if cont.lower() != "y":
         log.writeln("")
         log.writeln("Profile creation aborted by user...")
@@ -1997,27 +2122,31 @@ def perform_measurement_and_profile_creation(state: AppState, cfg: dict[str, str
 def create_profile_from_existing(state: AppState, cfg: dict[str, str], log: TeeLogger) -> bool:
     """Create ICC from existing .ti3 (port of Bash create_profile_from_existing)."""
 
+    log_event_enter(log, "workflow:create_profile_from_existing")
     # --- Build colprof arguments conditionally ---------------------------
     colprof_args = ["colprof", *_split_cfg_args(cfg.get("COMMON_ARGUMENTS_COLPROF", ""))]
     ink_limit = cfg.get("INK_LIMIT", "")
     if ink_limit:
         colprof_args.append(f"-l{ink_limit}")
-    smoothing = cfg.get("PROFILE_SMOOTING", "")
+    smoothing = cfg.get("PROFILE_SMOOTHING", "")
     if smoothing:
         colprof_args.append(f"-r{smoothing}")
+    # PRINTER_ICC_PATH is required
     printer_icc = cfg.get("PRINTER_ICC_PATH", "")
     if printer_icc:
         p = Path(printer_icc).expanduser()
         if not p.is_file():
             log.writeln(f"⚠️ Warning: Printer ICC profile not found: '{printer_icc}'")
-            log.writeln("   Skipping printer ICC profile in colprof.")
+            log.writeln("   Make sure parameter PRINTER_ICC_PATH is specified and valid. Use main menu option 6, or manually edit .ini file.")
+            log.writeln("   This defines path and file name for the color space to use when creating profile with colprof.")
+            log.writeln("   Cancelling running colprof...")
+            return False
         else:
             colprof_args.extend(["-S", str(p.resolve())])
 
     log.writeln("")
     log.writeln("")
     log.writeln("Starting profile creation (read .ti3 file and generate .icc file)...")
-    log.writeln(f"Command Used: {' '.join(colprof_args)} -D \"{state.desc}\" \"{state.name}\"")
     colprof_args.extend(["-D", state.desc, state.name])
 
     if run_cmd(colprof_args, log) != 0:
@@ -2039,7 +2168,9 @@ def install_profile_and_save_data(state: AppState, cfg: dict[str, str], log: Tee
     """Copy ICC into PRINTER_PROFILES_PATH (port of Bash install_profile_and_save_data)."""
 
     _ = (cfg,)
+    log_event_enter(log, "workflow:install_profile_and_save_data")
     log.writeln("Installing measured ICC profile...")
+    log.writeln("")
 
     src = Path(f"{state.name}.icc")
     if not src.is_file():
@@ -2053,15 +2184,16 @@ def install_profile_and_save_data(state: AppState, cfg: dict[str, str], log: Tee
     dest_dir = cfg.get("PRINTER_PROFILES_PATH", "")
     if not dest_dir:
         log.writeln("")
-        log.writeln("❌ PRINTER_PROFILES_PATH is empty. Check setup file.")
+        log.writeln("❌ Parameter PRINTER_PROFILES_PATH is empty. Check setup .ini file")
         log.writeln("")
         return False
-
-    dest = Path(dest_dir).expanduser()
+    dest_dir_expanded = os.path.expandvars(dest_dir)
+    dest = Path(dest_dir_expanded).expanduser()
+    dest_resolved = dest.resolve() if dest.exists() else dest
     if not dest.is_dir():
         log.writeln("")
         log.writeln(f"❌ Destination directory does not exist: '{dest_dir}'")
-        log.writeln("   Check PRINTER_PROFILES_PATH in the setup file.")
+        log.writeln("   Check parameter PRINTER_PROFILES_PATH in the setup .ini file")
         log.writeln("")
         return False
 
@@ -2100,10 +2232,10 @@ def install_profile_and_save_data(state: AppState, cfg: dict[str, str], log: Tee
         log.writeln("")
         return False
 
-    log.writeln(f"Finished. '{src.name}' was installed to the directory '{dest_dir}'")
+    log.writeln(f"Finished. '{src.name}' was installed to the directory '{str(dest_resolved)}'")
     log.writeln("Please restart any color-managed applications before using this profile.")
     log.writeln(
-        f"To print with this profile in a color-managed workflow, select '{state.desc}' in the profile selection menu."
+        f"To print with this profile in a color-managed workflow, select '{state.name}' in the profile selection menu."
     )
     return True
 
@@ -2112,12 +2244,15 @@ def install_profile_and_save_data(state: AppState, cfg: dict[str, str], log: Tee
 def edit_setup_parameters(state: AppState, cfg: dict[str, str], log: TeeLogger) -> None:
     """Interactive edit of setup parameters (port of Bash edit_setup_parameters)."""
 
+    log_event_enter(log, "menu:edit_setup_parameters")
     cfg = load_setup_file_shell_style(state.setup_file)
-    validate_cfg_paths(cfg, log)
+    validate_cfg_paths(state, cfg, log)
 
     while True:
         icc_filename = Path(cfg.get("PRINTER_ICC_PATH", "")).name
         precon_icc_filename = Path(cfg.get("PRECONDITIONING_PROFILE_PATH", "")).name
+        install_profiles_path = cfg.get("PRINTER_PROFILES_PATH", "")
+        setup_file_name = state.setup_file.name
 
         log.writeln("")
         log.writeln("")
@@ -2126,39 +2261,46 @@ def edit_setup_parameters(state: AppState, cfg: dict[str, str], log: TeeLogger) 
         log.writeln("Change Setup Parameters - Sub-Menu ")
         log.writeln("─────────────────────────────────────────────────────────────────────")
         log.writeln("")
-        log.writeln("In this menu some variables stored in the $setup_file file ")
+        log.writeln(f"In this menu some variables stored in the {setup_file_name} file ")
         log.writeln("can be modified. For other parameters modify the file in a text editor.")
         log.writeln("")
         log.writeln("What parameter do you want to modify?")
         log.writeln("")
-        log.writeln("1: Select Color Space profile to use when creating printer profile.")
-        log.writeln("   (gamut mapping to output profile)")
+        log.writeln("1: Select Color Space profile to use when creating printer profile (colprof arg. -S)")
+        log.writeln("   (Variable PRINTER_ICC_PATH in .ini file)")
         log.writeln(f"   Current file specified: '{icc_filename}'")
         log.writeln("")
-        log.writeln("2: Select pre-conditioning profile to use when creating target.")
+        log.writeln("2: Select pre-conditioning profile to use when creating target (targen arg. -c)")
+        log.writeln("   (Variable PRECONDITIONING_PROFILE_PATH in .ini file)")
         log.writeln(f"   Current file specified: '{precon_icc_filename}'")
         log.writeln("")
-        log.writeln("3: Modify patch consistency tolerance (chartread arg. -T)")
+        log.writeln("3: Select path to where printer profiles shall be copied for use by the operating system.")
+        log.writeln("   (Variable PRINTER_PROFILES_PATH in .ini file)")
+        log.writeln(f"   Current path specified: '{install_profiles_path}'")
+        log.writeln("")
+        log.writeln("4: Modify patch consistency tolerance (chartread arg. -T)")
+        log.writeln("   (Variable STRIP_PATCH_CONSISTENSY_TOLERANCE in .ini file)")
         log.writeln(f"   Current value specified: '{cfg.get('STRIP_PATCH_CONSISTENSY_TOLERANCE', '')}'")
         log.writeln("")
-        log.writeln("4: Modify paper size for target generation (printtarg -p). Valid values: A4, Letter.")
+        log.writeln("5: Modify paper size for target generation (printtarg arg. -p). Valid values: A4, Letter.")
+        log.writeln("   (Variable PAPER_SIZE in .ini file)")
         log.writeln(f"   Current value specified: '{cfg.get('PAPER_SIZE', '')}'")
         log.writeln("")
-        log.writeln("5: Modify ink limit (targen and colprof -l). Valid values: 0 – 400 (%) or empty to disable.")
+        log.writeln("6: Modify ink limit (targen and colprof arg. -l). Valid values: 0 – 400 (%) or empty to disable.")
+        log.writeln("   (Variable INK_LIMIT in .ini file)")
         log.writeln(f"   Current value specified: '{cfg.get('INK_LIMIT', '')}'")
         log.writeln("")
-        log.writeln("6: Modify file naming convention example (shown in main menu option 1). Valid value: text.")
+        log.writeln("7: Modify file naming convention example (shown in main menu option 1). Valid value: text.")
+        log.writeln("   (Variable EXAMPLE_FILE_NAMING in .ini file)")
         log.writeln("   Current value specified:")
         log.writeln(f"   '{cfg.get('EXAMPLE_FILE_NAMING', '')}'")
         log.writeln("")
-        log.writeln("7: Go back to main menu.")
+        log.writeln("8: Go back to main menu.")
         log.writeln("")
         log.writeln("─────────────────────────────────────────────────────────────────────")
         log.writeln("")
 
-        print("Enter your choice [1–7]: ", end='', flush=True)
-        answer = getch()
-        print(answer, flush=True)
+        answer = getch_logged("Enter your choice [1–8]: ", log)
 
         if answer == "1":
             state.action = "6"
@@ -2172,17 +2314,50 @@ def edit_setup_parameters(state: AppState, cfg: dict[str, str], log: TeeLogger) 
             continue
 
         elif answer == "2":
-            state.action = "6"
+            log.writeln("")
+            log.writeln("What do you want to do?")
+            log.writeln("  1) Choose color space profile file (icc/icm)")
+            log.writeln("  2) Clear parameter (no profile)")
+            log.writeln("")
+
+            while True:
+                choice = getch_logged("Enter choice [1-2]: ", log)
+                log.writeln("")
+
+                if choice == "1":
+                    state.action = "6"
+                    if select_file(state, cfg, log):
+                        new_path = state.new_icc_path
+                        update_setup_value_shell_style(state.setup_file, "PRECONDITIONING_PROFILE_PATH", new_path)
+                        cfg["PRECONDITIONING_PROFILE_PATH"] = new_path
+                        log.writeln("✅ Updated PRECONDITIONING_PROFILE_PATH")
+                    else:
+                        log.writeln("Selection cancelled.")
+                    break
+
+                elif choice == "2":
+                    new_path = ""
+                    update_setup_value_shell_style(state.setup_file, "PRECONDITIONING_PROFILE_PATH", new_path)
+                    cfg["PRECONDITIONING_PROFILE_PATH"] = new_path
+                    log.writeln("✅ Cleared PRECONDITIONING_PROFILE_PATH (no profile)")
+                    break
+
+                else:
+                    log.writeln("Invalid selection. Please choose 1 or 2.")
+            continue
+
+        elif answer == "3":
+            state.action = "7"
             if select_file(state, cfg, log):
-                new_path = state.new_icc_path
-                update_setup_value_shell_style(state.setup_file, "PRECONDITIONING_PROFILE_PATH", new_path)
-                cfg["PRECONDITIONING_PROFILE_PATH"] = new_path
-                log.writeln("✅ Updated PRECONDITIONING_PROFILE_PATH")
+                new_path = state.profile_installation_path
+                update_setup_value_shell_style(state.setup_file, "PRINTER_PROFILES_PATH", new_path)
+                cfg["PRINTER_PROFILES_PATH"] = new_path
+                log.writeln("✅ Updated PRINTER_PROFILES_PATH")
             else:
                 log.writeln("Selection cancelled.")
             continue
 
-        elif answer == "3":
+        elif answer == "4":
             value = input("Enter new value [0.6 recommended]: ").strip()
             if not re.fullmatch(r'^[0-9]+(\.[0-9]+)?$', value):
                 log.writeln("❌ Invalid numeric value.")
@@ -2192,7 +2367,7 @@ def edit_setup_parameters(state: AppState, cfg: dict[str, str], log: TeeLogger) 
             log.writeln(f"✅ Updated STRIP_PATCH_CONSISTENSY_TOLERANCE to {value}")
             continue
 
-        elif answer == "4":
+        elif answer == "5":
             value = input("Enter paper size [A4 or Letter]: ").strip()
             if value not in ["A4", "Letter"]:
                 log.writeln("❌ Invalid paper size.")
@@ -2202,7 +2377,7 @@ def edit_setup_parameters(state: AppState, cfg: dict[str, str], log: TeeLogger) 
             log.writeln(f"✅ Updated PAPER_SIZE to {value}")
             continue
 
-        elif answer == "5":
+        elif answer == "6":
             value = input("Enter ink limit (0–400 or empty to disable): ").strip()
             if value and (not value.isdigit() or not (0 <= int(value) <= 400)):
                 log.writeln("❌ Invalid ink limit.")
@@ -2212,7 +2387,7 @@ def edit_setup_parameters(state: AppState, cfg: dict[str, str], log: TeeLogger) 
             log.writeln(f"✅ Updated INK_LIMIT to '{value}'")
             continue
 
-        elif answer == "6":
+        elif answer == "7":
             # Show the menu
             print_profile_name_menu(log, cfg, "", show_example=False, current_display=f"Current value specified:\n'{cfg.get('EXAMPLE_FILE_NAMING', '')}'")
             value = input("Enter example file naming convention: ").strip()
@@ -2227,7 +2402,7 @@ def edit_setup_parameters(state: AppState, cfg: dict[str, str], log: TeeLogger) 
             log.writeln("")
             continue
 
-        elif answer == "7":
+        elif answer == "8":
             log.writeln("")
             log.writeln("Returning to main menu...")
             return
@@ -2260,66 +2435,137 @@ def print_banner(log: TeeLogger) -> None:
     log.writeln("")
 
 
-def validate_cfg_paths(cfg: dict[str, str], log: TeeLogger) -> None:
+def validate_cfg_paths(state: AppState | None, cfg: dict[str, str], log: TeeLogger) -> bool:
     """Validate paths in cfg for existence and validity, logging warnings if issues."""
 
+    warnings_issued = False
+    log.writeln("")
+
     # PRINTER_PROFILES_PATH: should be a directory
-    path_str = cfg.get("PRINTER_PROFILES_PATH", "").strip()
-    if not path_str:
-        log.writeln("⚠️ Warning: PRINTER_PROFILES_PATH is not specified in setup file.")
+    raw_path_str = cfg.get("PRINTER_PROFILES_PATH", "").strip()
+    if not raw_path_str:
+        log.writeln("⚠️ Warning: Variable PRINTER_PROFILES_PATH is not specified in setup .ini file")
+        warnings_issued = True
     else:
-        path_str = os.path.expandvars(path_str)
-        p = Path(path_str).expanduser()
+        expanded_path_str = os.path.expandvars(raw_path_str)
+        p = Path(expanded_path_str).expanduser()
         if not p.exists():
-            log.writeln(f"⚠️ Warning: PRINTER_PROFILES_PATH directory does not exist: '{path_str}'")
+            log.writeln(
+                "⚠️ Warning: Specified PRINTER_PROFILES_PATH directory does not exist: "
+                f"'{raw_path_str}'"
+            )
+            warnings_issued = True
         elif not p.is_dir():
-            log.writeln(f"⚠️ Warning: PRINTER_PROFILES_PATH is not a directory: '{path_str}'")
+            log.writeln(
+                "⚠️ Warning: Specified PRINTER_PROFILES_PATH is not a directory: "
+                f"'{raw_path_str}'"
+            )
+            warnings_issued = True
 
     # PRECONDITIONING_PROFILE_PATH: should be a file
-    path_str = cfg.get("PRECONDITIONING_PROFILE_PATH", "").strip()
-    if path_str:
-        path_str = os.path.expandvars(path_str)
-        p = Path(path_str).expanduser()
+    raw_path_str = cfg.get("PRECONDITIONING_PROFILE_PATH", "").strip()
+    if raw_path_str:
+        expanded_path_str = os.path.expandvars(raw_path_str)
+        p = Path(expanded_path_str).expanduser()
         if not p.exists():
-            log.writeln(f"⚠️ Warning: PRECONDITIONING_PROFILE_PATH file does not exist: '{path_str}'")
+            log.writeln(
+                "⚠️ Warning: Specified PRECONDITIONING_PROFILE_PATH file does not exist: "
+                f"'{raw_path_str}'"
+            )
+            warnings_issued = True
         elif not p.is_file():
-            log.writeln(f"⚠️ Warning: PRECONDITIONING_PROFILE_PATH is not a file: '{path_str}'")
+            log.writeln(
+                "⚠️ Warning: Specified PRECONDITIONING_PROFILE_PATH is not a file: "
+                f"'{raw_path_str}'"
+            )
+            warnings_issued = True
     # else:
         # Do nothing: accepted that path is empty
 
     # PRINTER_ICC_PATH: should be a file
-    path_str = cfg.get("PRINTER_ICC_PATH", "").strip()
-    if not path_str:
-        log.writeln("⚠️ Warning: PRINTER_ICC_PATH is not specified in setup file.")
+    raw_path_str = cfg.get("PRINTER_ICC_PATH", "").strip()
+    if not raw_path_str:
+        log.writeln("⚠️ Warning: Variable PRINTER_ICC_PATH is not specified in setup .ini file")
+        warnings_issued = True
     else:
-        path_str = os.path.expandvars(path_str)
-        p = Path(path_str).expanduser()
+        expanded_path_str = os.path.expandvars(raw_path_str)
+        p = Path(expanded_path_str).expanduser()
         if not p.exists():
-            log.writeln(f"⚠️ Warning: PRINTER_ICC_PATH file does not exist: '{path_str}'")
+            log.writeln(f"⚠️ Warning: Specified PRINTER_ICC_PATH file does not exist: '{raw_path_str}'")
+            warnings_issued = True
         elif not p.is_file():
-            log.writeln(f"⚠️ Warning: PRINTER_ICC_PATH is not a file: '{path_str}'")
+            log.writeln(f"⚠️ Warning: Specified PRINTER_ICC_PATH is not a file: '{raw_path_str}'")
+            warnings_issued = True
+
+    if warnings_issued:
+        log.writeln("⚠️ Warning: Make sure paths in mentioned parameters are defined and valid for your operating system.")
+        log.writeln("           Use menu option 6 and/or manually edit the parameters in the .ini file.")
+        if state is not None:
+            return False
 
     # Check required non-path variables
     required_vars = [
         "STRIP_PATCH_CONSISTENSY_TOLERANCE",
-        "COLOR_SYNC_UTILITY_PATH",
-        "PROFILE_SMOOTING",
+        "PROFILE_SMOOTHING",
         "TARGET_RESOLUTION",
     ]
+    if state is not None and state.PLATFORM == "macos":
+        required_vars.append("COLOR_SYNC_UTILITY_PATH")
 
     for var in required_vars:
         if not cfg.get(var, "").strip():
-            log.writeln(f"⚠️ Warning: Variable {var} not set. Check setup file.")
+            log.writeln(f"⚠️ Warning: Variable {var} not set. Check setup .ini file")
 
+    return True
+
+
+def show_last_menu(state: AppState, cfg: dict[str, str], log: TeeLogger) -> None:
+    """Show last menu."""
+
+    while True:
+        log_event_enter(log, "menu:last_menu")
+        log.writeln("")
+        log.writeln("")
+        log.writeln("─────────────────────────────────────────────────────────────────────────")
+        log.writeln("What would you like to do?")
+        log.writeln("─────────────────────────────────────────────────────────────────────────")
+        log.writeln("")
+        log.writeln("1) Show tips on how to improve accuracy of a profile")
+        log.writeln("2) Show ΔE2000 Color Accuracy — Quick Reference")
+        log.writeln("3) Return to main menu")
+        log.writeln("")
+        log.writeln("─────────────────────────────────────────────────────────────────────────")
+        log.writeln("")
+
+        choice = getch_logged("Enter your choice [1-3]: ", log)
+
+        if choice == "1":
+            log.writeln("")
+            improving_accuracy(state, cfg, log)
+            log.writeln("")
+            input("Press enter to continue...")
+        elif choice == "2":
+            log.writeln("")
+            show_de_reference(state, cfg, log)
+            log.writeln("")
+            input("Press enter to continue...")
+        elif choice == "3":
+            log.writeln("")
+            log.writeln("Returning to main menu...")
+            break
+        else:
+            log.writeln("")
+            log.writeln("❌ Invalid choice. Please enter 1, 2, or 3.")
 
 
 def main_menu(state: AppState, cfg: dict[str, str], log: TeeLogger) -> None:
     """Main menu loop (port of Bash main_menu)."""
 
     while True:
+        log_event_enter(log, "menu:main_menu")
         cfg = load_setup_file_shell_style(state.setup_file)
 
-        validate_cfg_paths(cfg, log)
+        validate_cfg_paths(None, cfg, log)
 
         # Clear variables each loop to mirror Bash behavior
         state.source_folder = ""
@@ -2375,12 +2621,15 @@ def main_menu(state: AppState, cfg: dict[str, str], log: TeeLogger) -> None:
         log.writeln("─────────────────────────────────────────────────────────────────────────")
         log.writeln("")
 
-        print("Enter your choice [1–9]: ", end='', flush=True)
-        answer = getch()
-        print(answer, flush=True)
+        answer = getch_logged("Enter your choice [1–9]: ", log)
 
         if answer == "1":
             state.action = "1"
+            if not validate_cfg_paths(state, cfg, log):
+                log.writeln("")
+                log.writeln("Operation aborted.")
+                input("Press enter to return to main menu...")
+                continue
             if not specify_profile_name(state, cfg, log):
                 log.writeln("")
                 log.writeln("Operation aborted.")
@@ -2407,8 +2656,16 @@ def main_menu(state: AppState, cfg: dict[str, str], log: TeeLogger) -> None:
                 input("Press enter to return to main menu...")
                 continue
 
+            show_last_menu(state, cfg, log)
+            continue
+
         elif answer == "2":
             state.action = "2"
+            if not validate_cfg_paths(state, cfg, log):
+                log.writeln("")
+                log.writeln("Operation aborted.")
+                input("Press enter to return to main menu...")
+                continue
             state.dialog_title = "Select an existing .ti3 file to re-read/resume measuring target patches."
             log.writeln(state.dialog_title)
             if not select_file(state, cfg, log):
@@ -2427,8 +2684,16 @@ def main_menu(state: AppState, cfg: dict[str, str], log: TeeLogger) -> None:
                 input("Press enter to return to main menu...")
                 continue
 
+            show_last_menu(state, cfg, log)
+            continue
+
         elif answer == "3":
             state.action = "3"
+            if not validate_cfg_paths(state, cfg, log):
+                log.writeln("")
+                log.writeln("Operation aborted.")
+                input("Press enter to return to main menu...")
+                continue
             state.dialog_title = "Select an existing .ti2 file to measure target patches."
             log.writeln(state.dialog_title)
             if not select_file(state, cfg, log):
@@ -2447,8 +2712,17 @@ def main_menu(state: AppState, cfg: dict[str, str], log: TeeLogger) -> None:
                 input("Press enter to return to main menu...")
                 continue
 
+            show_last_menu(state, cfg, log)
+            continue
+
         elif answer == "4":
             state.action = "4"
+            log_event_enter(log, "workflow:option_4_create_profile_from_existing_measurement")
+            if not validate_cfg_paths(state, cfg, log):
+                log.writeln("")
+                log.writeln("Operation aborted.")
+                input("Press enter to return to main menu...")
+                continue
             state.dialog_title = "Select an existing completed .ti3 file to create .icc profile with."
             log.writeln(state.dialog_title)
             if not select_file(state, cfg, log):
@@ -2467,6 +2741,9 @@ def main_menu(state: AppState, cfg: dict[str, str], log: TeeLogger) -> None:
                 input("Press enter to return to main menu...")
                 continue
 
+            show_last_menu(state, cfg, log)
+            continue
+
         elif answer == "5":
             state.action = "5"
             state.dialog_title = "Select an existing .ti3 file that has a matching .icc profile."
@@ -2481,6 +2758,9 @@ def main_menu(state: AppState, cfg: dict[str, str], log: TeeLogger) -> None:
                 log.writeln("Operation aborted.")
                 input("Press enter to return to main menu...")
                 continue
+
+            show_last_menu(state, cfg, log)
+            continue
 
         elif answer == "6":
             state.action = "6"
@@ -2583,7 +2863,7 @@ def main() -> None:
 
     # Extract Argyll version for logging
     try:
-        result = subprocess.run(["dispcal"], capture_output=True, text=True)
+        result = subprocess.run(["colprof"], capture_output=True, text=True)
         argyll_version_line = (result.stdout + result.stderr).split('\n')[0]
         match = re.search(r'Version ([0-9.]+)', argyll_version_line)
         argyll_version = match.group(1) if match else "unknown"
