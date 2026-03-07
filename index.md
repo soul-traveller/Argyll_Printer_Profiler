@@ -141,6 +141,7 @@ Both scripts use the same setup file (`Argyll_Printer_Profiler_setup.ini`) and p
 2. Modify the setup to fit your operating system. See section [Key Parameters](#key-parameters) for understanding the most important configurable parameters. The following should be assesed/modified:
 
     a. Easily modified via main menu (option 6):   
+    
       - Paths, which are different for MacOS/Linux/Windows and **must be changed**   
         if not valid (visible above main menu when running script):   
           - ICC profile to use `PRINTER_ICC_PATH`    
@@ -149,16 +150,17 @@ Both scripts use the same setup file (`Argyll_Printer_Profiler_setup.ini`) and p
             if target charts are generated to fit a perticular profile (used by targen).  
           - Location path `PRINTER_PROFILES_PATH` to dirictory where printer profiles   
             are placed for operating system to use.  
-       - Ink limit.  
-       - Paper size.  
-       - Is `STRIP_PATCH_CONSISTENSY_TOLERANCE` satisfactory?   
-       - `EXAMPLE_FILE_NAMING` (file naming convention).  
+            
+      - Ink limit.  
+      - Paper size.  
+      - Is `STRIP_PATCH_CONSISTENSY_TOLERANCE` satisfactory?   
+      - `EXAMPLE_FILE_NAMING` (file naming convention).  
 
     b. Modified in .ini file (defaults can be used as is):   
 	
-       - Common arguments to use by default (`COMMON_ARGUMENTS_*`).  
-       - Is `DEFAULT_TARGEN_COMMAND_NON_COLORMUNKI` satisfactory?   
-       - Is `DEFAULT_PRINTTARG_COMMAND_NON_COLORMUNKI` satisfactory?   
+      - Common arguments to use by default (`COMMON_ARGUMENTS_*`).  
+      - Is `DEFAULT_TARGEN_COMMAND_NON_COLORMUNKI` satisfactory?   
+      - Is `DEFAULT_PRINTTARG_COMMAND_NON_COLORMUNKI` satisfactory?   
 
 3. Run the script
 
