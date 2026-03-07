@@ -125,36 +125,36 @@ Both scripts use the same setup file (`Argyll_Printer_Profiler_setup.ini`) and p
 ### Getting Started
 
 1. Prepare for the script to run:   
-    - Place script folder in a desired location. See section [Script Placement](#script-placement).
-    - Check that dependencies are installed. 
-       - For MacOS/Linux:
-          - See section [Bash Script Dependencies](#bash-script-dependencies).
+    - Place script folder in a desired location. See section [Script Placement](#script-placement).   
+    - Check that dependencies are installed.  
+       - For MacOS/Linux:   
+          - See section [Bash Script Dependencies](#bash-script-dependencies).   
        - For Windows:
-          - See section[Python Script Dependencies](#python-script-dependencies)
+          - See section[Python Script Dependencies](#python-script-dependencies).  
     - Make sure environmental PATH variable for installed ArgyllCMS is present.  
-      This is especially important for windows. Use the script `add_argyll_path_windows`
+      This is especially important for windows. Use the script `add_argyll_path_windows`.  
       which is supplied with the release of Argyll\_Printer\_Profiler.   
-      This script comes in two versions, use ase desired (guidance in header of file): 
+      This script comes in two versions, use ase desired (guidance in header of file):  
       1. Windows PowerShell: `add_argyll_path_windows.ps1` and   
       2. Python: `add_argyll_path_windows.py`  
 
 2. Modify the setup to fit your operating system. See section [Key Parameters](#key-parameters) for understanding the most important configurable parameters. The following should be assesed/modified:
 
-	a. Easily modified via main menu (option 6):   
-       - Paths, which are different for MacOS/Linux/Windows and **must be changed**   
-         if not valid (visible above main menu when running script):
+    a. Easily modified via main menu (option 6):   
+      - Paths, which are different for MacOS/Linux/Windows and **must be changed**   
+        if not valid (visible above main menu when running script):   
           - ICC profile to use `PRINTER_ICC_PATH`    
             for creation of printer profile (used by colprof)
           - ICC profile to use `PRECONDITIONING_PROFILE_PATH`  
             if target charts are generated to fit a perticular profile (used by targen).  
           - Location path `PRINTER_PROFILES_PATH` to dirictory where printer profiles   
-            are placed for operating system to use .  
+            are placed for operating system to use.  
        - Ink limit.  
        - Paper size.  
        - Is `STRIP_PATCH_CONSISTENSY_TOLERANCE` satisfactory?   
        - `EXAMPLE_FILE_NAMING` (file naming convention).  
 
-	b. Modified in .ini file (defaults can be used as is):   
+    b. Modified in .ini file (defaults can be used as is):   
 	
        - Common arguments to use by default (`COMMON_ARGUMENTS_*`).  
        - Is `DEFAULT_TARGEN_COMMAND_NON_COLORMUNKI` satisfactory?   
