@@ -60,19 +60,38 @@ REQUIREMENTS
 • ArgyllCMS installed
 
 ===============================================================================
-#>
 param(
-    [string]$ARGYLL_INSTALLATION_PATH="C:\Argyll_V3.4.0\bin"
+    [string]$ARGYLL_INSTALLATION_PATH = "C:\Argyll_V3.4.0\bin"
 )
 
-$p = [Environment]::GetEnvironmentVariable("Path","User")
+# Get current user PATH
+$p = [Environment]::GetEnvironmentVariable("Path", "User")
 
-if ($p -notlike "*$ARGYLL_INSTALLATION_PATH*") {
+# If PATH is empty or null, initialize it
+if ([string]::IsNullOrWhiteSpace($p)) {
     [Environment]::SetEnvironmentVariable(
         "Path",
-        "$p;$ARGYLL_INSTALLATION_PATH",
+        $ARGYLL_INSTALLATION_PATH,
         "User"
     )
+    Write-Host "PATH was empty. Added Argyll to PATH."
+    return
+}
+
+# Split PATH into entries and trim whitespace
+$paths = $p.Split(';') | ForEach-Object { $_.Trim() }
+
+# Check for exact match
+if ($paths -notcontains $ARGYLL_INSTALLATION_PATH) {
+
+    $newPath = ($paths + $ARGYLL_INSTALLATION_PATH) -join ';'
+
+    [Environment]::SetEnvironmentVariable(
+        "Path",
+        $newPath,
+        "User"
+    )
+
     Write-Host "Added Argyll to PATH"
 }
 else {
