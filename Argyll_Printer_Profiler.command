@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-version="1.3.4"
+version="1.3.5"
 # Argyll Printer Profiler
 #
 # This is the original Bash script, providing macOS and Linux support for automated
-# printer ICC profiling using ArgyllCMS.
+# printer ICC/ICM profiling using ArgyllCMS.
 #
 # Supported Platforms:
 # - macOS
@@ -84,7 +84,7 @@ echo "  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      "
 echo "   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      "
 echo "                                                              "
 echo "        Argyll Printer Profiler (Automated Workflow)          "
-echo "          Color Target Generation & ICC Profiling             "
+echo "        Color Target Generation & ICC/ICM Profiling           "
 echo "=============================================================="
 echo
 echo
@@ -262,7 +262,6 @@ REQUIRED_CMDS=(
     colprof
     printtarg
     profcheck
-    dispcal
 )
 
 # Platform-specific requirements
@@ -280,7 +279,7 @@ for cmd in "${REQUIRED_CMDS[@]}"; do
   if ! command -v "$cmd" >/dev/null 2>&1; then
     # Check if it's an ArgyllCMS command or Linux tool
     case "$cmd" in
-        targen|chartread|colprof|printtarg|profcheck|dispcal)
+        targen|chartread|colprof|printtarg|profcheck)
             missing_argyll+=("$cmd")
             ;;
         zenity)
@@ -309,6 +308,9 @@ if [ ${#missing_argyll[@]} -gt 0 ]; then
         echo "Example:"
         echo "   sudo apt install argyll-cms"
     fi
+    echo
+    echo "ArgyllCMS commands must be available from terminal."
+    echo "Make sure PATH environmental variables are set correctly."
     echo
     read -p 'Press enter to quit...'
     exit 1
@@ -731,7 +733,7 @@ print_profile_name_menu() {
         echo "The profile description is what you will see in Photoshop and ColorSync Utility."
         echo
         echo "Enter a desired filename for this profile."
-        echo "If your filename is foobar, your profile will be named foobar.icc."
+        echo "If your filename is foobar, your profile will be named foobar with extension .icc or .icm."
         echo
     fi
     if [ -n "$current_display" ]; then
@@ -952,6 +954,7 @@ specify_and_generate_target() {
         echo '  choose a pre-made target (option 3. in main menu).'
         echo
     }
+
     menu_info_other_instruments() {
         echo "1: $INST_OTHER_MENU_OPTION1_PATCH_COUNT_f patches $INST_OTHER_MENU_OPTION1_DESCRIPTION"
         echo "2: $INST_OTHER_MENU_OPTION2_PATCH_COUNT_f patches $INST_OTHER_MENU_OPTION2_DESCRIPTION"
@@ -959,90 +962,7 @@ specify_and_generate_target() {
         echo "4: $INST_OTHER_MENU_OPTION4_PATCH_COUNT_f patches $INST_OTHER_MENU_OPTION4_DESCRIPTION"
         echo "5: $INST_OTHER_MENU_OPTION5_PATCH_COUNT_f patches $INST_OTHER_MENU_OPTION5_DESCRIPTION"
         echo "6: $INST_OTHER_MENU_OPTION6_PATCH_COUNT_f patches $INST_OTHER_MENU_OPTION6_DESCRIPTION"
-        echo "7: Custom – Specify arugments independend of setup parameters"
-        echo "8: Abort printing target."
-    }
-
-    menu_option_custom_target() {
-        label='Custom'
-        # Clear parameters
-        patch_count=''
-        white_patches=''
-        black_patches=''
-        gray_steps=''
-        multi_cube_steps=''
-        multi_cube_surface_steps=''
-        scale_patch_and_spacer=''
-        scale_spacer=''
-        layout_seed=''
-        inst_arg=''
-
-        while true; do
-            echo
-            echo
-            echo 'Specify targen command arguments:'
-            echo "Default value specified:"
-            echo "'${DEFAULT_TARGEN_COMMAND_CUSTOM}'"
-            echo
-            echo 'Notes: - Arguments -l and -c are programatically selected'
-            echo '         (unless empty '' in setup) and should not be specified below.'
-            if [ -n "$PRECONDITIONING_PROFILE_PATH" ]; then
-                echo '       - Current pre-conditioning profile specified -c:'
-                echo "         '${PRECONDITIONING_PROFILE_PATH}'"
-                precon_icc="${PRECONDITIONING_PROFILE_PATH}"
-            else
-                echo '       - Pre-conditioning profile is currently not specified in setup.'
-            fi
-            echo "       - Current ink limit specified -l: '${INK_LIMIT}'"
-            echo "       - For more information on targen arguments, see argyllcms manual."
-            echo
-            echo 'Valid values: Letters A–Z a–z, digits 0–9, dash -, underscore _, '
-            echo '              parentheses (), forward slash /, space, dot .'
-            read -e -p "Enter/modify arguments or enter to use default: " targen_command_custom
-
-            # Use default if user pressed Enter
-            if [[ -z "$targen_command_custom" ]]; then
-                targen_command_custom="${DEFAULT_TARGEN_COMMAND_CUSTOM}"
-                break
-            fi
-
-            if [[ ! "$targen_command_custom" =~ ^[A-Za-z0-9._()\/\-[:space:]]+$ ]]; then
-                echo "❌ Invalid characters. Please try again."
-                continue
-            fi
-
-            # Valid input → exit loop
-            break
-        done
-        while true; do
-            echo
-            echo
-            echo 'Specify printtarg command arguments:'
-            echo "Default value specified:"
-            echo "'${DEFAULT_PRINTTARG_COMMAND_CUSTOM}'"
-            echo
-            echo "Note: - Previously selected instrument (-i), resolution (-T) "
-            echo "        and page size (-p) must be specified again if desired."
-            echo "      - For more information on printtarg arguments, see argyllcms manual."
-            echo
-            echo 'Valid values: Letters A–Z a–z, digits 0–9, dash -, underscore _, '
-            echo '              parentheses (), forward slash /, space, dot .'
-            read -e -p "Enter/modify arguments or enter to use default: " printtarg_command_custom
-
-            # Use default if user pressed Enter
-            if [[ -z "$printtarg_command_custom" ]]; then
-                printtarg_command_custom="${DEFAULT_PRINTTARG_COMMAND_CUSTOM}"
-                break
-            fi
-
-            if [[ ! "$printtarg_command_custom" =~ ^[A-Za-z0-9._()\/\-[:space:]]+$ ]]; then
-                echo "❌ Invalid characters. Please try again."
-                continue
-            fi
-
-            # Valid input → exit loop
-            break
-        done
+        echo "7: Abort printing target."
     }
 
     default_target() {
@@ -1103,8 +1023,7 @@ specify_and_generate_target() {
                 echo "4: $INST_CM_MENU_OPTION4_PATCH_COUNT_A4_f patches $INST_CM_MENU_OPTION4_A4_DESCRIPTION"
                 echo "5: $INST_CM_MENU_OPTION5_PATCH_COUNT_A4_f patches $INST_CM_MENU_OPTION5_A4_DESCRIPTION"
                 echo "6: $INST_CM_MENU_OPTION6_PATCH_COUNT_A4_f patches $INST_CM_MENU_OPTION6_A4_DESCRIPTION"
-                echo "7: Custom – Specify arugments independend of setup parameters"
-                echo "8: Abort printing target."
+                echo "7: Abort printing target."
             elif [ "$PAPER_SIZE" = "Letter" ]; then
                 echo
                 echo "Below menu choices have been optimized for page size $PAPER_SIZE and $inst_name instrument."
@@ -1118,8 +1037,7 @@ specify_and_generate_target() {
                 echo "4: $INST_CM_MENU_OPTION4_PATCH_COUNT_LETTER_f patches $INST_CM_MENU_OPTION4_LETTER_DESCRIPTION"
                 echo "5: $INST_CM_MENU_OPTION5_PATCH_COUNT_LETTER_f patches $INST_CM_MENU_OPTION5_LETTER_DESCRIPTION"
                 echo "6: $INST_CM_MENU_OPTION6_PATCH_COUNT_LETTER_f patches $INST_CM_MENU_OPTION6_LETTER_DESCRIPTION"
-                echo "7: Custom – Specify arugments independend of setup parameters"
-                echo "8: Abort printing target."
+                echo "7: Abort printing target."
             else
                 # PAPER_SIZE A4 or any other value than Letter
                 echo
@@ -1146,7 +1064,7 @@ specify_and_generate_target() {
 
         echo
         # Prompt user after menu
-        read -r -n 1 -p 'Enter your choice [1–8]: ' patch_choice
+        read -r -n 1 -p 'Enter your choice [1–7]: ' patch_choice
         echo
         case "$patch_choice" in
         1)
@@ -1359,9 +1277,6 @@ specify_and_generate_target() {
             layout_seed="$INST_CM_MENU_OPTION6_LAYOUT_SEED_R"
             ;;
         7)
-            menu_option_custom_target
-            ;;
-        8)
             echo 'Aborting printing target.'
             return 1
             ;;
@@ -1372,21 +1287,7 @@ specify_and_generate_target() {
         esac
 
         echo
-        if [ ! "$label" = "Custom" ]; then      # When menu choice other than Custom
-            echo "Selected target: ${label} – ${patch_count} patches"
-        else
-            targen_c=''        # pre-conditioning profile path with filename
-            if [ -n "$PRECONDITIONING_PROFILE_PATH" ]; then
-                targen_c=(" -c \"$PRECONDITIONING_PROFILE_PATH\"")
-            fi
-            targen_l=''        # ink limit
-            if [ -n "$INK_LIMIT" ]; then
-                targen_l=" -l${INK_LIMIT}"
-            fi
-            echo "Selected target: - ${label}"
-            echo "                 - targen arguments: ${targen_command_custom}${targen_l}${targen_c}"
-            echo "                 - printtarg arguments: ${printtarg_command_custom}"
-        fi
+        echo "Selected target: ${label} – ${patch_count} patches"
 
         while true; do
             echo
@@ -1479,45 +1380,32 @@ specify_and_generate_target() {
         fi
     fi
 
-    if [ ! "$label" = "Custom" ]; then      # When menu choice other than Custom
+    echo
+    echo 'Generating target color values (.ti1 file)...'
+    echo "Command Used: targen ${COMMON_ARGUMENTS_TARGEN}${targen_l}${targen_e}${targen_B}${targen_g}${targen_m}${targen_M}${targen_f} "${targen_c[@]}" "${name}""
+    # --- Generate target ONLY ONCE, after confirmation ---
+    if ! targen ${COMMON_ARGUMENTS_TARGEN}${targen_l}${targen_e}${targen_B}${targen_g}${targen_m}${targen_M}${targen_f} "${targen_c[@]}" "${name}"; then
         echo
-        echo 'Generating target color values (.ti1 file)...'
-        echo "Command Used: targen ${COMMON_ARGUMENTS_TARGEN}${targen_l}${targen_e}${targen_B}${targen_g}${targen_m}${targen_M}${targen_f} "${targen_c[@]}" "${name}""
-        # --- Generate target ONLY ONCE, after confirmation ---
-        targen ${COMMON_ARGUMENTS_TARGEN}${targen_l}${targen_e}${targen_B}${targen_g}${targen_m}${targen_M}${targen_f} "${targen_c[@]}" "${name}" || {
-            echo "❌ targen failed."
-            return 1
-        }
-
+        echo "❌ targen failed."
+        echo "   Exit code: $?"
+        echo "   Error: Command failed during execution"
         echo
-        echo 'Generating target(s) (.tif image(es) and .ti2 file)...'
-        echo "Command Used: printtarg ${COMMON_ARGUMENTS_PRINTTARG}${inst_arg}${printtarg_R}${printtarg_T}${printtarg_p}${printtarg_a}${printtarg_A} "${name}""
-        # Common printtarg command
-        printtarg ${COMMON_ARGUMENTS_PRINTTARG}${inst_arg}${printtarg_R}${printtarg_T}${printtarg_p}${printtarg_a}${printtarg_A} "${name}" || {
-            echo "❌ printtarg failed."
-            return 1
-        }
-        echo
-    else      # When menu choice is Custom
-        echo
-        echo 'Generating target color values (.ti1 file)...'
-        # --- Generate target ONLY ONCE, after confirmation ---
-        echo "Command Used: targen ${targen_command_custom}${targen_l} "${targen_c[@]}" "${name}""
-        targen ${targen_command_custom}${targen_l} "${targen_c[@]}" "${name}" || {
-            echo "❌ targen failed."
-            return 1
-        }
-
-        echo
-        echo 'Generating target(s) (.tif image(s) and .ti2 file)...'
-        echo "Command Used: printtarg ${printtarg_command_custom} "${name}""
-        # Common printtarg command
-        printtarg ${printtarg_command_custom} "${name}" || {
-            echo "❌ printtarg failed."
-            return 1
-        }
-        echo
+        return 1
     fi
+
+    echo
+    echo 'Generating target(s) (.tif image(es) and .ti2 file)...'
+    echo "Command Used: printtarg ${COMMON_ARGUMENTS_PRINTTARG}${inst_arg}${printtarg_R}${printtarg_T}${printtarg_p}${printtarg_a}${printtarg_A} "${name}""
+    # Common printtarg command
+    if ! printtarg ${COMMON_ARGUMENTS_PRINTTARG}${inst_arg}${printtarg_R}${printtarg_T}${printtarg_p}${printtarg_a}${printtarg_A} "${name}"; then
+        echo
+        echo "❌ printtarg failed."
+        echo "   Exit code: $?"
+        echo "   Error: Command failed during execution"
+        echo
+        return 1
+    fi
+    echo
 
     # Detect generated TIFF files (single-page or multi-page)
     tif_files=()
@@ -1558,7 +1446,7 @@ specify_and_generate_target() {
         fi
     else
         echo 'Please print the test chart(s) and make sure to disable color management.'
-        echo 'Use applications like ColorSync Utility or Adobe Color Print Utility.'
+        echo 'Use applications like Adobe Color Print Utility.'
     fi
 
     echo
@@ -1847,7 +1735,7 @@ EOF
                 echo "  $(basename "$f")"
             done
 
-            copy_or_overwrite_submenu "use files in their current location, " "existing .ti3 and .icc/icm files will be overwritten"
+            copy_or_overwrite_submenu "use files in their current location, " "existing .ti3 and .icc/.icm files will be overwritten"
         elif [[ "$type" == "ti3" ]]; then
             # Verify .ti2 exists
             if [ ! -n "$name" ] || [ ! -f "${source_folder}/${name}.ti2" ]; then
@@ -1879,13 +1767,17 @@ EOF
                 echo "  $(basename "$f")"
             done
 
-            copy_or_overwrite_submenu "measurement will" "resume using existing .ti3 and .icc/icm file will be overwritten"
+            copy_or_overwrite_submenu "measurement will" "resume using existing .ti3 and .icc/.icm file will be overwritten"
         elif [[ "$type" == "ti3_only" ]]; then
             # only for action 5 (perform sanity check)
             if [ "$action" = "5" ]; then
-                # Verify .icc exists
-                if [ ! -n "$name" ] || [ ! -f "${source_folder}/${name}.icc" ]; then
-                    echo "❌ Matching .icc file not found for '${name}'."
+                # Check for .icc first, then .icm
+                if [ -n "$name" ] && [ -f "${source_folder}/${name}.icc" ]; then
+                    profile_extension="icc"
+                elif [ -n "$name" ] && [ -f "${source_folder}/${name}.icm" ]; then
+                    profile_extension="icm"
+                else
+                    echo "❌ Matching .icc/.icm file not found for '${name}'."
                     return 1
                 fi
             fi
@@ -1904,7 +1796,7 @@ EOF
 
             # only for action 4 (Create printer profile from an existing measurement file)
             if [ "$action" = "4" ]; then
-                copy_or_overwrite_submenu "existing .icc/icm file will be overwritten" ""
+                copy_or_overwrite_submenu "existing .icc/.icm file will be overwritten" ""
             fi
         fi
     fi
@@ -2017,7 +1909,7 @@ show_de_reference() {
     echo "──────────────────────────────────────────────────────────────────────────────"
     echo
     echo "Notes:"
-    echo "   • Values assume proper ICC profiling and correct media settings"
+    echo "   • Values assume proper ICC/ICM profiling and correct media settings"
     echo "   • Avg = overall accuracy, 95% = typical worst case, Max = outliers"
     echo "   • Lower ΔE = higher color accuracy"
     echo "   • ΔE < 1.0 is generally considered visually indistinguishable"
@@ -2053,7 +1945,7 @@ improving_accuracy() {
     echo "      b. In main menu, chose option 3, then select the target used"
     echo "         for your profile by selecting"
     echo "         the .ti2 file (files and targets should be in the folder"
-    echo "         where your .icc is stored)"
+    echo "         where your .icc/.icm is stored)"
     echo "      c. Select option '1. Create new profile (copy files into"
     echo "         new folder)'. Do not overwrite."
     echo "      d. Start reading only those strips where high error has been"
@@ -2072,7 +1964,7 @@ improving_accuracy() {
     echo "         replace the line with same ID in the original .ti3 file."
     echo "         Then save file."
     echo "      h. Now choose option 4 in main menu. Select the updated .ti3"
-    echo "         file. Now a new .icc profile and and sanity report is"
+    echo "         file. Now a new .icc/.icm profile and and sanity report is"
     echo "         created. Study results and see if the profile is improved."
     echo
     echo "────────────────────────────────────────────────────────────────"
@@ -2084,13 +1976,23 @@ sanity_check() {
     echo
     echo 'Performing sanity check (creating .txt file)...'
     echo
-    echo "Command Used: profcheck -v2 -k -s" 2>&1 > "${name}_sanity_check.txt"
-    profcheck -v2 -k -s "${name}.ti3" "${name}.icc" 2>&1 >> "${name}_sanity_check.txt" || {
+    # Show command in terminal, log file, and sanity check file
+    # Profcheck output only to sanity check file (not terminal or main log)
+    echo "Command Used: profcheck -v2 -k -s \"${name}.ti3\" \"${name}.${profile_extension}\"" | tee -a "${name}_sanity_check.txt"
+    if ! profcheck -v2 -k -s "${name}.ti3" "${name}.${profile_extension}" >> "${name}_sanity_check.txt" 2>&1; then
+        profcheck_exit_code=${PIPESTATUS[0]}
         echo
         echo "❌ profcheck failed."
+        echo "   Exit code: ${profcheck_exit_code}"
+        echo "   Error: Command failed during execution"
+        echo
+        echo "Debug output, profcheck after delta E analysis:"
+        echo " - name = '${name}'"
+        echo " - profile_extension = '${profile_extension}'"
+        echo " - sanity_file = '${name}_sanity_check.txt'"
         echo
         return 1
-    }
+    fi
     # Append to sanity check file
     {
         echo
@@ -2195,6 +2097,9 @@ sanity_check() {
 
     # Display results
     echo
+    echo "──────────────────────────────────────────"
+    echo "Analysis done by Argyll_Printer_Profiler"
+    echo "──────────────────────────────────────────"
     echo "Delta E Range Analysis:"
     echo "  Largest ΔE:  $largest"
     echo "  Smallest ΔE: $smallest"
@@ -2209,12 +2114,16 @@ sanity_check() {
     echo "  Percent of patches with ΔE<1.0: ${percent_lt_1}%"
     echo "  Percent of patches with ΔE<2.0: ${percent_lt_2}%"
     echo "  Percent of patches with ΔE<3.0: ${percent_lt_3}%"
+    echo "──────────────────────────────────────────"
     echo
 
     # Append results to sanity check file
     {
         echo
-        echo "=== Delta E Range Analysis ==="
+        echo "========================================"
+        echo "Analysis done by Argyll_Printer_Profiler"
+        echo "========================================"
+        echo "Delta E Range Analysis:"
         echo "Largest ΔE: $largest"
         echo "Smallest ΔE: $smallest"
         echo
@@ -2228,22 +2137,29 @@ sanity_check() {
         echo "Percent of patches with ΔE<1.0: ${percent_lt_1}%"
         echo "Percent of patches with ΔE<2.0: ${percent_lt_2}%"
         echo "Percent of patches with ΔE<3.0: ${percent_lt_3}%"
-        echo "================================"
+        echo "========================================"
         echo
     } >> "${name}_sanity_check.txt"
 
-    profcheck -v -k "${name}.ti3" "${name}.icc" || {
+    # Run another profcheck and append
+    # Show command in log file and sanity check file
+    # Show profcheck output to terminal, log file, and sanity check file
+    echo "Command Used: profcheck -v -k \"${name}.ti3\" \"${name}.${profile_extension}\"" >> "${name}_sanity_check.txt"
+    # Real-time output with proper error checking
+    if ! profcheck -v -k "${name}.ti3" "${name}.${profile_extension}" 2>&1 | tee -a "${name}_sanity_check.txt"; then
+        profcheck_exit_code=${PIPESTATUS[0]}
         echo
         echo "❌ profcheck failed."
+        echo "   Exit code: ${profcheck_exit_code}"
+        echo "   Error: Command failed during execution"
+        echo
+        echo "Debug output, profcheck after delta E analysis:"
+        echo " - name = '${name}'"
+        echo " - profile_extension = '${profile_extension}'"
+        echo " - sanity_file = '${name}_sanity_check.txt'"
         echo
         return 1
-    }
-    profcheck -v -k "${name}.ti3" "${name}.icc" 2>&1 >> "${name}_sanity_check.txt" || {
-        echo
-        echo "❌ profcheck failed."
-        echo
-        return 1
-    }
+    fi
 
     echo
     echo "Sanity Check Complete"
@@ -2278,6 +2194,21 @@ common_text_tips() {
     echo "     - Save progress once in a while with 'd' and then"
     echo "       resume measuring with option 2 of main menu."
 }
+
+
+check_profile_extension() {
+    # Check if created profile is .icc or .icm, then store extension
+    # Check for .icc first, then .icm
+    if [ -n "$name" ] && [ -f "${profile_folder}/${name}.icc" ]; then
+        profile_extension="icc"
+    elif [ -n "$name" ] && [ -f "${profile_folder}/${name}.icm" ]; then
+        profile_extension="icm"
+    else
+        echo "❌ Profile .icc/.icm file not found for '${name}' after completion of colprof."
+        return 1
+    fi
+}
+
 
 perform_measurement_and_profile_creation() {
     log_event_enter "workflow:perform_measurement_and_profile_creation"
@@ -2327,16 +2258,18 @@ perform_measurement_and_profile_creation() {
         echo
         common_text_tips
         echo
-        echo "Command Used: chartread ${COMMON_ARGUMENTS_CHARTREAD} -r${chartread_T} "${name}""
-        chartread ${COMMON_ARGUMENTS_CHARTREAD} -r${chartread_T} "${name}" || {
+        echo "Command Used: chartread ${COMMON_ARGUMENTS_CHARTREAD} -r${chartread_T} \"${name}\""
+        if ! chartread ${COMMON_ARGUMENTS_CHARTREAD} -r${chartread_T} "${name}"; then
             echo
             echo "❌ chartread failed."
+            echo "   Exit code: $?"
+            echo "   Error: Command failed during execution"
             echo
             return 1
-        }
+        fi
 
         # Detect abort after chartread
-        # Resume mode: Check if file modified, if not user abored
+        # Resume mode: Check if file modified, if not user aborted
         local ti3_mtime_after
         ti3_mtime_after=$(file_mtime "$ti3_file")
 
@@ -2351,13 +2284,15 @@ perform_measurement_and_profile_creation() {
         echo
         common_text_tips
         echo
-        echo "Command Used: chartread ${COMMON_ARGUMENTS_CHARTREAD}${chartread_T} "${name}""
-        chartread ${COMMON_ARGUMENTS_CHARTREAD}${chartread_T} "${name}" || {
+        echo "Command Used: chartread ${COMMON_ARGUMENTS_CHARTREAD}${chartread_T} \"${name}\""
+        if ! chartread ${COMMON_ARGUMENTS_CHARTREAD}${chartread_T} "${name}"; then
             echo
             echo "❌ chartread failed."
+            echo "   Exit code: $?"
+            echo "   Error: Command failed during execution"
             echo
             return 1
-        }
+        fi
 
         # Detect abort after chartread
         # Fresh read: file must exist
@@ -2372,10 +2307,12 @@ perform_measurement_and_profile_creation() {
     # --- Build colprof arguments conditionally ---------------------------
     # For colprof, if any variable for each argument is empty, then remove argument in command (empty parameter)
     colprof_S=()        # printer icc profile (required)
+    colprof_text=""
     if [ -n "$PRINTER_ICC_PATH" ] && [ -f "$PRINTER_ICC_PATH" ]; then
        colprof_S+=("-S" "$PRINTER_ICC_PATH")
+       colprof_text=" -S \"$PRINTER_ICC_PATH\""
     else
-        echo "⚠️ Warning: Printer ICC profile not found: '$PRINTER_ICC_PATH'"
+        echo "⚠️ Warning: Printer ICC/ICM profile not found: '$PRINTER_ICC_PATH'"
         echo "   Make sure parameter PRINTER_ICC_PATH is specified and valid. Use main menu option 6, or manually edit .ini file."
         echo "   This defines path and file name for the color space to use when creating profile with colprof."
         echo "   Cancelling running colprof..."
@@ -2397,14 +2334,21 @@ perform_measurement_and_profile_creation() {
     [yY]|[yY][eE][sS])
         echo
         echo
-        echo "Starting profile creation (read .ti3 file and generate .icc file)..."
-        echo "Command Used: colprof ${COMMON_ARGUMENTS_COLPROF}${colprof_l}${colprof_r} "${colprof_S[@]}" -D "${desc}" "${name}""
-        colprof ${COMMON_ARGUMENTS_COLPROF}${colprof_l}${colprof_r} "${colprof_S[@]}" -D "${desc}" "${name}" || {
+        echo "Starting profile creation (read .ti3 file and generate .icc/.icm file)..."
+        echo "Command Used: colprof ${COMMON_ARGUMENTS_COLPROF}${colprof_l}${colprof_r}${colprof_text} -D \"${desc}\" \"${name}\""
+        if ! colprof ${COMMON_ARGUMENTS_COLPROF}${colprof_l}${colprof_r} "${colprof_S[@]}" -D "${desc}" "${name}"; then
             echo
             echo "❌ colprof failed."
+            echo "   Exit code: $?"
+            echo "   Error: Command failed during execution"
+            echo
+            echo "Debug output:"
+            echo " - name = '${name}'"
+            echo " - profile_extension = '${profile_extension}'"
             echo
             return 1
-        }
+        fi
+
         echo
         echo 'Profile created.'
         echo
@@ -2416,6 +2360,11 @@ perform_measurement_and_profile_creation() {
         return 1
         ;;
     esac
+
+    check_profile_extension || {
+        return 1
+    }
+
     sanity_check || {
         return 1
     }
@@ -2426,10 +2375,12 @@ create_profile_from_existing() {
     # --- Build colprof arguments conditionally ---------------------------
     # For colprof, if any variable for each argument is empty, then remove argument in command (empty parameter)
     colprof_S=()        # printer icc profile (required)
+    colprof_text=""
     if [ -n "$PRINTER_ICC_PATH" ] && [ -f "$PRINTER_ICC_PATH" ]; then
        colprof_S+=("-S" "$PRINTER_ICC_PATH")
+       colprof_text=" -S \"$PRINTER_ICC_PATH\""
     else
-        echo "⚠️ Warning: Printer ICC profile not found: '$PRINTER_ICC_PATH'"
+        echo "⚠️ Warning: Printer ICC/ICM profile not found: '$PRINTER_ICC_PATH'"
         echo "   Make sure parameter PRINTER_ICC_PATH is specified and valid. Use main menu option 6, or manually edit .ini file."
         echo "   This defines path and file name for the color space to use when creating profile with colprof."
         echo "   Cancelling running colprof..."
@@ -2446,17 +2397,29 @@ create_profile_from_existing() {
 
     echo
     echo
-    echo "Starting profile creation (read .ti3 file and generate .icc file)..."
-    echo "Command Used: colprof ${COMMON_ARGUMENTS_COLPROF}${colprof_l}${colprof_r} "${colprof_S[@]}" -D "${desc}" "${name}""
-    colprof ${COMMON_ARGUMENTS_COLPROF}${colprof_l}${colprof_r} "${colprof_S[@]}" -D "${desc}" "${name}" || {
+    echo "Starting profile creation (read .ti3 file and generate .icc/.icm file)..."
+    echo "Command Used: colprof ${COMMON_ARGUMENTS_COLPROF}${colprof_l}${colprof_r}${colprof_text} -D \"${desc}\" \"${name}\""
+    if ! colprof ${COMMON_ARGUMENTS_COLPROF}${colprof_l}${colprof_r} "${colprof_S[@]}" -D "${desc}" "${name}"; then
         echo
         echo "❌ colprof failed."
+        echo "   Exit code: $?"
+        echo "   Error: Command failed during execution"
+        echo
+        echo "Debug output:"
+        echo " - name = '${name}'"
+        echo " - profile_extension = '${profile_extension}'"
         echo
         return 1
-    }
+    fi
+
     echo
     echo 'Profile created.'
     echo
+
+    check_profile_extension || {
+        return 1
+    }
+
     sanity_check || {
         return 1
     }
@@ -2465,7 +2428,7 @@ create_profile_from_existing() {
 install_profile_and_save_data() {
     log_event_enter "workflow:install_profile_and_save_data"
     echo
-    echo 'Installing measured ICC profile...'
+    echo 'Installing measured ICC/ICM profile...'
     echo
 
     # Expand ~ and environment variables (e.g. $HOME) in destination path
@@ -2473,9 +2436,9 @@ install_profile_and_save_data() {
     expanded_profiles_path="$(expand_path_safe "${PRINTER_PROFILES_PATH}")"
 
     # Verify source ICC exists
-    if [ ! -f "${name}.icc" ]; then
+    if [ ! -f "${name}.${profile_extension}" ]; then
         echo
-        echo "❌ ICC profile not found: '${name}.icc'"
+        echo "❌ ICC/ICM profile not found: '${name}.${profile_extension}'"
         echo "   Expected it in the current working directory:"
         echo "   $(pwd)"
         echo
@@ -2511,7 +2474,7 @@ install_profile_and_save_data() {
                 echo "     1) Change PRINTER_PROFILES_PATH to a user folder (recommended)"
                 echo "        e.g. '$HOME/.local/share/color/icc' (create if missing)"
                 echo "     2) Or install to the system folder using sudo (advanced)"
-                echo "        e.g. sudo cp '${name}.icc' '${PRINTER_PROFILES_PATH}/'"
+                echo "        e.g. sudo cp '${name}.${profile_extension}' '${PRINTER_PROFILES_PATH}/'"
             fi
             echo
             echo "   Current permissions:"
@@ -2524,15 +2487,15 @@ install_profile_and_save_data() {
         return 1
     fi
 
-    cp "${name}.icc" "${expanded_profiles_path}" || {
+    cp "${name}.${profile_extension}" "${expanded_profiles_path}" || {
         echo
-        echo "❌ Failed to copy ICC profile to '${PRINTER_PROFILES_PATH}'."
+        echo "❌ Failed to copy ICC/ICM profile to '${PRINTER_PROFILES_PATH}'."
         echo "   Check folder permissions or disk access."
         echo
         return 1
     }
 
-    echo "Finished. '${name}.icc' was installed to the directory '${expanded_profiles_path}'"
+    echo "Finished. '${name}.${profile_extension}' was installed to the directory '${expanded_profiles_path}'"
     echo "Please restart any color-managed applications before using this profile."
     echo "To print with this profile in a color-managed workflow, select '${name}' in the profile selection menu."
 }
@@ -2653,15 +2616,15 @@ edit_setup_parameters() {
                 ;;
 
             2)
-                echo ""
+                echo
                 echo "What do you want to do?"
-                echo "  1) Choose color space profile file (icc/icm)"
+                echo "  1) Choose color space profile file (.icc/.icm)"
                 echo "  2) Clear parameter (no profile)"
-                echo ""
+                echo
 
                 while true; do
                     read -r -n 1 -p "Enter choice [1-2]: " choice
-                    echo ""
+                    echo
 
                     if [ "$choice" = "1" ]; then
                         if select_file "icc" "Select a new pre-conditioning profile (.icc or .icm)" "icc"; then
@@ -2771,7 +2734,7 @@ edit_setup_parameters() {
                     echo "'${EXAMPLE_FILE_NAMING}'"
                     echo
                     echo 'Valid values: '
-                    echo 'Letters A–Z a–z, digits 0–9, dash -, underscore _, parentheses (), dot .'
+                    echo 'Letters A-Z a-z, digits 0-9, dash -, underscore _, parentheses (), dot .'
                     echo
                     echo "─────────────────────────────────────────────────────────────────────"
                     echo
@@ -2915,6 +2878,7 @@ main_menu() {
         desc=""
         action=""
         profile_folder=""
+        profile_extension=""
         new_name=""
         ti3_mtime_before=""
         ti3_mtime_after=""
@@ -2926,7 +2890,7 @@ main_menu() {
         echo "Printer Profiling — Main Menu"
         echo "─────────────────────────────────────────────────────────────────────────"
         echo 'General Notes: '
-        echo '   1. Existing ti1/ti2/ti3/icc and target image (.tif) filenames must match.'
+        echo '   1. Existing ti1/ti2/ti3/icc/icm and target image (.tif) filenames must match.'
         echo '   2. If more than one target image, filenames must end with _01, _02, etc.'
         echo
         echo
@@ -3095,7 +3059,7 @@ main_menu() {
                 continue
             fi
             # Call functions
-            dialog_title="Select an existing completed .ti3 file to create .icc profile with."
+            dialog_title="Select an existing completed .ti3 file to create .icc/.icm profile with."
             echo
             echo
             echo "$dialog_title"
@@ -3126,7 +3090,7 @@ main_menu() {
             action='5'
             # Call functions
 
-            dialog_title="Select an existing .ti3 file that has a matching .icc profile."
+            dialog_title="Select an existing .ti3 file that has a matching .icc/.icm profile."
             echo
             echo
             echo "$dialog_title"
