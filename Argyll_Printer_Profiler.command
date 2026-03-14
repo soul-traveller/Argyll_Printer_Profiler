@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-version="1.3.5"
+version="1.3.6"
 # Argyll Printer Profiler
 #
 # This is the original Bash script, providing macOS and Linux support for automated
@@ -88,8 +88,10 @@ echo "        Color Target Generation & ICC/ICM Profiling           "
 echo "=============================================================="
 echo
 echo
-echo "Automated ArgyllCMS script for calibrating printers on MacOS and Linux."
-echo "Targets are adapted for use with X-Rite Colormunki Photo / i1Studio."
+echo "Automated ArgyllCMS script for calibrating printers on macOS and Linux."
+echo "A selection of targets is provided as examples in the folder Pre-made_Targets."
+echo "These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro."
+echo "Modify target charts for menu option 1 and command arguments in .ini file."
 echo
 echo "Author:  Knut Larsson"
 echo "Version: $version"

@@ -1,0 +1,3 @@
+# Commands used
+# Letter paper size, Portrait: Ensure strip length is approx. <260cm or <2050pixels at 200 dpi.
+printtarg -v -P -ii1 -T200 -pLetter -M8 -R161 -a0.92 -A0.6 i1Pro-Expert-Letter-1168p-2pages-tc918-grays-randomized

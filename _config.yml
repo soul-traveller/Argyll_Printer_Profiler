@@ -7,14 +7,20 @@ author: "Knut Larsson"
 lang: en
 keywords:
   - Argyll_Printer_Profiler
+  - Argyll Printer Profiler
   - ArgyllCMS
   - Argyll CMS
+  - argyll-cms
+  - argyllcms
   - automated ArgyllCMS workflow
   - printer profiling automation
   - printer ICC profiling
   - ICC profile creation
   - ICC profile generation
   - ICC color profiles
+  - ICM profile creation
+  - ICM profile generation
+  - ICM color profiles
   - printer calibration
   - printer characterization
   - printer color management
@@ -27,6 +33,7 @@ keywords:
   - Homebrew ArgyllCMS
   - bash script
   - shell script
+  - python script
   - macOS bash automation
   - terminal-based profiling
   - ColorSync Utility
@@ -37,13 +44,18 @@ keywords:
   - chartread
   - colprof
   - profcheck
-  - dispcal
   - TI1 file
   - TI2 file
   - TI3 file
   - spectrophotometer support
   - X-Rite ColorMunki Photo
+  - X-Rite i1Studio
   - X-Rite i1Pro
+  - X-Rite i1Pro2
+  - X-Rite i1Pro3
+  - X-Rite i1 Pro
+  - X-Rite i1 Pro 2
+  - X-Rite i1 Pro 3
   - printer ink limit
   - patch consistency tolerance
   - RGB printer profiling
@@ -51,6 +63,7 @@ keywords:
   - inkjet printer profiling
   - fine art printer profiling
   - ICC workflow automation
+  - ICM workflow automation
   - photographic printing accuracy
 
 plugins:

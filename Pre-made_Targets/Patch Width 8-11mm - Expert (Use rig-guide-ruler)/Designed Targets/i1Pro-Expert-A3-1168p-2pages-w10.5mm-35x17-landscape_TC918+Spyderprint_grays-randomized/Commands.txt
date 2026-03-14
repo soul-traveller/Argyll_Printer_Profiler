@@ -1,0 +1,3 @@
+# Commands used
+# A3 paper size, Landscape: Ensure strip length is approx. 260cm or 2050pixels at 200 dpi.
+printtarg -v -P -ii1 -T200 -p420x297 -M8 -R161 -a1.36 i1Pro-Expert-A3-1168p-2pages-landscape-tc918-grays-randomized

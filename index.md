@@ -1,5 +1,5 @@
 # Argyll_Printer_Profiler Scripts — User Guide
-**Version:** 1.3.5<br>
+**Version:** 1.3.6<br>
 **Platform:** macOS, Linux (Bash script); macOS, Linux, Windows (Python script)<br>
 **Based on:** Simple script by Jintak Han (https://github.com/jintakhan/AutomatedArgyllPrinter)<br>
 **Author:** Knut Larsson<br>
@@ -40,16 +40,16 @@
 
 ## Overview
 
-This script provides a **guided, menu-driven interface** for creating printer ICC profiles using ArgyllCMS.   
+This script provides a **guided, menu-driven interface** for creating printer ICC profiles using ArgyllCMS.
 
 It is designed for:
 
 - Inkjet and laser printers
-- X-Rite ColorMunki / i1Studio and instruments compatible with ArgyllCMS
-- Users who want:  
-  - Simple user-focused guidance from start to finish.  
-  - Reproducible, well-documented profiles without memorizing  
-    ArgyllCMS commands and manual procedural steps.  
+- X-Rite ColorMunki / i1Studio / i1 Pro and other instruments supported by ArgyllCMS
+- Users who want:
+  - Simple user-focused guidance from start to finish.
+  - Reproducible, well-documented profiles without memorizing
+    ArgyllCMS commands and manual procedural steps.
 
 Make sure to read chapter on [Installation](#installation) below and follow steps in section [Getting Started](#getting-started).
 
@@ -114,12 +114,12 @@ Both scripts use the same setup file (`Argyll_Printer_Profiler_setup.ini`) and p
 - Percentile calculations (99th, 98th, 95th, 90th)
 - Patch count analysis below specific thresholds
 - Range statistics and outlier identification
- 
+
 ### Robust Error Handling
 - Variable validation in all functions
 - Dependency checking with clear error messages
 - Directory verification and automatic recovery
- 
+
 ### User Interface
 - Simple interactive terminal prompt
 
@@ -128,51 +128,51 @@ Both scripts use the same setup file (`Argyll_Printer_Profiler_setup.ini`) and p
 ## Installation
 ### Getting Started
 
-1. Prepare for the script to run:   
-    - Place script folder in a desired location. See section [Script Placement](#script-placement).   
-    - Check that dependencies are installed.  
-       - For MacOS/Linux:   
-          - See section [Bash Script Dependencies](#bash-script-dependencies).   
+1. Prepare for the script to run:
+    - Place script folder in a desired location. See section [Script Placement](#script-placement).
+    - Check that dependencies are installed.
+       - For MacOS/Linux:
+          - See section [Bash Script Dependencies](#bash-script-dependencies).
        - For Windows:
-          - See section[Python Script Dependencies](#python-script-dependencies).  
-    - Make sure environmental PATH variable for installed ArgyllCMS is present.  
-      This is especially important for Windows users. Use the script `add_argyll_path_windows`.  
-      which is supplied with the release of `Argyll\_Printer\_Profiler`.   
-      This script comes in two versions, use ase desired (guidance in header of file):  
-      1. Windows PowerShell: `add_argyll_path_windows.ps1` and   
-      2. Python: `add_argyll_path_windows.py`  
+          - See section[Python Script Dependencies](#python-script-dependencies).
+    - Make sure environmental PATH variable for installed ArgyllCMS is present.
+      This is especially important for Windows users. Use the script `add_argyll_path_windows`.
+      which is supplied with the release of `Argyll\_Printer\_Profiler`.
+      This script comes in two versions, use ase desired (guidance in header of file):
+      1. Windows PowerShell: `add_argyll_path_windows.ps1` and
+      2. Python: `add_argyll_path_windows.py`
 
 2. Modify the setup to fit your operating system. See section [Key Parameters](#key-parameters) for understanding the most important configurable parameters. The following should be assessed/modified:
 
-    a. Easily modified via main menu (option 6):   
-    
-      - Paths, which are different for MacOS/Linux/Windows and **must be changed**   
-        if not valid (visible above main menu when running script):   
-          - ICC/ICM profile to use `PRINTER_ICC_PATH` for creation of printer    
-            profile (used by colprof). This affects the color gamut for    
-            perceptual and saturation intents created in the profile by ArgyllCMS.    
+    a. Easily modified via main menu (option 6):
+
+      - Paths, which are different for MacOS/Linux/Windows and **must be changed**
+        if not valid (visible above main menu when running script):
+          - ICC/ICM profile to use `PRINTER_ICC_PATH` for creation of printer
+            profile (used by colprof). This affects the color gamut for
+            perceptual and saturation intents created in the profile by ArgyllCMS.
             Absolute and Relative colorimetric rendering intents are not affected.
-          - ICC/ICM profile to use `PRECONDITIONING_PROFILE_PATH`  
-            if target charts are generated to fit a particular profile (used by targen).  
-          - Location path `PRINTER_PROFILES_PATH` to folder where printer profiles   
-            are placed for operating system to use.  
-            
-      - Ink limit. (keep empty to use ArgyllCMS specified default)  
-      - Paper size.  
-      - `STRIP_PATCH_CONSISTENSY_TOLERANCE`  
-        (tolerance for how much color patch can vary before warning by chartread)   
-      - `EXAMPLE_FILE_NAMING`  
-        (naming convention visible as guidance when specifying file name).  
+          - ICC/ICM profile to use `PRECONDITIONING_PROFILE_PATH`
+            if target charts are generated to fit a particular profile (used by targen).
+          - Location path `PRINTER_PROFILES_PATH` to folder where printer profiles
+            are placed for operating system to use.
 
-    b. Modified in .ini file (defaults can be used as is):   
+      - Ink limit. (keep empty to use ArgyllCMS specified default)
+      - Paper size.
+      - `STRIP_PATCH_CONSISTENSY_TOLERANCE`
+        (tolerance for how much color patch can vary before warning by chartread)
+      - `EXAMPLE_FILE_NAMING`
+        (naming convention visible as guidance when specifying file name).
 
-      - Common arguments to use by default (`COMMON_ARGUMENTS_*`).  
-        - Is `COMMON_ARGUMENTS_TARGEN` satisfactory?   
-        - Is `COMMON_ARGUMENTS_PRINTTARG` satisfactory?   
-        - Is `COMMON_ARGUMENTS_CHARTREAD` satisfactory?   
-        - Is `COMMON_ARGUMENTS_COLPROF` satisfactory?   
+    b. Modified in .ini file (defaults can be used as is):
 
-      - Change menu arguments as desired (`INST_CM_MENU_*` and `INST_OTHER_MENU_*`).  
+      - Common arguments to use by default (`COMMON_ARGUMENTS_*`).
+        - Is `COMMON_ARGUMENTS_TARGEN` satisfactory?
+        - Is `COMMON_ARGUMENTS_PRINTTARG` satisfactory?
+        - Is `COMMON_ARGUMENTS_CHARTREAD` satisfactory?
+        - Is `COMMON_ARGUMENTS_COLPROF` satisfactory?
+
+      - Change menu arguments as desired (`INST_CM_MENU_*` and `INST_OTHER_MENU_*`).
 
 3. Run the script
 
@@ -213,18 +213,18 @@ or
 sudo apt install argyll zenity wmctrl
 ```
 
-**Note!**   
-Many Linux distributions have preinstalled Linux xdotool or wmctrl.  
-To verify if any of them is installed, open a terminal and run:  
+**Note!**
+Many Linux distributions have preinstalled Linux xdotool or wmctrl.
+To verify if any of them is installed, open a terminal and run:
 
 ```bash
 command -v xdotool >/dev/null 2>&1 && echo true || echo false
-```  
+```
 Outputs true if xdotool is installed, otherwise false.
 
 ```bash
 command -v wmctrl >/dev/null 2>&1 && echo true || echo false
-```   
+```
 Outputs true if wmctrl is installed, otherwise false.
 
 
@@ -307,7 +307,7 @@ You may place any of the scripts **in any folder**:
 
 All generated files are stored **relative to the script’s location**.
 
-**Setup File: Argyll\_Printer\_Profiler\_setup.ini**.  
+**Setup File: Argyll\_Printer\_Profiler\_setup.ini**.
 The setup file **must be located in the same folder as the script**:
 
 ```
@@ -326,7 +326,7 @@ Ctrl + Right Click on the script, then Open, may work in many cases instead of r
 On modern macOS versions, a script must have the **execute bit** set.
 
 1. Open Terminal
-2. Navigate to the script folder  
+2. Navigate to the script folder
    (use: "cd [folder_name]" and "ls" to navigate, "cd .." to navigate one level up)
 3. Run command:
 
@@ -353,11 +353,11 @@ You can now run the script by:
 ### Execution Permissions for Linux (Important)
 
 As for macOS, Linux scripts must have the **execute bit** set.
-However, the ".command" file extension is recommended to change to ".sh".   
+However, the ".command" file extension is recommended to change to ".sh".
 Rename file to .sh, then:
 
 1. Open Terminal
-2. Navigate to the script folder  
+2. Navigate to the script folder
    (use: "cd [folder_name]" and "ls" to navigate, "cd .." to navigate one level up)
 3. Run command:
 
@@ -394,7 +394,7 @@ You can now run the script by:
 - Or running `./Argyll_Printer_Profiler.sh` from Terminal
 
 ### Key Parameters
-**For details on ArgyllCMS, the commands used by this script (targen, printtarg, chartread, colprof, profcheck), see:**   
+**For details on ArgyllCMS, the commands used by this script (targen, printtarg, chartread, colprof, profcheck), see:**
 [https://www.argyllcms.com/doc/ArgyllDoc.html](https://www.argyllcms.com/doc/ArgyllDoc.html)
 
 See `Argyll_Printer_Profiler_setup.ini` for a descriptions and list of all parameters.
@@ -403,28 +403,28 @@ See `Argyll_Printer_Profiler_setup.ini` for a descriptions and list of all param
   Path to the RGB/CMYK colorspace profile used as reference (e.g. sRGB, AdobeRGB).
 
 - **`PRINTER_PROFILES_PATH`**
-  Destination folder for installed ICC/ICM profiles.  
+  Destination folder for installed ICC/ICM profiles.
   Example (recommended for MacOS): `$HOME/Library/ColorSync/Profiles`
 
-- **`STRIP_PATCH_CONSISTENSY_TOLERANCE`**  
-  Used by `chartread -T`  
+- **`STRIP_PATCH_CONSISTENSY_TOLERANCE`**
+  Used by `chartread -T`
   Default recommendation: **0.6**
 
-- **`INK_LIMIT`**   
+- **`INK_LIMIT`**
   Total ink limit used by `targen` and `colprof`
 
-  Typical values:   
+  Typical values:
   - Inkjet: 220–300
   - Laser: 180–260
 
-- **`PAPER_SIZE`**   
+- **`PAPER_SIZE`**
   `A4` or `Letter`
 
-- **`PROFILE_SMOOTING`**   
-  Argument -r in `colprof` average deviation, affecting accuracy and smoothing of profile.   
+- **`PROFILE_SMOOTING`**
+  Argument -r in `colprof` average deviation, affecting accuracy and smoothing of profile.
   Argyll-default 0.5. 1.0 makes smoother profile without much reduction in accuracy.
 
-- **`TARGET_RESOLUTION`**   
+- **`TARGET_RESOLUTION`**
   DPI for generated TIFF targets
 
 #### Instrument-Specific Parameters
@@ -536,32 +536,35 @@ The target generation menu options is available under main menu action **1**.
 The script provides **6 optimized preset targets**, where patch counts and menu text are configurable in the `.ini` file.
 
 ### ColorMunki Instrument (A4/Letter Paper)
-Default menu for ColorMunki instrument:
+Default menu for ColorMunki instrument (User may modify/add as desired):
 
-**A4 Paper Size:**  
-- **Option 1**: Small – 210 patches – 1 × A4 page, quick profiling.  
-- **Option 2**: Medium – 420 patches – 2 × A4 pages, recommended default.  
-- **Option 3**: Large – 630 patches – 3 × A4 pages, better accuracy.  
-- **Option 4**: XL – 840 patches – 4 × A4 pages, high quality.  
-- **Option 5**: XXL – 1050 patches – 5 × A4 pages, very high quality.  
-- **Option 6**: XXXL – 1260 patches – 6 × A4 pages, maximum quality.  
+**A4 Paper Size:**
+- **Option 1**: 210 patches  - Small  – 1 x A4 page,  quick profiling
+- **Option 2**: 420 patches  - Medium – 2 x A4 pages, recommended minimum.
+- **Option 3**: 630 patches  - Large  – 3 x A4 pages, better accuracy
+- **Option 4**: 840 patches  - XL     – 4 x A4 pages, high quality
+- **Option 5**: 1050 patches - XXL    – 5 x A4 pages, very high quality
+- **Option 6**: 1260 patches - XXXL   – 6 x A4 pages, maximum quality
 
-**Letter Paper Size:**  
-- **Option 1**: Small – 196 patches – 1 × Letter page, quick profiling.  
-- **Option 2**: Medium – 392 patches – 2 × Letter pages, recommended default.  
-- **Option 3**: Large – 588 patches – 3 × Letter pages, better accuracy.  
-- **Option 4**: XL – 784 patches – 4 × Letter pages, high quality.  
-- **Option 5**: XXL – 980 patches – 5 × Letter pages, very high quality.  
-- **Option 6**: XXXL – 1176 patches – 6 × Letter pages, maximum quality.  
+**Letter Paper Size:**
+- **Option 1**: 1: 196 patches  - Small  - 1 x Letter page,  quick profiling
+- **Option 2**: 2: 392 patches  - Medium - 2 x Letter pages, recommended minimum
+- **Option 3**: 3: 588 patches  - Large  - 3 x Letter pages, better accuracy
+- **Option 4**: 4: 784 patches  - XL     - 4 x Letter pages, high quality
+- **Option 5**: 5: 980 patches  - XXL    - 5 x Letter pages, very high quality
+- **Option 6**: 6: 1176 patches - XXXL   - 6 x Letter pages, maximum quality
 
 The Colormunki menu above has separate options for A4 and Letter, shown according to the current setting of paper size, which can be chosen in main menu option 6.
 
 ### Other Instruments (Same for All Paper Sizes)
-Default menu for other instruments is only partially specified. User may modify/add as desired:
+Default menu for other instruments (User may modify/add as desired):
 
-- **Option 1**: Small – 480 patches – quick profiling.  
-- **Option 2**: Medium – 960 patches – recommended default.  
-- **Options 3-6**: Options Not defined (specify in the `.ini` file).  
+- **Option 1**: 480 patches  - i1Pro Small  – 1 x A4 page,     quick profiling
+- **Option 2**: 480 patches  - i1Pro Small  – 1 x Letter page, quick profiling
+- **Option 3**: 957 patches  - i1Pro Medium – 1 x A4 page,     recommended default
+- **Option 4**: 957 patches  - i1Pro Medium – 1 x Letter page, recommended default
+- **Option 5**: 2250 patches - i1Pro Large  - 3 x A4 pages, better accuracy
+- **Option 6**: 2250 patches - i1Pro Large  - 3 x Letter pages, better accuracy
 
 The menu for Other Instruments is the same regardless of paper size. This means that, if options differentiate between A4 and Letter size, then the page size must first be set in main menu option 6.
 
@@ -641,16 +644,16 @@ Used to generate color values:
 After successful creation:
 
 - `.icc or .icm` file is copied to `PRINTER_PROFILES_PATH`
-- Typical paths:   
-   - macOS: 
-      - `$HOME/Library/ColorSync/Profiles/` (user) or 
+- Typical paths:
+   - macOS:
+      - `$HOME/Library/ColorSync/Profiles/` (user) or
       - `/Library/ColorSync/Profiles/` (system)
-   - Windows: 
-      - `C:\Windows\System32\spool\drivers\color\` or 
+   - Windows:
+      - `C:\Windows\System32\spool\drivers\color\` or
       - `%USERPROFILE%\AppData\Local\Microsoft\Windows\spool\drivers\color\`
-   - Linux: 
-      - `/usr/share/color/icc/` or 
-      - `/var/lib/colord/icc/` or 
+   - Linux:
+      - `/usr/share/color/icc/` or
+      - `/var/lib/colord/icc/` or
       - `$HOME/.color/icc/`
 
 macOS applications must be **restarted** to see the new profile.
@@ -670,11 +673,11 @@ Log files are essential for:
 - Support requests
 
 **If you require more detailed debugging information:
-**In the .ini file, locate the common parameters for the command you want to debug: 
-- **`COMMON_ARGUMENTS_TARGEN`**.  
-- **`COMMON_ARGUMENTS_PRINTTARG`**.  
-- **`COMMON_ARGUMENTS_CHARTREAD`**.  
-- **`COMMON_ARGUMENTS_COLPROF`**   
+**In the .ini file, locate the common parameters for the command you want to debug:
+- **`COMMON_ARGUMENTS_TARGEN`**.
+- **`COMMON_ARGUMENTS_PRINTTARG`**.
+- **`COMMON_ARGUMENTS_CHARTREAD`**.
+- **`COMMON_ARGUMENTS_COLPROF`**
 
 Change the **`-v`** argument on any of the parameters to **`-v2`**.
 Now terminal output and log file will show detailed debug output from ArgyllCMS commands.
@@ -695,25 +698,25 @@ Now terminal output and log file will show detailed debug output from ArgyllCMS 
 
 ### Script won’t run
 
-For .command script on Linux or MacOS:    
+For .command script on Linux or MacOS:
 
-   - Ensure execute bit is set (`chmod +x`). See sections: 
+   - Ensure execute bit is set (`chmod +x`). See sections:
       - [Execution Permissions for MacOS (Important)](#execution-permissions-for-macos-important)
       - [Execution Permissions for Linux (Important)](#execution-permissions-for-linux-important)
-   - macOS Gatekeeper may require Ctrl+right-click → Open.  
+   - macOS Gatekeeper may require Ctrl+right-click → Open.
    - The .command script cannot run on Windows.
 
 ### Script does not find ArgyllCMS installation
 
-Make sure ArgyllCMS is properly installed. Under chapter [Installation](#installation) see sections:   
+Make sure ArgyllCMS is properly installed. Under chapter [Installation](#installation) see sections:
 
-   - [Getting Started](#getting-started).  
-   - [Bash Script Dependencies](#bash-script-dependencies).  
-   - [Python Script Dependencies](#python-script-dependencies).  
+   - [Getting Started](#getting-started).
+   - [Bash Script Dependencies](#bash-script-dependencies).
+   - [Python Script Dependencies](#python-script-dependencies).
 
 ### Path warnings above main menu
 
-- Ensure all path variables are set correctly according to your operating system (platform).   
+- Ensure all path variables are set correctly according to your operating system (platform).
 - Default when downloading `Argyll_Printer_Profiler` paths are for MacOS.
 - User main menu option 6 to set all the path variables.
 - `PRECONDITIONING_PROFILE_PATH` is allowed to be empty.
@@ -725,7 +728,7 @@ Make sure ArgyllCMS is properly installed. Under chapter [Installation](#install
 
 ### colprof gray-axis errors
 
-Try the following:   
+Try the following:
 
 - Check measurement quality
 - Reduce profile quality (`-qm`)

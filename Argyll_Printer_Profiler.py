@@ -98,7 +98,7 @@ def getch_logged(prompt: str, log: "TeeLogger") -> str:
     log.log_only(f"{prompt}{ch}")
     return ch
 
-VERSION = "1.3.5"
+VERSION = "1.3.6"
 
 
 @dataclass
@@ -298,13 +298,13 @@ def check_required_commands(required_cmds: list[str], log: TeeLogger, PLATFORM: 
 
 def handle_command_error(proc: subprocess.CompletedProcess, log: TeeLogger) -> None:
     """Generic error handler for subprocess failures."""
-    
+
     # Extract command name
     cmd_name = proc.args[0] if proc.args else "Unknown command"
-    
+
     # Get error details
     error_output = proc.stderr.strip() if proc.stderr else "No error details available"
-    
+
     # Standardized error output
     log.writeln("")
     log.writeln(f"❌ {cmd_name} failed.")
@@ -401,7 +401,7 @@ def run_cmd(args: list[str], log: TeeLogger, cwd: Optional[Path] = None) -> int:
         log.writeln(f"   Error: Command failed during execution")
         log.writeln(f"   Command: {' '.join(args)}")
         log.writeln("")
-    
+
     return exit_code
 
 
@@ -908,7 +908,7 @@ def prepare_profile_folder(state: AppState, cfg: dict[str, str], log: TeeLogger)
 
     while True:
         profile_folder = state.script_dir / created_profiles_folder / state.new_name
-        
+
         if profile_folder.is_dir():
             log.writeln("")
             log.writeln(f"⚠️ Profile folder already exists: '{str(profile_folder)}'")
@@ -1803,7 +1803,7 @@ def sanity_check(state: AppState, cfg: dict[str, str], log: TeeLogger) -> bool:
         output = proc.stdout
         log.writeln(output)  # Terminal + Log
         f.write(output)  # Sanity file
-        
+
     # Append empty lines
     with open(sanity_file, "a") as f:
         f.write("\n\n")
@@ -2412,8 +2412,10 @@ def print_banner(log: TeeLogger) -> None:
     log.writeln("        Color Target Generation & ICC/ICM Profiling           ")
     log.writeln("==============================================================")
     log.writeln("")
-    log.writeln("Automated ArgyllCMS script for calibrating printers on Windows, macOS and Linux.")
-    log.writeln("Targets are adapted for use with X-Rite Colormunki Photo / i1Studio.")
+    log.writeln("Automated ArgyllCMS script for calibrating printers on macOS and Linux.")
+    log.writeln("A selection of targets is provided as examples in the folder Pre-made_Targets.")
+    log.writeln("These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.")
+    log.writeln("Modify target charts for menu option 1 and command arguments in .ini file.")
     log.writeln("")
     log.writeln("Author:  Knut Larsson")
     log.writeln(f"Version: {VERSION}")
