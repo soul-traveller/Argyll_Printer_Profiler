@@ -547,12 +547,12 @@ Default menu for ColorMunki instrument (User may modify/add as desired):
 - **Option 6**: 1260 patches - XXXL   – 6 x A4 pages, maximum quality
 
 **Letter Paper Size:**
-- **Option 1**: 1: 196 patches  - Small  - 1 x Letter page,  quick profiling
-- **Option 2**: 2: 392 patches  - Medium - 2 x Letter pages, recommended minimum
-- **Option 3**: 3: 588 patches  - Large  - 3 x Letter pages, better accuracy
-- **Option 4**: 4: 784 patches  - XL     - 4 x Letter pages, high quality
-- **Option 5**: 5: 980 patches  - XXL    - 5 x Letter pages, very high quality
-- **Option 6**: 6: 1176 patches - XXXL   - 6 x Letter pages, maximum quality
+- **Option 1**: 196 patches  - Small  - 1 x Letter page,  quick profiling
+- **Option 2**: 392 patches  - Medium - 2 x Letter pages, recommended minimum
+- **Option 3**: 588 patches  - Large  - 3 x Letter pages, better accuracy
+- **Option 4**: 784 patches  - XL     - 4 x Letter pages, high quality
+- **Option 5**: 980 patches  - XXL    - 5 x Letter pages, very high quality
+- **Option 6**: 1176 patches - XXXL   - 6 x Letter pages, maximum quality
 
 The Colormunki menu above has separate options for A4 and Letter, shown according to the current setting of paper size, which can be chosen in main menu option 6.
 
