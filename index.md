@@ -726,6 +726,12 @@ Make sure ArgyllCMS is properly installed. Under chapter [Installation](#install
 - Ensure `PRINTER_PROFILES_PATH` is an absolute path
 - Do not use `~` unless expanded to `$HOME`
 
+### Strip read recognised as other strip
+
+If reading strips of a chart frequently gives warning that the strip is recognised as another strip, this is an inperfection caused by the random distribution of patches by the ArgyllCMS printtarg command. Each generated chart has a seed number at the bottom, determining the random sequence. the "-R number" argument can be used with printtarg to make sure to use the same seed number every time, to reproduce a known good patch distribution.
+
+Many charts deliverd with this script have not been verified, thus there is a chance this type of error may occur. For this reason the command used to generate most targets have been provided (look in the folder of pre-made targets), so that the user can re-generate a target with a new random distribution. When a good working patch sequence is found, which does not give lots of "strip recognised as another strip" type error, then use the -R argument to make sure to keep the seed number. In many cases this seed number can then also be used on other similar targets.
+
 ### colprof gray-axis errors
 
 Try the following:
