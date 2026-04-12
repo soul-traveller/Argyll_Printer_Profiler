@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-version="1.3.6"
+version="1.3.7"
 # Argyll Printer Profiler
 #
 # This is the original Bash script, providing macOS and Linux support for automated
