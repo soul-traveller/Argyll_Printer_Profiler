@@ -728,9 +728,14 @@ Make sure ArgyllCMS is properly installed. Under chapter [Installation](#install
 
 ### Strip read recognised as other strip
 
-If reading strips of a chart frequently gives warning that the strip is recognised as another strip, this is an inperfection caused by the random distribution of patches by the ArgyllCMS printtarg command. Each generated chart has a seed number at the bottom, determining the random sequence. the "-R number" argument can be used with printtarg to make sure to use the same seed number every time, to reproduce a known good patch distribution.
+If reading strips of a chart frequently gives warning that the strip is recognised as another strip, this is an imperfection caused by the random distribution of patches by the ArgyllCMS printtarg command. If many warnings occur it may indicate that the expected values in the .ti2 are not to be relied on (far from the values actually being measured), or the sequence of patches for each strip are distributed in a way that one strip is similar to another. Both cases can also be true at the same time.
 
-Many charts deliverd with this script have not been verified, thus there is a chance this type of error may occur. For this reason the command used to generate most targets have been provided (look in the folder of pre-made targets), so that the user can re-generate a target with a new random distribution. When a good working patch sequence is found, which does not give lots of "strip recognised as another strip" type error, then use the -R argument to make sure to keep the seed number. In many cases this seed number can then also be used on other similar targets.
+To turn off all "wrong strip" and "unexpected value" warnings make sure the argument `-S` is added to parameter `COMMON_ARGUMENTS_CHARTREAD` in the .ini file.
+
+**If you intend to perfect a generated chart then make note of the following:**  
+Each generated chart has a seed number at the bottom, determining the random sequence. the "-R number" argument can be used with printtarg to make sure to use the same seed number every time, to reproduce a known good patch distribution.
+
+Many charts deliverd with this script have not been verified, thus there is a chance this type of error may occur, given that argument `-S` is not used for ArgyllCMS chartread command. For this reason the command used to generate most targets have been provided (look in the folder of pre-made targets), so that the user can re-generate a target with a new random distribution. When a good working patch sequence is found, which does not give lots of "strip recognised as another strip" type error, then use the -R argument to make sure to keep the seed number. In some cases this seed number can then also be used on other similar targets.
 
 ### colprof gray-axis errors
 
