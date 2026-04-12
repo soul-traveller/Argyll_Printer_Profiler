@@ -1,5 +1,5 @@
 # Argyll_Printer_Profiler Scripts — User Guide
-**Version:** 1.3.7<br>
+**Version:** 1.3.8<br>
 **Platform:** macOS, Linux (Bash script); macOS, Linux, Windows (Python script)<br>
 **Based on:** Simple script by Jintak Han (https://github.com/jintakhan/AutomatedArgyllPrinter)<br>
 **Author:** Knut Larsson<br>

@@ -98,7 +98,7 @@ def getch_logged(prompt: str, log: "TeeLogger") -> str:
     log.log_only(f"{prompt}{ch}")
     return ch
 
-VERSION = "1.3.7"
+VERSION = "1.3.8"
 
 
 @dataclass

@@ -1,5 +1,5 @@
 # Argyll\_Printer\_Profiler — User Guide
-**Version:** 1.3.7<br>
+**Version:** 1.3.8<br>
 **Platform:** macOS, Linux and Windows<br>
 **Loosely Based on:** Simple script by Jintak Han (https://github.com/jintakhan/AutomatedArgyllPrinter)<br>
 **Author:** Knut Larsson<br>
