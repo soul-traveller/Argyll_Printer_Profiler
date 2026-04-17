@@ -1,0 +1,10708 @@
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 13:32:19 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+Aborting workflow and returning to main menu...
+
+
+Aborting workflow and returning to main menu...
+
+
+Aborting workflow and returning to main menu...
+
+
+Aborting workflow and returning to main menu...
+
+
+Aborting workflow and returning to main menu...
+
+
+Aborting workflow and returning to main menu...
+
+
+Aborting workflow and returning to main menu...
+
+
+Aborting workflow and returning to main menu...
+
+
+Aborting workflow and returning to main menu...
+
+
+Aborting workflow and returning to main menu...
+
+
+Aborting workflow and returning to main menu...
+
+
+Aborting workflow and returning to main menu...
+
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 13:58:09 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 13:59:08 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+Aborting workflow and returning to main menu...
+
+
+Aborting workflow and returning to main menu...
+
+
+Aborting workflow and returning to main menu...
+
+
+Aborting workflow and returning to main menu...
+
+Cleared PRECONDITIONING_PROFILE_PATH (no profile)
+Cleared PRECONDITIONING_PROFILE_PATH (no profile)
+Cleared PRECONDITIONING_PROFILE_PATH (no profile)
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 14:18:46 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+Aborting workflow and returning to main menu...
+
+
+Aborting workflow and returning to main menu...
+
+
+Aborting workflow and returning to main menu...
+
+
+Aborting workflow and returning to main menu...
+
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 14:21:37 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 14:26:14 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+Aborting workflow and returning to main menu...
+
+Selected .ti3 file: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.ti3
+Found target image(s):
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_01.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_02.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_03.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_04.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_05.tif
+
+
+Do you want to:
+
+1: Create new profile (copy files into new folder)
+2: Overwrite existing (use files in their current location, measurement will
+   resume using existing .ti3 and .icc/.icm file will be overwritten)
+3: Abort operation
+
+User chose to abort.
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 15:52:25 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+Aborting workflow and returning to main menu...
+
+Selected .ti3 file: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.ti3
+Found target image(s):
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_01.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_02.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_03.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_04.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_05.tif
+
+
+Do you want to:
+
+1: Create new profile (copy files into new folder)
+2: Overwrite existing (use files in their current location, measurement will
+   resume using existing .ti3 and .icc/.icm file will be overwritten)
+3: Abort operation
+
+
+Profile folder already exists: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14'
+
+Contents:
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14.ti1
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14.ti2
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14.ti3
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14_01.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14_02.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14_03.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14_04.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14_05.tif
+
+
+Creating profile folder cancelled.
+Profile preparation failed...
+Selected .ti3 file: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.ti3
+Found target image(s):
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_01.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_02.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_03.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_04.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_05.tif
+
+
+Do you want to:
+
+1: Create new profile (copy files into new folder)
+2: Overwrite existing (use files in their current location, measurement will
+   resume using existing .ti3 and .icc/.icm file will be overwritten)
+3: Abort operation
+
+
+Profile folder already exists: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09'
+
+Contents:
+  .DS_Store
+  Argyll_Printer_Profiler_20260209_192732.log
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.icc
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.ti1
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.ti2
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.ti3
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_01.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_02.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_03.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_04.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_05.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_sanity_check.txt
+
+
+Using existing folder: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09'
+Source and destination are the same folder.
+Files will not be deleted or copied.
+Old file name equals new folder name.
+Files will not be renamed.
+Working folder for profile:
+'/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09'
+Source and destination are the same folder.
+Files will not be copied.
+Old file name equals new folder name.
+Files will not be renamed.
+Working folder: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09
+
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 16:14:18 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+Selected .ti3 file: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.ti3
+Found target image(s):
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_01.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_02.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_03.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_04.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_05.tif
+
+
+Do you want to:
+
+1: Create new profile (copy files into new folder)
+2: Overwrite existing (use files in their current location, measurement will
+   resume using existing .ti3 and .icc/.icm file will be overwritten)
+3: Abort operation
+
+
+Profile folder already exists: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles'
+
+Contents:
+  .DS_Store
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14
+  test_profile
+
+
+Please enter a different profile name.
+
+Profile folder already exists: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14'
+
+Contents:
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14.ti1
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14.ti2
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14.ti3
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14_01.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14_02.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14_03.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14_04.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14_05.tif
+
+
+Using existing folder: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14'
+Working folder for profile:
+'/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14'
+Copied: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.ti1
+Copied: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.ti2
+Copied: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.ti3
+Copied: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_01.tif
+Copied: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_02.tif
+Copied: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_03.tif
+Copied: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_04.tif
+Copied: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_05.tif
+Successfully copied 8 file(s)
+Renamed: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.ti1 -> Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14.ti1
+Renamed: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.ti2 -> Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14.ti2
+Renamed: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.ti3 -> Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14.ti3
+Renamed: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_01.tif -> Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14_01.tif
+Renamed: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_02.tif -> Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14_02.tif
+Renamed: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_03.tif -> Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14_03.tif
+Renamed: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_04.tif -> Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14_04.tif
+Renamed: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_05.tif -> Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14_05.tif
+All files verified after copy
+Working folder: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14
+
+
+Aborting workflow and returning to main menu...
+
+Working folder for profile:
+'/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer-MFC-9460-Plain90g-White-sRGB-225Patches-Argyll-CM_2026.01.16'
+Working folder for profile:
+'/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+Selected instrument: i1Pro
+Selected instrument: i1Pro
+Selected target: Small - 480 patches
+
+Working folder: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test
+
+Generating target color values (.ti1 file)...
+
+iRGB test chart
+White patches = 6
+Black patches = 5
+Composite Grey steps = 128
+Full spread patches = 480
+Full points:
+   29%
+   29%
+   29%
+   29%
+   30%
+   30%
+   30%
+   30%
+   30%
+   31%
+   31%
+   31%
+   31%
+   31%
+   32%
+   32%
+   32%
+   32%
+   33%
+   33%
+   33%
+   33%
+   33%
+   34%
+   34%
+   34%
+   34%
+   34%
+   35%
+   35%
+   35%
+   35%
+   35%
+   36%
+   36%
+   36%
+   36%
+   36%
+   37%
+   37%
+   37%
+   37%
+   38%
+   38%
+   38%
+   38%
+   38%
+   39%
+   39%
+   39%
+   39%
+   39%
+   40%
+   40%
+   40%
+   40%
+   40%
+   41%
+   41%
+   41%
+   41%
+   41%
+   42%
+   42%
+   42%
+   42%
+   43%
+   43%
+   43%
+   43%
+   43%
+   44%
+   44%
+   44%
+   44%
+   44%
+   45%
+   45%
+   45%
+   45%
+   45%
+   46%
+   46%
+   46%
+   46%
+   46%
+   47%
+   47%
+   47%
+   47%
+   48%
+   48%
+   48%
+   48%
+   48%
+   49%
+   49%
+   49%
+   49%
+   49%
+   50%
+   50%
+   50%
+   50%
+   50%
+   51%
+   51%
+   51%
+   51%
+   51%
+   52%
+   52%
+   52%
+   52%
+   53%
+   53%
+   53%
+   53%
+   53%
+   54%
+   54%
+   54%
+   54%
+   54%
+   55%
+   55%
+   55%
+   55%
+   55%
+   56%
+   56%
+   56%
+   56%
+   56%
+   57%
+   57%
+   57%
+   57%
+   58%
+   58%
+   58%
+   58%
+   58%
+   59%
+   59%
+   59%
+   59%
+   59%
+   60%
+   60%
+   60%
+   60%
+   60%
+   61%
+   61%
+   61%
+   61%
+   61%
+   62%
+   62%
+   62%
+   62%
+   63%
+   63%
+   63%
+   63%
+   63%
+   64%
+   64%
+   64%
+   64%
+   64%
+   65%
+   65%
+   65%
+   65%
+   65%
+   66%
+   66%
+   66%
+   66%
+   66%
+   67%
+   67%
+   67%
+   67%
+   68%
+   68%
+   68%
+   68%
+   68%
+   69%
+   69%
+   69%
+   69%
+   69%
+   70%
+   70%
+   70%
+   70%
+   70%
+   71%
+   71%
+   71%
+   71%
+   71%
+   72%
+   72%
+   72%
+   72%
+   73%
+   73%
+   73%
+   73%
+   73%
+   74%
+   74%
+   74%
+   74%
+   74%
+   75%
+   75%
+   75%
+   75%
+   75%
+   76%
+   76%
+   76%
+   76%
+   76%
+   77%
+   77%
+   77%
+   77%
+   78%
+   78%
+   78%
+   78%
+   78%
+   79%
+   79%
+   79%
+   79%
+   79%
+   80%
+   80%
+   80%
+   80%
+   80%
+   81%
+   81%
+   81%
+   81%
+   81%
+   82%
+   82%
+   82%
+   82%
+   83%
+   83%
+   83%
+   83%
+   83%
+   84%
+   84%
+   84%
+   84%
+   84%
+   85%
+   85%
+   85%
+   85%
+   85%
+   86%
+   86%
+   86%
+   86%
+   86%
+   87%
+   87%
+   87%
+   87%
+   88%
+   88%
+   88%
+   88%
+   88%
+   89%
+   89%
+   89%
+   89%
+   89%
+   90%
+   90%
+   90%
+   90%
+   90%
+   91%
+   91%
+   91%
+   91%
+   91%
+   92%
+   92%
+   92%
+   92%
+   93%
+   93%
+   93%
+   93%
+   93%
+   94%
+   94%
+   94%
+   94%
+   94%
+   95%
+   95%
+   95%
+   95%
+   95%
+   96%
+   96%
+   96%
+   96%
+   96%
+   97%
+   97%
+   97%
+   97%
+   98%
+   98%
+   98%
+   98%
+   98%
+   99%
+   99%
+   99%
+   99%
+   99%
+   100%
+   100%
+   100%
+Total number of patches = 480
+Execution time = 0.146369 seconds
+
+targen completed successfully
+
+Generating target(s) (.tif image(s) and .ti2 file)...
+
+Paper chosen is A4	[210.0 x 297.0 mm]
+Patches = 480
+Test patches per row = 24
+Rows per page = 21, patches per page = 504
+Rows in last strip = 20, patches in last row = 24
+Total pages needed = 1
+Worst case delta E = 0.000000
+Worst case direction distinction delta E = 47.905958
+Optimising layout for strip reader:
+ 0%
+ 0%
+ 0%
+ 1%
+ 1%
+ 1%
+ 2%
+ 2%
+ 2%
+ 3%
+ 3%
+ 3%
+ 3%
+ 4%
+ 4%
+ 4%
+ 5%
+ 5%
+ 5%
+ 6%
+ 6%
+ 6%
+ 7%
+ 7%
+ 7%
+ 8%
+ 8%
+ 8%
+ 9%
+ 9%
+ 9%
+ 9%
+10%
+10%
+10%
+11%
+11%
+11%
+12%
+12%
+12%
+13%
+13%
+13%
+14%
+14%
+14%
+15%
+15%
+15%
+16%
+16%
+16%
+16%
+17%
+17%
+17%
+18%
+18%
+18%
+19%
+19%
+19%
+20%
+20%
+20%
+21%
+21%
+21%
+22%
+22%
+22%
+22%
+23%
+23%
+23%
+24%
+24%
+24%
+25%
+25%
+25%
+26%
+26%
+26%
+27%
+27%
+27%
+28%
+28%
+28%
+28%
+29%
+29%
+29%
+30%
+30%
+30%
+31%
+31%
+31%
+32%
+32%
+32%
+33%
+33%
+33%
+34%
+34%
+34%
+34%
+35%
+35%
+35%
+36%
+36%
+36%
+37%
+37%
+37%
+38%
+38%
+38%
+39%
+39%
+39%
+40%
+40%
+40%
+41%
+41%
+41%
+41%
+42%
+42%
+42%
+43%
+43%
+43%
+44%
+44%
+44%
+45%
+45%
+45%
+46%
+46%
+46%
+47%
+47%
+47%
+47%
+48%
+48%
+48%
+49%
+49%
+49%
+50%
+50%
+50%
+51%
+51%
+51%
+52%
+52%
+52%
+53%
+53%
+53%
+53%
+54%
+54%
+54%
+55%
+55%
+55%
+56%
+56%
+56%
+57%
+57%
+57%
+58%
+58%
+58%
+59%
+59%
+59%
+59%
+60%
+60%
+60%
+61%
+61%
+61%
+62%
+62%
+62%
+63%
+63%
+63%
+64%
+64%
+64%
+65%
+65%
+65%
+66%
+66%
+66%
+66%
+67%
+67%
+67%
+68%
+68%
+68%
+69%
+69%
+69%
+70%
+70%
+70%
+71%
+71%
+71%
+72%
+72%
+72%
+72%
+73%
+73%
+73%
+74%
+74%
+74%
+75%
+75%
+75%
+76%
+76%
+76%
+77%
+77%
+77%
+78%
+78%
+78%
+78%
+79%
+79%
+79%
+80%
+80%
+80%
+81%
+81%
+81%
+82%
+82%
+82%
+83%
+83%
+83%
+84%
+84%
+84%
+84%
+85%
+85%
+85%
+86%
+86%
+86%
+87%
+87%
+87%
+88%
+88%
+88%
+89%
+89%
+89%
+90%
+90%
+90%
+91%
+91%
+91%
+91%
+92%
+92%
+92%
+93%
+93%
+93%
+94%
+94%
+94%
+95%
+95%
+95%
+96%
+96%
+96%
+97%
+97%
+97%
+97%
+98%
+98%
+98%
+99%
+99%
+99%
+100%
+100%
+After optimisation, worst delta E = 58.007549
+Worst case direction distinction delta E = 66.837270
+Creating file 'test.tif'
+
+Target generation completed successfully
+
+Test chart(s) created:
+
+  test.tif
+
+Please print the test chart(s) and make sure to disable color management.
+Use applications like ColorSync Utility, Adobe Color Print Utility or
+Photoshop etc.
+
+After target(s) have been printed...
+
+Selected target: Small - 480 patches
+
+Working folder: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test
+
+Generating target color values (.ti1 file)...
+
+iRGB test chart
+White patches = 6
+Black patches = 5
+Composite Grey steps = 128
+Full spread patches = 480
+Full points:
+   29%
+   29%
+   29%
+   29%
+   30%
+   30%
+   30%
+   30%
+   30%
+   31%
+   31%
+   31%
+   31%
+   31%
+   32%
+   32%
+   32%
+   32%
+   33%
+   33%
+   33%
+   33%
+   33%
+   34%
+   34%
+   34%
+   34%
+   34%
+   35%
+   35%
+   35%
+   35%
+   35%
+   36%
+   36%
+   36%
+   36%
+   36%
+   37%
+   37%
+   37%
+   37%
+   38%
+   38%
+   38%
+   38%
+   38%
+   39%
+   39%
+   39%
+   39%
+   39%
+   40%
+   40%
+   40%
+   40%
+   40%
+   41%
+   41%
+   41%
+   41%
+   41%
+   42%
+   42%
+   42%
+   42%
+   43%
+   43%
+   43%
+   43%
+   43%
+   44%
+   44%
+   44%
+   44%
+   44%
+   45%
+   45%
+   45%
+   45%
+   45%
+   46%
+   46%
+   46%
+   46%
+   46%
+   47%
+   47%
+   47%
+   47%
+   48%
+   48%
+   48%
+   48%
+   48%
+   49%
+   49%
+   49%
+   49%
+   49%
+   50%
+   50%
+   50%
+   50%
+   50%
+   51%
+   51%
+   51%
+   51%
+   51%
+   52%
+   52%
+   52%
+   52%
+   53%
+   53%
+   53%
+   53%
+   53%
+   54%
+   54%
+   54%
+   54%
+   54%
+   55%
+   55%
+   55%
+   55%
+   55%
+   56%
+   56%
+   56%
+   56%
+   56%
+   57%
+   57%
+   57%
+   57%
+   58%
+   58%
+   58%
+   58%
+   58%
+   59%
+   59%
+   59%
+   59%
+   59%
+   60%
+   60%
+   60%
+   60%
+   60%
+   61%
+   61%
+   61%
+   61%
+   61%
+   62%
+   62%
+   62%
+   62%
+   63%
+   63%
+   63%
+   63%
+   63%
+   64%
+   64%
+   64%
+   64%
+   64%
+   65%
+   65%
+   65%
+   65%
+   65%
+   66%
+   66%
+   66%
+   66%
+   66%
+   67%
+   67%
+   67%
+   67%
+   68%
+   68%
+   68%
+   68%
+   68%
+   69%
+   69%
+   69%
+   69%
+   69%
+   70%
+   70%
+   70%
+   70%
+   70%
+   71%
+   71%
+   71%
+   71%
+   71%
+   72%
+   72%
+   72%
+   72%
+   73%
+   73%
+   73%
+   73%
+   73%
+   74%
+   74%
+   74%
+   74%
+   74%
+   75%
+   75%
+   75%
+   75%
+   75%
+   76%
+   76%
+   76%
+   76%
+   76%
+   77%
+   77%
+   77%
+   77%
+   78%
+   78%
+   78%
+   78%
+   78%
+   79%
+   79%
+   79%
+   79%
+   79%
+   80%
+   80%
+   80%
+   80%
+   80%
+   81%
+   81%
+   81%
+   81%
+   81%
+   82%
+   82%
+   82%
+   82%
+   83%
+   83%
+   83%
+   83%
+   83%
+   84%
+   84%
+   84%
+   84%
+   84%
+   85%
+   85%
+   85%
+   85%
+   85%
+   86%
+   86%
+   86%
+   86%
+   86%
+   87%
+   87%
+   87%
+   87%
+   88%
+   88%
+   88%
+   88%
+   88%
+   89%
+   89%
+   89%
+   89%
+   89%
+   90%
+   90%
+   90%
+   90%
+   90%
+   91%
+   91%
+   91%
+   91%
+   91%
+   92%
+   92%
+   92%
+   92%
+   93%
+   93%
+   93%
+   93%
+   93%
+   94%
+   94%
+   94%
+   94%
+   94%
+   95%
+   95%
+   95%
+   95%
+   95%
+   96%
+   96%
+   96%
+   96%
+   96%
+   97%
+   97%
+   97%
+   97%
+   98%
+   98%
+   98%
+   98%
+   98%
+   99%
+   99%
+   99%
+   99%
+   99%
+   100%
+   100%
+   100%
+Total number of patches = 480
+Execution time = 0.146794 seconds
+
+targen completed successfully
+
+Generating target(s) (.tif image(s) and .ti2 file)...
+
+Paper chosen is A4	[210.0 x 297.0 mm]
+Patches = 480
+Test patches per row = 24
+Rows per page = 21, patches per page = 504
+Rows in last strip = 20, patches in last row = 24
+Total pages needed = 1
+Worst case delta E = 0.924300
+Worst case direction distinction delta E = 42.813154
+Optimising layout for strip reader:
+ 0%
+ 0%
+ 0%
+ 1%
+ 1%
+ 1%
+ 2%
+ 2%
+ 2%
+ 3%
+ 3%
+ 3%
+ 3%
+ 4%
+ 4%
+ 4%
+ 5%
+ 5%
+ 5%
+ 6%
+ 6%
+ 6%
+ 7%
+ 7%
+ 7%
+ 8%
+ 8%
+ 8%
+ 9%
+ 9%
+ 9%
+ 9%
+10%
+10%
+10%
+11%
+11%
+11%
+12%
+12%
+12%
+13%
+13%
+13%
+14%
+14%
+14%
+15%
+15%
+15%
+16%
+16%
+16%
+16%
+17%
+17%
+17%
+18%
+18%
+18%
+19%
+19%
+19%
+20%
+20%
+20%
+21%
+21%
+21%
+22%
+22%
+22%
+22%
+23%
+23%
+23%
+24%
+24%
+24%
+25%
+25%
+25%
+26%
+26%
+26%
+27%
+27%
+27%
+28%
+28%
+28%
+28%
+29%
+29%
+29%
+30%
+30%
+30%
+31%
+31%
+31%
+32%
+32%
+32%
+33%
+33%
+33%
+34%
+34%
+34%
+34%
+35%
+35%
+35%
+36%
+36%
+36%
+37%
+37%
+37%
+38%
+38%
+38%
+39%
+39%
+39%
+40%
+40%
+40%
+41%
+41%
+41%
+41%
+42%
+42%
+42%
+43%
+43%
+43%
+44%
+44%
+44%
+45%
+45%
+45%
+46%
+46%
+46%
+47%
+47%
+47%
+47%
+48%
+48%
+48%
+49%
+49%
+49%
+50%
+50%
+50%
+51%
+51%
+51%
+52%
+52%
+52%
+53%
+53%
+53%
+53%
+54%
+54%
+54%
+55%
+55%
+55%
+56%
+56%
+56%
+57%
+57%
+57%
+58%
+58%
+58%
+59%
+59%
+59%
+59%
+60%
+60%
+60%
+61%
+61%
+61%
+62%
+62%
+62%
+63%
+63%
+63%
+64%
+64%
+64%
+65%
+65%
+65%
+66%
+66%
+66%
+66%
+67%
+67%
+67%
+68%
+68%
+68%
+69%
+69%
+69%
+70%
+70%
+70%
+71%
+71%
+71%
+72%
+72%
+72%
+72%
+73%
+73%
+73%
+74%
+74%
+74%
+75%
+75%
+75%
+76%
+76%
+76%
+77%
+77%
+77%
+78%
+78%
+78%
+78%
+79%
+79%
+79%
+80%
+80%
+80%
+81%
+81%
+81%
+82%
+82%
+82%
+83%
+83%
+83%
+84%
+84%
+84%
+84%
+85%
+85%
+85%
+86%
+86%
+86%
+87%
+87%
+87%
+88%
+88%
+88%
+89%
+89%
+89%
+90%
+90%
+90%
+91%
+91%
+91%
+91%
+92%
+92%
+92%
+93%
+93%
+93%
+94%
+94%
+94%
+95%
+95%
+95%
+96%
+96%
+96%
+97%
+97%
+97%
+97%
+98%
+98%
+98%
+99%
+99%
+99%
+100%
+100%
+After optimisation, worst delta E = 58.273636
+Worst case direction distinction delta E = 62.121933
+Creating file 'test.tif'
+
+Target generation completed successfully
+
+Test chart(s) created:
+
+  test.tif
+
+Please print the test chart(s) and make sure to disable color management.
+Use applications like ColorSync Utility, Adobe Color Print Utility or
+Photoshop etc.
+
+After target(s) have been printed...
+
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 16:55:40 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+=== Entering Main Menu ===
+
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 16:57:42 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: create_from_scratch ===
+
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 17:06:33 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: create_from_scratch ===
+
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 17:09:40 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: create_from_scratch ===
+
+
+--- Workflow aborted by user ---
+
+Aborting workflow and returning to main menu...
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: resume_measurement ===
+
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 17:16:17 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: create_from_scratch ===
+
+
+--- Navigating forward from 'specify_name' ---
+
+
+Profile folder already exists: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+
+Contents:
+  test.ti1
+  test.ti2
+  test.tif
+
+
+Using existing folder: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+Working folder for profile:
+'/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+Selected instrument: i1Pro
+Selected instrument: i1Pro3+
+Selected instrument: SpectroScan
+Selected instrument: i1Pro
+
+--- Navigating back from 'select_instrument' ---
+
+
+--- Navigating forward from 'specify_name' ---
+
+
+Profile folder already exists: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+
+Contents:
+  test.ti1
+  test.ti2
+  test.tif
+
+
+Creating profile folder cancelled.
+
+--- Workflow aborted by user ---
+
+Aborting workflow and returning to main menu...
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: create_from_scratch ===
+
+
+--- Navigating forward from 'specify_name' ---
+
+
+Profile folder already exists: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+
+Contents:
+  test.ti1
+  test.ti2
+  test.tif
+
+
+Using existing folder: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+Source and destination are the same folder.
+Files will not be deleted or copied.
+Old file name equals new folder name.
+Files will not be renamed.
+Working folder for profile:
+'/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+
+--- Navigating back from 'select_instrument' ---
+
+
+--- Navigating forward from 'specify_name' ---
+
+
+Profile folder already exists: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+
+Contents:
+  test.ti1
+  test.ti2
+  test.tif
+
+
+Creating profile folder cancelled.
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 17:26:35 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: create_from_scratch ===
+
+
+--- Navigating forward from 'specify_name' ---
+
+
+Profile folder already exists: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+
+Contents:
+  test.ti1
+  test.ti2
+  test.tif
+
+
+Using existing folder: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+Working folder for profile:
+'/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+
+--- Navigating back from 'select_instrument' ---
+
+
+--- Navigating forward from 'specify_name' ---
+
+Profile folder already exists: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+Using existing folder and files.
+
+
+--- Navigating back from 'select_instrument' ---
+
+
+--- Navigating forward from 'specify_name' ---
+
+Profile folder already exists: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+Using existing folder and files.
+
+Selected instrument: i1Pro
+
+--- Navigating forward from 'select_instrument' ---
+
+
+--- Navigating back from 'generate_target' ---
+
+
+--- Workflow aborted by user ---
+
+Aborting workflow and returning to main menu...
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: resume_measurement ===
+
+Selected .ti3 file: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.ti3
+Found target image(s):
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_01.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_02.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_03.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_04.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_05.tif
+
+
+Do you want to:
+
+1: Create new profile (copy files into new folder)
+2: Overwrite existing (use files in their current location, measurement will
+   resume using existing .ti3 and .icc/.icm file will be overwritten)
+3: Abort operation
+
+
+Profile folder already exists: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles'
+
+Contents:
+  .DS_Store
+  Printer-MFC-9460-Plain90g-White-sRGB-225Patches-Argyll-CM_2026.01.16
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14
+  test
+  test_profile
+
+
+Using existing folder: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles'
+Working folder for profile:
+'/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles'
+Failed to copy Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_01.tif: [Errno 2] No such file or directory: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_01.tif'
+Failed to copy Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_02.tif: [Errno 2] No such file or directory: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_02.tif'
+Failed to copy Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_03.tif: [Errno 2] No such file or directory: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_03.tif'
+Failed to copy Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_04.tif: [Errno 2] No such file or directory: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_04.tif'
+Failed to copy Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_05.tif: [Errno 2] No such file or directory: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_05.tif'
+Warning: No files copied
+File copy failed...
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 17:33:50 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: resume_measurement ===
+
+Selected .ti3 file: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09.ti3
+Found target image(s):
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_01.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_02.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_03.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_04.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_05.tif
+
+
+Do you want to:
+
+1: Create new profile (copy files into new folder)
+2: Overwrite existing (use files in their current location, measurement will
+   resume using existing .ti3 and .icc/.icm file will be overwritten)
+3: Abort operation
+
+
+Profile folder already exists: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles'
+
+Contents:
+  .DS_Store
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09
+
+
+Creating profile folder cancelled.
+Profile preparation failed...
+Selected .ti3 file: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09.ti3
+Found target image(s):
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_01.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_02.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_03.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_04.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_05.tif
+
+
+Using previous choice: 1
+
+Working folder for profile:
+'/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.14'
+Copied: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09.ti1
+Copied: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09.ti2
+Copied: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09.ti3
+Copied: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_01.tif
+Copied: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_02.tif
+Copied: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_03.tif
+Copied: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_04.tif
+Copied: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_05.tif
+Successfully copied 8 file(s)
+Renamed: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09.ti1 -> Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.14.ti1
+Renamed: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09.ti2 -> Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.14.ti2
+Renamed: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09.ti3 -> Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.14.ti3
+Renamed: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_01.tif -> Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.14_01.tif
+Renamed: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_02.tif -> Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.14_02.tif
+Renamed: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_03.tif -> Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.14_03.tif
+Renamed: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_04.tif -> Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.14_04.tif
+Renamed: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_05.tif -> Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.14_05.tif
+All files verified after copy
+Working folder: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.14
+
+Selected .ti3 file: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09.ti3
+Found target image(s):
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_01.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_02.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_03.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_04.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_05.tif
+
+
+Using previous choice: 1
+
+Working folder for profile:
+'/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+Copied: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09.ti1
+Copied: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09.ti2
+Copied: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09.ti3
+Copied: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_01.tif
+Copied: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_02.tif
+Copied: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_03.tif
+Copied: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_04.tif
+Copied: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_05.tif
+Successfully copied 8 file(s)
+Renamed: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09.ti1 -> test.ti1
+Renamed: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09.ti2 -> test.ti2
+Renamed: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09.ti3 -> test.ti3
+Renamed: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_01.tif -> test_01.tif
+Renamed: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_02.tif -> test_02.tif
+Renamed: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_03.tif -> test_03.tif
+Renamed: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_04.tif -> test_04.tif
+Renamed: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_05.tif -> test_05.tif
+All files verified after copy
+Working folder: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test
+
+
+--- Navigating forward from 'select_ti3_file' ---
+
+
+--- Navigating back from 'measure_target' ---
+
+
+--- Navigating forward from 'select_ti3_file' ---
+
+
+Starting chart reading (read .ti2 file and generate .ti3 file)...
+
+
+Steps in each Pass = 14
+Passes in each Strip = 13, 13, 13, 13, 13
+Unknown, inappropriate or no instrument detected
+
+Chart reading completed successfully
+
+Creating ICC/ICM profile...
+
+Create ICC profile, Version 3.5.0
+Author: Graeme W. Gill, licensed under the AGPL Version 3
+  Diagnostic: Expect argument to profile description flag -D
+usage: colprof [-options] inoutfile
+ -v              Verbose mode
+ -A manufacturer Manufacturer description string
+ -M model        Model description string
+ -D description  Profile Description string (Default "inoutfile")
+ -C copyright    Copyright string
+ -Z tmnb         Attributes: Transparency, Matte, Negative, BlackAndWhite
+ -Z prsa         Default intent: Perceptual, Rel. Colorimetric, Saturation, Abs. Colorimetric
+ -q lmhu         Quality - Low, Medium (def), High, Ultra
+ -b [lmhun]      Low quality B2A table - or specific B2A quality or none for input device
+ -ni             Don't create input (Device) shaper curves
+ -np             Don't create input (Device) grid position curves
+ -no             Don't create output (PCS) shaper curves
+ -nc             Don't put the input .ti3 data in the profile
+ -k zhxr         Black Ink generation target: z = zero K,
+                 h = 0.5 K, x = max K, r = ramp K (def.)
+ -k p stle stpo enpo enle shape
+                 stle: K level at White 0.0 - 1.0
+                 stpo: start point of transition Wh 0.0 - Bk 1.0
+                 enpo: End point of transition Wh 0.0 - Bk 1.0
+                 enle: K level at Black 0.0 - 1.0
+                 shape: 1.0 = straight, 0.0-1.0 concave, 1.0-2.0 convex
+ -K parameters   Same as -k, but target is K locus rather than K value itself
+ -l tlimit       override total ink limit, 0 - 400% (default from .ti3)
+ -L klimit       override black ink limit, 0 - 100% (default from .ti3)
+ -a lxXYgsmGS    Algorithm type override
+                 l = Lab cLUT (def.), x = XYZ cLUT,
+                 X = display XYZ cLUT + matrix, Y = display XYZ cLUT + debug matrix
+                 g = gamma+matrix, s = shaper+matrix, m = matrix only,
+                 G = single gamma+matrix, S = single shaper+matrix
+ -u              If input profile, auto scale WP to allow extrapolation
+ -ua             If input profile, force absolute intent
+ -uc             If input profile, clip cLUT values above WP
+ -u scale        If input profile, scale media white point by scale
+ -R              Restrict white <= 1.0, black and primaries to be +ve
+ -V demphasis    Degree of dark region cLUT grid emphasis 1.0-4.0 (default 1.00 = none)
+ -f [illum]      Use Fluorescent Whitening Agent compensation [opt. simulated inst. illum.:
+                  M0, M1, M2, A, C, D50 (def.), D50M2, D65, F5, F8, F10 or file.sp]
+ -i illum        Choose illuminant for computation of CIE XYZ from spectral data & FWA:
+                  A, C, D50 (def.), D50M2, D65, F5, F8, F10 or file.sp
+ -o observ       Choose CIE Observer for spectral data:
+                  1931_2 (def), 1964_10, 2015_2, 2015_10, S&B 1955_2, shaw, J&V 1978_2, or file.cmf
+ -r avgdev       Average deviation of device+instrument readings as a percentage (default 0.50%)
+ -s src.icc|cperc  Apply gamut mapping to output profile perceptual B2A table
+                   for given source space, or compression percentage
+ -S src.icc|experc Apply gamut mapping to output profile perceptual and
+                   and saturation B2A table, or expansion percentage
+ -nP             Use colormetric source gamut to make output profile perceptual table
+ -nS             Use colormetric source gamut to make output profile saturation table
+ -nI             Apply inverse gammut mapping to perceptual and saturation AtoB tables
+ -g src.gam      Use source image gamut as well for output profile gamut mapping
+ -p absprof,...  Incorporate abstract profile(s) into output tables
+ -t intent       Override gamut mapping intent for output profile perceptual table:
+ -T intent       Override gamut mapping intent for output profile saturation table:
+               a - Absolute Colorimetric (in Jab) [ICC Absolute Colorimetric]
+              aw - Absolute Colorimetric (in Jab) with scaling to fit white point
+              aa - Absolute Appearance
+               r - White Point Matched Appearance [ICC Relative Colorimetric]
+              la - Luminance axis matched Appearance
+               p - Perceptual (Preferred) (Default) [ICC Perceptual]
+              pa - Perceptual Apperance 
+              lp - Luminance Preserving Perceptual
+              ms - Saturation
+               s - Enhanced Saturation [ICC Saturation]
+              al - Absolute Colorimetric (Lab)
+              rl - White Point Matched Colorimetric (Lab)
+ -c viewcond     set input viewing conditions for output profile CIECAM02 gamut mapping,
+                  either an enumerated choice, or a parameter
+ -d viewcond     set output viewing conditions for output profile CIECAM02 gamut mapping
+                  either an enumerated choice, or a parameter
+                  Also sets out of gamut clipping CAM space.
+                  either an enumerated choice, or a series of parameters:value changes
+              pc - Critical print evaluation environment (ISO-3664 P1)
+              pp - Practical Reflection Print (ISO-3664 P2)
+              pe - Print evaluation environment (CIE 116-1995)
+              pm - Print evaluation with partial Mid-tone adapation
+              mb - Bright monitor in bright work environment
+              mt - Monitor in typical work environment
+              md - Monitor in darkened work environment
+              jm - Projector in dim environment
+              jd - Projector in dark environment
+              tv - Television/Film Studio
+             pcd - Photo CD - original scene outdoors
+              ob - Original scene - Bright Outdoors
+              cx - Cut Sheet Transparencies on a viewing box
+ -P              Create gamut gammap_p.wrl and gammap_s.wrl diagostics
+ -H charTarget   Override the default CharTargetTag string
+ -O outputfile   Override the default output filename.
+ -Y c:file.cal   Override any calibration info from .ti3
+ inoutfile       Base name for input.ti3/output.icc file
+
+--- Workflow aborted by user ---
+
+Aborting workflow and returning to main menu...
+
+
+=== Entering Main Menu ===
+
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 17:48:10 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: create_from_scratch ===
+
+
+--- Navigating forward from 'specify_name' ---
+
+
+Profile folder already exists: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+
+Contents:
+  test.ti1
+  test.ti2
+  test.ti3
+  test_01.tif
+  test_02.tif
+  test_03.tif
+  test_04.tif
+  test_05.tif
+
+
+Using existing folder: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+Working folder for profile:
+'/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+Selected instrument: i1Pro
+
+--- Navigating forward from 'select_instrument' ---
+
+Selected target: Small - 480 patches
+
+Working folder: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test
+
+Generating target color values (.ti1 file)...
+
+iRGB test chart
+White patches = 6
+Black patches = 5
+Composite Grey steps = 128
+Full spread patches = 480
+Full points:
+   29%
+   29%
+   29%
+   29%
+   30%
+   30%
+   30%
+   30%
+   30%
+   31%
+   31%
+   31%
+   31%
+   31%
+   32%
+   32%
+   32%
+   32%
+   33%
+   33%
+   33%
+   33%
+   33%
+   34%
+   34%
+   34%
+   34%
+   34%
+   35%
+   35%
+   35%
+   35%
+   35%
+   36%
+   36%
+   36%
+   36%
+   36%
+   37%
+   37%
+   37%
+   37%
+   38%
+   38%
+   38%
+   38%
+   38%
+   39%
+   39%
+   39%
+   39%
+   39%
+   40%
+   40%
+   40%
+   40%
+   40%
+   41%
+   41%
+   41%
+   41%
+   41%
+   42%
+   42%
+   42%
+   42%
+   43%
+   43%
+   43%
+   43%
+   43%
+   44%
+   44%
+   44%
+   44%
+   44%
+   45%
+   45%
+   45%
+   45%
+   45%
+   46%
+   46%
+   46%
+   46%
+   46%
+   47%
+   47%
+   47%
+   47%
+   48%
+   48%
+   48%
+   48%
+   48%
+   49%
+   49%
+   49%
+   49%
+   49%
+   50%
+   50%
+   50%
+   50%
+   50%
+   51%
+   51%
+   51%
+   51%
+   51%
+   52%
+   52%
+   52%
+   52%
+   53%
+   53%
+   53%
+   53%
+   53%
+   54%
+   54%
+   54%
+   54%
+   54%
+   55%
+   55%
+   55%
+   55%
+   55%
+   56%
+   56%
+   56%
+   56%
+   56%
+   57%
+   57%
+   57%
+   57%
+   58%
+   58%
+   58%
+   58%
+   58%
+   59%
+   59%
+   59%
+   59%
+   59%
+   60%
+   60%
+   60%
+   60%
+   60%
+   61%
+   61%
+   61%
+   61%
+   61%
+   62%
+   62%
+   62%
+   62%
+   63%
+   63%
+   63%
+   63%
+   63%
+   64%
+   64%
+   64%
+   64%
+   64%
+   65%
+   65%
+   65%
+   65%
+   65%
+   66%
+   66%
+   66%
+   66%
+   66%
+   67%
+   67%
+   67%
+   67%
+   68%
+   68%
+   68%
+   68%
+   68%
+   69%
+   69%
+   69%
+   69%
+   69%
+   70%
+   70%
+   70%
+   70%
+   70%
+   71%
+   71%
+   71%
+   71%
+   71%
+   72%
+   72%
+   72%
+   72%
+   73%
+   73%
+   73%
+   73%
+   73%
+   74%
+   74%
+   74%
+   74%
+   74%
+   75%
+   75%
+   75%
+   75%
+   75%
+   76%
+   76%
+   76%
+   76%
+   76%
+   77%
+   77%
+   77%
+   77%
+   78%
+   78%
+   78%
+   78%
+   78%
+   79%
+   79%
+   79%
+   79%
+   79%
+   80%
+   80%
+   80%
+   80%
+   80%
+   81%
+   81%
+   81%
+   81%
+   81%
+   82%
+   82%
+   82%
+   82%
+   83%
+   83%
+   83%
+   83%
+   83%
+   84%
+   84%
+   84%
+   84%
+   84%
+   85%
+   85%
+   85%
+   85%
+   85%
+   86%
+   86%
+   86%
+   86%
+   86%
+   87%
+   87%
+   87%
+   87%
+   88%
+   88%
+   88%
+   88%
+   88%
+   89%
+   89%
+   89%
+   89%
+   89%
+   90%
+   90%
+   90%
+   90%
+   90%
+   91%
+   91%
+   91%
+   91%
+   91%
+   92%
+   92%
+   92%
+   92%
+   93%
+   93%
+   93%
+   93%
+   93%
+   94%
+   94%
+   94%
+   94%
+   94%
+   95%
+   95%
+   95%
+   95%
+   95%
+   96%
+   96%
+   96%
+   96%
+   96%
+   97%
+   97%
+   97%
+   97%
+   98%
+   98%
+   98%
+   98%
+   98%
+   99%
+   99%
+   99%
+   99%
+   99%
+   100%
+   100%
+   100%
+Total number of patches = 480
+Execution time = 0.146912 seconds
+
+targen completed successfully
+
+Generating target(s) (.tif image(s) and .ti2 file)...
+
+Paper chosen is A4	[210.0 x 297.0 mm]
+Patches = 480
+Test patches per row = 24
+Rows per page = 21, patches per page = 504
+Rows in last strip = 20, patches in last row = 24
+Total pages needed = 1
+Worst case delta E = 0.000000
+Worst case direction distinction delta E = 43.174480
+Optimising layout for strip reader:
+ 0%
+ 0%
+ 0%
+ 1%
+ 1%
+ 1%
+ 2%
+ 2%
+ 2%
+ 3%
+ 3%
+ 3%
+ 3%
+ 4%
+ 4%
+ 4%
+ 5%
+ 5%
+ 5%
+ 6%
+ 6%
+ 6%
+ 7%
+ 7%
+ 7%
+ 8%
+ 8%
+ 8%
+ 9%
+ 9%
+ 9%
+ 9%
+10%
+10%
+10%
+11%
+11%
+11%
+12%
+12%
+12%
+13%
+13%
+13%
+14%
+14%
+14%
+15%
+15%
+15%
+16%
+16%
+16%
+16%
+17%
+17%
+17%
+18%
+18%
+18%
+19%
+19%
+19%
+20%
+20%
+20%
+21%
+21%
+21%
+22%
+22%
+22%
+22%
+23%
+23%
+23%
+24%
+24%
+24%
+25%
+25%
+25%
+26%
+26%
+26%
+27%
+27%
+27%
+28%
+28%
+28%
+28%
+29%
+29%
+29%
+30%
+30%
+30%
+31%
+31%
+31%
+32%
+32%
+32%
+33%
+33%
+33%
+34%
+34%
+34%
+34%
+35%
+35%
+35%
+36%
+36%
+36%
+37%
+37%
+37%
+38%
+38%
+38%
+39%
+39%
+39%
+40%
+40%
+40%
+41%
+41%
+41%
+41%
+42%
+42%
+42%
+43%
+43%
+43%
+44%
+44%
+44%
+45%
+45%
+45%
+46%
+46%
+46%
+47%
+47%
+47%
+47%
+48%
+48%
+48%
+49%
+49%
+49%
+50%
+50%
+50%
+51%
+51%
+51%
+52%
+52%
+52%
+53%
+53%
+53%
+53%
+54%
+54%
+54%
+55%
+55%
+55%
+56%
+56%
+56%
+57%
+57%
+57%
+58%
+58%
+58%
+59%
+59%
+59%
+59%
+60%
+60%
+60%
+61%
+61%
+61%
+62%
+62%
+62%
+63%
+63%
+63%
+64%
+64%
+64%
+65%
+65%
+65%
+66%
+66%
+66%
+66%
+67%
+67%
+67%
+68%
+68%
+68%
+69%
+69%
+69%
+70%
+70%
+70%
+71%
+71%
+71%
+72%
+72%
+72%
+72%
+73%
+73%
+73%
+74%
+74%
+74%
+75%
+75%
+75%
+76%
+76%
+76%
+77%
+77%
+77%
+78%
+78%
+78%
+78%
+79%
+79%
+79%
+80%
+80%
+80%
+81%
+81%
+81%
+82%
+82%
+82%
+83%
+83%
+83%
+84%
+84%
+84%
+84%
+85%
+85%
+85%
+86%
+86%
+86%
+87%
+87%
+87%
+88%
+88%
+88%
+89%
+89%
+89%
+90%
+90%
+90%
+91%
+91%
+91%
+91%
+92%
+92%
+92%
+93%
+93%
+93%
+94%
+94%
+94%
+95%
+95%
+95%
+96%
+96%
+96%
+97%
+97%
+97%
+97%
+98%
+98%
+98%
+99%
+99%
+99%
+100%
+100%
+After optimisation, worst delta E = 55.861441
+Worst case direction distinction delta E = 60.143963
+Creating file 'test.tif'
+
+Target generation completed successfully
+
+Test chart(s) created:
+
+  test.tif
+  test_01.tif
+  test_02.tif
+  test_03.tif
+  test_04.tif
+  test_05.tif
+
+Please print the test chart(s) and make sure to disable color management.
+Use applications like ColorSync Utility, Adobe Color Print Utility or
+Photoshop etc.
+
+After target(s) have been printed...
+
+
+--- Navigating forward from 'generate_target' ---
+
+
+Starting chart reading (read .ti2 file and generate .ti3 file)...
+
+
+Steps in each Pass = 24
+Passes in each Strip = 20
+Unknown, inappropriate or no instrument detected
+
+Chart reading completed successfully
+
+Creating ICC/ICM profile...
+
+Create ICC profile, Version 3.5.0
+Author: Graeme W. Gill, licensed under the AGPL Version 3
+  Diagnostic: Expect argument to profile description flag -D
+usage: colprof [-options] inoutfile
+ -v              Verbose mode
+ -A manufacturer Manufacturer description string
+ -M model        Model description string
+ -D description  Profile Description string (Default "inoutfile")
+ -C copyright    Copyright string
+ -Z tmnb         Attributes: Transparency, Matte, Negative, BlackAndWhite
+ -Z prsa         Default intent: Perceptual, Rel. Colorimetric, Saturation, Abs. Colorimetric
+ -q lmhu         Quality - Low, Medium (def), High, Ultra
+ -b [lmhun]      Low quality B2A table - or specific B2A quality or none for input device
+ -ni             Don't create input (Device) shaper curves
+ -np             Don't create input (Device) grid position curves
+ -no             Don't create output (PCS) shaper curves
+ -nc             Don't put the input .ti3 data in the profile
+ -k zhxr         Black Ink generation target: z = zero K,
+                 h = 0.5 K, x = max K, r = ramp K (def.)
+ -k p stle stpo enpo enle shape
+                 stle: K level at White 0.0 - 1.0
+                 stpo: start point of transition Wh 0.0 - Bk 1.0
+                 enpo: End point of transition Wh 0.0 - Bk 1.0
+                 enle: K level at Black 0.0 - 1.0
+                 shape: 1.0 = straight, 0.0-1.0 concave, 1.0-2.0 convex
+ -K parameters   Same as -k, but target is K locus rather than K value itself
+ -l tlimit       override total ink limit, 0 - 400% (default from .ti3)
+ -L klimit       override black ink limit, 0 - 100% (default from .ti3)
+ -a lxXYgsmGS    Algorithm type override
+                 l = Lab cLUT (def.), x = XYZ cLUT,
+                 X = display XYZ cLUT + matrix, Y = display XYZ cLUT + debug matrix
+                 g = gamma+matrix, s = shaper+matrix, m = matrix only,
+                 G = single gamma+matrix, S = single shaper+matrix
+ -u              If input profile, auto scale WP to allow extrapolation
+ -ua             If input profile, force absolute intent
+ -uc             If input profile, clip cLUT values above WP
+ -u scale        If input profile, scale media white point by scale
+ -R              Restrict white <= 1.0, black and primaries to be +ve
+ -V demphasis    Degree of dark region cLUT grid emphasis 1.0-4.0 (default 1.00 = none)
+ -f [illum]      Use Fluorescent Whitening Agent compensation [opt. simulated inst. illum.:
+                  M0, M1, M2, A, C, D50 (def.), D50M2, D65, F5, F8, F10 or file.sp]
+ -i illum        Choose illuminant for computation of CIE XYZ from spectral data & FWA:
+                  A, C, D50 (def.), D50M2, D65, F5, F8, F10 or file.sp
+ -o observ       Choose CIE Observer for spectral data:
+                  1931_2 (def), 1964_10, 2015_2, 2015_10, S&B 1955_2, shaw, J&V 1978_2, or file.cmf
+ -r avgdev       Average deviation of device+instrument readings as a percentage (default 0.50%)
+ -s src.icc|cperc  Apply gamut mapping to output profile perceptual B2A table
+                   for given source space, or compression percentage
+ -S src.icc|experc Apply gamut mapping to output profile perceptual and
+                   and saturation B2A table, or expansion percentage
+ -nP             Use colormetric source gamut to make output profile perceptual table
+ -nS             Use colormetric source gamut to make output profile saturation table
+ -nI             Apply inverse gammut mapping to perceptual and saturation AtoB tables
+ -g src.gam      Use source image gamut as well for output profile gamut mapping
+ -p absprof,...  Incorporate abstract profile(s) into output tables
+ -t intent       Override gamut mapping intent for output profile perceptual table:
+ -T intent       Override gamut mapping intent for output profile saturation table:
+               a - Absolute Colorimetric (in Jab) [ICC Absolute Colorimetric]
+              aw - Absolute Colorimetric (in Jab) with scaling to fit white point
+              aa - Absolute Appearance
+               r - White Point Matched Appearance [ICC Relative Colorimetric]
+              la - Luminance axis matched Appearance
+               p - Perceptual (Preferred) (Default) [ICC Perceptual]
+              pa - Perceptual Apperance 
+              lp - Luminance Preserving Perceptual
+              ms - Saturation
+               s - Enhanced Saturation [ICC Saturation]
+              al - Absolute Colorimetric (Lab)
+              rl - White Point Matched Colorimetric (Lab)
+ -c viewcond     set input viewing conditions for output profile CIECAM02 gamut mapping,
+                  either an enumerated choice, or a parameter
+ -d viewcond     set output viewing conditions for output profile CIECAM02 gamut mapping
+                  either an enumerated choice, or a parameter
+                  Also sets out of gamut clipping CAM space.
+                  either an enumerated choice, or a series of parameters:value changes
+              pc - Critical print evaluation environment (ISO-3664 P1)
+              pp - Practical Reflection Print (ISO-3664 P2)
+              pe - Print evaluation environment (CIE 116-1995)
+              pm - Print evaluation with partial Mid-tone adapation
+              mb - Bright monitor in bright work environment
+              mt - Monitor in typical work environment
+              md - Monitor in darkened work environment
+              jm - Projector in dim environment
+              jd - Projector in dark environment
+              tv - Television/Film Studio
+             pcd - Photo CD - original scene outdoors
+              ob - Original scene - Bright Outdoors
+              cx - Cut Sheet Transparencies on a viewing box
+ -P              Create gamut gammap_p.wrl and gammap_s.wrl diagostics
+ -H charTarget   Override the default CharTargetTag string
+ -O outputfile   Override the default output filename.
+ -Y c:file.cal   Override any calibration info from .ti3
+ inoutfile       Base name for input.ti3/output.icc file
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 18:03:59 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: create_from_scratch ===
+
+
+--- Navigating forward from 'specify_name' ---
+
+
+Profile folder already exists: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+
+Contents:
+  test.ti1
+  test.ti2
+  test.ti3
+  test.tif
+  test_01.tif
+  test_02.tif
+  test_03.tif
+  test_04.tif
+  test_05.tif
+
+
+Using existing folder: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+Working folder for profile:
+'/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+Selected instrument: i1Pro
+
+--- Navigating forward from 'select_instrument' ---
+
+Selected target: Small - 480 patches
+
+Working folder: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test
+
+Generating target color values (.ti1 file)...
+
+iRGB test chart
+White patches = 6
+Black patches = 5
+Composite Grey steps = 128
+Full spread patches = 480
+Full points:
+   29%
+   29%
+   29%
+   29%
+   30%
+   30%
+   30%
+   30%
+   30%
+   31%
+   31%
+   31%
+   31%
+   31%
+   32%
+   32%
+   32%
+   32%
+   33%
+   33%
+   33%
+   33%
+   33%
+   34%
+   34%
+   34%
+   34%
+   34%
+   35%
+   35%
+   35%
+   35%
+   35%
+   36%
+   36%
+   36%
+   36%
+   36%
+   37%
+   37%
+   37%
+   37%
+   38%
+   38%
+   38%
+   38%
+   38%
+   39%
+   39%
+   39%
+   39%
+   39%
+   40%
+   40%
+   40%
+   40%
+   40%
+   41%
+   41%
+   41%
+   41%
+   41%
+   42%
+   42%
+   42%
+   42%
+   43%
+   43%
+   43%
+   43%
+   43%
+   44%
+   44%
+   44%
+   44%
+   44%
+   45%
+   45%
+   45%
+   45%
+   45%
+   46%
+   46%
+   46%
+   46%
+   46%
+   47%
+   47%
+   47%
+   47%
+   48%
+   48%
+   48%
+   48%
+   48%
+   49%
+   49%
+   49%
+   49%
+   49%
+   50%
+   50%
+   50%
+   50%
+   50%
+   51%
+   51%
+   51%
+   51%
+   51%
+   52%
+   52%
+   52%
+   52%
+   53%
+   53%
+   53%
+   53%
+   53%
+   54%
+   54%
+   54%
+   54%
+   54%
+   55%
+   55%
+   55%
+   55%
+   55%
+   56%
+   56%
+   56%
+   56%
+   56%
+   57%
+   57%
+   57%
+   57%
+   58%
+   58%
+   58%
+   58%
+   58%
+   59%
+   59%
+   59%
+   59%
+   59%
+   60%
+   60%
+   60%
+   60%
+   60%
+   61%
+   61%
+   61%
+   61%
+   61%
+   62%
+   62%
+   62%
+   62%
+   63%
+   63%
+   63%
+   63%
+   63%
+   64%
+   64%
+   64%
+   64%
+   64%
+   65%
+   65%
+   65%
+   65%
+   65%
+   66%
+   66%
+   66%
+   66%
+   66%
+   67%
+   67%
+   67%
+   67%
+   68%
+   68%
+   68%
+   68%
+   68%
+   69%
+   69%
+   69%
+   69%
+   69%
+   70%
+   70%
+   70%
+   70%
+   70%
+   71%
+   71%
+   71%
+   71%
+   71%
+   72%
+   72%
+   72%
+   72%
+   73%
+   73%
+   73%
+   73%
+   73%
+   74%
+   74%
+   74%
+   74%
+   74%
+   75%
+   75%
+   75%
+   75%
+   75%
+   76%
+   76%
+   76%
+   76%
+   76%
+   77%
+   77%
+   77%
+   77%
+   78%
+   78%
+   78%
+   78%
+   78%
+   79%
+   79%
+   79%
+   79%
+   79%
+   80%
+   80%
+   80%
+   80%
+   80%
+   81%
+   81%
+   81%
+   81%
+   81%
+   82%
+   82%
+   82%
+   82%
+   83%
+   83%
+   83%
+   83%
+   83%
+   84%
+   84%
+   84%
+   84%
+   84%
+   85%
+   85%
+   85%
+   85%
+   85%
+   86%
+   86%
+   86%
+   86%
+   86%
+   87%
+   87%
+   87%
+   87%
+   88%
+   88%
+   88%
+   88%
+   88%
+   89%
+   89%
+   89%
+   89%
+   89%
+   90%
+   90%
+   90%
+   90%
+   90%
+   91%
+   91%
+   91%
+   91%
+   91%
+   92%
+   92%
+   92%
+   92%
+   93%
+   93%
+   93%
+   93%
+   93%
+   94%
+   94%
+   94%
+   94%
+   94%
+   95%
+   95%
+   95%
+   95%
+   95%
+   96%
+   96%
+   96%
+   96%
+   96%
+   97%
+   97%
+   97%
+   97%
+   98%
+   98%
+   98%
+   98%
+   98%
+   99%
+   99%
+   99%
+   99%
+   99%
+   100%
+   100%
+   100%
+Total number of patches = 480
+Execution time = 0.182122 seconds
+
+targen completed successfully
+
+Generating target(s) (.tif image(s) and .ti2 file)...
+
+Paper chosen is A4	[210.0 x 297.0 mm]
+Patches = 480
+Test patches per row = 24
+Rows per page = 21, patches per page = 504
+Rows in last strip = 20, patches in last row = 24
+Total pages needed = 1
+Worst case delta E = 2.457981
+Worst case direction distinction delta E = 50.728311
+Optimising layout for strip reader:
+ 0%
+ 0%
+ 0%
+ 1%
+ 1%
+ 1%
+ 2%
+ 2%
+ 2%
+ 3%
+ 3%
+ 3%
+ 3%
+ 4%
+ 4%
+ 4%
+ 5%
+ 5%
+ 5%
+ 6%
+ 6%
+ 6%
+ 7%
+ 7%
+ 7%
+ 8%
+ 8%
+ 8%
+ 9%
+ 9%
+ 9%
+ 9%
+10%
+10%
+10%
+11%
+11%
+11%
+12%
+12%
+12%
+13%
+13%
+13%
+14%
+14%
+14%
+15%
+15%
+15%
+16%
+16%
+16%
+16%
+17%
+17%
+17%
+18%
+18%
+18%
+19%
+19%
+19%
+20%
+20%
+20%
+21%
+21%
+21%
+22%
+22%
+22%
+22%
+23%
+23%
+23%
+24%
+24%
+24%
+25%
+25%
+25%
+26%
+26%
+26%
+27%
+27%
+27%
+28%
+28%
+28%
+28%
+29%
+29%
+29%
+30%
+30%
+30%
+31%
+31%
+31%
+32%
+32%
+32%
+33%
+33%
+33%
+34%
+34%
+34%
+34%
+35%
+35%
+35%
+36%
+36%
+36%
+37%
+37%
+37%
+38%
+38%
+38%
+39%
+39%
+39%
+40%
+40%
+40%
+41%
+41%
+41%
+41%
+42%
+42%
+42%
+43%
+43%
+43%
+44%
+44%
+44%
+45%
+45%
+45%
+46%
+46%
+46%
+47%
+47%
+47%
+47%
+48%
+48%
+48%
+49%
+49%
+49%
+50%
+50%
+50%
+51%
+51%
+51%
+52%
+52%
+52%
+53%
+53%
+53%
+53%
+54%
+54%
+54%
+55%
+55%
+55%
+56%
+56%
+56%
+57%
+57%
+57%
+58%
+58%
+58%
+59%
+59%
+59%
+59%
+60%
+60%
+60%
+61%
+61%
+61%
+62%
+62%
+62%
+63%
+63%
+63%
+64%
+64%
+64%
+65%
+65%
+65%
+66%
+66%
+66%
+66%
+67%
+67%
+67%
+68%
+68%
+68%
+69%
+69%
+69%
+70%
+70%
+70%
+71%
+71%
+71%
+72%
+72%
+72%
+72%
+73%
+73%
+73%
+74%
+74%
+74%
+75%
+75%
+75%
+76%
+76%
+76%
+77%
+77%
+77%
+78%
+78%
+78%
+78%
+79%
+79%
+79%
+80%
+80%
+80%
+81%
+81%
+81%
+82%
+82%
+82%
+83%
+83%
+83%
+84%
+84%
+84%
+84%
+85%
+85%
+85%
+86%
+86%
+86%
+87%
+87%
+87%
+88%
+88%
+88%
+89%
+89%
+89%
+90%
+90%
+90%
+91%
+91%
+91%
+91%
+92%
+92%
+92%
+93%
+93%
+93%
+94%
+94%
+94%
+95%
+95%
+95%
+96%
+96%
+96%
+97%
+97%
+97%
+97%
+98%
+98%
+98%
+99%
+99%
+99%
+100%
+100%
+After optimisation, worst delta E = 58.069508
+Worst case direction distinction delta E = 65.596528
+Creating file 'test.tif'
+
+Target generation completed successfully
+
+Test chart(s) created:
+
+  test.tif
+  test_01.tif
+  test_02.tif
+  test_03.tif
+  test_04.tif
+  test_05.tif
+
+Please print the test chart(s) and make sure to disable color management.
+Use applications like ColorSync Utility, Adobe Color Print Utility or
+Photoshop etc.
+
+After target(s) have been printed press Next to continuing with measuring of target...
+
+
+--- Navigating forward from 'generate_target' ---
+
+
+Starting chart reading (read .ti2 file and generate .ti3 file)...
+
+
+Steps in each Pass = 24
+Passes in each Strip = 20
+Unknown, inappropriate or no instrument detected
+
+Chart reading completed successfully
+
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 18:10:53 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: create_from_scratch ===
+
+
+--- Navigating forward from 'specify_name' ---
+
+
+Profile folder already exists: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+
+Contents:
+  test.ti1
+  test.ti2
+  test.ti3
+  test.tif
+  test_01.tif
+  test_02.tif
+  test_03.tif
+  test_04.tif
+  test_05.tif
+
+
+Using existing folder: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+Working folder for profile:
+'/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+
+--- Navigating back from 'select_instrument' ---
+
+
+--- Navigating forward from 'specify_name' ---
+
+Profile folder already exists: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+Using existing folder and files.
+
+
+--- Workflow aborted by user ---
+
+Aborting workflow and returning to main menu...
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: create_from_scratch ===
+
+
+--- Navigating forward from 'specify_name' ---
+
+
+Profile folder already exists: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+
+Contents:
+  test.ti1
+  test.ti2
+  test.ti3
+  test.tif
+  test_01.tif
+  test_02.tif
+  test_03.tif
+  test_04.tif
+  test_05.tif
+
+Creating profile folder cancelled.
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 18:17:14 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: create_from_scratch ===
+
+
+--- Navigating forward from 'specify_name' ---
+
+
+Profile folder already exists: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+
+Contents:
+  test.ti1
+  test.ti2
+  test.ti3
+  test.tif
+  test_01.tif
+  test_02.tif
+  test_03.tif
+  test_04.tif
+  test_05.tif
+
+
+Using existing folder: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+Deleting existing contents to avoid leftover files from previous runs...
+Working folder for profile:
+'/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+Selected instrument: i1Pro
+
+--- Navigating forward from 'select_instrument' ---
+
+Selected target: Small - 480 patches
+
+Working folder: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test
+
+Generating target color values (.ti1 file)...
+
+iRGB test chart
+White patches = 6
+Black patches = 5
+Composite Grey steps = 128
+Full spread patches = 480
+Full points:
+   29%
+   29%
+   29%
+   29%
+   30%
+   30%
+   30%
+   30%
+   30%
+   31%
+   31%
+   31%
+   31%
+   31%
+   32%
+   32%
+   32%
+   32%
+   33%
+   33%
+   33%
+   33%
+   33%
+   34%
+   34%
+   34%
+   34%
+   34%
+   35%
+   35%
+   35%
+   35%
+   35%
+   36%
+   36%
+   36%
+   36%
+   36%
+   37%
+   37%
+   37%
+   37%
+   38%
+   38%
+   38%
+   38%
+   38%
+   39%
+   39%
+   39%
+   39%
+   39%
+   40%
+   40%
+   40%
+   40%
+   40%
+   41%
+   41%
+   41%
+   41%
+   41%
+   42%
+   42%
+   42%
+   42%
+   43%
+   43%
+   43%
+   43%
+   43%
+   44%
+   44%
+   44%
+   44%
+   44%
+   45%
+   45%
+   45%
+   45%
+   45%
+   46%
+   46%
+   46%
+   46%
+   46%
+   47%
+   47%
+   47%
+   47%
+   48%
+   48%
+   48%
+   48%
+   48%
+   49%
+   49%
+   49%
+   49%
+   49%
+   50%
+   50%
+   50%
+   50%
+   50%
+   51%
+   51%
+   51%
+   51%
+   51%
+   52%
+   52%
+   52%
+   52%
+   53%
+   53%
+   53%
+   53%
+   53%
+   54%
+   54%
+   54%
+   54%
+   54%
+   55%
+   55%
+   55%
+   55%
+   55%
+   56%
+   56%
+   56%
+   56%
+   56%
+   57%
+   57%
+   57%
+   57%
+   58%
+   58%
+   58%
+   58%
+   58%
+   59%
+   59%
+   59%
+   59%
+   59%
+   60%
+   60%
+   60%
+   60%
+   60%
+   61%
+   61%
+   61%
+   61%
+   61%
+   62%
+   62%
+   62%
+   62%
+   63%
+   63%
+   63%
+   63%
+   63%
+   64%
+   64%
+   64%
+   64%
+   64%
+   65%
+   65%
+   65%
+   65%
+   65%
+   66%
+   66%
+   66%
+   66%
+   66%
+   67%
+   67%
+   67%
+   67%
+   68%
+   68%
+   68%
+   68%
+   68%
+   69%
+   69%
+   69%
+   69%
+   69%
+   70%
+   70%
+   70%
+   70%
+   70%
+   71%
+   71%
+   71%
+   71%
+   71%
+   72%
+   72%
+   72%
+   72%
+   73%
+   73%
+   73%
+   73%
+   73%
+   74%
+   74%
+   74%
+   74%
+   74%
+   75%
+   75%
+   75%
+   75%
+   75%
+   76%
+   76%
+   76%
+   76%
+   76%
+   77%
+   77%
+   77%
+   77%
+   78%
+   78%
+   78%
+   78%
+   78%
+   79%
+   79%
+   79%
+   79%
+   79%
+   80%
+   80%
+   80%
+   80%
+   80%
+   81%
+   81%
+   81%
+   81%
+   81%
+   82%
+   82%
+   82%
+   82%
+   83%
+   83%
+   83%
+   83%
+   83%
+   84%
+   84%
+   84%
+   84%
+   84%
+   85%
+   85%
+   85%
+   85%
+   85%
+   86%
+   86%
+   86%
+   86%
+   86%
+   87%
+   87%
+   87%
+   87%
+   88%
+   88%
+   88%
+   88%
+   88%
+   89%
+   89%
+   89%
+   89%
+   89%
+   90%
+   90%
+   90%
+   90%
+   90%
+   91%
+   91%
+   91%
+   91%
+   91%
+   92%
+   92%
+   92%
+   92%
+   93%
+   93%
+   93%
+   93%
+   93%
+   94%
+   94%
+   94%
+   94%
+   94%
+   95%
+   95%
+   95%
+   95%
+   95%
+   96%
+   96%
+   96%
+   96%
+   96%
+   97%
+   97%
+   97%
+   97%
+   98%
+   98%
+   98%
+   98%
+   98%
+   99%
+   99%
+   99%
+   99%
+   99%
+   100%
+   100%
+   100%
+Total number of patches = 480
+Execution time = 0.146319 seconds
+
+targen completed successfully
+
+Generating target(s) (.tif image(s) and .ti2 file)...
+
+Paper chosen is A4	[210.0 x 297.0 mm]
+Patches = 480
+Test patches per row = 24
+Rows per page = 21, patches per page = 504
+Rows in last strip = 20, patches in last row = 24
+Total pages needed = 1
+Worst case delta E = 0.954274
+Worst case direction distinction delta E = 51.473544
+Optimising layout for strip reader:
+ 0%
+ 0%
+ 0%
+ 1%
+ 1%
+ 1%
+ 2%
+ 2%
+ 2%
+ 3%
+ 3%
+ 3%
+ 3%
+ 4%
+ 4%
+ 4%
+ 5%
+ 5%
+ 5%
+ 6%
+ 6%
+ 6%
+ 7%
+ 7%
+ 7%
+ 8%
+ 8%
+ 8%
+ 9%
+ 9%
+ 9%
+ 9%
+10%
+10%
+10%
+11%
+11%
+11%
+12%
+12%
+12%
+13%
+13%
+13%
+14%
+14%
+14%
+15%
+15%
+15%
+16%
+16%
+16%
+16%
+17%
+17%
+17%
+18%
+18%
+18%
+19%
+19%
+19%
+20%
+20%
+20%
+21%
+21%
+21%
+22%
+22%
+22%
+22%
+23%
+23%
+23%
+24%
+24%
+24%
+25%
+25%
+25%
+26%
+26%
+26%
+27%
+27%
+27%
+28%
+28%
+28%
+28%
+29%
+29%
+29%
+30%
+30%
+30%
+31%
+31%
+31%
+32%
+32%
+32%
+33%
+33%
+33%
+34%
+34%
+34%
+34%
+35%
+35%
+35%
+36%
+36%
+36%
+37%
+37%
+37%
+38%
+38%
+38%
+39%
+39%
+39%
+40%
+40%
+40%
+41%
+41%
+41%
+41%
+42%
+42%
+42%
+43%
+43%
+43%
+44%
+44%
+44%
+45%
+45%
+45%
+46%
+46%
+46%
+47%
+47%
+47%
+47%
+48%
+48%
+48%
+49%
+49%
+49%
+50%
+50%
+50%
+51%
+51%
+51%
+52%
+52%
+52%
+53%
+53%
+53%
+53%
+54%
+54%
+54%
+55%
+55%
+55%
+56%
+56%
+56%
+57%
+57%
+57%
+58%
+58%
+58%
+59%
+59%
+59%
+59%
+60%
+60%
+60%
+61%
+61%
+61%
+62%
+62%
+62%
+63%
+63%
+63%
+64%
+64%
+64%
+65%
+65%
+65%
+66%
+66%
+66%
+66%
+67%
+67%
+67%
+68%
+68%
+68%
+69%
+69%
+69%
+70%
+70%
+70%
+71%
+71%
+71%
+72%
+72%
+72%
+72%
+73%
+73%
+73%
+74%
+74%
+74%
+75%
+75%
+75%
+76%
+76%
+76%
+77%
+77%
+77%
+78%
+78%
+78%
+78%
+79%
+79%
+79%
+80%
+80%
+80%
+81%
+81%
+81%
+82%
+82%
+82%
+83%
+83%
+83%
+84%
+84%
+84%
+84%
+85%
+85%
+85%
+86%
+86%
+86%
+87%
+87%
+87%
+88%
+88%
+88%
+89%
+89%
+89%
+90%
+90%
+90%
+91%
+91%
+91%
+91%
+92%
+92%
+92%
+93%
+93%
+93%
+94%
+94%
+94%
+95%
+95%
+95%
+96%
+96%
+96%
+97%
+97%
+97%
+97%
+98%
+98%
+98%
+99%
+99%
+99%
+100%
+100%
+After optimisation, worst delta E = 57.636584
+Worst case direction distinction delta E = 60.346928
+Creating file 'test.tif'
+
+Target generation completed successfully
+
+Test chart(s) created:
+
+  test.tif
+
+Please print the test chart(s) and make sure to disable color management.
+Use applications like ColorSync Utility, Adobe Color Print Utility or
+Photoshop etc.
+
+After target(s) have been printed press Next to continuing with measuring of target...
+
+
+--- Navigating forward from 'generate_target' ---
+
+
+Starting chart reading (read .ti2 file and generate .ti3 file)...
+
+
+Steps in each Pass = 24
+Passes in each Strip = 20
+Unknown, inappropriate or no instrument detected
+
+Chartread aborted by user.
+
+
+--- Navigating back from 'measure_target' ---
+
+
+--- Navigating back from 'generate_target' ---
+
+Selected instrument: i1Pro
+Restored instrument selection: i1Pro
+
+--- Navigating forward from 'select_instrument' ---
+
+
+--- Navigating back from 'generate_target' ---
+
+Selected instrument: i1Pro
+Restored instrument selection: i1Pro
+
+--- Navigating forward from 'select_instrument' ---
+
+
+--- Workflow aborted by user ---
+
+Aborting workflow and returning to main menu...
+
+
+=== Entering Main Menu ===
+
+
+=== Selected: Change Setup Parameters ===
+
+
+--- Navigating back from 'setup_parameters' ---
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: sanity_check ===
+
+
+--- Workflow aborted by user ---
+
+Aborting workflow and returning to main menu...
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: profile_from_measurement ===
+
+
+--- Workflow aborted by user ---
+
+Aborting workflow and returning to main menu...
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: sanity_check ===
+
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 18:35:50 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: create_from_scratch ===
+
+
+--- Navigating forward from 'specify_name' ---
+
+
+Profile folder already exists: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+
+Contents:
+  test.ti1
+  test.ti2
+  test.tif
+
+
+Using existing folder: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+Deleting existing contents to avoid leftover files from previous runs...
+Working folder for profile:
+'/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+Selected instrument: i1Pro
+
+--- Navigating forward from 'select_instrument' ---
+
+
+--- Navigating back from 'generate_target' ---
+
+Selected instrument: i1Pro
+Restored instrument selection: i1Pro
+
+--- Navigating forward from 'select_instrument' ---
+
+Selected target: Small - 480 patches
+
+Working folder: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test
+
+Generating target color values (.ti1 file)...
+
+iRGB test chart
+White patches = 6
+Black patches = 5
+Composite Grey steps = 128
+Full spread patches = 480
+Full points:
+   29%
+   29%
+   29%
+   29%
+   30%
+   30%
+   30%
+   30%
+   30%
+   31%
+   31%
+   31%
+   31%
+   31%
+   32%
+   32%
+   32%
+   32%
+   33%
+   33%
+   33%
+   33%
+   33%
+   34%
+   34%
+   34%
+   34%
+   34%
+   35%
+   35%
+   35%
+   35%
+   35%
+   36%
+   36%
+   36%
+   36%
+   36%
+   37%
+   37%
+   37%
+   37%
+   38%
+   38%
+   38%
+   38%
+   38%
+   39%
+   39%
+   39%
+   39%
+   39%
+   40%
+   40%
+   40%
+   40%
+   40%
+   41%
+   41%
+   41%
+   41%
+   41%
+   42%
+   42%
+   42%
+   42%
+   43%
+   43%
+   43%
+   43%
+   43%
+   44%
+   44%
+   44%
+   44%
+   44%
+   45%
+   45%
+   45%
+   45%
+   45%
+   46%
+   46%
+   46%
+   46%
+   46%
+   47%
+   47%
+   47%
+   47%
+   48%
+   48%
+   48%
+   48%
+   48%
+   49%
+   49%
+   49%
+   49%
+   49%
+   50%
+   50%
+   50%
+   50%
+   50%
+   51%
+   51%
+   51%
+   51%
+   51%
+   52%
+   52%
+   52%
+   52%
+   53%
+   53%
+   53%
+   53%
+   53%
+   54%
+   54%
+   54%
+   54%
+   54%
+   55%
+   55%
+   55%
+   55%
+   55%
+   56%
+   56%
+   56%
+   56%
+   56%
+   57%
+   57%
+   57%
+   57%
+   58%
+   58%
+   58%
+   58%
+   58%
+   59%
+   59%
+   59%
+   59%
+   59%
+   60%
+   60%
+   60%
+   60%
+   60%
+   61%
+   61%
+   61%
+   61%
+   61%
+   62%
+   62%
+   62%
+   62%
+   63%
+   63%
+   63%
+   63%
+   63%
+   64%
+   64%
+   64%
+   64%
+   64%
+   65%
+   65%
+   65%
+   65%
+   65%
+   66%
+   66%
+   66%
+   66%
+   66%
+   67%
+   67%
+   67%
+   67%
+   68%
+   68%
+   68%
+   68%
+   68%
+   69%
+   69%
+   69%
+   69%
+   69%
+   70%
+   70%
+   70%
+   70%
+   70%
+   71%
+   71%
+   71%
+   71%
+   71%
+   72%
+   72%
+   72%
+   72%
+   73%
+   73%
+   73%
+   73%
+   73%
+   74%
+   74%
+   74%
+   74%
+   74%
+   75%
+   75%
+   75%
+   75%
+   75%
+   76%
+   76%
+   76%
+   76%
+   76%
+   77%
+   77%
+   77%
+   77%
+   78%
+   78%
+   78%
+   78%
+   78%
+   79%
+   79%
+   79%
+   79%
+   79%
+   80%
+   80%
+   80%
+   80%
+   80%
+   81%
+   81%
+   81%
+   81%
+   81%
+   82%
+   82%
+   82%
+   82%
+   83%
+   83%
+   83%
+   83%
+   83%
+   84%
+   84%
+   84%
+   84%
+   84%
+   85%
+   85%
+   85%
+   85%
+   85%
+   86%
+   86%
+   86%
+   86%
+   86%
+   87%
+   87%
+   87%
+   87%
+   88%
+   88%
+   88%
+   88%
+   88%
+   89%
+   89%
+   89%
+   89%
+   89%
+   90%
+   90%
+   90%
+   90%
+   90%
+   91%
+   91%
+   91%
+   91%
+   91%
+   92%
+   92%
+   92%
+   92%
+   93%
+   93%
+   93%
+   93%
+   93%
+   94%
+   94%
+   94%
+   94%
+   94%
+   95%
+   95%
+   95%
+   95%
+   95%
+   96%
+   96%
+   96%
+   96%
+   96%
+   97%
+   97%
+   97%
+   97%
+   98%
+   98%
+   98%
+   98%
+   98%
+   99%
+   99%
+   99%
+   99%
+   99%
+   100%
+   100%
+   100%
+Total number of patches = 480
+Execution time = 0.148245 seconds
+
+targen completed successfully
+
+Generating target(s) (.tif image(s) and .ti2 file)...
+
+Paper chosen is A4	[210.0 x 297.0 mm]
+Patches = 480
+Test patches per row = 24
+Rows per page = 21, patches per page = 504
+Rows in last strip = 20, patches in last row = 24
+Total pages needed = 1
+Worst case delta E = 0.924300
+Worst case direction distinction delta E = 42.813154
+Optimising layout for strip reader:
+ 0%
+ 0%
+ 0%
+ 1%
+ 1%
+ 1%
+ 2%
+ 2%
+ 2%
+ 3%
+ 3%
+ 3%
+ 3%
+ 4%
+ 4%
+ 4%
+ 5%
+ 5%
+ 5%
+ 6%
+ 6%
+ 6%
+ 7%
+ 7%
+ 7%
+ 8%
+ 8%
+ 8%
+ 9%
+ 9%
+ 9%
+ 9%
+10%
+10%
+10%
+11%
+11%
+11%
+12%
+12%
+12%
+13%
+13%
+13%
+14%
+14%
+14%
+15%
+15%
+15%
+16%
+16%
+16%
+16%
+17%
+17%
+17%
+18%
+18%
+18%
+19%
+19%
+19%
+20%
+20%
+20%
+21%
+21%
+21%
+22%
+22%
+22%
+22%
+23%
+23%
+23%
+24%
+24%
+24%
+25%
+25%
+25%
+26%
+26%
+26%
+27%
+27%
+27%
+28%
+28%
+28%
+28%
+29%
+29%
+29%
+30%
+30%
+30%
+31%
+31%
+31%
+32%
+32%
+32%
+33%
+33%
+33%
+34%
+34%
+34%
+34%
+35%
+35%
+35%
+36%
+36%
+36%
+37%
+37%
+37%
+38%
+38%
+38%
+39%
+39%
+39%
+40%
+40%
+40%
+41%
+41%
+41%
+41%
+42%
+42%
+42%
+43%
+43%
+43%
+44%
+44%
+44%
+45%
+45%
+45%
+46%
+46%
+46%
+47%
+47%
+47%
+47%
+48%
+48%
+48%
+49%
+49%
+49%
+50%
+50%
+50%
+51%
+51%
+51%
+52%
+52%
+52%
+53%
+53%
+53%
+53%
+54%
+54%
+54%
+55%
+55%
+55%
+56%
+56%
+56%
+57%
+57%
+57%
+58%
+58%
+58%
+59%
+59%
+59%
+59%
+60%
+60%
+60%
+61%
+61%
+61%
+62%
+62%
+62%
+63%
+63%
+63%
+64%
+64%
+64%
+65%
+65%
+65%
+66%
+66%
+66%
+66%
+67%
+67%
+67%
+68%
+68%
+68%
+69%
+69%
+69%
+70%
+70%
+70%
+71%
+71%
+71%
+72%
+72%
+72%
+72%
+73%
+73%
+73%
+74%
+74%
+74%
+75%
+75%
+75%
+76%
+76%
+76%
+77%
+77%
+77%
+78%
+78%
+78%
+78%
+79%
+79%
+79%
+80%
+80%
+80%
+81%
+81%
+81%
+82%
+82%
+82%
+83%
+83%
+83%
+84%
+84%
+84%
+84%
+85%
+85%
+85%
+86%
+86%
+86%
+87%
+87%
+87%
+88%
+88%
+88%
+89%
+89%
+89%
+90%
+90%
+90%
+91%
+91%
+91%
+91%
+92%
+92%
+92%
+93%
+93%
+93%
+94%
+94%
+94%
+95%
+95%
+95%
+96%
+96%
+96%
+97%
+97%
+97%
+97%
+98%
+98%
+98%
+99%
+99%
+99%
+100%
+100%
+After optimisation, worst delta E = 58.273636
+Worst case direction distinction delta E = 62.121933
+Creating file 'test.tif'
+
+Target generation completed successfully
+
+Test chart(s) created:
+
+  test.tif
+
+Please print the test chart(s) and make sure to disable color management.
+Use applications like ColorSync Utility, Adobe Color Print Utility or
+Photoshop etc.
+
+After target(s) have been printed press Next to continuing with measuring of target...
+
+
+--- Navigating forward from 'generate_target' ---
+
+
+--- Navigating back from 'measure_target' ---
+
+Restored target selection: option 1
+
+--- Navigating back from 'generate_target' ---
+
+Selected instrument: i1Pro
+Restored instrument selection: i1Pro
+
+--- Navigating back from 'select_instrument' ---
+
+
+--- Navigating forward from 'specify_name' ---
+
+Profile folder already exists: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+Using existing folder and files.
+
+Selected instrument: i1Pro
+Restored instrument selection: i1Pro
+
+--- Navigating forward from 'select_instrument' ---
+
+Restored target selection: option 1
+
+--- Workflow aborted by user ---
+
+Aborting workflow and returning to main menu...
+
+
+=== Entering Main Menu ===
+
+
+=== Selected: Show Delta E2000 Color Accuracy - Quick Reference ===
+
+
+--- Navigating back from 'de_reference' ---
+
+
+=== Entering Main Menu ===
+
+
+=== Selected: Show Tips on How to Improve Accuracy ===
+
+
+--- Navigating back from 'improving_accuracy' ---
+
+
+=== Entering Main Menu ===
+
+
+=== Selected: Change Setup Parameters ===
+
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 18:53:28 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: create_from_scratch ===
+
+
+--- Navigating forward from 'specify_name' ---
+
+
+Profile folder already exists: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+
+Contents:
+  test.ti1
+  test.ti2
+  test.tif
+
+
+Using existing folder: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+Deleting existing contents to avoid leftover files from previous runs...
+Working folder for profile:
+'/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+Selected instrument: i1Pro
+
+--- Navigating forward from 'select_instrument' ---
+
+
+--- Navigating back from 'generate_target' ---
+
+Selected instrument: i1Pro
+Restored instrument selection: i1Pro
+
+--- Navigating forward from 'select_instrument' ---
+
+Selected target: Small - 480 patches
+
+Working folder: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test
+
+Generating target color values (.ti1 file)...
+
+iRGB test chart
+White patches = 6
+Black patches = 5
+Composite Grey steps = 128
+Full spread patches = 480
+Full points:
+   29%
+   29%
+   29%
+   29%
+   30%
+   30%
+   30%
+   30%
+   30%
+   31%
+   31%
+   31%
+   31%
+   31%
+   32%
+   32%
+   32%
+   32%
+   33%
+   33%
+   33%
+   33%
+   33%
+   34%
+   34%
+   34%
+   34%
+   34%
+   35%
+   35%
+   35%
+   35%
+   35%
+   36%
+   36%
+   36%
+   36%
+   36%
+   37%
+   37%
+   37%
+   37%
+   38%
+   38%
+   38%
+   38%
+   38%
+   39%
+   39%
+   39%
+   39%
+   39%
+   40%
+   40%
+   40%
+   40%
+   40%
+   41%
+   41%
+   41%
+   41%
+   41%
+   42%
+   42%
+   42%
+   42%
+   43%
+   43%
+   43%
+   43%
+   43%
+   44%
+   44%
+   44%
+   44%
+   44%
+   45%
+   45%
+   45%
+   45%
+   45%
+   46%
+   46%
+   46%
+   46%
+   46%
+   47%
+   47%
+   47%
+   47%
+   48%
+   48%
+   48%
+   48%
+   48%
+   49%
+   49%
+   49%
+   49%
+   49%
+   50%
+   50%
+   50%
+   50%
+   50%
+   51%
+   51%
+   51%
+   51%
+   51%
+   52%
+   52%
+   52%
+   52%
+   53%
+   53%
+   53%
+   53%
+   53%
+   54%
+   54%
+   54%
+   54%
+   54%
+   55%
+   55%
+   55%
+   55%
+   55%
+   56%
+   56%
+   56%
+   56%
+   56%
+   57%
+   57%
+   57%
+   57%
+   58%
+   58%
+   58%
+   58%
+   58%
+   59%
+   59%
+   59%
+   59%
+   59%
+   60%
+   60%
+   60%
+   60%
+   60%
+   61%
+   61%
+   61%
+   61%
+   61%
+   62%
+   62%
+   62%
+   62%
+   63%
+   63%
+   63%
+   63%
+   63%
+   64%
+   64%
+   64%
+   64%
+   64%
+   65%
+   65%
+   65%
+   65%
+   65%
+   66%
+   66%
+   66%
+   66%
+   66%
+   67%
+   67%
+   67%
+   67%
+   68%
+   68%
+   68%
+   68%
+   68%
+   69%
+   69%
+   69%
+   69%
+   69%
+   70%
+   70%
+   70%
+   70%
+   70%
+   71%
+   71%
+   71%
+   71%
+   71%
+   72%
+   72%
+   72%
+   72%
+   73%
+   73%
+   73%
+   73%
+   73%
+   74%
+   74%
+   74%
+   74%
+   74%
+   75%
+   75%
+   75%
+   75%
+   75%
+   76%
+   76%
+   76%
+   76%
+   76%
+   77%
+   77%
+   77%
+   77%
+   78%
+   78%
+   78%
+   78%
+   78%
+   79%
+   79%
+   79%
+   79%
+   79%
+   80%
+   80%
+   80%
+   80%
+   80%
+   81%
+   81%
+   81%
+   81%
+   81%
+   82%
+   82%
+   82%
+   82%
+   83%
+   83%
+   83%
+   83%
+   83%
+   84%
+   84%
+   84%
+   84%
+   84%
+   85%
+   85%
+   85%
+   85%
+   85%
+   86%
+   86%
+   86%
+   86%
+   86%
+   87%
+   87%
+   87%
+   87%
+   88%
+   88%
+   88%
+   88%
+   88%
+   89%
+   89%
+   89%
+   89%
+   89%
+   90%
+   90%
+   90%
+   90%
+   90%
+   91%
+   91%
+   91%
+   91%
+   91%
+   92%
+   92%
+   92%
+   92%
+   93%
+   93%
+   93%
+   93%
+   93%
+   94%
+   94%
+   94%
+   94%
+   94%
+   95%
+   95%
+   95%
+   95%
+   95%
+   96%
+   96%
+   96%
+   96%
+   96%
+   97%
+   97%
+   97%
+   97%
+   98%
+   98%
+   98%
+   98%
+   98%
+   99%
+   99%
+   99%
+   99%
+   99%
+   100%
+   100%
+   100%
+Total number of patches = 480
+Execution time = 0.148378 seconds
+
+targen completed successfully
+
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 19:01:58 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: create_from_scratch ===
+
+
+--- Navigating forward from 'specify_name' ---
+
+
+Profile folder already exists: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+
+Contents:
+  test.ti1
+
+
+Using existing folder: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+Deleting existing contents to avoid leftover files from previous runs...
+Working folder for profile:
+'/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+Selected instrument: i1Pro
+
+--- Navigating forward from 'select_instrument' ---
+
+Error: No target option selected
+Selected target: Small - 480 patches
+
+Working folder: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test
+
+Generating target color values (.ti1 file)...
+
+iRGB test chart
+White patches = 6
+Black patches = 5
+Composite Grey steps = 128
+Full spread patches = 480
+Full points:
+   29%
+   29%
+   29%
+   29%
+   30%
+   30%
+   30%
+   30%
+   30%
+   31%
+   31%
+   31%
+   31%
+   31%
+   32%
+   32%
+   32%
+   32%
+   33%
+   33%
+   33%
+   33%
+   33%
+   34%
+   34%
+   34%
+   34%
+   34%
+   35%
+   35%
+   35%
+   35%
+   35%
+   36%
+   36%
+   36%
+   36%
+   36%
+   37%
+   37%
+   37%
+   37%
+   38%
+   38%
+   38%
+   38%
+   38%
+   39%
+   39%
+   39%
+   39%
+   39%
+   40%
+   40%
+   40%
+   40%
+   40%
+   41%
+   41%
+   41%
+   41%
+   41%
+   42%
+   42%
+   42%
+   42%
+   43%
+   43%
+   43%
+   43%
+   43%
+   44%
+   44%
+   44%
+   44%
+   44%
+   45%
+   45%
+   45%
+   45%
+   45%
+   46%
+   46%
+   46%
+   46%
+   46%
+   47%
+   47%
+   47%
+   47%
+   48%
+   48%
+   48%
+   48%
+   48%
+   49%
+   49%
+   49%
+   49%
+   49%
+   50%
+   50%
+   50%
+   50%
+   50%
+   51%
+   51%
+   51%
+   51%
+   51%
+   52%
+   52%
+   52%
+   52%
+   53%
+   53%
+   53%
+   53%
+   53%
+   54%
+   54%
+   54%
+   54%
+   54%
+   55%
+   55%
+   55%
+   55%
+   55%
+   56%
+   56%
+   56%
+   56%
+   56%
+   57%
+   57%
+   57%
+   57%
+   58%
+   58%
+   58%
+   58%
+   58%
+   59%
+   59%
+   59%
+   59%
+   59%
+   60%
+   60%
+   60%
+   60%
+   60%
+   61%
+   61%
+   61%
+   61%
+   61%
+   62%
+   62%
+   62%
+   62%
+   63%
+   63%
+   63%
+   63%
+   63%
+   64%
+   64%
+   64%
+   64%
+   64%
+   65%
+   65%
+   65%
+   65%
+   65%
+   66%
+   66%
+   66%
+   66%
+   66%
+   67%
+   67%
+   67%
+   67%
+   68%
+   68%
+   68%
+   68%
+   68%
+   69%
+   69%
+   69%
+   69%
+   69%
+   70%
+   70%
+   70%
+   70%
+   70%
+   71%
+   71%
+   71%
+   71%
+   71%
+   72%
+   72%
+   72%
+   72%
+   73%
+   73%
+   73%
+   73%
+   73%
+   74%
+   74%
+   74%
+   74%
+   74%
+   75%
+   75%
+   75%
+   75%
+   75%
+   76%
+   76%
+   76%
+   76%
+   76%
+   77%
+   77%
+   77%
+   77%
+   78%
+   78%
+   78%
+   78%
+   78%
+   79%
+   79%
+   79%
+   79%
+   79%
+   80%
+   80%
+   80%
+   80%
+   80%
+   81%
+   81%
+   81%
+   81%
+   81%
+   82%
+   82%
+   82%
+   82%
+   83%
+   83%
+   83%
+   83%
+   83%
+   84%
+   84%
+   84%
+   84%
+   84%
+   85%
+   85%
+   85%
+   85%
+   85%
+   86%
+   86%
+   86%
+   86%
+   86%
+   87%
+   87%
+   87%
+   87%
+   88%
+   88%
+   88%
+   88%
+   88%
+   89%
+   89%
+   89%
+   89%
+   89%
+   90%
+   90%
+   90%
+   90%
+   90%
+   91%
+   91%
+   91%
+   91%
+   91%
+   92%
+   92%
+   92%
+   92%
+   93%
+   93%
+   93%
+   93%
+   93%
+   94%
+   94%
+   94%
+   94%
+   94%
+   95%
+   95%
+   95%
+   95%
+   95%
+   96%
+   96%
+   96%
+   96%
+   96%
+   97%
+   97%
+   97%
+   97%
+   98%
+   98%
+   98%
+   98%
+   98%
+   99%
+   99%
+   99%
+   99%
+   99%
+   100%
+   100%
+   100%
+Total number of patches = 480
+Execution time = 0.147501 seconds
+
+targen completed successfully
+
+Generating target(s) (.tif image(s) and .ti2 file)...
+
+Paper chosen is A4	[210.0 x 297.0 mm]
+Patches = 480
+Test patches per row = 24
+Rows per page = 21, patches per page = 504
+Rows in last strip = 20, patches in last row = 24
+Total pages needed = 1
+Worst case delta E = 0.000000
+Worst case direction distinction delta E = 49.303502
+Optimising layout for strip reader:
+ 0%
+ 0%
+ 0%
+ 1%
+ 1%
+ 1%
+ 2%
+ 2%
+ 2%
+ 3%
+ 3%
+ 3%
+ 3%
+ 4%
+ 4%
+ 4%
+ 5%
+ 5%
+ 5%
+ 6%
+ 6%
+ 6%
+ 7%
+ 7%
+ 7%
+ 8%
+ 8%
+ 8%
+ 9%
+ 9%
+ 9%
+ 9%
+10%
+10%
+10%
+11%
+11%
+11%
+12%
+12%
+12%
+13%
+13%
+13%
+14%
+14%
+14%
+15%
+15%
+15%
+16%
+16%
+16%
+16%
+17%
+17%
+17%
+18%
+18%
+18%
+19%
+19%
+19%
+20%
+20%
+20%
+21%
+21%
+21%
+22%
+22%
+22%
+22%
+23%
+23%
+23%
+24%
+24%
+24%
+25%
+25%
+25%
+26%
+26%
+26%
+27%
+27%
+27%
+28%
+28%
+28%
+28%
+29%
+29%
+29%
+30%
+30%
+30%
+31%
+31%
+31%
+32%
+32%
+32%
+33%
+33%
+33%
+34%
+34%
+34%
+34%
+35%
+35%
+35%
+36%
+36%
+36%
+37%
+37%
+37%
+38%
+38%
+38%
+39%
+39%
+39%
+40%
+40%
+40%
+41%
+41%
+41%
+41%
+42%
+42%
+42%
+43%
+43%
+43%
+44%
+44%
+44%
+45%
+45%
+45%
+46%
+46%
+46%
+47%
+47%
+47%
+47%
+48%
+48%
+48%
+49%
+49%
+49%
+50%
+50%
+50%
+51%
+51%
+51%
+52%
+52%
+52%
+53%
+53%
+53%
+53%
+54%
+54%
+54%
+55%
+55%
+55%
+56%
+56%
+56%
+57%
+57%
+57%
+58%
+58%
+58%
+59%
+59%
+59%
+59%
+60%
+60%
+60%
+61%
+61%
+61%
+62%
+62%
+62%
+63%
+63%
+63%
+64%
+64%
+64%
+65%
+65%
+65%
+66%
+66%
+66%
+66%
+67%
+67%
+67%
+68%
+68%
+68%
+69%
+69%
+69%
+70%
+70%
+70%
+71%
+71%
+71%
+72%
+72%
+72%
+72%
+73%
+73%
+73%
+74%
+74%
+74%
+75%
+75%
+75%
+76%
+76%
+76%
+77%
+77%
+77%
+78%
+78%
+78%
+78%
+79%
+79%
+79%
+80%
+80%
+80%
+81%
+81%
+81%
+82%
+82%
+82%
+83%
+83%
+83%
+84%
+84%
+84%
+84%
+85%
+85%
+85%
+86%
+86%
+86%
+87%
+87%
+87%
+88%
+88%
+88%
+89%
+89%
+89%
+90%
+90%
+90%
+91%
+91%
+91%
+91%
+92%
+92%
+92%
+93%
+93%
+93%
+94%
+94%
+94%
+95%
+95%
+95%
+96%
+96%
+96%
+97%
+97%
+97%
+97%
+98%
+98%
+98%
+99%
+99%
+99%
+100%
+100%
+After optimisation, worst delta E = 57.408533
+Worst case direction distinction delta E = 63.419702
+Creating file 'test.tif'
+
+Target generation completed successfully
+
+Test chart(s) created:
+
+  test.tif
+
+Please print the test chart(s) and make sure to disable color management.
+Use applications like ColorSync Utility, Adobe Color Print Utility or
+Photoshop etc.
+
+After target(s) have been printed press Next to continuing with measuring of target...
+
+
+--- Navigating forward from 'generate_target' ---
+
+
+Starting chart reading (read .ti2 file and generate .ti3 file)...
+
+
+Steps in each Pass = 24
+Passes in each Strip = 20
+Unknown, inappropriate or no instrument detected
+
+chartread failed - .ti3 file not created
+
+
+--- Navigating back from 'measure_target' ---
+
+Restored target selection: option 1
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 19:11:13 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: create_from_scratch ===
+
+
+--- Navigating forward from 'specify_name' ---
+
+
+Profile folder already exists: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+
+Contents:
+  test.ti1
+  test.ti2
+  test.tif
+
+
+Using existing folder: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+Deleting existing contents to avoid leftover files from previous runs...
+Working folder for profile:
+'/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+Selected instrument: i1Pro
+
+--- Navigating forward from 'select_instrument' ---
+
+Error: No target option selected
+Selected target: Small - 480 patches
+
+Working folder: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test
+
+Generating target color values (.ti1 file)...
+
+iRGB test chart
+White patches = 6
+Black patches = 5
+Composite Grey steps = 128
+Full spread patches = 480
+Full points:
+   29%
+   29%
+   29%
+   29%
+   30%
+   30%
+   30%
+   30%
+   30%
+   31%
+   31%
+   31%
+   31%
+   31%
+   32%
+   32%
+   32%
+   32%
+   33%
+   33%
+   33%
+   33%
+   33%
+   34%
+   34%
+   34%
+   34%
+   34%
+   35%
+   35%
+   35%
+   35%
+   35%
+   36%
+   36%
+   36%
+   36%
+   36%
+   37%
+   37%
+   37%
+   37%
+   38%
+   38%
+   38%
+   38%
+   38%
+   39%
+   39%
+   39%
+   39%
+   39%
+   40%
+   40%
+   40%
+   40%
+   40%
+   41%
+   41%
+   41%
+   41%
+   41%
+   42%
+   42%
+   42%
+   42%
+   43%
+   43%
+   43%
+   43%
+   43%
+   44%
+   44%
+   44%
+   44%
+   44%
+   45%
+   45%
+   45%
+   45%
+   45%
+   46%
+   46%
+   46%
+   46%
+   46%
+   47%
+   47%
+   47%
+   47%
+   48%
+   48%
+   48%
+   48%
+   48%
+   49%
+   49%
+   49%
+   49%
+   49%
+   50%
+   50%
+   50%
+   50%
+   50%
+   51%
+   51%
+   51%
+   51%
+   51%
+   52%
+   52%
+   52%
+   52%
+   53%
+   53%
+   53%
+   53%
+   53%
+   54%
+   54%
+   54%
+   54%
+   54%
+   55%
+   55%
+   55%
+   55%
+   55%
+   56%
+   56%
+   56%
+   56%
+   56%
+   57%
+   57%
+   57%
+   57%
+   58%
+   58%
+   58%
+   58%
+   58%
+   59%
+   59%
+   59%
+   59%
+   59%
+   60%
+   60%
+   60%
+   60%
+   60%
+   61%
+   61%
+   61%
+   61%
+   61%
+   62%
+   62%
+   62%
+   62%
+   63%
+   63%
+   63%
+   63%
+   63%
+   64%
+   64%
+   64%
+   64%
+   64%
+   65%
+   65%
+   65%
+   65%
+   65%
+   66%
+   66%
+   66%
+   66%
+   66%
+   67%
+   67%
+   67%
+   67%
+   68%
+   68%
+   68%
+   68%
+   68%
+   69%
+   69%
+   69%
+   69%
+   69%
+   70%
+   70%
+   70%
+   70%
+   70%
+   71%
+   71%
+   71%
+   71%
+   71%
+   72%
+   72%
+   72%
+   72%
+   73%
+   73%
+   73%
+   73%
+   73%
+   74%
+   74%
+   74%
+   74%
+   74%
+   75%
+   75%
+   75%
+   75%
+   75%
+   76%
+   76%
+   76%
+   76%
+   76%
+   77%
+   77%
+   77%
+   77%
+   78%
+   78%
+   78%
+   78%
+   78%
+   79%
+   79%
+   79%
+   79%
+   79%
+   80%
+   80%
+   80%
+   80%
+   80%
+   81%
+   81%
+   81%
+   81%
+   81%
+   82%
+   82%
+   82%
+   82%
+   83%
+   83%
+   83%
+   83%
+   83%
+   84%
+   84%
+   84%
+   84%
+   84%
+   85%
+   85%
+   85%
+   85%
+   85%
+   86%
+   86%
+   86%
+   86%
+   86%
+   87%
+   87%
+   87%
+   87%
+   88%
+   88%
+   88%
+   88%
+   88%
+   89%
+   89%
+   89%
+   89%
+   89%
+   90%
+   90%
+   90%
+   90%
+   90%
+   91%
+   91%
+   91%
+   91%
+   91%
+   92%
+   92%
+   92%
+   92%
+   93%
+   93%
+   93%
+   93%
+   93%
+   94%
+   94%
+   94%
+   94%
+   94%
+   95%
+   95%
+   95%
+   95%
+   95%
+   96%
+   96%
+   96%
+   96%
+   96%
+   97%
+   97%
+   97%
+   97%
+   98%
+   98%
+   98%
+   98%
+   98%
+   99%
+   99%
+   99%
+   99%
+   99%
+   100%
+   100%
+   100%
+Total number of patches = 480
+Execution time = 0.144828 seconds
+
+targen completed successfully
+
+Generating target(s) (.tif image(s) and .ti2 file)...
+
+Paper chosen is A4	[210.0 x 297.0 mm]
+Patches = 480
+Test patches per row = 24
+Rows per page = 21, patches per page = 504
+Rows in last strip = 20, patches in last row = 24
+Total pages needed = 1
+Worst case delta E = 0.000000
+Worst case direction distinction delta E = 47.905958
+Optimising layout for strip reader:
+ 0%
+ 0%
+ 0%
+ 1%
+ 1%
+ 1%
+ 2%
+ 2%
+ 2%
+ 3%
+ 3%
+ 3%
+ 3%
+ 4%
+ 4%
+ 4%
+ 5%
+ 5%
+ 5%
+ 6%
+ 6%
+ 6%
+ 7%
+ 7%
+ 7%
+ 8%
+ 8%
+ 8%
+ 9%
+ 9%
+ 9%
+ 9%
+10%
+10%
+10%
+11%
+11%
+11%
+12%
+12%
+12%
+13%
+13%
+13%
+14%
+14%
+14%
+15%
+15%
+15%
+16%
+16%
+16%
+16%
+17%
+17%
+17%
+18%
+18%
+18%
+19%
+19%
+19%
+20%
+20%
+20%
+21%
+21%
+21%
+22%
+22%
+22%
+22%
+23%
+23%
+23%
+24%
+24%
+24%
+25%
+25%
+25%
+26%
+26%
+26%
+27%
+27%
+27%
+28%
+28%
+28%
+28%
+29%
+29%
+29%
+30%
+30%
+30%
+31%
+31%
+31%
+32%
+32%
+32%
+33%
+33%
+33%
+34%
+34%
+34%
+34%
+35%
+35%
+35%
+36%
+36%
+36%
+37%
+37%
+37%
+38%
+38%
+38%
+39%
+39%
+39%
+40%
+40%
+40%
+41%
+41%
+41%
+41%
+42%
+42%
+42%
+43%
+43%
+43%
+44%
+44%
+44%
+45%
+45%
+45%
+46%
+46%
+46%
+47%
+47%
+47%
+47%
+48%
+48%
+48%
+49%
+49%
+49%
+50%
+50%
+50%
+51%
+51%
+51%
+52%
+52%
+52%
+53%
+53%
+53%
+53%
+54%
+54%
+54%
+55%
+55%
+55%
+56%
+56%
+56%
+57%
+57%
+57%
+58%
+58%
+58%
+59%
+59%
+59%
+59%
+60%
+60%
+60%
+61%
+61%
+61%
+62%
+62%
+62%
+63%
+63%
+63%
+64%
+64%
+64%
+65%
+65%
+65%
+66%
+66%
+66%
+66%
+67%
+67%
+67%
+68%
+68%
+68%
+69%
+69%
+69%
+70%
+70%
+70%
+71%
+71%
+71%
+72%
+72%
+72%
+72%
+73%
+73%
+73%
+74%
+74%
+74%
+75%
+75%
+75%
+76%
+76%
+76%
+77%
+77%
+77%
+78%
+78%
+78%
+78%
+79%
+79%
+79%
+80%
+80%
+80%
+81%
+81%
+81%
+82%
+82%
+82%
+83%
+83%
+83%
+84%
+84%
+84%
+84%
+85%
+85%
+85%
+86%
+86%
+86%
+87%
+87%
+87%
+88%
+88%
+88%
+89%
+89%
+89%
+90%
+90%
+90%
+91%
+91%
+91%
+91%
+92%
+92%
+92%
+93%
+93%
+93%
+94%
+94%
+94%
+95%
+95%
+95%
+96%
+96%
+96%
+97%
+97%
+97%
+97%
+98%
+98%
+98%
+99%
+99%
+99%
+100%
+100%
+After optimisation, worst delta E = 58.007549
+Worst case direction distinction delta E = 66.837270
+Creating file 'test.tif'
+
+Target generation completed successfully
+
+Test chart(s) created:
+
+  test.tif
+
+Please print the test chart(s) and make sure to disable color management.
+Use applications like ColorSync Utility, Adobe Color Print Utility or
+Photoshop etc.
+
+After target(s) have been printed press Next to continuing with measuring of target...
+
+
+--- Navigating forward from 'generate_target' ---
+
+
+--- Navigating back from 'measure_target' ---
+
+Restored target selection: option 1
+
+--- Navigating back from 'generate_target' ---
+
+Selected instrument: i1Pro
+Restored instrument selection: i1Pro
+
+--- Navigating back from 'select_instrument' ---
+
+
+--- Navigating forward from 'specify_name' ---
+
+Profile folder already exists: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+Using existing folder and files.
+
+Selected instrument: i1Pro
+Restored instrument selection: i1Pro
+
+--- Navigating forward from 'select_instrument' ---
+
+Restored target selection: option 1
+
+--- Navigating forward from 'generate_target' ---
+
+
+Starting chart reading (read .ti2 file and generate .ti3 file)...
+
+
+Steps in each Pass = 24
+Passes in each Strip = 20
+Unknown, inappropriate or no instrument detected
+
+chartread failed - .ti3 file not created
+
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 19:18:07 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: create_from_scratch ===
+
+
+--- Navigating forward from 'specify_name' ---
+
+
+Profile folder already exists: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+
+Contents:
+  test.ti1
+  test.ti2
+  test.tif
+
+
+Please enter a different profile name.
+Working folder for profile:
+'/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test2'
+Selected instrument: ColorMunki
+
+--- Navigating forward from 'select_instrument' ---
+
+Selected target: Medium (default) - 420 patches
+
+Working folder: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test
+
+Generating target color values (.ti1 file)...
+
+iRGB test chart
+White patches = 6
+Black patches = 6
+Composite Grey steps = 84
+Full spread patches = 420
+Full points:
+   23%
+   23%
+   23%
+   23%
+   24%
+   24%
+   24%
+   24%
+   25%
+   25%
+   25%
+   25%
+   25%
+   26%
+   26%
+   26%
+   26%
+   27%
+   27%
+   27%
+   27%
+   28%
+   28%
+   28%
+   28%
+   29%
+   29%
+   29%
+   29%
+   30%
+   30%
+   30%
+   30%
+   30%
+   31%
+   31%
+   31%
+   31%
+   32%
+   32%
+   32%
+   32%
+   33%
+   33%
+   33%
+   33%
+   34%
+   34%
+   34%
+   34%
+   35%
+   35%
+   35%
+   35%
+   35%
+   36%
+   36%
+   36%
+   36%
+   37%
+   37%
+   37%
+   37%
+   38%
+   38%
+   38%
+   38%
+   39%
+   39%
+   39%
+   39%
+   40%
+   40%
+   40%
+   40%
+   40%
+   41%
+   41%
+   41%
+   41%
+   42%
+   42%
+   42%
+   42%
+   43%
+   43%
+   43%
+   43%
+   44%
+   44%
+   44%
+   44%
+   45%
+   45%
+   45%
+   45%
+   45%
+   46%
+   46%
+   46%
+   46%
+   47%
+   47%
+   47%
+   47%
+   48%
+   48%
+   48%
+   48%
+   49%
+   49%
+   49%
+   49%
+   50%
+   50%
+   50%
+   50%
+   50%
+   51%
+   51%
+   51%
+   51%
+   52%
+   52%
+   52%
+   52%
+   53%
+   53%
+   53%
+   53%
+   54%
+   54%
+   54%
+   54%
+   55%
+   55%
+   55%
+   55%
+   55%
+   56%
+   56%
+   56%
+   56%
+   57%
+   57%
+   57%
+   57%
+   58%
+   58%
+   58%
+   58%
+   59%
+   59%
+   59%
+   59%
+   60%
+   60%
+   60%
+   60%
+   60%
+   61%
+   61%
+   61%
+   61%
+   62%
+   62%
+   62%
+   62%
+   63%
+   63%
+   63%
+   63%
+   64%
+   64%
+   64%
+   64%
+   65%
+   65%
+   65%
+   65%
+   65%
+   66%
+   66%
+   66%
+   66%
+   67%
+   67%
+   67%
+   67%
+   68%
+   68%
+   68%
+   68%
+   69%
+   69%
+   69%
+   69%
+   70%
+   70%
+   70%
+   70%
+   70%
+   71%
+   71%
+   71%
+   71%
+   72%
+   72%
+   72%
+   72%
+   73%
+   73%
+   73%
+   73%
+   74%
+   74%
+   74%
+   74%
+   75%
+   75%
+   75%
+   75%
+   75%
+   76%
+   76%
+   76%
+   76%
+   77%
+   77%
+   77%
+   77%
+   78%
+   78%
+   78%
+   78%
+   79%
+   79%
+   79%
+   79%
+   80%
+   80%
+   80%
+   80%
+   80%
+   81%
+   81%
+   81%
+   81%
+   82%
+   82%
+   82%
+   82%
+   83%
+   83%
+   83%
+   83%
+   84%
+   84%
+   84%
+   84%
+   85%
+   85%
+   85%
+   85%
+   85%
+   86%
+   86%
+   86%
+   86%
+   87%
+   87%
+   87%
+   87%
+   88%
+   88%
+   88%
+   88%
+   89%
+   89%
+   89%
+   89%
+   90%
+   90%
+   90%
+   90%
+   90%
+   91%
+   91%
+   91%
+   91%
+   92%
+   92%
+   92%
+   92%
+   93%
+   93%
+   93%
+   93%
+   94%
+   94%
+   94%
+   94%
+   95%
+   95%
+   95%
+   95%
+   95%
+   96%
+   96%
+   96%
+   96%
+   97%
+   97%
+   97%
+   97%
+   98%
+   98%
+   98%
+   98%
+   99%
+   99%
+   99%
+   99%
+   100%
+   100%
+   100%
+Total number of patches = 420
+Execution time = 0.120163 seconds
+
+targen completed successfully
+
+Generating target(s) (.tif image(s) and .ti2 file)...
+
+Paper chosen is A4	[210.0 x 297.0 mm]
+Patches = 420
+Test patches per row = 15
+Rows per page = 14, patches per page = 210
+Rows in last strip = 14, patches in last row = 15
+Total pages needed = 2
+Worst case delta E = 0.000000
+Worst case direction distinction delta E = 30.561207
+Optimising layout for strip reader:
+ 0%
+ 0%
+ 0%
+ 1%
+ 1%
+ 1%
+ 2%
+ 2%
+ 2%
+ 3%
+ 3%
+ 3%
+ 3%
+ 4%
+ 4%
+ 4%
+ 5%
+ 5%
+ 5%
+ 6%
+ 6%
+ 6%
+ 7%
+ 7%
+ 7%
+ 8%
+ 8%
+ 8%
+ 9%
+ 9%
+ 9%
+ 9%
+10%
+10%
+10%
+11%
+11%
+11%
+12%
+12%
+12%
+13%
+13%
+13%
+14%
+14%
+14%
+15%
+15%
+15%
+16%
+16%
+16%
+16%
+17%
+17%
+17%
+18%
+18%
+18%
+19%
+19%
+19%
+20%
+20%
+20%
+21%
+21%
+21%
+22%
+22%
+22%
+22%
+23%
+23%
+23%
+24%
+24%
+24%
+25%
+25%
+25%
+26%
+26%
+26%
+27%
+27%
+27%
+28%
+28%
+28%
+28%
+29%
+29%
+29%
+30%
+30%
+30%
+31%
+31%
+31%
+32%
+32%
+32%
+33%
+33%
+33%
+34%
+34%
+34%
+34%
+35%
+35%
+35%
+36%
+36%
+36%
+37%
+37%
+37%
+38%
+38%
+38%
+39%
+39%
+39%
+40%
+40%
+40%
+41%
+41%
+41%
+41%
+42%
+42%
+42%
+43%
+43%
+43%
+44%
+44%
+44%
+45%
+45%
+45%
+46%
+46%
+46%
+47%
+47%
+47%
+47%
+48%
+48%
+48%
+49%
+49%
+49%
+50%
+50%
+50%
+51%
+51%
+51%
+52%
+52%
+52%
+53%
+53%
+53%
+53%
+54%
+54%
+54%
+55%
+55%
+55%
+56%
+56%
+56%
+57%
+57%
+57%
+58%
+58%
+58%
+59%
+59%
+59%
+59%
+60%
+60%
+60%
+61%
+61%
+61%
+62%
+62%
+62%
+63%
+63%
+63%
+64%
+64%
+64%
+65%
+65%
+65%
+66%
+66%
+66%
+66%
+67%
+67%
+67%
+68%
+68%
+68%
+69%
+69%
+69%
+70%
+70%
+70%
+71%
+71%
+71%
+72%
+72%
+72%
+72%
+73%
+73%
+73%
+74%
+74%
+74%
+75%
+75%
+75%
+76%
+76%
+76%
+77%
+77%
+77%
+78%
+78%
+78%
+78%
+79%
+79%
+79%
+80%
+80%
+80%
+81%
+81%
+81%
+82%
+82%
+82%
+83%
+83%
+83%
+84%
+84%
+84%
+84%
+85%
+85%
+85%
+86%
+86%
+86%
+87%
+87%
+87%
+88%
+88%
+88%
+89%
+89%
+89%
+90%
+90%
+90%
+91%
+91%
+91%
+91%
+92%
+92%
+92%
+93%
+93%
+93%
+94%
+94%
+94%
+95%
+95%
+95%
+96%
+96%
+96%
+97%
+97%
+97%
+97%
+98%
+98%
+98%
+99%
+99%
+99%
+100%
+100%
+After optimisation, worst delta E = 58.093259
+Worst case direction distinction delta E = 54.810449
+Creating file 'test_01.tif'
+Creating file 'test_02.tif'
+
+Target generation completed successfully
+
+Test chart(s) created:
+
+  test.tif
+  test_01.tif
+  test_02.tif
+
+Please print the test chart(s) and make sure to disable color management.
+Use applications like ColorSync Utility, Adobe Color Print Utility or
+Photoshop etc.
+
+After target(s) have been printed press Next to continuing with measuring of target...
+
+
+--- Navigating forward from 'generate_target' ---
+
+
+--- Workflow aborted by user ---
+
+Aborting workflow and returning to main menu...
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: resume_measurement ===
+
+
+--- Workflow aborted by user ---
+
+Aborting workflow and returning to main menu...
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: create_from_scratch ===
+
+
+--- Workflow aborted by user ---
+
+Aborting workflow and returning to main menu...
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: read_from_scratch ===
+
+
+--- Workflow aborted by user ---
+
+Aborting workflow and returning to main menu...
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: profile_from_measurement ===
+
+
+--- Workflow aborted by user ---
+
+Aborting workflow and returning to main menu...
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: profile_from_measurement ===
+
+
+--- Workflow aborted by user ---
+
+Aborting workflow and returning to main menu...
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: sanity_check ===
+
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 19:21:35 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: resume_measurement ===
+
+
+--- Workflow aborted by user ---
+
+Aborting workflow and returning to main menu...
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: create_from_scratch ===
+
+
+--- Navigating forward from 'specify_name' ---
+
+
+Profile folder already exists: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+
+Contents:
+  test.ti1
+  test.ti2
+  test.tif
+  test_01.tif
+  test_02.tif
+
+
+Using existing folder: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+Deleting existing contents to avoid leftover files from previous runs...
+Working folder for profile:
+'/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+Selected instrument: ColorMunki
+
+--- Navigating back from 'select_instrument' ---
+
+
+--- Workflow aborted by user ---
+
+Aborting workflow and returning to main menu...
+
+
+=== Entering Main Menu ===
+
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 19:33:25 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: create_from_scratch ===
+
+
+--- Workflow aborted by user ---
+
+Aborting workflow and returning to main menu...
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: resume_measurement ===
+
+
+--- Workflow aborted by user ---
+
+Aborting workflow and returning to main menu...
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: create_from_scratch ===
+
+
+--- Workflow aborted by user ---
+
+Aborting workflow and returning to main menu...
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: create_from_scratch ===
+
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 19:38:30 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: create_from_scratch ===
+
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 19:48:17 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+=== Entering Main Menu ===
+
+
+=== Selected: Show Delta E2000 Color Accuracy - Quick Reference ===
+
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 19:53:40 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: create_from_scratch ===
+
+
+--- Workflow aborted by user ---
+
+Aborting workflow and returning to main menu...
+
+
+=== Entering Main Menu ===
+
+
+=== Selected: Show Delta E2000 Color Accuracy - Quick Reference ===
+
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 20:00:11 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: resume_measurement ===
+
+
+--- Workflow aborted by user ---
+
+Aborting workflow and returning to main menu...
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: read_from_scratch ===
+
+
+--- Workflow aborted by user ---
+
+Aborting workflow and returning to main menu...
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: read_from_scratch ===
+
+
+--- Workflow aborted by user ---
+
+Aborting workflow and returning to main menu...
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: profile_from_measurement ===
+
+
+--- Workflow aborted by user ---
+
+Aborting workflow and returning to main menu...
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: sanity_check ===
+
+
+--- Workflow aborted by user ---
+
+Aborting workflow and returning to main menu...
+
+
+=== Entering Main Menu ===
+
+
+=== Selected: Change Setup Parameters ===
+
+
+--- Navigating back from 'setup_parameters' ---
+
+
+=== Entering Main Menu ===
+
+
+=== Selected: Show Tips on How to Improve Accuracy ===
+
+
+--- Navigating back from 'improving_accuracy' ---
+
+
+=== Entering Main Menu ===
+
+
+=== Selected: Show Delta E2000 Color Accuracy - Quick Reference ===
+
+
+--- Navigating back from 'de_reference' ---
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: read_from_scratch ===
+
+Selected .ti2 file: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Pre-made_Targets/Patch Width 8-11mm - Expert (Use rig-guide-ruler)/Designed Targets/CM-Expert-10x15cm-484p-4pages-w8.5mm-11x11/10x15-profile.ti2
+Found target image(s):
+  10x15-profile_01.tif
+  10x15-profile_02.tif
+  10x15-profile_03.tif
+  10x15-profile_04.tif
+
+Do you want to:
+
+1: Create new profile (copy files into new folder)
+2: Overwrite existing (use files in their current location, 
+   existing .ti3 and .icc/.icm files will be overwritten)
+3: Abort operation
+
+Working folder for profile:
+'/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/10x15-profile'
+Copied: 10x15-profile.ti1
+Copied: 10x15-profile.ti2
+Copied: 10x15-profile_01.tif
+Copied: 10x15-profile_02.tif
+Copied: 10x15-profile_03.tif
+Copied: 10x15-profile_04.tif
+Successfully copied 6 file(s)
+Renamed: 10x15-profile.ti1 -> 10x15-profile.ti1
+Renamed: 10x15-profile.ti2 -> 10x15-profile.ti2
+Renamed: 10x15-profile_01.tif -> 10x15-profile_01.tif
+Renamed: 10x15-profile_02.tif -> 10x15-profile_02.tif
+Renamed: 10x15-profile_03.tif -> 10x15-profile_03.tif
+Renamed: 10x15-profile_04.tif -> 10x15-profile_04.tif
+All files verified after copy
+Working folder: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/10x15-profile
+
+
+--- Navigating forward from 'select_ti2_file' ---
+
+
+--- Navigating back from 'measure_target' ---
+
+
+--- Workflow aborted by user ---
+
+Aborting workflow and returning to main menu...
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: create_from_scratch ===
+
+
+--- Navigating forward from 'specify_name' ---
+
+
+Profile folder already exists: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+
+Contents:
+
+
+Using existing folder: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+Deleting existing contents to avoid leftover files from previous runs...
+Working folder for profile:
+'/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test'
+Selected instrument: i1Pro
+
+--- Navigating forward from 'select_instrument' ---
+
+Selected target: Small - 480 patches
+
+Working folder: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/test
+
+Generating target color values (.ti1 file)...
+
+iRGB test chart
+White patches = 6
+Black patches = 5
+Composite Grey steps = 128
+Full spread patches = 480
+Full points:
+   29%
+   29%
+   29%
+   29%
+   30%
+   30%
+   30%
+   30%
+   30%
+   31%
+   31%
+   31%
+   31%
+   31%
+   32%
+   32%
+   32%
+   32%
+   33%
+   33%
+   33%
+   33%
+   33%
+   34%
+   34%
+   34%
+   34%
+   34%
+   35%
+   35%
+   35%
+   35%
+   35%
+   36%
+   36%
+   36%
+   36%
+   36%
+   37%
+   37%
+   37%
+   37%
+   38%
+   38%
+   38%
+   38%
+   38%
+   39%
+   39%
+   39%
+   39%
+   39%
+   40%
+   40%
+   40%
+   40%
+   40%
+   41%
+   41%
+   41%
+   41%
+   41%
+   42%
+   42%
+   42%
+   42%
+   43%
+   43%
+   43%
+   43%
+   43%
+   44%
+   44%
+   44%
+   44%
+   44%
+   45%
+   45%
+   45%
+   45%
+   45%
+   46%
+   46%
+   46%
+   46%
+   46%
+   47%
+   47%
+   47%
+   47%
+   48%
+   48%
+   48%
+   48%
+   48%
+   49%
+   49%
+   49%
+   49%
+   49%
+   50%
+   50%
+   50%
+   50%
+   50%
+   51%
+   51%
+   51%
+   51%
+   51%
+   52%
+   52%
+   52%
+   52%
+   53%
+   53%
+   53%
+   53%
+   53%
+   54%
+   54%
+   54%
+   54%
+   54%
+   55%
+   55%
+   55%
+   55%
+   55%
+   56%
+   56%
+   56%
+   56%
+   56%
+   57%
+   57%
+   57%
+   57%
+   58%
+   58%
+   58%
+   58%
+   58%
+   59%
+   59%
+   59%
+   59%
+   59%
+   60%
+   60%
+   60%
+   60%
+   60%
+   61%
+   61%
+   61%
+   61%
+   61%
+   62%
+   62%
+   62%
+   62%
+   63%
+   63%
+   63%
+   63%
+   63%
+   64%
+   64%
+   64%
+   64%
+   64%
+   65%
+   65%
+   65%
+   65%
+   65%
+   66%
+   66%
+   66%
+   66%
+   66%
+   67%
+   67%
+   67%
+   67%
+   68%
+   68%
+   68%
+   68%
+   68%
+   69%
+   69%
+   69%
+   69%
+   69%
+   70%
+   70%
+   70%
+   70%
+   70%
+   71%
+   71%
+   71%
+   71%
+   71%
+   72%
+   72%
+   72%
+   72%
+   73%
+   73%
+   73%
+   73%
+   73%
+   74%
+   74%
+   74%
+   74%
+   74%
+   75%
+   75%
+   75%
+   75%
+   75%
+   76%
+   76%
+   76%
+   76%
+   76%
+   77%
+   77%
+   77%
+   77%
+   78%
+   78%
+   78%
+   78%
+   78%
+   79%
+   79%
+   79%
+   79%
+   79%
+   80%
+   80%
+   80%
+   80%
+   80%
+   81%
+   81%
+   81%
+   81%
+   81%
+   82%
+   82%
+   82%
+   82%
+   83%
+   83%
+   83%
+   83%
+   83%
+   84%
+   84%
+   84%
+   84%
+   84%
+   85%
+   85%
+   85%
+   85%
+   85%
+   86%
+   86%
+   86%
+   86%
+   86%
+   87%
+   87%
+   87%
+   87%
+   88%
+   88%
+   88%
+   88%
+   88%
+   89%
+   89%
+   89%
+   89%
+   89%
+   90%
+   90%
+   90%
+   90%
+   90%
+   91%
+   91%
+   91%
+   91%
+   91%
+   92%
+   92%
+   92%
+   92%
+   93%
+   93%
+   93%
+   93%
+   93%
+   94%
+   94%
+   94%
+   94%
+   94%
+   95%
+   95%
+   95%
+   95%
+   95%
+   96%
+   96%
+   96%
+   96%
+   96%
+   97%
+   97%
+   97%
+   97%
+   98%
+   98%
+   98%
+   98%
+   98%
+   99%
+   99%
+   99%
+   99%
+   99%
+   100%
+   100%
+   100%
+Total number of patches = 480
+Execution time = 0.146980 seconds
+
+targen completed successfully
+
+Generating target(s) (.tif image(s) and .ti2 file)...
+
+Paper chosen is A4	[210.0 x 297.0 mm]
+Patches = 480
+Test patches per row = 24
+Rows per page = 21, patches per page = 504
+Rows in last strip = 20, patches in last row = 24
+Total pages needed = 1
+Worst case delta E = 0.978737
+Worst case direction distinction delta E = 44.678562
+Optimising layout for strip reader:
+ 0%
+ 0%
+ 0%
+ 1%
+ 1%
+ 1%
+ 2%
+ 2%
+ 2%
+ 3%
+ 3%
+ 3%
+ 3%
+ 4%
+ 4%
+ 4%
+ 5%
+ 5%
+ 5%
+ 6%
+ 6%
+ 6%
+ 7%
+ 7%
+ 7%
+ 8%
+ 8%
+ 8%
+ 9%
+ 9%
+ 9%
+ 9%
+10%
+10%
+10%
+11%
+11%
+11%
+12%
+12%
+12%
+13%
+13%
+13%
+14%
+14%
+14%
+15%
+15%
+15%
+16%
+16%
+16%
+16%
+17%
+17%
+17%
+18%
+18%
+18%
+19%
+19%
+19%
+20%
+20%
+20%
+21%
+21%
+21%
+22%
+22%
+22%
+22%
+23%
+23%
+23%
+24%
+24%
+24%
+25%
+25%
+25%
+26%
+26%
+26%
+27%
+27%
+27%
+28%
+28%
+28%
+28%
+29%
+29%
+29%
+30%
+30%
+30%
+31%
+31%
+31%
+32%
+32%
+32%
+33%
+33%
+33%
+34%
+34%
+34%
+34%
+35%
+35%
+35%
+36%
+36%
+36%
+37%
+37%
+37%
+38%
+38%
+38%
+39%
+39%
+39%
+40%
+40%
+40%
+41%
+41%
+41%
+41%
+42%
+42%
+42%
+43%
+43%
+43%
+44%
+44%
+44%
+45%
+45%
+45%
+46%
+46%
+46%
+47%
+47%
+47%
+47%
+48%
+48%
+48%
+49%
+49%
+49%
+50%
+50%
+50%
+51%
+51%
+51%
+52%
+52%
+52%
+53%
+53%
+53%
+53%
+54%
+54%
+54%
+55%
+55%
+55%
+56%
+56%
+56%
+57%
+57%
+57%
+58%
+58%
+58%
+59%
+59%
+59%
+59%
+60%
+60%
+60%
+61%
+61%
+61%
+62%
+62%
+62%
+63%
+63%
+63%
+64%
+64%
+64%
+65%
+65%
+65%
+66%
+66%
+66%
+66%
+67%
+67%
+67%
+68%
+68%
+68%
+69%
+69%
+69%
+70%
+70%
+70%
+71%
+71%
+71%
+72%
+72%
+72%
+72%
+73%
+73%
+73%
+74%
+74%
+74%
+75%
+75%
+75%
+76%
+76%
+76%
+77%
+77%
+77%
+78%
+78%
+78%
+78%
+79%
+79%
+79%
+80%
+80%
+80%
+81%
+81%
+81%
+82%
+82%
+82%
+83%
+83%
+83%
+84%
+84%
+84%
+84%
+85%
+85%
+85%
+86%
+86%
+86%
+87%
+87%
+87%
+88%
+88%
+88%
+89%
+89%
+89%
+90%
+90%
+90%
+91%
+91%
+91%
+91%
+92%
+92%
+92%
+93%
+93%
+93%
+94%
+94%
+94%
+95%
+95%
+95%
+96%
+96%
+96%
+97%
+97%
+97%
+97%
+98%
+98%
+98%
+99%
+99%
+99%
+100%
+100%
+After optimisation, worst delta E = 57.751815
+Worst case direction distinction delta E = 62.916705
+Creating file 'test.tif'
+
+Target generation completed successfully
+
+Test chart(s) created:
+
+  test.tif
+
+Please print the test chart(s) and make sure to disable color management.
+Use applications like ColorSync Utility, Adobe Color Print Utility or
+Photoshop etc.
+
+After target(s) have been printed press Next to continuing with measuring of target...
+
+
+--- Navigating forward from 'generate_target' ---
+
+
+--- Workflow aborted by user ---
+
+Aborting workflow and returning to main menu...
+
+
+=== Entering Main Menu ===
+
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 20:10:00 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: create_from_scratch ===
+
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 20:11:58 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+=== Entering Main Menu ===
+
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 20:12:54 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: create_from_scratch ===
+
+
+--- Workflow aborted by user ---
+
+Aborting workflow and returning to main menu...
+
+
+=== Entering Main Menu ===
+
+
+=== Selected: Show Delta E2000 Color Accuracy - Quick Reference ===
+
+
+--- Navigating back from 'de_reference' ---
+
+
+=== Entering Main Menu ===
+
+
+=== Selected: Show Delta E2000 Color Accuracy - Quick Reference ===
+
+
+--- Navigating back from 'de_reference' ---
+
+
+=== Entering Main Menu ===
+
+
+=== Selected: Show Tips on How to Improve Accuracy ===
+
+
+--- Navigating back from 'improving_accuracy' ---
+
+
+=== Entering Main Menu ===
+
+
+=== Selected: Change Setup Parameters ===
+
+
+--- Navigating back from 'setup_parameters' ---
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: sanity_check ===
+
+Selected .ti3 file: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09.ti3
+Working folder: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09
+
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 20:17:37 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: resume_measurement ===
+
+Selected .ti3 file: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09.ti3
+Found target image(s):
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_01.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_02.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_03.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_04.tif
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_05.tif
+
+
+Do you want to:
+
+1: Create new profile (copy files into new folder)
+2: Overwrite existing (use files in their current location, measurement will
+   resume using existing .ti3 and .icc/.icm file will be overwritten)
+3: Abort operation
+
+
+Profile folder already exists: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles'
+
+Contents:
+  .DS_Store
+  10x15-profile
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09
+  Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.14
+  test
+  test2
+
+
+Using existing folder: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles'
+Deleting existing contents to avoid leftover files from previous runs...
+Working folder for profile:
+'/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles'
+Failed to copy Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_01.tif: [Errno 2] No such file or directory: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_01.tif'
+Failed to copy Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_02.tif: [Errno 2] No such file or directory: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_02.tif'
+Failed to copy Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_03.tif: [Errno 2] No such file or directory: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_03.tif'
+Failed to copy Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_04.tif: [Errno 2] No such file or directory: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_04.tif'
+Failed to copy Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_05.tif: [Errno 2] No such file or directory: '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-900Patches-Calib-Argyll-Colormunki_2026.02.09_05.tif'
+Warning: No files copied
+File copy failed...
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 20:22:34 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: profile_from_measurement ===
+
+Selected .ti3 file: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.ti3
+
+Do you want to:
+
+1: Create new profile (copy files into new folder)
+2: Overwrite existing (use files in their current location,
+3: Abort operation
+
+User chose to abort.
+Selected .ti3 file: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.ti3
+
+Do you want to:
+
+1: Create new profile (copy files into new folder)
+2: Overwrite existing (use files in their current location,
+3: Abort operation
+
+Profile preparation failed...
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 20:27:15 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: sanity_check ===
+
+Selected .ti3 file: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.ti3
+Working folder: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09
+
+
+--- Navigating forward from 'select_ti3_file' ---
+
+
+--- Navigating back from 'sanity_check' ---
+
+
+--- Workflow aborted by user ---
+
+Aborting workflow and returning to main menu...
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: sanity_check ===
+
+
+--- Workflow aborted by user ---
+
+Aborting workflow and returning to main menu...
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: profile_from_measurement ===
+
+Selected .ti3 file: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.ti3
+
+Do you want to:
+
+1: Create new profile (copy files into new folder)
+2: Overwrite existing (use files in their current location,
+3: Abort operation
+
+Profile preparation failed...
+======================================================================
+    ___        _                        _           _ _       
+   / _ \ _   _| |_ ___  _ __ ___   __ _| |_ ___  __| | |      
+  | | | | | | | __/ _ \| '_ ` _ \ / _` | __/ _ \/ _` | |   
+  | |_| | |_| | || (_) | | | | | | (_| | ||  __/ (_| | |      
+   \___/ \__,_|\__\___/|_| |_| |_|\__,_|\__\___|\__,_|_|      
+                                                              
+        Argyll Printer Profiler GUI (Automated Workflow)       
+        Color Target Generation & ICC/ICM Profiling           
+======================================================================
+
+Automated ArgyllCMS GUI for calibrating printers on macOS, Linux, and Windows.
+A selection of targets is provided as examples in the folder Pre-made_Targets.
+These are adapted for use with X-Rite ColorMunki Photo, i1Studio and i1Pro.
+Modify target charts and command arguments in .ini file.
+
+Author:  Knut Larsson
+Version: 1.3.8
+
+
+================================================================================
+NEW GUI SESSION STARTED
+Date & Time: 2026-04-16 20:31:01 CEST (+0200)
+Platform: macos
+================================================================================
+
+Checking required ArgyllCMS commands...
+  Found: targen
+  Found: chartread
+  Found: colprof
+  Found: printtarg
+  Found: profcheck
+All required commands found.
+
+ArgyllCMS detected
+Version: 3.5.0
+
+
+=== Entering Main Menu ===
+
+
+=== Starting workflow: profile_from_measurement ===
+
+Selected .ti3 file: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.ti3
+
+Do you want to:
+
+1: Create new profile (copy files into new folder)
+2: Overwrite existing (use files in their current location,
+3: Abort operation
+
+Working folder for profile:
+'/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14'
+Copying files from '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09' to '/Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14'...
+Renamed: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.ti1 -> Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14.ti1
+Renamed: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.ti2 -> Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14.ti2
+Renamed: Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.ti3 -> Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14.ti3
+All files verified after copy
+Working folder: /Users/knut/Documents/Calibration/Scripts/ArgyllCMS scripts/Published on Github/Argyll_Printer_Profiler_GUI/Created_Profiles/Printer_HP_CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.14
+
+
+--- Navigating forward from 'select_ti3_file' ---
+
+Creating ICC/ICM profile...
+
+Create ICC profile, Version 3.5.0
+Author: Graeme W. Gill, licensed under the AGPL Version 3
+  Diagnostic: Expect argument to profile description flag -D
+usage: colprof [-options] inoutfile
+ -v              Verbose mode
+ -A manufacturer Manufacturer description string
+ -M model        Model description string
+ -D description  Profile Description string (Default "inoutfile")
+ -C copyright    Copyright string
+ -Z tmnb         Attributes: Transparency, Matte, Negative, BlackAndWhite
+ -Z prsa         Default intent: Perceptual, Rel. Colorimetric, Saturation, Abs. Colorimetric
+ -q lmhu         Quality - Low, Medium (def), High, Ultra
+ -b [lmhun]      Low quality B2A table - or specific B2A quality or none for input device
+ -ni             Don't create input (Device) shaper curves
+ -np             Don't create input (Device) grid position curves
+ -no             Don't create output (PCS) shaper curves
+ -nc             Don't put the input .ti3 data in the profile
+ -k zhxr         Black Ink generation target: z = zero K,
+                 h = 0.5 K, x = max K, r = ramp K (def.)
+ -k p stle stpo enpo enle shape
+                 stle: K level at White 0.0 - 1.0
+                 stpo: start point of transition Wh 0.0 - Bk 1.0
+                 enpo: End point of transition Wh 0.0 - Bk 1.0
+                 enle: K level at Black 0.0 - 1.0
+                 shape: 1.0 = straight, 0.0-1.0 concave, 1.0-2.0 convex
+ -K parameters   Same as -k, but target is K locus rather than K value itself
+ -l tlimit       override total ink limit, 0 - 400% (default from .ti3)
+ -L klimit       override black ink limit, 0 - 100% (default from .ti3)
+ -a lxXYgsmGS    Algorithm type override
+                 l = Lab cLUT (def.), x = XYZ cLUT,
+                 X = display XYZ cLUT + matrix, Y = display XYZ cLUT + debug matrix
+                 g = gamma+matrix, s = shaper+matrix, m = matrix only,
+                 G = single gamma+matrix, S = single shaper+matrix
+ -u              If input profile, auto scale WP to allow extrapolation
+ -ua             If input profile, force absolute intent
+ -uc             If input profile, clip cLUT values above WP
+ -u scale        If input profile, scale media white point by scale
+ -R              Restrict white <= 1.0, black and primaries to be +ve
+ -V demphasis    Degree of dark region cLUT grid emphasis 1.0-4.0 (default 1.00 = none)
+ -f [illum]      Use Fluorescent Whitening Agent compensation [opt. simulated inst. illum.:
+                  M0, M1, M2, A, C, D50 (def.), D50M2, D65, F5, F8, F10 or file.sp]
+ -i illum        Choose illuminant for computation of CIE XYZ from spectral data & FWA:
+                  A, C, D50 (def.), D50M2, D65, F5, F8, F10 or file.sp
+ -o observ       Choose CIE Observer for spectral data:
+                  1931_2 (def), 1964_10, 2015_2, 2015_10, S&B 1955_2, shaw, J&V 1978_2, or file.cmf
+ -r avgdev       Average deviation of device+instrument readings as a percentage (default 0.50%)
+ -s src.icc|cperc  Apply gamut mapping to output profile perceptual B2A table
+                   for given source space, or compression percentage
+ -S src.icc|experc Apply gamut mapping to output profile perceptual and
+                   and saturation B2A table, or expansion percentage
+ -nP             Use colormetric source gamut to make output profile perceptual table
+ -nS             Use colormetric source gamut to make output profile saturation table
+ -nI             Apply inverse gammut mapping to perceptual and saturation AtoB tables
+ -g src.gam      Use source image gamut as well for output profile gamut mapping
+ -p absprof,...  Incorporate abstract profile(s) into output tables
+ -t intent       Override gamut mapping intent for output profile perceptual table:
+ -T intent       Override gamut mapping intent for output profile saturation table:
+               a - Absolute Colorimetric (in Jab) [ICC Absolute Colorimetric]
+              aw - Absolute Colorimetric (in Jab) with scaling to fit white point
+              aa - Absolute Appearance
+               r - White Point Matched Appearance [ICC Relative Colorimetric]
+              la - Luminance axis matched Appearance
+               p - Perceptual (Preferred) (Default) [ICC Perceptual]
+              pa - Perceptual Apperance 
+              lp - Luminance Preserving Perceptual
+              ms - Saturation
+               s - Enhanced Saturation [ICC Saturation]
+              al - Absolute Colorimetric (Lab)
+              rl - White Point Matched Colorimetric (Lab)
+ -c viewcond     set input viewing conditions for output profile CIECAM02 gamut mapping,
+                  either an enumerated choice, or a parameter
+ -d viewcond     set output viewing conditions for output profile CIECAM02 gamut mapping
+                  either an enumerated choice, or a parameter
+                  Also sets out of gamut clipping CAM space.
+                  either an enumerated choice, or a series of parameters:value changes
+              pc - Critical print evaluation environment (ISO-3664 P1)
+              pp - Practical Reflection Print (ISO-3664 P2)
+              pe - Print evaluation environment (CIE 116-1995)
+              pm - Print evaluation with partial Mid-tone adapation
+              mb - Bright monitor in bright work environment
+              mt - Monitor in typical work environment
+              md - Monitor in darkened work environment
+              jm - Projector in dim environment
+              jd - Projector in dark environment
+              tv - Television/Film Studio
+             pcd - Photo CD - original scene outdoors
+              ob - Original scene - Bright Outdoors
+              cx - Cut Sheet Transparencies on a viewing box
+ -P              Create gamut gammap_p.wrl and gammap_s.wrl diagostics
+ -H charTarget   Override the default CharTargetTag string
+ -O outputfile   Override the default output filename.
+ -Y c:file.cal   Override any calibration info from .ti3
+ inoutfile       Base name for input.ti3/output.icc file

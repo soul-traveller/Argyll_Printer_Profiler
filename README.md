@@ -1,18 +1,20 @@
-# Argyll\_Printer\_Profiler — User Guide
-**Version:** 1.3.8<br>
+# Argyll_Printer_Profiler - GUI User Guide
+**Version:** 0.8.0<br>
 **Platform:** macOS, Linux and Windows<br>
-**Loosely Based on:** Simple script by Jintak Han (https://github.com/jintakhan/AutomatedArgyllPrinter)<br>
+**Based on:** `Argyll_Printer_Profiler` version 1.3.8 CLI scripts: https://soul-traveller.github.io/Argyll_Printer_Profiler/<br>
 **Author:** Knut Larsson<br>
 <br>
-`Argyll_Printer_Profiler` is an advanced interactive terminal script that automates a complete **ArgyllCMS printer profiling workflow** on macOS, Linux and Windows, from target generation to ICC profile installation.<br>
+`Argyll_Printer_Profiler_GUI` is an advanced graphical user interface that automates a complete **ArgyllCMS printer profiling workflow** on macOS, Linux and Windows, from target generation to ICC profile installation.<br>
 
-Available in two versions:<br>
-  - `Argyll_Printer_Profiler.command` (Bash script compatible with MacOS and Linux)<br>
-  - `Argyll_Printer_Profiler.py` (python script compatible with MacOS, Linux and Windows)<br>
+**Status:** 95% complete - All core workflows implemented, GUI setup done, but not functionality not fully complete yet. Design is based on working 100% according to original `Argyll_Printer_Profiler` scripts, but with a windows interface. User Guide (index.md) not updated according to new GUI<br>
+
+## ANYONE MAY COMPLETE THE TOO WITH A LITTLE VIBE-CODING EFFORT!
+
+Python script:
+  - `Argyll_Printer_Profiler_GUI.py` (Python GUI script compatible with MacOS, Linux and Windows)<br>
 
 See full Reference and Usage Guide:<br>
-https://soul-traveller.github.io/Argyll_Printer_Profiler/<br>
-<br>
+TBD<br>
 <br>
 ## Background for creation 
 

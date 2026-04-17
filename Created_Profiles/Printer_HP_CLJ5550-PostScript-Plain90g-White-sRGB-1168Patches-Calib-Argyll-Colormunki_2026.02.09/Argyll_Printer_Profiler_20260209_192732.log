@@ -1,0 +1,1975 @@
+
+File path: /Users/kari/Documents/Calibration Targets/Argyll_Printer_Profiler-1.1.2-unreleased
+Script executed: Argyll_Printer_Profiler.command
+Log file: /Users/kari/Documents/Calibration Targets/Argyll_Printer_Profiler-1.1.2-unreleased/Argyll_Printer_Profiler_20260209_192732.log
+
+✅ ArgyllCMS detected
+   Version: 3.4.1
+
+
+
+What action do you want to perform?
+
+1: Create printer profile from scratch (default).
+   Specify name → Generate targets → Measure target patches
+    → Create profile → Sanity check → Copy to profile folder
+
+2: Re-read or resume partly read chart, then create printer profile.
+   Specify .ti3 file → Continue measuring target patches
+    → Create profile → Sanity check → Copy to profile folder
+
+   Note: Existing .ti3, .ti2 and target image filenames must be same.
+         If more than one target image, filenames end with _01, _02, etc.
+
+3: Select an existing target with .ti2 file to create profile:
+   Specify .ti2 file → Measure target patches
+    → Create profile → Sanity check → Copy to profile folder
+
+   Note: Existing .ti2 and target image filenames must be same.
+         If more than one target image, filenames end with _01, _02, etc.
+
+4: Create printer profile from an existing .ti3.
+   Specify .ti3 file → Create profile → Sanity check → Copy to profile folder
+
+5: Perform sanity check on existing .ti3 and .icc file pair.
+
+   Note: Existing .ti3 and .icc filenames must be same.
+
+6: Change setup parameters.
+
+7: Exit script
+
+Enter your choice [1–7]: 
+
+
+Select an existing .ti2 file
+
+
+Selection cancelled.
+
+Operation aborted. Returning to main menu...
+
+
+What action do you want to perform?
+
+1: Create printer profile from scratch (default).
+   Specify name → Generate targets → Measure target patches
+    → Create profile → Sanity check → Copy to profile folder
+
+2: Re-read or resume partly read chart, then create printer profile.
+   Specify .ti3 file → Continue measuring target patches
+    → Create profile → Sanity check → Copy to profile folder
+
+   Note: Existing .ti3, .ti2 and target image filenames must be same.
+         If more than one target image, filenames end with _01, _02, etc.
+
+3: Select an existing target with .ti2 file to create profile:
+   Specify .ti2 file → Measure target patches
+    → Create profile → Sanity check → Copy to profile folder
+
+   Note: Existing .ti2 and target image filenames must be same.
+         If more than one target image, filenames end with _01, _02, etc.
+
+4: Create printer profile from an existing .ti3.
+   Specify .ti3 file → Create profile → Sanity check → Copy to profile folder
+
+5: Perform sanity check on existing .ti3 and .icc file pair.
+
+   Note: Existing .ti3 and .icc filenames must be same.
+
+6: Change setup parameters.
+
+7: Exit script
+
+Enter your choice [1–7]: 
+
+
+Select an existing .ti2 file
+
+
+Selected .ti2 file: /Users/kari/Documents/Calibration Targets/Argyll_Printer_Profiler-1.1.2-unreleased/Created_Profiles/Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.ti2
+Found target image(s):
+  Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_01.tif
+  Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_02.tif
+  Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_03.tif
+  Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_04.tif
+  Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_05.tif
+
+Do you want to:
+1: Create new profile (copy files into new folder)
+2: Overwrite existing (use files in their current location)
+3: Abort operation
+
+Enter your choice [1-3]: 
+✅ Working folder for profile:
+/Users/kari/Documents/Calibration Targets/Argyll_Printer_Profiler-1.1.2-unreleased/Created_Profiles/Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09
+
+Starting chart reading (read .ti2 file and generate .ti3 file)...
+
+Command Used: chartread -v -H -B -T0.7 Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09
+
+Tips:
+     - Reading speed to more than 7 sec per strip reduces
+       frequent re-reading due to inconsistent results.
+     - If frequent inconsistent results try altering
+       patch consistency tolerance.
+     - Save progress once in a while with 'd' and then
+       resume measuring with option 2 of main manu.
+
+✅ Working folder for profile:
+/Users/kari/Documents/Calibration Targets/Argyll_Printer_Profiler-1.1.2-unreleased/Created_Profiles/Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09
+
+Starting chart reading (read .ti2 file and generate .ti3 file)...
+
+Command Used: chartread -v -H -B -T0.7 Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09
+
+Tips:
+     - Reading speed to more than 7 sec per strip reduces
+       frequent re-reading due to inconsistent results.
+     - If frequent inconsistent results try altering
+       patch consistency tolerance.
+     - Save progress once in a while with 'd' and then
+       resume measuring with option 2 of main manu.
+
+Steps in each Pass = 16
+Passes in each Strip = 15, 15, 15, 15, 13
+Instrument Type:   ColorMunki
+Serial Number:     2017464
+Firmware version:  288
+Chip ID:           01-7B8D381200002B
+Version string:    'colormunki FW V1.32  Build Nr. 1303'
+Calibration Ver.:  6
+Production No.:    29776
+Steps in each Pass = 16
+Passes in each Strip = 15, 15, 15, 15, 13
+Instrument Type:   ColorMunki
+Serial Number:     2017464
+Firmware version:  288
+Chip ID:           01-7B8D381200002B
+Version string:    'colormunki FW V1.32  Build Nr. 1303'
+Calibration Ver.:  6
+Production No.:    29776
+
+Set instrument sensor to calibration position,
+ and then hit any key to continue,
+ or hit Esc or Q to abort: 
+Set instrument sensor to calibration position,
+ and then hit any key to continue,
+ or hit Esc or Q to abort: 
+Calibration complete
+
+Ready to read strip pass A
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+Calibration complete
+
+Ready to read strip pass A
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass B
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass B
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass C
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass C
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass D
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass D
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass E
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass E
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass F
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass F
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass G
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass G
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass H
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass H
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass I
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass I
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass J
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass J
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass K
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass K
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass L
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass L
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass M
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass M
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass N
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass N
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass O
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass O
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass P
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass P
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+
+
+Done ? - At least one unread patch (928, P1), Are you sure [y/n]: 
+
+
+Done ? - At least one unread patch (928, P1), Are you sure [y/n]: 
+
+
+Do you want to continue creating profile with resulting ti3 file? [y/n]: 
+Do you want to continue creating profile with resulting ti3 file? [y/n]: 
+
+
+Profile creation aborted by user...
+
+
+Profile creation aborted by user...
+
+Operation aborted. Returning to main menu...
+Operation aborted. Returning to main menu...
+
+
+What action do you want to perform?
+
+
+1: Create printer profile from scratch (default).
+   Specify name → Generate targets → Measure target patches
+
+What action do you want to perform?
+
+1: Create printer profile from scratch (default).
+   Specify name → Generate targets → Measure target patches
+    → Create profile → Sanity check → Copy to profile folder
+
+2: Re-read or resume partly read chart, then create printer profile.
+   Specify .ti3 file → Continue measuring target patches
+    → Create profile → Sanity check → Copy to profile folder
+
+2: Re-read or resume partly read chart, then create printer profile.
+   Specify .ti3 file → Continue measuring target patches
+    → Create profile → Sanity check → Copy to profile folder
+
+    → Create profile → Sanity check → Copy to profile folder
+   Note: Existing .ti3, .ti2 and target image filenames must be same.
+
+         If more than one target image, filenames end with _01, _02, etc.
+
+3: Select an existing target with .ti2 file to create profile:
+   Note: Existing .ti3, .ti2 and target image filenames must be same.
+   Specify .ti2 file → Measure target patches
+    → Create profile → Sanity check → Copy to profile folder
+
+   Note: Existing .ti2 and target image filenames must be same.
+         If more than one target image, filenames end with _01, _02, etc.
+
+3: Select an existing target with .ti2 file to create profile:
+         If more than one target image, filenames end with _01, _02, etc.
+
+4: Create printer profile from an existing .ti3.
+   Specify .ti2 file → Measure target patches
+    → Create profile → Sanity check → Copy to profile folder
+
+   Note: Existing .ti2 and target image filenames must be same.
+   Specify .ti3 file → Create profile → Sanity check → Copy to profile folder
+
+         If more than one target image, filenames end with _01, _02, etc.
+
+4: Create printer profile from an existing .ti3.
+   Specify .ti3 file → Create profile → Sanity check → Copy to profile folder
+
+5: Perform sanity check on existing .ti3 and .icc file pair.
+
+   Note: Existing .ti3 and .icc filenames must be same.
+
+6: Change setup parameters.
+
+7: Exit script
+5: Perform sanity check on existing .ti3 and .icc file pair.
+
+   Note: Existing .ti3 and .icc filenames must be same.
+
+6: Change setup parameters.
+
+7: Exit script
+
+
+Enter your choice [1–7]: Enter your choice [1–7]: 
+
+
+Select an existing .ti3 file
+
+
+
+
+Select an existing .ti3 file
+
+
+
+Selected .ti3 file: /Users/kari/Documents/Calibration Targets/Argyll_Printer_Profiler-1.1.2-unreleased/Created_Profiles/Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.ti3
+Selected .ti3 file: /Users/kari/Documents/Calibration Targets/Argyll_Printer_Profiler-1.1.2-unreleased/Created_Profiles/Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.ti3
+Found target image(s):
+Found target image(s):
+  Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_01.tif
+  Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_01.tif
+  Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_02.tif
+  Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_02.tif
+  Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_03.tif
+  Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_03.tif
+  Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_04.tif
+  Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_04.tif
+  Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_05.tif
+  Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_05.tif
+
+Do you want to:
+1: Create new profile (copy files into new folder)
+2: Overwrite existing (use files in their current location)
+3: Abort operation
+
+Enter your choice [1-3]: 
+Do you want to:
+1: Create new profile (copy files into new folder)
+2: Overwrite existing (use files in their current location)
+3: Abort operation
+
+Enter your choice [1-3]: 
+
+mv: /Users/kari/Documents/Calibration Targets/Argyll_Printer_Profiler-1.1.2-unreleased/Created_Profiles/Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/Argyll_Printer_Profiler_20260209_192732.log and /Users/kari/Documents/Calibration Targets/Argyll_Printer_Profiler-1.1.2-unreleased/Created_Profiles/Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/Argyll_Printer_Profiler_20260209_192732.log are identical
+mv: /Users/kari/Documents/Calibration Targets/Argyll_Printer_Profiler-1.1.2-unreleased/Created_Profiles/Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/Argyll_Printer_Profiler_20260209_192732.log and /Users/kari/Documents/Calibration Targets/Argyll_Printer_Profiler-1.1.2-unreleased/Created_Profiles/Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/Argyll_Printer_Profiler_20260209_192732.log are identical
+❌ Could not move log '/Users/kari/Documents/Calibration Targets/Argyll_Printer_Profiler-1.1.2-unreleased/Created_Profiles/Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/Argyll_Printer_Profiler_20260209_192732.log' to '/Users/kari/Documents/Calibration Targets/Argyll_Printer_Profiler-1.1.2-unreleased/Created_Profiles/Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/'
+❌ Could not move log '/Users/kari/Documents/Calibration Targets/Argyll_Printer_Profiler-1.1.2-unreleased/Created_Profiles/Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/Argyll_Printer_Profiler_20260209_192732.log' to '/Users/kari/Documents/Calibration Targets/Argyll_Printer_Profiler-1.1.2-unreleased/Created_Profiles/Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/'
+✅ Working folder for profile:
+✅ Working folder for profile:
+/Users/kari/Documents/Calibration Targets/Argyll_Printer_Profiler-1.1.2-unreleased/Created_Profiles/Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09
+/Users/kari/Documents/Calibration Targets/Argyll_Printer_Profiler-1.1.2-unreleased/Created_Profiles/Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09
+
+Starting chart reading (read .ti2 file and generate .ti3 file)...
+
+
+Starting chart reading (read .ti2 file and generate .ti3 file)...
+
+Command Used: chartread -v -H -B -r -T0.7 Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09
+
+Tips:
+     - Reading speed to more than 7 sec per strip reduces
+Command Used: chartread -v -H -B -r -T0.7 Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09
+
+       frequent re-reading due to inconsistent results.
+     - If frequent inconsistent results try altering
+       patch consistency tolerance.
+Tips:
+     - Reading speed to more than 7 sec per strip reduces
+       frequent re-reading due to inconsistent results.
+     - Save progress once in a while with 'd' and then
+     - If frequent inconsistent results try altering
+       patch consistency tolerance.
+       resume measuring with option 2 of main manu.
+
+     - Save progress once in a while with 'd' and then
+       resume measuring with option 2 of main manu.
+
+Steps in each Pass = 16
+Passes in each Strip = 15, 15, 15, 15, 13
+Instrument Type:   ColorMunki
+Serial Number:     2017464
+Firmware version:  288
+Chip ID:           01-7B8D381200002B
+Version string:    'colormunki FW V1.32  Build Nr. 1303'
+Calibration Ver.:  6
+Production No.:    29776
+Steps in each Pass = 16
+Passes in each Strip = 15, 15, 15, 15, 13
+Instrument Type:   ColorMunki
+Serial Number:     2017464
+Firmware version:  288
+Chip ID:           01-7B8D381200002B
+Version string:    'colormunki FW V1.32  Build Nr. 1303'
+Calibration Ver.:  6
+Production No.:    29776
+
+Set instrument sensor to calibration position,
+ and then hit any key to continue,
+ or hit Esc or Q to abort: 
+Set instrument sensor to calibration position,
+ and then hit any key to continue,
+ or hit Esc or Q to abort: 
+Calibration complete
+
+Ready to read strip pass P
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+Calibration complete
+
+Ready to read strip pass P
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass Q
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass Q
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass R
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass R
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass S
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass S
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass T
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass T
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass U
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass U
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass V
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass V
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass W
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass W
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass X
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass X
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass Y
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass Y
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass Z
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass Z
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+
+Strip read failed due to misread (Not enough patches)
+Hit Esc to give up, any other key to retry:
+
+Strip read failed due to misread (Not enough patches)
+Hit Esc to give up, any other key to retry:
+
+Ready to read strip pass Z
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+
+Ready to read strip pass Z
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AA
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AA
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AB
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AB
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AC
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AC
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AD
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AD
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AE
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AE
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+
+
+Done ? - At least one unread patch (313, AE1), Are you sure [y/n]: 
+
+
+Done ? - At least one unread patch (313, AE1), Are you sure [y/n]: 
+
+
+Do you want to continue creating profile with resulting ti3 file? [y/n]: 
+Do you want to continue creating profile with resulting ti3 file? [y/n]: 
+
+
+Profile creation aborted by user...
+
+
+Profile creation aborted by user...
+
+Operation aborted. Returning to main menu...
+Operation aborted. Returning to main menu...
+
+
+What action do you want to perform?
+
+1: Create printer profile from scratch (default).
+
+   Specify name → Generate targets → Measure target patches
+
+What action do you want to perform?
+
+1: Create printer profile from scratch (default).
+    → Create profile → Sanity check → Copy to profile folder
+   Specify name → Generate targets → Measure target patches
+    → Create profile → Sanity check → Copy to profile folder
+
+
+2: Re-read or resume partly read chart, then create printer profile.
+   Specify .ti3 file → Continue measuring target patches
+    → Create profile → Sanity check → Copy to profile folder
+2: Re-read or resume partly read chart, then create printer profile.
+   Specify .ti3 file → Continue measuring target patches
+    → Create profile → Sanity check → Copy to profile folder
+
+   Note: Existing .ti3, .ti2 and target image filenames must be same.
+
+   Note: Existing .ti3, .ti2 and target image filenames must be same.
+         If more than one target image, filenames end with _01, _02, etc.
+
+3: Select an existing target with .ti2 file to create profile:
+         If more than one target image, filenames end with _01, _02, etc.
+
+3: Select an existing target with .ti2 file to create profile:
+   Specify .ti2 file → Measure target patches
+    → Create profile → Sanity check → Copy to profile folder
+
+   Specify .ti2 file → Measure target patches
+    → Create profile → Sanity check → Copy to profile folder
+
+   Note: Existing .ti2 and target image filenames must be same.
+         If more than one target image, filenames end with _01, _02, etc.
+   Note: Existing .ti2 and target image filenames must be same.
+         If more than one target image, filenames end with _01, _02, etc.
+
+4: Create printer profile from an existing .ti3.
+
+4: Create printer profile from an existing .ti3.
+   Specify .ti3 file → Create profile → Sanity check → Copy to profile folder
+
+5: Perform sanity check on existing .ti3 and .icc file pair.
+   Specify .ti3 file → Create profile → Sanity check → Copy to profile folder
+
+5: Perform sanity check on existing .ti3 and .icc file pair.
+
+   Note: Existing .ti3 and .icc filenames must be same.
+
+
+   Note: Existing .ti3 and .icc filenames must be same.
+
+6: Change setup parameters.
+
+7: Exit script
+
+6: Change setup parameters.
+
+7: Exit script
+
+Enter your choice [1–7]: Enter your choice [1–7]: 
+
+
+Select an existing .ti3 file
+
+
+
+
+Select an existing .ti3 file
+
+
+
+Selected .ti3 file: /Users/kari/Documents/Calibration Targets/Argyll_Printer_Profiler-1.1.2-unreleased/Created_Profiles/Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.ti3
+Selected .ti3 file: /Users/kari/Documents/Calibration Targets/Argyll_Printer_Profiler-1.1.2-unreleased/Created_Profiles/Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.ti3
+Found target image(s):
+Found target image(s):
+  Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_01.tif
+  Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_01.tif
+  Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_02.tif
+  Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_02.tif
+  Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_03.tif
+  Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_03.tif
+  Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_04.tif
+  Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_04.tif
+  Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_05.tif
+  Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_05.tif
+
+Do you want to:
+
+1: Create new profile (copy files into new folder)
+Do you want to:
+2: Overwrite existing (use files in their current location)
+3: Abort operation
+
+1: Create new profile (copy files into new folder)
+2: Overwrite existing (use files in their current location)
+3: Abort operation
+
+Enter your choice [1-3]: Enter your choice [1-3]: 
+
+mv: /Users/kari/Documents/Calibration Targets/Argyll_Printer_Profiler-1.1.2-unreleased/Created_Profiles/Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/Argyll_Printer_Profiler_20260209_192732.log and /Users/kari/Documents/Calibration Targets/Argyll_Printer_Profiler-1.1.2-unreleased/Created_Profiles/Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/Argyll_Printer_Profiler_20260209_192732.log are identical
+mv: /Users/kari/Documents/Calibration Targets/Argyll_Printer_Profiler-1.1.2-unreleased/Created_Profiles/Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/Argyll_Printer_Profiler_20260209_192732.log and /Users/kari/Documents/Calibration Targets/Argyll_Printer_Profiler-1.1.2-unreleased/Created_Profiles/Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/Argyll_Printer_Profiler_20260209_192732.log are identical
+❌ Could not move log '/Users/kari/Documents/Calibration Targets/Argyll_Printer_Profiler-1.1.2-unreleased/Created_Profiles/Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/Argyll_Printer_Profiler_20260209_192732.log' to '/Users/kari/Documents/Calibration Targets/Argyll_Printer_Profiler-1.1.2-unreleased/Created_Profiles/Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/'
+❌ Could not move log '/Users/kari/Documents/Calibration Targets/Argyll_Printer_Profiler-1.1.2-unreleased/Created_Profiles/Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/Argyll_Printer_Profiler_20260209_192732.log' to '/Users/kari/Documents/Calibration Targets/Argyll_Printer_Profiler-1.1.2-unreleased/Created_Profiles/Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09/'
+✅ Working folder for profile:
+✅ Working folder for profile:
+/Users/kari/Documents/Calibration Targets/Argyll_Printer_Profiler-1.1.2-unreleased/Created_Profiles/Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09
+/Users/kari/Documents/Calibration Targets/Argyll_Printer_Profiler-1.1.2-unreleased/Created_Profiles/Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09
+
+
+Starting chart reading (read .ti2 file and generate .ti3 file)...
+
+Starting chart reading (read .ti2 file and generate .ti3 file)...
+
+Command Used: chartread -v -H -B -r -T0.7 Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09
+Command Used: chartread -v -H -B -r -T0.7 Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09
+
+Tips:
+     - Reading speed to more than 7 sec per strip reduces
+       frequent re-reading due to inconsistent results.
+
+Tips:
+     - Reading speed to more than 7 sec per strip reduces
+       frequent re-reading due to inconsistent results.
+     - If frequent inconsistent results try altering
+       patch consistency tolerance.
+     - Save progress once in a while with 'd' and then
+       resume measuring with option 2 of main manu.
+
+     - If frequent inconsistent results try altering
+       patch consistency tolerance.
+     - Save progress once in a while with 'd' and then
+       resume measuring with option 2 of main manu.
+
+Steps in each Pass = 16
+Passes in each Strip = 15, 15, 15, 15, 13
+Instrument Type:   ColorMunki
+Serial Number:     2017464
+Firmware version:  288
+Chip ID:           01-7B8D381200002B
+Version string:    'colormunki FW V1.32  Build Nr. 1303'
+Calibration Ver.:  6
+Production No.:    29776
+Steps in each Pass = 16
+Passes in each Strip = 15, 15, 15, 15, 13
+Instrument Type:   ColorMunki
+Serial Number:     2017464
+Firmware version:  288
+Chip ID:           01-7B8D381200002B
+Version string:    'colormunki FW V1.32  Build Nr. 1303'
+Calibration Ver.:  6
+Production No.:    29776
+
+Set instrument sensor to calibration position,
+ and then hit any key to continue,
+ or hit Esc or Q to abort: 
+Set instrument sensor to calibration position,
+ and then hit any key to continue,
+ or hit Esc or Q to abort: 
+Calibration complete
+
+Ready to read strip pass AE
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+Calibration complete
+
+Ready to read strip pass AE
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AF
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AF
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AG
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AG
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AH
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AH
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AI
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AI
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AJ
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AJ
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AK
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AK
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AL
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AL
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AM
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AM
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AN
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AN
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AO
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AO
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AP
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AP
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AQ
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AQ
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AR
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AR
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AS
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AS
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AT
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AT
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AU
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AU
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AV
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AV
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AW
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AW
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+
+
+Ready to read strip pass AV (This row has been read)
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+
+
+Ready to read strip pass AV (This row has been read)
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AW
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AW
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+
+Strip read failed due to misread (Not enough patches)
+Hit Esc to give up, any other key to retry:
+
+Strip read failed due to misread (Not enough patches)
+Hit Esc to give up, any other key to retry:
+
+Ready to read strip pass AW
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+
+Ready to read strip pass AW
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AX
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AX
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AY
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AY
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AZ
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass AZ
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BA
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BA
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BB
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BB
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BC
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BC
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BD
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BD
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BE
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BE
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BF
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BF
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BG
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BG
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BH
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BH
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+
+Strip read failed due to misread (Reading is too short)
+Hit Esc to give up, any other key to retry:
+
+Strip read failed due to misread (Reading is too short)
+Hit Esc to give up, any other key to retry:
+
+Ready to read strip pass BH
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+
+Ready to read strip pass BH
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BI
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BI
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BJ
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BJ
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BK
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BK
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BL
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BL
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BM
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BM
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BN
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BN
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BO
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BO
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BP
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BP
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BQ
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BQ
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BR
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BR
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BS
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BS
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BT
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BT
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BU
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BU
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BU (!! ALL ROWS READ !!)
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+ Strip read OK
+
+Ready to read strip pass BU (!! ALL ROWS READ !!)
+Press 'f' to move forward, 'b' to move back, 'n' for next unread,
+ 'd' when done, Esc or 'q' to quit without saving.
+Trigger instrument switch or any other key to start:
+
+
+
+
+Do you want to continue creating profile with resulting ti3 file? [y/n]: 
+Do you want to continue creating profile with resulting ti3 file? [y/n]: 
+
+
+Starting profile creation (read .ti3 file and generate .icc file)...
+Command Used: colprof -v -qh -cmt -dpp -l400 -r1.0 -S /System/Library/ColorSync/Profiles/sRGB Profile.icc -DPrinter HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09 Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09
+
+
+
+Starting profile creation (read .ti3 file and generate .icc file)...
+Command Used: colprof -v -qh -cmt -dpp -l400 -r1.0 -S /System/Library/ColorSync/Profiles/sRGB Profile.icc -DPrinter HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09 Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09
+No total ink limit being used
+No black ink limit being used
+No of test patches = 1168
+Estimating white point
+Approximate White point XYZ = 0.76155723 0.78570957 0.67877947, Lab = 91.03981203 0.80529084 -2.86381608
+Creating optimised per channel curves
+Initial White Point XYZ 0.761557 0.785710 0.678779, Lab 91.039812 0.805291 -2.863816
+About to optimise temporary matrix
+  0%No total ink limit being used
+No black ink limit being used
+No of test patches = 1168
+Estimating white point
+Approximate White point XYZ = 0.76155723 0.78570957 0.67877947, Lab = 91.03981203 0.80529084 -2.86381608
+Creating optimised per channel curves
+Initial White Point XYZ 0.761557 0.785710 0.678779, Lab 91.039812 0.805291 -2.863816
+About to optimise temporary matrix
+  0% 16% 16% 57% 57% 100%
+About to optimise a common ord 0 input curve and matrix
+  0% 100%
+About to optimise a common ord 0 input curve and matrix
+  0% 100%
+About to optimise a common input curve and matrix
+  0% 100%
+About to optimise a common input curve and matrix
+  0%  2%  2%  4%  4% 52% 52% 100%
+About to optimise input curves and matrix
+  0% 100%
+About to optimise input curves and matrix
+  0% 18% 18% 100%
+About to optimise output curves and matrix
+  0% 100%
+About to optimise output curves and matrix
+  0% 14% 14% 42% 42% 76% 76% 100%
+About to optimise input curves and matrix again
+  0% 100%
+About to optimise input curves and matrix again
+  0% 14% 14% 45% 45% 85% 85% 100%
+About to optimise input, matrix and output together
+  0% 100%
+About to optimise input, matrix and output together
+  0%  2%  2%  4%  4% 26% 26% 61% 61% 95% 95% 100%
+ 100%
+About to adjust a and b output curves for white point
+About to create grid position input curves
+Create final clut from scattered data
+**About to adjust a and b output curves for white point
+About to create grid position input curves
+Create final clut from scattered data
+**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************Warning: Gamut mapping is non-monotonic - may not be very smooth !
+Warning: Gamut mapping is non-monotonic - may not be very smooth !
+
+Doing White point fine tune:
+Before fine tune, rel WP = XYZ 0.965719 1.001584 0.826399, Lab 100.061228 -0.002066 -0.015054
+After fine tune, rel WP = XYZ 0.964203 1.000000 0.824905, Lab 100.000000 -0.000000 0.000000
+                 abs WP = XYZ 0.76275562 0.78695476 0.68000858, Lab 91.09632737 0.80399487 -2.87942899
+White point XYZ = 0.76275562 0.78695476 0.68000858, Lab = 91.09632737 0.80399487 -2.87942899
+Find black point
+Black point XYZ = 0.02608973 0.02695930 0.02098749, Lab = 18.78250370 0.18336936 1.14661267
+Done A to B table creation
+Setting up B to A table lookup
+Creating Gamut Mapping
+ Finding Source Colorspace Perceptual Gamut
+ Finding Source Colorspace Saturation Gamut
+ Finding Destination Gamut
+ Creating Gamut match
+ Gamut Mapping Specification:
+  Description = ' p - Perceptual (Preferred) (Default) [ICC Perceptual]'
+  Closest ICC intent = 'Perceptual'
+  Using Color Apperance Space
+  Using Mapping with parameters:
+  Grey axis alignment   factor 1.000000
+  Grey axis white compression factor 1.000000
+  Grey axis white expansion   factor 1.000000
+  Grey axis black compression factor 1.000000
+  Grey axis black expansion   factor 1.000000
+  Grey axis knee        factor 1.000000
+  Black point algorithm: Neutral axis no-adapt extend and bend
+  Gamut compression factor 1.000000
+  Gamut expansion   factor 0.000000
+  Gamut compression knee factor 1.000000
+  Gamut expansion   knee factor 0.000000
+  Gamut Perceptual mapping weighting factor 1.000000
+  Gamut Lightness Preserving Perceptual mapping weighting 0.000000
+  Gamut Saturation mapping weighting factor 0.000000
+  Saturation enhancement factor 0.000000
+Gamut map resolution: 39
+Src colorspace white/black are 100.000000 -2.471343 -1.494423, 7.998625 -0.676698 -0.409267
+Src gamut white/black are      100.000000 -2.471343 -1.494423, 7.998625 -0.676698 -0.409267
+Dst colorspace white/black are 100.000000 -0.622574 1.310278, 16.980608 -0.067738 2.399601
+Target (blended) dst wp/bp   = 100.000000 -0.622574 1.310278, 16.980608 -0.067738 2.399601
+Adapted & extended tgt wp/bp = 100.000000 -0.622574 1.310278, 16.980608 -0.067738 2.399601
+Rotate matrix src wp/bp      = 100.000000 -2.471343 -1.494423, 16.993172 -0.852152 -0.515358
+Rotate matrix dst wp/bp      = 100.000000 -0.622574 1.310278, 16.980608 -0.067738 2.399601
+Bend target                                              bp = 16.980608 -0.537792 -0.038727
+Rotated source grey axis wp/bp 100.000000 -0.622574 1.310278, 7.984700 -0.007616 2.517639
+Rotated gamut grey axis wp/bp  100.000000 -0.622574 1.310278, 7.984700 -0.007616 2.517639
+Destination axis target wp/bp  100.000000 -0.622574 1.310278, 16.980608 -0.067738 2.399601
+Before tuning, L. map White/Black is 100.161438 16.270168, should be 100.000000 16.980608
+After tuning,  L. map White/Black is 100.000000 16.980608, should be 100.000000 16.980608
+Mapped source grey axis wp/bp  100.000000 -0.622574 1.310278, 16.980608 -0.007616 2.517639
+Average number of direction guide neigbours = 186.511020, min = 8
+Optimizing source to destination mapping...
+It 0: No clip 2226/4130 delta 0.460886 max by 13.807099, avg by 0.916066
+It 1: No clip 1915/4130 delta 0.075321 max by 11.035128, avg by 0.856965
+It 2: No clip 1799/4130 delta 0.028094 max by 10.938046, avg by 0.816214
+It 3: No clip 1760/4130 delta 0.009445 max by 10.855640, avg by 0.784941
+It 4: No clip 1727/4130 delta 0.007992 max by 10.734959, avg by 0.772009
+It 5: No clip 1701/4130 delta 0.006297 max by 10.653637, avg by 0.766534
+It 6: No clip 1689/4130 delta 0.002906 max by 10.604522, avg by 0.760977
+It 7: No clip 1674/4130 delta 0.003633 max by 10.578118, avg by 0.760634
+No og 1185 max 3.518316 avg 0.189313, No ig 2944 max 8.555150 avg 1.337969, avg rext -0.792285
+No og  460 max 1.996676 avg 0.117057, No ig 3669 max 8.565888 avg 1.132571, avg rext -0.792285
+No og  353 max 1.394549 avg 0.099008, No ig 3776 max 8.599069 avg 1.130568, avg rext -0.792285
+No og  314 max 1.285064 avg 0.095719, No ig 3815 max 8.634165 avg 1.137157, avg rext -0.792285
+Sub-surface smoothing changed by max 3.762794, average 0.629610
+Creating rspl..
+Fine tuning white and black point mapping
+White is 99.659925 -0.502544 1.662646, should be 100.000000 -0.622574 1.310278
+Black is 17.121546 -0.155153 2.252130, should be 16.980608 -0.067738 2.399601
+After fine tuning:
+White is 99.999998 -0.622574 1.310278, should be 100.000000 -0.622574 1.310278
+Black is 16.980608 -0.067738 2.399601, should be 16.980608 -0.067738 2.399601
+ Gamut Mapping Specification:
+  Description = ' s - Enhanced Saturation [ICC Saturation]'
+  Closest ICC intent = 'Saturation'
+  Using Color Apperance Space
+  Using Mapping with parameters:
+  Grey axis alignment   factor 1.000000
+  Grey axis white compression factor 1.000000
+  Grey axis white expansion   factor 1.000000
+  Grey axis black compression factor 1.000000
+  Grey axis black expansion   factor 1.000000
+  Grey axis knee        factor 1.000000
+  Black point algorithm: Neutral axis no-adapt extend and bend
+  Gamut compression factor 1.000000
+  Gamut expansion   factor 1.000000
+  Gamut compression knee factor 1.100000
+  Gamut expansion   knee factor 0.500000
+  Gamut Perceptual mapping weighting factor 0.000000
+  Gamut Lightness Preserving Perceptual mapping weighting 0.000000
+  Gamut Saturation mapping weighting factor 1.000000
+  Saturation enhancement factor 0.900000
+Gamut map resolution: 39
+Src colorspace white/black are 100.000000 -2.471343 -1.494423, 7.998625 -0.676698 -0.409267
+Src gamut white/black are      100.000000 -2.471343 -1.494423, 7.998625 -0.676698 -0.409267
+Dst colorspace white/black are 100.000000 -0.622574 1.310278, 16.980608 -0.067738 2.399601
+Target (blended) dst wp/bp   = 100.000000 -0.622574 1.310278, 16.980608 -0.067738 2.399601
+Adapted & extended tgt wp/bp = 100.000000 -0.622574 1.310278, 16.980608 -0.067738 2.399601
+Rotate matrix src wp/bp      = 100.000000 -2.471343 -1.494423, 16.993172 -0.852152 -0.515358
+Rotate matrix dst wp/bp      = 100.000000 -0.622574 1.310278, 16.980608 -0.067738 2.399601
+Bend target                                              bp = 16.980608 -0.537792 -0.038727
+Rotated source grey axis wp/bp 100.000000 -0.622574 1.310278, 7.984700 -0.007616 2.517639
+Rotated gamut grey axis wp/bp  100.000000 -0.622574 1.310278, 7.984700 -0.007616 2.517639
+Destination axis target wp/bp  100.000000 -0.622574 1.310278, 16.980608 -0.067738 2.399601
+Before tuning, L. map White/Black is 100.161438 16.270168, should be 100.000000 16.980608
+After tuning,  L. map White/Black is 100.000000 16.980608, should be 100.000000 16.980608
+Mapped source grey axis wp/bp  100.000000 -0.622574 1.310278, 16.980608 -0.007616 2.517639
+Average number of direction guide neigbours = 106.682490, min = 13
+Optimizing source to destination mapping...
+It 0: No clip 2504/4130 delta 0.393558 max by 5.297827, avg by 0.537246
+It 1: No clip 2139/4130 delta 0.088399 max by 4.853061, avg by 0.518215
+It 2: No clip 2004/4130 delta 0.032696 max by 4.831610, avg by 0.507236
+It 3: No clip 1913/4130 delta 0.022039 max by 4.818686, avg by 0.503564
+It 4: No clip 1868/4130 delta 0.010899 max by 4.811677, avg by 0.498078
+It 5: No clip 1830/4130 delta 0.009203 max by 4.807275, avg by 0.497037
+It 6: No clip 1809/4130 delta 0.005086 max by 4.800759, avg by 0.495526
+It 7: No clip 1801/4130 delta 0.001938 max by 4.784998, avg by 0.492967
+No og 1238 max 2.476139 avg 0.224419, No ig 2891 max 5.346370 avg 0.517137, avg rext -0.283237
+No og 1847 max 2.314284 avg 0.238316, No ig 2282 max 3.408814 avg 0.229279, avg rext -0.283237
+No og 1352 max 2.025834 avg 0.212534, No ig 2777 max 4.112331 avg 0.293490, avg rext -0.283237
+No og 1135 max 1.831626 avg 0.199575, No ig 2994 max 4.493631 avg 0.336252, avg rext -0.283237
+Sub-surface smoothing changed by max 4.438696, average 0.409992
+Creating rspl..
+Fine tuning white and black point mapping
+White is 99.432570 -0.589087 1.787307, should be 100.000000 -0.622574 1.310278
+Black is 17.235108 -0.077123 2.252924, should be 16.980608 -0.067738 2.399601
+After fine tuning:
+White is 100.000001 -0.622574 1.310278, should be 100.000000 -0.622574 1.310278
+Black is 16.980608 -0.067738 2.399601, should be 16.980608 -0.067738 2.399601
+Creating B to A tables
+ 0%
+Doing White point fine tune:
+Before fine tune, rel WP = XYZ 0.965719 1.001584 0.826399, Lab 100.061228 -0.002066 -0.015054
+After fine tune, rel WP = XYZ 0.964203 1.000000 0.824905, Lab 100.000000 -0.000000 0.000000
+                 abs WP = XYZ 0.76275562 0.78695476 0.68000858, Lab 91.09632737 0.80399487 -2.87942899
+White point XYZ = 0.76275562 0.78695476 0.68000858, Lab = 91.09632737 0.80399487 -2.87942899
+Find black point
+Black point XYZ = 0.02608973 0.02695930 0.02098749, Lab = 18.78250370 0.18336936 1.14661267
+Done A to B table creation
+Setting up B to A table lookup
+Creating Gamut Mapping
+ Finding Source Colorspace Perceptual Gamut
+ Finding Source Colorspace Saturation Gamut
+ Finding Destination Gamut
+ Creating Gamut match
+ Gamut Mapping Specification:
+  Description = ' p - Perceptual (Preferred) (Default) [ICC Perceptual]'
+  Closest ICC intent = 'Perceptual'
+  Using Color Apperance Space
+  Using Mapping with parameters:
+  Grey axis alignment   factor 1.000000
+  Grey axis white compression factor 1.000000
+  Grey axis white expansion   factor 1.000000
+  Grey axis black compression factor 1.000000
+  Grey axis black expansion   factor 1.000000
+  Grey axis knee        factor 1.000000
+  Black point algorithm: Neutral axis no-adapt extend and bend
+  Gamut compression factor 1.000000
+  Gamut expansion   factor 0.000000
+  Gamut compression knee factor 1.000000
+  Gamut expansion   knee factor 0.000000
+  Gamut Perceptual mapping weighting factor 1.000000
+  Gamut Lightness Preserving Perceptual mapping weighting 0.000000
+  Gamut Saturation mapping weighting factor 0.000000
+  Saturation enhancement factor 0.000000
+Gamut map resolution: 39
+Src colorspace white/black are 100.000000 -2.471343 -1.494423, 7.998625 -0.676698 -0.409267
+Src gamut white/black are      100.000000 -2.471343 -1.494423, 7.998625 -0.676698 -0.409267
+Dst colorspace white/black are 100.000000 -0.622574 1.310278, 16.980608 -0.067738 2.399601
+Target (blended) dst wp/bp   = 100.000000 -0.622574 1.310278, 16.980608 -0.067738 2.399601
+Adapted & extended tgt wp/bp = 100.000000 -0.622574 1.310278, 16.980608 -0.067738 2.399601
+Rotate matrix src wp/bp      = 100.000000 -2.471343 -1.494423, 16.993172 -0.852152 -0.515358
+Rotate matrix dst wp/bp      = 100.000000 -0.622574 1.310278, 16.980608 -0.067738 2.399601
+Bend target                                              bp = 16.980608 -0.537792 -0.038727
+Rotated source grey axis wp/bp 100.000000 -0.622574 1.310278, 7.984700 -0.007616 2.517639
+Rotated gamut grey axis wp/bp  100.000000 -0.622574 1.310278, 7.984700 -0.007616 2.517639
+Destination axis target wp/bp  100.000000 -0.622574 1.310278, 16.980608 -0.067738 2.399601
+Before tuning, L. map White/Black is 100.161438 16.270168, should be 100.000000 16.980608
+After tuning,  L. map White/Black is 100.000000 16.980608, should be 100.000000 16.980608
+Mapped source grey axis wp/bp  100.000000 -0.622574 1.310278, 16.980608 -0.007616 2.517639
+Average number of direction guide neigbours = 186.511020, min = 8
+Optimizing source to destination mapping...
+It 0: No clip 2226/4130 delta 0.460886 max by 13.807099, avg by 0.916066
+It 1: No clip 1915/4130 delta 0.075321 max by 11.035128, avg by 0.856965
+It 2: No clip 1799/4130 delta 0.028094 max by 10.938046, avg by 0.816214
+It 3: No clip 1760/4130 delta 0.009445 max by 10.855640, avg by 0.784941
+It 4: No clip 1727/4130 delta 0.007992 max by 10.734959, avg by 0.772009
+It 5: No clip 1701/4130 delta 0.006297 max by 10.653637, avg by 0.766534
+It 6: No clip 1689/4130 delta 0.002906 max by 10.604522, avg by 0.760977
+It 7: No clip 1674/4130 delta 0.003633 max by 10.578118, avg by 0.760634
+No og 1185 max 3.518316 avg 0.189313, No ig 2944 max 8.555150 avg 1.337969, avg rext -0.792285
+No og  460 max 1.996676 avg 0.117057, No ig 3669 max 8.565888 avg 1.132571, avg rext -0.792285
+No og  353 max 1.394549 avg 0.099008, No ig 3776 max 8.599069 avg 1.130568, avg rext -0.792285
+No og  314 max 1.285064 avg 0.095719, No ig 3815 max 8.634165 avg 1.137157, avg rext -0.792285
+Sub-surface smoothing changed by max 3.762794, average 0.629610
+Creating rspl..
+Fine tuning white and black point mapping
+White is 99.659925 -0.502544 1.662646, should be 100.000000 -0.622574 1.310278
+Black is 17.121546 -0.155153 2.252130, should be 16.980608 -0.067738 2.399601
+After fine tuning:
+White is 99.999998 -0.622574 1.310278, should be 100.000000 -0.622574 1.310278
+Black is 16.980608 -0.067738 2.399601, should be 16.980608 -0.067738 2.399601
+ Gamut Mapping Specification:
+  Description = ' s - Enhanced Saturation [ICC Saturation]'
+  Closest ICC intent = 'Saturation'
+  Using Color Apperance Space
+  Using Mapping with parameters:
+  Grey axis alignment   factor 1.000000
+  Grey axis white compression factor 1.000000
+  Grey axis white expansion   factor 1.000000
+  Grey axis black compression factor 1.000000
+  Grey axis black expansion   factor 1.000000
+  Grey axis knee        factor 1.000000
+  Black point algorithm: Neutral axis no-adapt extend and bend
+  Gamut compression factor 1.000000
+  Gamut expansion   factor 1.000000
+  Gamut compression knee factor 1.100000
+  Gamut expansion   knee factor 0.500000
+  Gamut Perceptual mapping weighting factor 0.000000
+  Gamut Lightness Preserving Perceptual mapping weighting 0.000000
+  Gamut Saturation mapping weighting factor 1.000000
+  Saturation enhancement factor 0.900000
+Gamut map resolution: 39
+Src colorspace white/black are 100.000000 -2.471343 -1.494423, 7.998625 -0.676698 -0.409267
+Src gamut white/black are      100.000000 -2.471343 -1.494423, 7.998625 -0.676698 -0.409267
+Dst colorspace white/black are 100.000000 -0.622574 1.310278, 16.980608 -0.067738 2.399601
+Target (blended) dst wp/bp   = 100.000000 -0.622574 1.310278, 16.980608 -0.067738 2.399601
+Adapted & extended tgt wp/bp = 100.000000 -0.622574 1.310278, 16.980608 -0.067738 2.399601
+Rotate matrix src wp/bp      = 100.000000 -2.471343 -1.494423, 16.993172 -0.852152 -0.515358
+Rotate matrix dst wp/bp      = 100.000000 -0.622574 1.310278, 16.980608 -0.067738 2.399601
+Bend target                                              bp = 16.980608 -0.537792 -0.038727
+Rotated source grey axis wp/bp 100.000000 -0.622574 1.310278, 7.984700 -0.007616 2.517639
+Rotated gamut grey axis wp/bp  100.000000 -0.622574 1.310278, 7.984700 -0.007616 2.517639
+Destination axis target wp/bp  100.000000 -0.622574 1.310278, 16.980608 -0.067738 2.399601
+Before tuning, L. map White/Black is 100.161438 16.270168, should be 100.000000 16.980608
+After tuning,  L. map White/Black is 100.000000 16.980608, should be 100.000000 16.980608
+Mapped source grey axis wp/bp  100.000000 -0.622574 1.310278, 16.980608 -0.007616 2.517639
+Average number of direction guide neigbours = 106.682490, min = 13
+Optimizing source to destination mapping...
+It 0: No clip 2504/4130 delta 0.393558 max by 5.297827, avg by 0.537246
+It 1: No clip 2139/4130 delta 0.088399 max by 4.853061, avg by 0.518215
+It 2: No clip 2004/4130 delta 0.032696 max by 4.831610, avg by 0.507236
+It 3: No clip 1913/4130 delta 0.022039 max by 4.818686, avg by 0.503564
+It 4: No clip 1868/4130 delta 0.010899 max by 4.811677, avg by 0.498078
+It 5: No clip 1830/4130 delta 0.009203 max by 4.807275, avg by 0.497037
+It 6: No clip 1809/4130 delta 0.005086 max by 4.800759, avg by 0.495526
+It 7: No clip 1801/4130 delta 0.001938 max by 4.784998, avg by 0.492967
+No og 1238 max 2.476139 avg 0.224419, No ig 2891 max 5.346370 avg 0.517137, avg rext -0.283237
+No og 1847 max 2.314284 avg 0.238316, No ig 2282 max 3.408814 avg 0.229279, avg rext -0.283237
+No og 1352 max 2.025834 avg 0.212534, No ig 2777 max 4.112331 avg 0.293490, avg rext -0.283237
+No og 1135 max 1.831626 avg 0.199575, No ig 2994 max 4.493631 avg 0.336252, avg rext -0.283237
+Sub-surface smoothing changed by max 4.438696, average 0.409992
+Creating rspl..
+Fine tuning white and black point mapping
+White is 99.432570 -0.589087 1.787307, should be 100.000000 -0.622574 1.310278
+Black is 17.235108 -0.077123 2.252924, should be 16.980608 -0.067738 2.399601
+After fine tuning:
+White is 100.000001 -0.622574 1.310278, should be 100.000000 -0.622574 1.310278
+Black is 16.980608 -0.067738 2.399601, should be 16.980608 -0.067738 2.399601
+Creating B to A tables
+ 0%Rev cache RAM = 1610 Mbytes
+Initializing nnrev arrays...
+There is 1 rev cache instance with 1610 Mbytes limit
+nnrev initialization done
+Initializing nnrev arrays...
+There are 2 rev cache instances with 805 Mbytes limit
+nnrev initialization done
+ 0%Rev cache RAM = 1610 Mbytes
+Initializing nnrev arrays...
+There is 1 rev cache instance with 1610 Mbytes limit
+nnrev initialization done
+Initializing nnrev arrays...
+There are 2 rev cache instances with 805 Mbytes limit
+nnrev initialization done
+ 0% 1% 1% 2% 2% 3% 3% 4% 4% 5% 5% 6% 6% 7% 7% 8% 8% 9% 9%10%10%11%11%12%12%13%13%14%14%15%15%16%16%17%17%18%18%19%19%20%20%21%21%22%22%23%23%24%24%25%25%26%26%27%27%28%28%29%29%30%30%31%31%32%32%33%33%34%34%35%35%36%36%37%37%38%38%39%39%40%40%41%41%42%42%43%43%44%44%45%45%46%46%47%47%48%48%49%49%50%50%51%51%52%52%53%53%54%54%55%55%56%56%57%57%58%58%59%59%60%60%61%61%62%62%63%63%64%64%65%65%66%66%67%67%68%68%69%69%70%70%71%71%72%72%73%73%74%74%75%75%76%76%77%77%78%78%79%79%80%80%81%81%82%82%83%83%84%84%85%85%86%86%87%87%88%88%89%89%90%90%91%91%92%92%93%93%94%94%95%95%96%96%97%97%98%98%99%99%100%100%
+Done B to A tables
+Creating gamut boundary table
+ 0%
+Done B to A tables
+Creating gamut boundary table
+ 0% 0% 0% 1% 2% 1% 3% 2% 3% 4% 4% 5% 5% 6% 6% 7% 7% 8% 8% 9% 9%10%10%11%11%12%12%13%13%14%14%15%15%16%16%17%17%18%18%19%19%20%20%21%21%22%22%23%23%24%24%25%26%25%26%27%27%28%28%29%29%30%30%31%31%32%32%33%33%34%34%35%35%36%36%37%37%38%38%39%39%40%40%41%41%42%42%43%43%44%44%45%45%46%46%47%47%48%48%49%49%50%50%51%51%52%52%53%53%54%54%55%55%56%56%57%57%58%58%59%59%60%60%61%61%62%62%63%63%64%64%65%65%66%66%67%67%68%68%69%69%70%70%71%71%72%72%73%73%74%74%75%75%76%76%77%77%78%78%79%79%80%80%81%82%81%82%83%83%84%84%85%85%86%86%87%87%88%88%89%89%90%90%91%91%92%92%93%93%94%94%95%95%96%96%97%97%98%98%99%99%100%100%
+Done gamut boundary table
+Profile check complete, peak err = 8.623318, avg err = 1.850797, RMS = 2.201463
+
+Done gamut boundary table
+Profile check complete, peak err = 8.623318, avg err = 1.850797, RMS = 2.201463
+
+
+Profile created.
+Profile created.
+
+
+
+Performing sanity check (creating .txt file)...
+
+
+Performing sanity check (creating .txt file)...
+
+Command Used: profcheck -v2 -k -s Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.ti3 Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.icc 2>&1 >> Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_sanity_check.txt
+
+Command Used: profcheck -v2 -k -s Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.ti3 Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.icc 2>&1 >> Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_sanity_check.txt
+
+
+
+Detailed sanity check stored in 'Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_sanity_check.txt'.
+Sanity check complete.
+
+
+Detailed sanity check stored in 'Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09_sanity_check.txt'.
+Sanity check complete.
+
+
+If any of the profile values in the sanity check exceed 2.0
+If any of the profile values in the sanity check exceed 2.0
+it is recommended to remeasure patches or whole target.
+
+
+it is recommended to remeasure patches or whole target.
+
+
+Installing measured ICC profile...
+Installing measured ICC profile...
+Finished. 'Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.icc' was installed to the directory '/Users/kari/Library/ColorSync/Profiles/'
+Please restart any color-managed applications before using this profile.
+To print with this profile in a color-managed workflow, select ${desc} in the profile selection menu.
+Finished. 'Printer HP CLJ5550-PostScript-Plain90g-White-sRGB-1168Patches-Calib-Argyll-Colormunki_2026.02.09.icc' was installed to the directory '/Users/kari/Library/ColorSync/Profiles/'
+Please restart any color-managed applications before using this profile.
+To print with this profile in a color-managed workflow, select ${desc} in the profile selection menu.
+
+
+
+
+What action do you want to perform?
+
+1: Create printer profile from scratch (default).
+   Specify name → Generate targets → Measure target patches
+What action do you want to perform?
+
+1: Create printer profile from scratch (default).
+   Specify name → Generate targets → Measure target patches
+    → Create profile → Sanity check → Copy to profile folder
+    → Create profile → Sanity check → Copy to profile folder
+
+2: Re-read or resume partly read chart, then create printer profile.
+   Specify .ti3 file → Continue measuring target patches
+    → Create profile → Sanity check → Copy to profile folder
+
+   Note: Existing .ti3, .ti2 and target image filenames must be same.
+         If more than one target image, filenames end with _01, _02, etc.
+
+3: Select an existing target with .ti2 file to create profile:
+   Specify .ti2 file → Measure target patches
+    → Create profile → Sanity check → Copy to profile folder
+
+   Note: Existing .ti2 and target image filenames must be same.
+         If more than one target image, filenames end with _01, _02, etc.
+
+4: Create printer profile from an existing .ti3.
+   Specify .ti3 file → Create profile → Sanity check → Copy to profile folder
+
+5: Perform sanity check on existing .ti3 and .icc file pair.
+
+   Note: Existing .ti3 and .icc filenames must be same.
+
+6: Change setup parameters.
+
+7: Exit script
+
+Enter your choice [1–7]: 
+2: Re-read or resume partly read chart, then create printer profile.
+   Specify .ti3 file → Continue measuring target patches
+    → Create profile → Sanity check → Copy to profile folder
+
+   Note: Existing .ti3, .ti2 and target image filenames must be same.
+         If more than one target image, filenames end with _01, _02, etc.
+
+3: Select an existing target with .ti2 file to create profile:
+   Specify .ti2 file → Measure target patches
+    → Create profile → Sanity check → Copy to profile folder
+
+   Note: Existing .ti2 and target image filenames must be same.
+         If more than one target image, filenames end with _01, _02, etc.
+
+4: Create printer profile from an existing .ti3.
+   Specify .ti3 file → Create profile → Sanity check → Copy to profile folder
+
+5: Perform sanity check on existing .ti3 and .icc file pair.
+
+   Note: Existing .ti3 and .icc filenames must be same.
+
+6: Change setup parameters.
+
+7: Exit script
+
+Enter your choice [1–7]: 
+
+
+
+Closing Terminal...
+Closing Terminal...
