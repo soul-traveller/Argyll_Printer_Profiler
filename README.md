@@ -8,7 +8,7 @@
 
 **Status:** 95% complete - All core workflows implemented, GUI setup done, but not functionality not fully complete yet. Design is based on working 100% according to original `Argyll_Printer_Profiler` scripts, but with a windows interface. User Guide (index.md) not updated according to new GUI<br>
 
-## ANYONE MAY COMPLETE THE TOO WITH A LITTLE VIBE-CODING EFFORT!
+## ANYONE MAY COMPLETE THE TOOL WITH A LITTLE VIBE-CODING EFFORT!
 
 Python script:
   - `Argyll_Printer_Profiler_GUI.py` (Python GUI script compatible with MacOS, Linux and Windows)<br>
